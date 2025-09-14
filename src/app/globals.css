@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --brand-blue: #4041d1;
+  --brand-blue-light: #5a5be8;
+  --brand-blue-dark: #2a2bb8;
+  --brand-blue-50: #f0f0ff;
+  --brand-blue-100: #e1e2ff;
+  --brand-blue-700: #1a1b99;
 }
 
 @theme inline {
@@ -10,6 +16,17 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-playfair: var(--font-playfair);
+  --font-inter: var(--font-inter);
+  --font-dm-sans: var(--font-dm-sans);
+  --font-raleway: var(--font-raleway);
+  --font-merriweather: var(--font-merriweather);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-light: var(--brand-blue-light);
+  --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-brand-blue-50: var(--brand-blue-50);
+  --color-brand-blue-100: var(--brand-blue-100);
+  --color-brand-blue-700: var(--brand-blue-700);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +39,165 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+/* Custom animations for hero section */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-5px);
+  }
+  75% {
+    transform: translateY(-30px) translateX(15px);
+  }
+}
+
+@keyframes float-reverse {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(20px) translateX(-10px);
+  }
+  50% {
+    transform: translateY(10px) translateX(5px);
+  }
+  75% {
+    transform: translateY(30px) translateX(-15px);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 10s ease-in-out infinite;
+}
+
+/* Background image fade animation */
+@keyframes imageFade {
+  0%,
+  20% {
+    opacity: 0.25;
+  }
+  25%,
+  45% {
+    opacity: 0.25;
+  }
+  50%,
+  70% {
+    opacity: 0.25;
+  }
+  75%,
+  95% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes image1Fade {
+  0%,
+  70% {
+    opacity: 0;
+  }
+  75%,
+  95% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes image2Fade {
+  0%,
+  20% {
+    opacity: 0;
+  }
+  25%,
+  45% {
+    opacity: 0.3;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes image3Fade {
+  0%,
+  20% {
+    opacity: 0.3;
+  }
+  25%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes image4Fade {
+  0%,
+  45% {
+    opacity: 0;
+  }
+  50%,
+  70% {
+    opacity: 0.3;
+  }
+  75%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes imageFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes backgroundFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-image1-fade {
+  animation: image1Fade 16s ease-in-out infinite;
+}
+
+.animate-image2-fade {
+  animation: image2Fade 16s ease-in-out infinite;
+}
+
+.animate-image3-fade {
+  animation: image3Fade 16s ease-in-out infinite;
+}
+
+.animate-image4-fade {
+  animation: image4Fade 16s ease-in-out infinite;
+}
+
+.animate-image-fade-in {
+  animation: imageFadeIn 2s ease-in-out forwards;
 }
