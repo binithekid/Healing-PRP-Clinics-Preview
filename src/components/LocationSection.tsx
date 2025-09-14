@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaMapMarkerAlt, FaTrain, FaCar } from "react-icons/fa";
 
 export default function LocationSection() {
   const containerVariants = {

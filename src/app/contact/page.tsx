@@ -6,7 +6,6 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaPhone,
-  FaClock,
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
@@ -123,7 +122,7 @@ export default function ContactPage() {
                 className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-6"
                 variants={itemVariants}
               >
-                We're committed to providing you with care and support.
+                We&apos;re committed to providing you with care and support.
               </motion.h1>
 
               <motion.p
@@ -132,9 +131,9 @@ export default function ContactPage() {
               >
                 Whether you have questions about our PRP treatments, need to
                 schedule an appointment, or want to learn more about improving
-                your health and confidence, we're just a message or call away.
-                Our team is available Monday through Friday, 9:00 AM to 6:00 PM,
-                to answer your calls and help you book your next visit.
+                your health and confidence, we&apos;re just a message or call
+                away. Our team is available Monday through Friday, 9:00 AM to
+                6:00 PM, to answer your calls and help you book your next visit.
               </motion.p>
 
               <motion.div

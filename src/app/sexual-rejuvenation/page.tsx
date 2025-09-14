@@ -4,11 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import {
   FaWhatsapp,
-  FaEnvelope,
-  FaInstagram,
-  FaMapMarkerAlt,
   FaCheck,
-  FaArrowRight,
   FaChevronDown,
   FaChevronUp,
   FaPlus,

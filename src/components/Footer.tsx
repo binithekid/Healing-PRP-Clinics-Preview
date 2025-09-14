@@ -8,7 +8,6 @@ import {
   FaInstagram,
   FaMapMarkerAlt,
   FaPhone,
-  FaArrowRight,
 } from "react-icons/fa";
 
 export default function Footer() {

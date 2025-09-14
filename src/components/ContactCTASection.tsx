@@ -1,13 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  FaWhatsapp,
-  FaEnvelope,
-  FaInstagram,
-  FaStar,
-  FaArrowRight,
-} from "react-icons/fa";
+import { FaWhatsapp, FaEnvelope, FaInstagram } from "react-icons/fa";
 
 export default function ContactCTASection() {
   const containerVariants = {

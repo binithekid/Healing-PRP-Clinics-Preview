@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
-import { FaSyringe, FaPills, FaXRay, FaArrowRight } from "react-icons/fa";
+import { FaSyringe, FaPills, FaXRay } from "react-icons/fa";
 
 export default function JointInjectionsSection() {
   const containerVariants = {

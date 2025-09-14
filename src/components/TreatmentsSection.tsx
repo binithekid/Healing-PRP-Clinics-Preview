@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
-import { FaUser, FaVenus, FaHeartbeat, FaArrowRight } from "react-icons/fa";
+import { FaUser, FaVenus, FaHeartbeat } from "react-icons/fa";
 
 export default function TreatmentsSection() {
   const containerVariants = {

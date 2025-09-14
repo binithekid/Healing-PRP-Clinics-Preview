@@ -4,11 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import {
   FaWhatsapp,
-  FaEnvelope,
-  FaInstagram,
-  FaMapMarkerAlt,
   FaCheck,
-  FaArrowRight,
   FaChevronDown,
   FaChevronUp,
   FaPlus,
@@ -626,7 +622,7 @@ export default function JointInjectionsPage() {
                 long‑term healing, PRP may be ideal. If you need fast relief
                 during a flare, a steroid injection may suit you better. In many
                 cases, both can be used at different stages. Book a consultation
-                and we'll advise the most effective plan for your goals.
+                and we&apos;ll advise the most effective plan for your goals.
               </motion.p>
             </div>
           </motion.div>

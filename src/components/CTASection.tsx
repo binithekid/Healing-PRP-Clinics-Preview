@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
-import { FaCheck, FaArrowRight } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 
 export default function CTASection() {
   const containerVariants = {

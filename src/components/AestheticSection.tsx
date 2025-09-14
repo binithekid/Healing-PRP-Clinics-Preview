@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
-import { FaFlask, FaCut, FaLeaf, FaArrowRight } from "react-icons/fa";
+import { FaFlask, FaCut, FaLeaf } from "react-icons/fa";
 
 export default function AestheticSection() {
   const containerVariants = {

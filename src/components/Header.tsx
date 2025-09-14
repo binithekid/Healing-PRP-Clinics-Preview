@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Phone, Crown, Flower } from "lucide-react";
+import { Menu, X, ChevronDown, Flower } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
 import { useState } from "react";
-import { FaSyringe, FaSync, FaGem, FaStar, FaArrowRight } from "react-icons/fa";
+import { FaSyringe, FaSync, FaGem, FaStar } from "react-icons/fa";
 
 export default function PRPExplanationSection() {
   const [activeStep, setActiveStep] = useState(0);

@@ -111,7 +111,7 @@ export default function Hero() {
                     <span className="w-2 h-2 bg-[var(--brand-blue)] rounded-full mt-2 mr-3 flex-shrink-0"></span>
                     <span>
                       P-Shot® (Priapus Shot) for erectile dysfunction &
-                      Peyronie's
+                      Peyronie&apos;s
                     </span>
                   </li>
                   <div className="h-px bg-slate-200 dark:bg-slate-600"></div>
@@ -127,7 +127,7 @@ export default function Hero() {
                   <div className="h-px bg-slate-200 dark:bg-slate-600"></div>
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-[var(--brand-blue)] rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span>Shockwave Therapy for ED & Peyronie's</span>
+                    <span>Shockwave Therapy for ED & Peyronie&apos;s</span>
                   </li>
                   <div className="h-px bg-slate-200 dark:bg-slate-600"></div>
                   <li className="flex items-start">
