@@ -153,7 +153,7 @@ export default function Hero() {
 
       {/* Feature Banner at Bottom */}
       <div
-        className={`md:absolute hidden bottom-0 left-0 right-0 bg-[var(--brand-blue)] transition-all duration-1000 delay-1100 ${
+        className={`md:block absolute hidden bottom-0 left-0 right-0 bg-[var(--brand-blue)] transition-all duration-1000 delay-1100 ${
           isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
