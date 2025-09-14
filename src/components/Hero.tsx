@@ -11,7 +11,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className="relative h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)] overflow-hidden">
+    <div className="relative md:h-[calc(100vh-4rem)] pb-5 md:pb-0 lg:h-[calc(100vh-5rem)] overflow-hidden">
       {/* Background Images */}
       <div className="absolute inset-0 z-0">
         <div
@@ -103,7 +103,7 @@ export default function Hero() {
               }`}
             >
               <div className="p-8 bg-white/90 dark:bg-slate-800/90 rounded-lg border border-slate-200 dark:border-slate-700">
-                <h2 className="text-2xl font-raleway text-navy-600 dark:text-navy-400 mb-6">
+                <h2 className="md:text-2xl text-xl font-raleway text-navy-600 dark:text-navy-400 mb-6">
                   Our Signature Treatments
                 </h2>
                 <ul className="space-y-3 text-slate-600 dark:text-slate-300 text-sm font-inter">
