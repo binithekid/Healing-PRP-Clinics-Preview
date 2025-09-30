@@ -66,7 +66,7 @@ export default function SexualRejuvenationPage() {
           "Those wanting to improve erection firmness and duration",
           "Reduced penile sensitivity or performance anxiety",
           "Restoring sexual confidence after conditions such as diabetes or circulatory problems",
-          "Peyronie's disease (penile curvature due to scar tissue)",
+          "Peyronie&apos;s disease (penile curvature due to scar tissue)",
         ],
         commonQuestions: [
           {
@@ -107,7 +107,7 @@ export default function SexualRejuvenationPage() {
           "Patients wanting stronger, longer‑lasting results than the standard P‑Shot®",
           "Poor response to other therapies",
           "Diabetes or poor circulation",
-          "Peyronie's disease (penile curvature caused by scar tissue)",
+          "Peyronie&apos;s disease (penile curvature caused by scar tissue)",
         ],
         commonQuestions: [
           {
@@ -256,19 +256,20 @@ export default function SexualRejuvenationPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)] overflow-hidden">
+      <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/Pic2.jpg')" }}
-          ></div>
-          <div className="absolute inset-0 bg-black/40 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white z-10" />
+          <img
+            src="/hero_img.png"
+            alt="Projects background"
+            className="w-full h-full object-cover"
+          />
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-20 flex h-full">
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+        <div className="relative w-full z-20 flex h-full">
+          <div className="w-full flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <div className="text-white">
               <motion.div
                 initial="hidden"
@@ -283,14 +284,14 @@ export default function SexualRejuvenationPage() {
                 </motion.div>
 
                 <motion.h1
-                  className="text-4xl lg:text-5xl font-raleway font-light leading-tight mb-2"
+                  className="text-3xl lg:text-4xl text-gray-700 font-raleway leading-tight mb-2"
                   variants={itemVariants}
                 >
                   Sexual Rejuvenation Treatments in St Albans & Hertfordshire
                 </motion.h1>
 
                 <motion.p
-                  className="text-base font-inter leading-relaxed max-w-3xl"
+                  className="text-base font-inter text-gray-500 leading-relaxed max-w-3xl"
                   variants={itemVariants}
                 >
                   Confidential, non‑surgical solutions to restore confidence,
@@ -316,10 +317,10 @@ export default function SexualRejuvenationPage() {
       </section>
 
       {/* Navigation */}
-      <section className="py-8 bg-slate-300 relative">
+      <section className="py-8 border-b border-t shadow-xs border-gray-100 relative">
         {/* Background Elements */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-[#f6f7ff] to-transparent"></div>
+          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-white to-gray-50"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -335,7 +336,7 @@ export default function SexualRejuvenationPage() {
                 href={`#${treatment.name
                   .toLowerCase()
                   .replace(/[^a-z0-9]/g, "-")}`}
-                className="px-4 py-2 bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+                className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
                 variants={itemVariants}
               >
                 {treatment.name}
@@ -343,7 +344,7 @@ export default function SexualRejuvenationPage() {
             ))}
             <motion.a
               href="#comparison"
-              className="px-4 py-2 bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+              className="px-4 py-2 text-sm bg-white text-[var(--brand-blue)] border border-gray-100 shadow-xs rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
               variants={itemVariants}
             >
               Comparison
@@ -353,11 +354,9 @@ export default function SexualRejuvenationPage() {
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 lg:py-32 bg-white relative">
+      <section className="py-20 lg:py-32 relative">
         {/* Background Elements */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#f6f7ff] to-transparent"></div>
-        </div>
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -366,7 +365,7 @@ export default function SexualRejuvenationPage() {
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-3"
+              className="text-3xl font-raleway text-slate-900 mb-3"
               variants={itemVariants}
             >
               A Personal, Medical Approach to Sexual Wellness
@@ -400,7 +399,7 @@ export default function SexualRejuvenationPage() {
       </section>
 
       {/* PRP Explanation Section */}
-      <section className="py-20 lg:py-32 bg-slate-50">
+      <section id="what-is-prp" className="py-20 lg:py-32 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -409,7 +408,7 @@ export default function SexualRejuvenationPage() {
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-3"
+              className="text-3xl font-raleway text-slate-900 mb-3"
               variants={itemVariants}
             >
               What is PRP (Platelet‑Rich Plasma)?
@@ -471,7 +470,7 @@ export default function SexualRejuvenationPage() {
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-8 text-center"
+              className="text-3xl font-raleway text-slate-900 mb-8"
               variants={itemVariants}
             >
               Treatments Offered at Healing‑PRP Clinics
@@ -653,6 +652,121 @@ export default function SexualRejuvenationPage() {
         </div>
       </section>
 
+      {/* Comparison Table Section */}
+      <section className="py-20 lg:py-32 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+          >
+            <motion.h2
+              className="text-3xl font-raleway text-slate-900 mb-6"
+              variants={itemVariants}
+            >
+              P-Shot® vs Exomine® P-Shot – Comparison
+            </motion.h2>
+
+            <motion.div
+              className="bg-white rounded-sm shadow-lg border border-slate-200 overflow-hidden"
+              variants={itemVariants}
+            >
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs">
+                  <thead className="bg-slate-100">
+                    <tr>
+                      <th className="px-6 py-4 text-left font-raleway font-semibold text-slate-900">
+                        Feature
+                      </th>
+                      <th className="px-6 py-4 text-left font-raleway font-semibold text-slate-900">
+                        P-Shot® (Priapus Shot®)
+                      </th>
+                      <th className="px-6 py-4 text-left font-raleway font-semibold text-slate-900">
+                        Exomine® P-Shot (Priapus Shot®)
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200">
+                    <tr>
+                      <td className="px-6 py-4 font-inter font-medium text-slate-700">
+                        Type of PRP
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        Standard PRP (Platelet-Rich Plasma)
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        Exomine PRP – platelets stressed so growth factors are
+                        released outside the platelets
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50">
+                      <td className="px-6 py-4 font-inter font-medium text-slate-700">
+                        Growth Factor Release
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        Gradual release over time as platelets break down
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        Growth factors are already active and ready to work
+                        immediately
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-inter font-medium text-slate-700">
+                        Procedure Time
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        ~30-45 minutes
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        ~60 minutes (extra preparation steps)
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50">
+                      <td className="px-6 py-4 font-inter font-medium text-slate-700">
+                        Course of Treatment
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        May require up to 3 injections depending on history
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        May require up to 3 injections depending on history
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-inter font-medium text-slate-700">
+                        Best For
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        Mild-moderate ED, sensitivity loss, confidence issues,
+                        Peyronie&apos;s disease (early cases)
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        Longstanding or severe ED, diabetes-related ED, poor
+                        response to standard PRP, Peyronie&apos;s disease (more
+                        advanced cases)
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50">
+                      <td className="px-6 py-4 font-inter font-medium text-slate-700">
+                        Cost
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        £600 (London clinics typically £1,300–£1,500)
+                      </td>
+                      <td className="px-6 py-4 font-inter text-slate-600">
+                        £1,000 (London clinics typically £1,500–£1,700)
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Shockwave Therapy Section */}
       <section className="py-20 lg:py-32 bg-slate-50 relative">
         {/* Background Image with Overlay */}
@@ -675,11 +789,11 @@ export default function SexualRejuvenationPage() {
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-6"
+              className="text-3xl font-raleway text-slate-900 mb-6"
               variants={itemVariants}
             >
-              Shockwave Therapy in St Albans, Hertfordshire – Erectile
-              Dysfunction Treatment
+              Shockwave Therapy in St Albans, Hertfordshire
+              <br /> Erectile Dysfunction Treatment
             </motion.h2>
 
             <motion.div
@@ -737,7 +851,7 @@ export default function SexualRejuvenationPage() {
               </div>
             </motion.div>
             <motion.h2
-              className="text-3xl lg:text-4xl text-text tracking-tight font-raleway text-navy-600 dark:text-white leading-tight text-center"
+              className="text-3xl text-text tracking-tight font-raleway text-navy-600 dark:text-white leading-tight text-center"
               variants={itemVariants}
             >
               Common Questions About PRP Treatments

@@ -161,18 +161,19 @@ export default function JointInjectionsPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)] overflow-hidden">
+      <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/Pic4.jpg')" }}
-          ></div>
-          <div className="absolute inset-0 bg-black/40 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white z-10" />
+          <img
+            src="/hero_img.png"
+            alt="Projects background"
+            className="w-full h-full object-cover"
+          />
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-20 flex h-full">
+        <div className="relative w-full z-20 flex h-full">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
             <div className="text-white">
               <motion.div
@@ -189,14 +190,14 @@ export default function JointInjectionsPage() {
                 </motion.div>
 
                 <motion.h1
-                  className="text-4xl lg:text-5xl font-raleway font-light leading-tight mb-2"
+                  className="text-3xl lg:text-4xl text-gray-700 font-raleway leading-tight mb-2"
                   variants={itemVariants}
                 >
                   Private Joint Injections in St Albans & Hertfordshire
                 </motion.h1>
 
                 <motion.p
-                  className="text-base font-inter leading-relaxed max-w-3xl"
+                  className="text-base font-inter text-gray-500 leading-relaxed max-w-3xl"
                   variants={itemVariants}
                 >
                   GP-led pain relief for arthritis, sports injuries & joint
@@ -221,10 +222,10 @@ export default function JointInjectionsPage() {
       </section>
 
       {/* Navigation */}
-      <section className="py-8 bg-slate-300 relative">
+      <section className="py-8 border-b border-t shadow-xs border-gray-100 relative">
         {/* Background Elements */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-[#f6f7ff] to-transparent"></div>
+          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-white to-gray-50"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -236,35 +237,35 @@ export default function JointInjectionsPage() {
           >
             <motion.a
               href="#what-is-joint-injection"
-              className="px-4 py-2 bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+              className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
               variants={itemVariants}
             >
               What is a Joint Injection
             </motion.a>
             <motion.a
               href="#treatments"
-              className="px-4 py-2 bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+              className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
               variants={itemVariants}
             >
               Treatments
             </motion.a>
             <motion.a
               href="#comparison"
-              className="px-4 py-2 bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+              className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
               variants={itemVariants}
             >
               PRP vs Steroid
             </motion.a>
             <motion.a
               href="#faqs"
-              className="px-4 py-2 bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+              className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
               variants={itemVariants}
             >
               FAQs
             </motion.a>
             <motion.a
               href="#contact"
-              className="px-4 py-2 bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+              className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
               variants={itemVariants}
             >
               Contact

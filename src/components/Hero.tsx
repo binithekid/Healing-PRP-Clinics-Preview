@@ -1,14 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const handleLearnAboutPRP = () => {
+    router.push("/sexual-rejuvenation");
+    // Scroll to PRP section after navigation
+    setTimeout(() => {
+      const element = document.getElementById("what-is-prp");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
 
   return (
     <div className="relative md:h-[calc(100vh-4rem)] pb-5 md:pb-0 lg:h-[calc(100vh-5rem)] overflow-hidden">
@@ -33,14 +46,14 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-20 flex md:mt-30 mt-8 h-full">
+      <div className="relative z-20 flex md:mt-30 md:mt-8 mt-20 h-full">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Hero Content */}
             <div className="">
               {/* Location Tag */}
               <div
-                className={`inline-block px-4 py-2 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs mb-2 font-inter font-medium transition-all duration-1000 delay-200 ${
+                className={`inline-block md:px-4 px-2 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs mb-2 font-medium transition-all duration-1000 delay-200 ${
                   isLoaded
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
@@ -51,19 +64,19 @@ export default function Hero() {
 
               {/* Main Heading */}
               <h1
-                className={`text-3xl sm:text-4xl lg:text-5xl font-raleway text-navy-600 dark:text-navy-400 leading-tight transition-all duration-1000 delay-300 ${
+                className={`md:text-3xl text-2xl font-raleway text-navy-600 dark:text-navy-400 leading-tight transition-all duration-1000 delay-300 ${
                   isLoaded
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
                 }`}
               >
-                Natural Regeneration with PRP, Confidential Care by a GMC
-                Registered GP
+                Natural Regeneration with PRP (Platelet‑Rich Plasma),
+                Confidential Care by a GMC Registered GP
               </h1>
 
               {/* Description */}
               <p
-                className={`font-inter mt-1 text-slate-600 dark:text-slate-300 leading-relaxed transition-all duration-1000 delay-500 ${
+                className={`mt-1 text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed transition-all duration-1000 delay-500 ${
                   isLoaded
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
@@ -82,12 +95,15 @@ export default function Hero() {
                     : "opacity-0 translate-y-8"
                 }`}
               >
-                <button className="px-6 py-3 flex items-center justify-center text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2">
+                <button className="px-6 py-3 flex items-center justify-center text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-medium transition-all duration-300 flex items-center gap-2">
                   <FaWhatsapp className="w-5 h-5" />
                   Book on WhatsApp
                 </button>
-                <button className="px-6 py-3 hidden md:block cursor-pointer text-sm border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg font-inter bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]">
-                  Explore Treatments
+                <button
+                  onClick={handleLearnAboutPRP}
+                  className="px-6 py-3 hidden md:block cursor-pointer text-sm border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]"
+                >
+                  Learn About PRP
                 </button>
               </div>
 
@@ -102,11 +118,11 @@ export default function Hero() {
                   : "opacity-0 translate-y-8"
               }`}
             >
-              <div className="p-8 bg-white/90 dark:bg-slate-800/90 rounded-lg border border-slate-200 dark:border-slate-700">
-                <h2 className="md:text-2xl text-xl font-raleway text-navy-600 dark:text-navy-400 mb-6">
+              <div className="p-8 bg-white/90 -mt-6 md:mt-0 dark:bg-slate-800/90 rounded-lg border border-slate-200 dark:border-slate-700">
+                <h2 className="md:text-2xl text-lg font-raleway text-navy-600 dark:text-navy-400 mb-6">
                   Our Signature Treatments
                 </h2>
-                <ul className="space-y-3 text-slate-600 dark:text-slate-300 text-sm font-inter">
+                <ul className="space-y-3 text-slate-600 dark:text-slate-300 text-sm ">
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-[var(--brand-blue)] rounded-full mt-2 mr-3 flex-shrink-0"></span>
                     <span>
@@ -161,10 +177,10 @@ export default function Hero() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="text-center border-r border-[var(--brand-blue-100)]">
-                <div className="text-white font-inter font-semibold text-sm">
+                <div className="text-white font-semibold text-sm">
                   GMC-registered doctor
                 </div>
-                <div className="text-blue-100 text-sm font-inter">
+                <div className="text-blue-100 text-sm">
                   Over 10 years NHS experience
                 </div>
               </div>
@@ -172,7 +188,7 @@ export default function Hero() {
                 <div className="text-white font-semibold text-sm">
                   Drug-free options
                 </div>
-                <div className="text-blue-100 text-sm font-inter">
+                <div className="text-blue-100 text-sm">
                   Your own PRP — no hormones
                 </div>
               </div>
@@ -180,15 +196,15 @@ export default function Hero() {
                 <div className="text-white font-semibold text-sm">
                   Discreet location
                 </div>
-                <div className="text-blue-100 text-sm font-inter">
+                <div className="text-blue-100 text-sm">
                   21 Victoria Street, St Albans
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-white font-inter font-semibold text-sm">
+                <div className="text-white font-semibold text-sm">
                   Flexible appointments
                 </div>
-                <div className="text-blue-100 text-sm font-inter">
+                <div className="text-blue-100 text-sm">
                   Private 1:1 consultations
                 </div>
               </div>

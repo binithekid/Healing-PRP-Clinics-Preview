@@ -83,21 +83,21 @@ export default function FAQSection() {
           variants={containerVariants}
         >
           <motion.div
-            className="inline-block px-4 py-2 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter font-medium mb-2"
+            className="inline-block md:px-4 px-3 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter mb-2"
             variants={itemVariants}
           >
             Frequently Asked Questions
           </motion.div>
 
           <motion.h2
-            className="text-3xl lg:text-4xl tracking-tight font-raleway text-navy-600 dark:text-white leading-tight"
+            className="text-2xl lg:text-3xl tracking-tight font-raleway text-navy-600 dark:text-white leading-tight"
             variants={itemVariants}
           >
             Common Questions About PRP Treatments
           </motion.h2>
 
           <motion.p
-            className="text-sm font-inter text-slate-600 dark:text-slate-300 mx-auto leading-relaxed"
+            className="text-sm text-slate-600 dark:text-slate-300 mx-auto leading-relaxed"
             variants={itemVariants}
           >
             Find answers to the most frequently asked questions about our PRP
@@ -125,7 +125,7 @@ export default function FAQSection() {
                 onClick={() => toggleFAQ(index)}
                 whileTap={{ scale: 0.99 }}
               >
-                <h3 className="font-raleway text-navy-600 dark:text-white pr-4 leading-relaxed">
+                <h3 className="font-raleway md:text-base text-sm text-navy-600 dark:text-white pr-4 leading-relaxed">
                   {faq.question}
                 </h3>
                 <motion.div
@@ -167,7 +167,7 @@ export default function FAQSection() {
                   >
                     <div className="px-6 pb-6">
                       <div className="border-t border-slate-200/50 dark:border-slate-700/50 pt-4">
-                        <p className="font-inter text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <p className="font-inter md:text-sm text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                           {faq.answer}
                         </p>
                       </div>

@@ -21,6 +21,7 @@
   --font-dm-sans: var(--font-dm-sans);
   --font-raleway: var(--font-raleway);
   --font-merriweather: var(--font-merriweather);
+  --font-manrope: var(--font-manrope);
   --color-brand-blue: var(--brand-blue);
   --color-brand-blue-light: var(--brand-blue-light);
   --color-brand-blue-dark: var(--brand-blue-dark);
@@ -39,7 +40,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
 }
 
 /* Custom animations for hero section */

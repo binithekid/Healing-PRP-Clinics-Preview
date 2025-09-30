@@ -99,7 +99,7 @@ export default function AestheticSection() {
             </motion.p>
             {/* Main Headline */}
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 leading-tight"
+              className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight"
               variants={itemVariants}
             >
               Aesthetic & Hair PRP Treatments in St Albans
@@ -107,7 +107,7 @@ export default function AestheticSection() {
 
             {/* Introductory Paragraph */}
             <motion.p
-              className="text-base mt-2 font-inter text-slate-600 leading-relaxed"
+              className="text-base mt-2 text-slate-600 leading-relaxed"
               variants={itemVariants}
             >
               Natural, low‑downtime treatments focused on subtle, confident
@@ -134,17 +134,17 @@ export default function AestheticSection() {
                     </div> */}
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-inter font-medium text-[var(--brand-blue)] uppercase tracking-wide">
+                        <span className="text-xs font-medium text-[var(--brand-blue)] uppercase tracking-wide">
                           {treatment.tag}
                         </span>
                       </div>
                       <h3 className="text-xl font-raleway font-medium text-slate-900 mb-2">
                         {treatment.title}
                       </h3>
-                      <p className="font-inter text-sm text-slate-500 leading-relaxed mb-4">
+                      <p className="text-sm text-slate-500 leading-relaxed mb-4">
                         {treatment.description}
                       </p>
-                      <button className="flex text-sm items-center gap-2 text-[var(--brand-blue)] font-inter font-medium hover:text-[var(--brand-blue-dark)] transition-colors duration-300 group">
+                      <button className="flex text-sm items-center gap-2 text-[var(--brand-blue)] font-medium hover:text-[var(--brand-blue-dark)] transition-colors duration-300 group">
                         <span>{treatment.cta}</span>
                         <MoveRight className="w-4 h-4 mt-[0.1rem] transition-transform duration-300 group-hover:translate-x-1" />
                       </button>

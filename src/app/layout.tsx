@@ -7,6 +7,7 @@ import {
   DM_Sans,
   Raleway,
   Merriweather,
+  Manrope,
 } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -47,6 +48,12 @@ const merriweather = Merriweather({
   weight: ["300", "400", "700", "900"],
 });
 
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
   title: "Healing-PRP Clinics - Natural Regeneration with PRP | St Albans",
   description:
@@ -61,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${inter.variable} ${dmSans.variable} ${raleway.variable} ${merriweather.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${inter.variable} ${dmSans.variable} ${raleway.variable} ${merriweather.variable} ${manrope.variable} antialiased`}
       >
         <Header />
         {children}

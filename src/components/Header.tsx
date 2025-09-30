@@ -64,6 +64,7 @@ const Header = () => {
       hasDropdown: false,
       href: "/facial-aesthetics",
     },
+    { name: "Blog", hasDropdown: false, href: "/blog" },
     { name: "Contact", hasDropdown: false, href: "/contact" },
   ];
 
@@ -93,7 +94,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-[var(--brand-blue-100)]/90 dark:bg-slate-900/80 dark:border-slate-700/90">
+      <header className="sticky top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
@@ -107,13 +108,13 @@ const Header = () => {
             </div>
 
             {/* Phone number and Menu */}
-            <div className="flex items-center space-x-4">
-              <span className="hidden md:inline text-sm font-inter font-medium text-slate-500 dark:text-slate-400">
+            <div className="flex items-center space-x-2">
+              <span className="hidden md:inline text-[13px] font-medium font-raleway text-slate-800 dark:text-slate-400">
                 MENU
               </span>
               <button
                 onClick={toggleMenu}
-                className="p-2 hover:bg-[var(--brand-blue-50)] dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="p-2 cursor-pointer hover:bg-[var(--brand-blue-50)] dark:hover:bg-slate-800 rounded-md transition-colors"
               >
                 {isMenuOpen ? (
                   <X className="h-5 w-5 text-slate-700 dark:text-slate-300" />

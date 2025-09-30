@@ -55,9 +55,11 @@ export default function Footer() {
   ];
 
   const treatments = [
-    "Sexual Rejuvenation",
-    "Joint Injections",
-    "Facial Aesthetics",
+    { name: "Sexual Rejuvenation", href: "/sexual-rejuvenation" },
+    { name: "Joint Injections", href: "/joint-injections" },
+    { name: "Facial Aesthetics", href: "/facial-aesthetics" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -112,9 +114,12 @@ export default function Footer() {
               <ul className="space-y-2">
                 {treatments.map((treatment, index) => (
                   <li key={index}>
-                    <span className="text-sm text-slate-300 hover:text-white transition-colors duration-300 cursor-pointer">
-                      {treatment}
-                    </span>
+                    <a
+                      href={treatment.href}
+                      className="text-sm text-slate-300 hover:text-white transition-colors duration-300"
+                    >
+                      {treatment.name}
+                    </a>
                   </li>
                 ))}
               </ul>

@@ -50,20 +50,20 @@ export default function LocationSection() {
           variants={containerVariants}
         >
           <motion.div
-            className="inline-block px-4 py-2 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter font-medium mb-2"
+            className="inline-block mb-2 font-inter md:px-4 px-3 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
             variants={itemVariants}
           >
             Where to Find us
           </motion.div>
 
           <motion.h2
-            className="text-3xl lg:text-4xl tracking-tight font-raleway text-navy-600 dark:text-white leading-tight mb-1"
+            className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight"
             variants={itemVariants}
           >
             Visit Us in St Albans
           </motion.h2>
           <motion.p
-            className="text-sm font-inter text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed"
+            className="text-sm text-slate-600 dark:text-slate-300 md:max-w-2xl max-w-xl mx-auto leading-relaxed"
             variants={itemVariants}
           >
             Ready to start your PRP journey? Contact us today to book your
@@ -73,7 +73,7 @@ export default function LocationSection() {
 
         {/* Content Grid */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch"
+          className="grid grid-cols-1 -mt-6 md:mt-0 lg:grid-cols-2 gap-12 items-stretch"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -87,7 +87,7 @@ export default function LocationSection() {
                 <h3 className="text-xl font-raleway text-navy-600 dark:text-white mb-2">
                   Our Location
                 </h3>
-                <p className="font-inter text-sm text-slate-600 dark:text-slate-300">
+                <p className="text-sm text-slate-600 dark:text-slate-300">
                   21 Victoria Street, St Albans, AL1 3JJ
                 </p>
               </div>
@@ -100,14 +100,14 @@ export default function LocationSection() {
                 <h3 className="text-xl font-raleway text-navy-600 dark:text-white mb-3">
                   Conveniently Located
                 </h3>
-                <p className="font-inter text-sm text-slate-600 dark:text-slate-300 mb-2">
+                <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
                   Close to:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {nearbyAreas.map((area, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter"
+                      className="px-3 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
                     >
                       {area}
                     </span>
@@ -123,7 +123,7 @@ export default function LocationSection() {
                 <h3 className="text-xl font-raleway text-navy-600 dark:text-white mb-3">
                   Easy Access
                 </h3>
-                <p className="font-inter text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Short walk from St Albans City station (fast trains to
                   London).
                 </p>

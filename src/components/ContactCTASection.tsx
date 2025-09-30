@@ -84,7 +84,7 @@ export default function ContactCTASection() {
         >
           {/* Main Headline */}
           <motion.h2
-            className="text-3xl lg:text-4xl font-raleway font-light text-slate-900 dark:text-white leading-tight"
+            className="md:text-3xl text-2xl font-raleway font-light text-slate-900 dark:text-white leading-tight"
             variants={itemVariants}
           >
             Book a Private Consultation
@@ -92,7 +92,7 @@ export default function ContactCTASection() {
 
           {/* Subtitle */}
           <motion.p
-            className="text-sm font-inter text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="md:text-sm text-xs text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-5 leading-relaxed"
             variants={itemVariants}
           >
             Take the first step toward natural healing and personal confidence.
@@ -100,7 +100,7 @@ export default function ContactCTASection() {
 
           {/* Contact Methods */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-4xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 max-w-4xl mx-auto"
             variants={itemVariants}
           >
             {contactMethods.map((method, index) => (
@@ -132,7 +132,7 @@ export default function ContactCTASection() {
 
           {/* Features List */}
           <motion.div
-            className="flex flex-wrap justify-center gap-6 mb-6"
+            className="md:flex hidden flex-wrap justify-center gap-6 mb-6"
             variants={itemVariants}
           >
             {features.map((feature, index) => (

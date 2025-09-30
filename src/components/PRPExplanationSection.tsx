@@ -95,21 +95,21 @@ export default function PRPExplanationSection() {
           variants={containerVariants}
         >
           <motion.div
-            className="inline-block px-4 py-2 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter font-medium"
+            className="inline-block font-inter md:px-4 px-3 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
             variants={itemVariants}
           >
             Understanding PRP
           </motion.div>
 
           <motion.h2
-            className="text-3xl mt-3 lg:text-4xl tracking-tight font-raleway text-navy-600 dark:text-white leading-tight mb-2"
+            className="md:text-3xl text-xl py-2 font-raleway text-slate-900 leading-tight"
             variants={itemVariants}
           >
             What is Platelet-Rich Plasma - PRP?
           </motion.h2>
 
           <motion.p
-            className="text-sm font-inter text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed"
+            className="md:text-sm text-xs text-slate-600 dark:text-slate-300 max-w-2xl mx-auto"
             variants={itemVariants}
           >
             At Healing-PRP Clinics in St Albans, Hertfordshire, we use
@@ -140,7 +140,7 @@ export default function PRPExplanationSection() {
               >
                 <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--brand-blue)]/10 rounded-full">
                   <div className="w-2 h-2 bg-[var(--brand-blue)] rounded-full"></div>
-                  <span className="text-sm font-inter font-medium text-[var(--brand-blue)]">
+                  <span className="text-sm font-medium text-[var(--brand-blue)]">
                     Step {steps[activeStep].number}: {steps[activeStep].title}
                   </span>
                 </div>
@@ -188,10 +188,10 @@ export default function PRPExplanationSection() {
 
                         {/* Content */}
                         <div className="flex flex-col flex-1">
-                          <h3 className="font-inter font-semibold text-navy-600 dark:text-white mb-2">
+                          <h3 className="font-semibold text-navy-600 dark:text-white mb-2">
                             {step.title}
                           </h3>
-                          <p className="text-sm font-inter text-slate-600 dark:text-slate-300 leading-relaxed flex-1">
+                          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed flex-1">
                             {step.description}
                           </p>
                         </div>
@@ -215,7 +215,7 @@ export default function PRPExplanationSection() {
           variants={containerVariants}
         >
           <motion.h3
-            className="text-2xl lg:text-3xl font-raleway text-navy-600 dark:text-white mb-8"
+            className="md:text-3xl text-xl py-2 font-raleway text-slate-900 leading-tight"
             variants={itemVariants}
           >
             Why PRP Works?
@@ -232,7 +232,7 @@ export default function PRPExplanationSection() {
                 variants={itemVariants}
               >
                 <div className="w-2 h-2 bg-[var(--brand-blue)] rounded-full mt-2 flex-shrink-0"></div>
-                <span className="font-inter text-slate-600 dark:text-slate-300 text-left">
+                <span className="text-slate-600 dark:text-slate-300 text-left">
                   {benefit}
                 </span>
               </motion.div>
@@ -240,14 +240,15 @@ export default function PRPExplanationSection() {
           </motion.div>
 
           {/* CTA Link */}
-          <motion.div
-            className="inline-flex items-center gap-2 text-[var(--brand-blue)] font-inter text-sm cursor-pointer hover:text-[var(--brand-blue-dark)] transition-colors duration-300"
+          <motion.a
+            href="/sexual-rejuvenation"
+            className="inline-flex items-center gap-2 text-[var(--brand-blue)] text-sm cursor-pointer hover:text-[var(--brand-blue-dark)] transition-colors duration-300"
             variants={itemVariants}
             whileHover={{ x: 4 }}
           >
             <span>Learn more on our Sexual Rejuvenation page</span>
             <MoveRight className="w-4 h-4 mt-[0.1rem] transition-transform duration-300 group-hover:translate-x-1" />
-          </motion.div>
+          </motion.a>
         </motion.div>
       </div>
     </section>

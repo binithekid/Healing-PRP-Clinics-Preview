@@ -56,20 +56,20 @@ export default function CTASection() {
           variants={containerVariants}
         >
           <motion.div
-            className="inline-block px-4 mb-2 py-2 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter font-medium"
+            className="inline-block md:px-4 px-3 mb-2 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter md:font-medium"
             variants={itemVariants}
           >
             About Healing‑PRP
           </motion.div>
           <motion.h2
-            className="text-3xl lg:text-4xl tracking-tight font-raleway text-white leading-tight"
+            className="md:text-3xl text-2xl font-raleway text-slate-100 leading-tight"
             variants={itemVariants}
           >
             Why Choose Healing‑PRP Clinics?
           </motion.h2>
 
           <motion.p
-            className="text-sm font-inter text-white/90 max-w-2xl mx-auto leading-relaxed mb-3"
+            className="md:text-sm text-xs text-white/90 max-w-2xl mx-auto leading-relaxed mb-3"
             variants={itemVariants}
           >
             Experience the difference of personalized, evidence-based care
@@ -105,13 +105,18 @@ export default function CTASection() {
             className="inline-flex flex-col sm:flex-row gap-4"
             variants={itemVariants}
           >
-            <motion.button className="px-6 py-3 text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2">
+            <motion.a
+              href="/contact"
+              className="inline-flex px-6 py-3 text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 items-center gap-2"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
               Book Your Consultation
               <MoveRight className="w-4 h-4 mt-[0.1rem] transition-transform duration-300 group-hover:translate-x-1" />
-            </motion.button>
-            <motion.button className="px-6 py-3 cursor-pointer text-sm border-2 border-white text-[var(--brand-blue)] rounded-lg font-inter bg-transparent text-white font-medium transition-all duration-300 hover:opacity-40">
+            </motion.a>
+            {/* <motion.button className="px-6 py-3 cursor-pointer text-sm border-2 border-white text-[var(--brand-blue)] rounded-lg font-inter bg-transparent text-white font-medium transition-all duration-300 hover:opacity-40">
               Learn More
-            </motion.button>
+            </motion.button> */}
           </motion.div>
         </motion.div>
       </div>
