@@ -19,7 +19,7 @@ export default function BlogPostPage() {
     previous: BlogPost | null;
     next: BlogPost | null;
   }>({ previous: null, next: null });
-  const [loading, setLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
@@ -44,12 +44,17 @@ export default function BlogPostPage() {
       } catch (error) {
         console.error("Error fetching post:", error);
         setNotFound(true);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchPost();
+
+    // Set loaded state after a short delay for smooth animation
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [params.slug]);
 
   const containerVariants = {
@@ -57,17 +62,28 @@ export default function BlogPostPage() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
+        duration: 0.8,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
+      transition: {
+        duration: 0.8,
+      },
+    },
+  };
+
+  const pageVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
       transition: {
         duration: 0.6,
       },
@@ -339,17 +355,6 @@ export default function BlogPostPage() {
     return null;
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--brand-blue)]"></div>
-          <p className="mt-4 text-slate-600">Loading blog post...</p>
-        </div>
-      </div>
-    );
-  }
-
   if (notFound || !post) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -373,7 +378,11 @@ export default function BlogPostPage() {
   }
 
   return (
-    <>
+    <motion.div
+      initial="hidden"
+      animate={isLoaded ? "visible" : "hidden"}
+      variants={pageVariants}
+    >
       <div className="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"></div>
 
       {/* Hero Section */}
@@ -381,7 +390,7 @@ export default function BlogPostPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            animate="visible"
+            animate={isLoaded ? "visible" : "hidden"}
             variants={containerVariants}
           >
             <motion.div
@@ -506,7 +515,7 @@ export default function BlogPostPage() {
           <motion.article
             className="prose prose-lg max-w-none"
             initial="hidden"
-            animate="visible"
+            animate={isLoaded ? "visible" : "hidden"}
             variants={containerVariants}
           >
             <motion.div
@@ -520,6 +529,6 @@ export default function BlogPostPage() {
       </section>
 
       <Footer />
-    </>
+    </motion.div>
   );
 }

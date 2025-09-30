@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -17,12 +17,17 @@ export default function BlogPage() {
         setPosts(blogPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchPosts();
+
+    // Set loaded state after a short delay for smooth animation
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const containerVariants = {
@@ -30,17 +35,28 @@ export default function BlogPage() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
+        duration: 0.8,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
+      transition: {
+        duration: 0.8,
+      },
+    },
+  };
+
+  const pageVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
       transition: {
         duration: 0.6,
       },
@@ -56,7 +72,11 @@ export default function BlogPage() {
   };
 
   return (
-    <>
+    <motion.div
+      initial="hidden"
+      animate={isLoaded ? "visible" : "hidden"}
+      variants={pageVariants}
+    >
       {/* Background */}
       <div className="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"></div>
 
@@ -66,7 +86,7 @@ export default function BlogPage() {
           <motion.div
             className="text-center"
             initial="hidden"
-            animate="visible"
+            animate={isLoaded ? "visible" : "hidden"}
             variants={containerVariants}
           >
             <motion.div
@@ -98,31 +118,31 @@ export default function BlogPage() {
       {/* Blog Posts Section */}
       <section className="py-12 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {loading ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--brand-blue)]"></div>
-              <p className="mt-4 text-slate-600">Loading blog posts...</p>
-            </div>
-          ) : posts.length === 0 ? (
-            <div className="text-center py-12">
+          {posts.length === 0 ? (
+            <motion.div
+              className="text-center py-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <h3 className="text-xl font-raleway text-slate-900 mb-4">
                 No blog posts yet
               </h3>
               <p className="text-slate-600">
                 Check back soon for the latest insights on PRP treatments.
               </p>
-            </div>
+            </motion.div>
           ) : (
             <motion.div
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
               initial="hidden"
-              animate="visible"
+              animate={isLoaded ? "visible" : "hidden"}
               variants={containerVariants}
             >
               {posts.map((post) => (
                 <motion.article
                   key={post.slug}
-                  className="bg-white rounded-sm shadow overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                  className="bg-white rounded-sm shadow overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                   variants={itemVariants}
                 >
                   {post.coverImage && (
@@ -197,6 +217,6 @@ export default function BlogPage() {
       </section>
 
       <Footer />
-    </>
+    </motion.div>
   );
 }
