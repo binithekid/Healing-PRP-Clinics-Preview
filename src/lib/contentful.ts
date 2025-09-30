@@ -38,12 +38,25 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         coverImage: fields.coverImage
           ? {
               url: `https:${
-                (fields.coverImage as Record<string, unknown>).fields?.file?.url
+                (
+                  (
+                    (fields.coverImage as Record<string, unknown>)
+                      .fields as Record<string, unknown>
+                  )?.file as Record<string, unknown>
+                )?.url as string
               }`,
-              title: (fields.coverImage as Record<string, unknown>).fields
-                ?.title as string,
-              description: (fields.coverImage as Record<string, unknown>).fields
-                ?.description as string,
+              title: (
+                (fields.coverImage as Record<string, unknown>).fields as Record<
+                  string,
+                  unknown
+                >
+              )?.title as string,
+              description: (
+                (fields.coverImage as Record<string, unknown>).fields as Record<
+                  string,
+                  unknown
+                >
+              )?.description as string,
             }
           : undefined,
         date: fields.date as string,
@@ -82,12 +95,25 @@ export async function getBlogPostBySlug(
       coverImage: fields.coverImage
         ? {
             url: `https:${
-              (fields.coverImage as Record<string, unknown>).fields?.file?.url
+              (
+                (
+                  (fields.coverImage as Record<string, unknown>)
+                    .fields as Record<string, unknown>
+                )?.file as Record<string, unknown>
+              )?.url as string
             }`,
-            title: (fields.coverImage as Record<string, unknown>).fields
-              ?.title as string,
-            description: (fields.coverImage as Record<string, unknown>).fields
-              ?.description as string,
+            title: (
+              (fields.coverImage as Record<string, unknown>).fields as Record<
+                string,
+                unknown
+              >
+            )?.title as string,
+            description: (
+              (fields.coverImage as Record<string, unknown>).fields as Record<
+                string,
+                unknown
+              >
+            )?.description as string,
           }
         : undefined,
       date: fields.date as string,
