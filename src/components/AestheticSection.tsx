@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
+import Link from "next/link";
 import { FaFlask, FaCut, FaLeaf } from "react-icons/fa";
 
 export default function AestheticSection() {
@@ -17,7 +18,7 @@ export default function AestheticSection() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 60 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       y: 0,
@@ -144,10 +145,12 @@ export default function AestheticSection() {
                       <p className="text-sm text-slate-500 leading-relaxed mb-4">
                         {treatment.description}
                       </p>
-                      <button className="flex text-sm items-center gap-2 text-[var(--brand-blue)] font-medium hover:text-[var(--brand-blue-dark)] transition-colors duration-300 group">
-                        <span>{treatment.cta}</span>
-                        <MoveRight className="w-4 h-4 mt-[0.1rem] transition-transform duration-300 group-hover:translate-x-1" />
-                      </button>
+                      <Link href="/contact">
+                        <button className="flex text-sm cursor-pointer items-center gap-2 text-[var(--brand-blue)] font-medium hover:text-[var(--brand-blue-dark)] transition-colors duration-300 group">
+                          <span>{treatment.cta}</span>
+                          <MoveRight className="w-4 h-4 mt-[0.1rem] transition-transform duration-300 group-hover:translate-x-1" />
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>

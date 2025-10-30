@@ -9,9 +9,12 @@ import {
   FaChevronUp,
   FaPlus,
   FaMinus,
+  FaEnvelope,
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
+import Link from "next/link";
+import { BookOpen } from "lucide-react";
 
 export default function SexualRejuvenationPage() {
   const [expandedTreatment, setExpandedTreatment] = useState<string | null>(
@@ -35,12 +38,11 @@ export default function SexualRejuvenationPage() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 60 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
       },
     },
   };
@@ -268,7 +270,7 @@ export default function SexualRejuvenationPage() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative w-full z-20 flex h-full">
+        <div className="relative w-full z-20 mt-10 md:mt-0 flex h-full">
           <div className="w-full flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <div className="text-white">
               <motion.div
@@ -277,21 +279,23 @@ export default function SexualRejuvenationPage() {
                 variants={containerVariants}
               >
                 <motion.div
-                  className="inline-block px-4 py-2 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter font-medium mb-4"
+                  className="inline-flex gap-1 px-4 py-2 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter font-medium mb-4"
                   variants={itemVariants}
                 >
-                  GMC‑registered | CE‑marked equipment | Confidential
+                  GMC‑registered | CE‑marked equipment{" "}
+                  <span className="hidden md:block">| Confidential</span>
                 </motion.div>
 
                 <motion.h1
-                  className="text-3xl lg:text-4xl text-gray-700 font-raleway leading-tight mb-2"
+                  className="text-2xl lg:text-3xl md:max-w-2xl text-gray-700 font-raleway leading-tight mb-2"
                   variants={itemVariants}
                 >
-                  Sexual Rejuvenation Treatments in St Albans & Hertfordshire
+                  Natural Regeneration & Erectile Dysfunction Treatment with PRP
+                  — Confidential Care by a GMC-Registered GP{" "}
                 </motion.h1>
 
                 <motion.p
-                  className="text-base font-inter text-gray-500 leading-relaxed max-w-3xl"
+                  className="md:text-base text-xs font-inter text-gray-500 leading-relaxed max-w-3xl"
                   variants={itemVariants}
                 >
                   Confidential, non‑surgical solutions to restore confidence,
@@ -300,14 +304,23 @@ export default function SexualRejuvenationPage() {
                 </motion.p>
                 <motion.div
                   variants={itemVariants}
-                  className={`flex flex-col mt-3 sm:flex-row gap-4`}
+                  className={`flex flex-col items-center md:items-start mb-10 md:mb-0 mt-3 sm:flex-row gap-4`}
                 >
-                  <button className="px-6 py-3 text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2">
+                  <a
+                    href="https://wa.me/447990364147"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 w-full md:w-max md:text-sm text-xs  items-center justify-center cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2"
+                  >
                     <FaWhatsapp className="w-5 h-5" />
                     Book on WhatsApp
-                  </button>
-                  <button className="px-6 py-3 cursor-pointer text-sm border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg font-inter bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]">
-                    Explore Treatments
+                  </a>
+
+                  <button className="px-6 w-full md:w-max inline-flex items-center justify-center md:text-sm text-xs items-center gap-2 py-3 cursor-pointer border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg font-inter bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]">
+                    <Link className="flex items-center gap-2" href="/contact">
+                      <FaEnvelope className="w-5 h-5" />
+                      Contact Us
+                    </Link>
                   </button>
                 </motion.div>
               </motion.div>
@@ -354,6 +367,81 @@ export default function SexualRejuvenationPage() {
       </section>
 
       {/* Introduction Section */}
+
+      {/* Understanding ED Section */}
+      <section className="py-16 lg:py-24 bg-gradient-to-b from-[#f6f7ff] to-transparent">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+          >
+            <motion.h2
+              className="text-2xl lg:text-3xl font-raleway text-slate-900 mb-3"
+              variants={itemVariants}
+            >
+              Understanding Erectile Dysfunction (ED)
+            </motion.h2>
+
+            <motion.p
+              className="text-sm font-inter text-slate-600 leading-relaxed mb-4"
+              variants={itemVariants}
+            >
+              Erectile dysfunction (ED) is a common condition where achieving or
+              maintaining an erection becomes difficult. It often results from a
+              combination of factors such as reduced blood flow, stress,
+              hormonal imbalance, diabetes, high blood pressure, or certain
+              medications.
+            </motion.p>
+
+            <motion.p
+              className="text-sm font-inter text-slate-600 leading-relaxed mb-3 "
+              variants={itemVariants}
+            >
+              Sometimes, the blood vessels supplying the penis can become
+              narrow, and the penile muscles may weaken, reducing the ability to
+              maintain a firm erection. PRP (Platelet-Rich Plasma) therapy can
+              help by improving blood flow, regenerating tissue, and
+              strengthening the smooth muscle responsible for erections.
+            </motion.p>
+
+            <motion.p
+              className="text-sm font-inter text-slate-600 leading-relaxed mb-3"
+              variants={itemVariants}
+            >
+              At Healing-PRP, we understand that ED can affect both physical and
+              emotional well-being. Many men prefer to avoid medication or
+              surgery, seeking a natural, regenerative alternative instead. Our
+              treatments — including the P-Shot® and Exomine® P-Shot — use your
+              body’s own PRP to stimulate tissue repair, vascular regeneration,
+              and increased sensitivity.
+            </motion.p>
+
+            <motion.p
+              className="text-sm font-inter text-slate-600 leading-relaxed max-w-3xl"
+              variants={itemVariants}
+            >
+              Because PRP is derived from your own blood, the therapy is safe,
+              drug-free, and minimally invasive. It targets the root causes of
+              erectile dysfunction, not just the symptoms — helping restore
+              confidence, performance, and intimacy over time.
+            </motion.p>
+            <motion.div variants={itemVariants}>
+              <Link
+                href="https://wa.me/447990364147"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2"
+              >
+                <FaWhatsapp className="w-5 h-5" />
+                Book a consultation
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       <section className="py-20 lg:py-32 relative">
         {/* Background Elements */}
 
@@ -365,14 +453,14 @@ export default function SexualRejuvenationPage() {
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl font-raleway text-slate-900 mb-3"
+              className="text-2xl lg:text-3xl font-raleway text-slate-900 mb-3"
               variants={itemVariants}
             >
               A Personal, Medical Approach to Sexual Wellness
             </motion.h2>
 
             <motion.div
-              className="prose prose-lg max-w-none text-slate-600 font-inter leading-relaxed space-y-6"
+              className="prose prose-lg text-sm max-w-none text-slate-600 font-inter leading-relaxed space-y-6"
               variants={itemVariants}
             >
               <p>
@@ -394,6 +482,17 @@ export default function SexualRejuvenationPage() {
                 Hertford, and London.
               </p>
             </motion.div>
+            <motion.div variants={itemVariants}>
+              <Link
+                href="/blog"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2"
+              >
+                <BookOpen className="w-5 h-5" />
+                Read More
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -408,14 +507,14 @@ export default function SexualRejuvenationPage() {
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl font-raleway text-slate-900 mb-3"
+              className="md:text-3xl text-2xl font-raleway text-slate-900 mb-3"
               variants={itemVariants}
             >
               What is PRP (Platelet‑Rich Plasma)?
             </motion.h2>
 
             <motion.div
-              className="prose prose-lg max-w-none text-slate-600 font-inter leading-relaxed mb-8"
+              className="prose prose-lg text-sm max-w-none text-slate-600 font-inter leading-relaxed mb-8"
               variants={itemVariants}
             >
               <p>
@@ -429,7 +528,7 @@ export default function SexualRejuvenationPage() {
             </motion.div>
 
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 text-sm md:grid-cols-2 gap-4"
               variants={itemVariants}
             >
               {[
@@ -450,7 +549,7 @@ export default function SexualRejuvenationPage() {
             </motion.div>
 
             <motion.p
-              className="mt-8 text-slate-600 text-center font-inter leading-relaxed"
+              className="mt-8 text-sm text-slate-600 text-center font-inter leading-relaxed"
               variants={itemVariants}
             >
               Because PRP comes from your own body, it is a safe, natural, and
@@ -465,12 +564,11 @@ export default function SexualRejuvenationPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl font-raleway text-slate-900 mb-8"
+              className="md:text-3xl text-2xl font-raleway text-slate-900 mb-8"
               variants={itemVariants}
             >
               Treatments Offered at Healing‑PRP Clinics
@@ -487,7 +585,7 @@ export default function SexualRejuvenationPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                     <div>
                       <div className="flex items-center gap-2 mb-4">
-                        <h3 className="text-2xl font-raleway text-slate-900">
+                        <h3 className="md:text-2xl text-xl font-raleway text-slate-900">
                           {treatment.name} -
                         </h3>
                         <span className="text-xl font-inter font-semibold text-[var(--brand-blue)]">
@@ -511,11 +609,11 @@ export default function SexualRejuvenationPage() {
                         ))}
                       </ul>
                     </div>
-                    <div className="bg-white rounded-xl p-6">
-                      <h4 className="text-lg font-raleway font-semibold text-slate-900 mb-4">
+                    <div className="bg-white rounded-xl md:p-6 p-4">
+                      <h4 className="md:text-lg text-base font-raleway font-semibold text-slate-900 mb-4">
                         Treatment Details
                       </h4>
-                      <div className="space-y-3">
+                      <div className="space-y-3  md:text-base text-sm ">
                         <div>
                           <span className="font-inter font-medium text-slate-700">
                             Duration:
@@ -537,11 +635,11 @@ export default function SexualRejuvenationPage() {
                         href="https://wa.me/447990364147"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center text-sm gap-2 mt-6 px-6 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+                        className="inline-flex items-center md:text-sm text-xs gap-2 mt-6 md:px-6 px-4 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
                         whileTap={{ scale: 0.95 }}
                       >
-                        <FaWhatsapp className="w-4 h-4" />
-                        Enquire Now About {treatment.name}
+                        <FaWhatsapp className="w-4 h-4 md:block hidden" />
+                        Enquire About {treatment.name}
                       </motion.a>
                     </div>
                   </div>
@@ -590,17 +688,17 @@ export default function SexualRejuvenationPage() {
                               <h4 className="text-lg font-raleway font-semibold text-slate-900 mb-4">
                                 How It Works
                               </h4>
-                              <p className="text-sm font-inter text-slate-600 leading-relaxed">
+                              <p className="md:text-sm text-xs font-inter text-slate-600 leading-relaxed">
                                 {treatment.expandedContent.howItWorks}
                               </p>
                             </div>
 
                             {/* Who Is It For */}
                             <div>
-                              <h4 className="text-lg font-raleway font-semibold text-slate-900 mb-4">
+                              <h4 className="md:text-lg text-base font-raleway font-semibold text-slate-900 mb-4">
                                 Who Is It For?
                               </h4>
-                              <ul className="space-y-2">
+                              <ul className="space-y-2 md:text-sm text-xs">
                                 {treatment.expandedContent.whoIsItFor.map(
                                   (item, itemIndex) => (
                                     <li
@@ -608,7 +706,7 @@ export default function SexualRejuvenationPage() {
                                       className="flex items-start gap-3"
                                     >
                                       <FaCheck className="w-3 h-3 mt-[0.3rem] text-[var(--brand-blue)] flex-shrink-0" />
-                                      <span className="text-sm font-inter text-slate-700">
+                                      <span className="font-inter text-slate-700">
                                         {item}
                                       </span>
                                     </li>
@@ -620,7 +718,7 @@ export default function SexualRejuvenationPage() {
 
                           {/* Common Questions */}
                           <div className="mt-8">
-                            <h4 className="text-lg font-raleway font-semibold text-slate-900 mb-4">
+                            <h4 className="md:text-lg text-base font-raleway font-semibold text-slate-900 mb-4">
                               Common Questions
                             </h4>
                             <div className="space-y-4">
@@ -628,12 +726,12 @@ export default function SexualRejuvenationPage() {
                                 (qa, qaIndex) => (
                                   <div
                                     key={qaIndex}
-                                    className="bg-slate-50 rounded-lg p-4"
+                                    className="bg-slate-50 rounded-lg md:p-4 p-2"
                                   >
-                                    <h5 className="font-inter font-semibold text-slate-900 mb-2">
+                                    <h5 className="font-inter md:text-base text-sm font-semibold text-slate-900 mb-2">
                                       {qa.question}
                                     </h5>
-                                    <p className="text-sm font-inter text-slate-600">
+                                    <p className="md:text-sm text-xs font-inter text-slate-600">
                                       {qa.answer}
                                     </p>
                                   </div>
@@ -662,10 +760,11 @@ export default function SexualRejuvenationPage() {
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl font-raleway text-slate-900 mb-6"
+              className="md:text-3xl text-xl font-raleway text-slate-900 md:mb-6 mb-4"
               variants={itemVariants}
             >
-              P-Shot® vs Exomine® P-Shot – Comparison
+              P-Shot® vs Exomine® P-Shot{" "}
+              <span className="hidden md:inline">- Comparison</span>
             </motion.h2>
 
             <motion.div
@@ -782,18 +881,17 @@ export default function SexualRejuvenationPage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="bg-white/95 backdrop-blur-sm rounded-lg p-8 lg:p-12 text-center shadow-xl"
+            className="bg-white/95 backdrop-blur-sm rounded-lg md:p-8 p-4 lg:p-12 text-center shadow-xl"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl font-raleway text-slate-900 mb-6"
+              className="md:text-3xl text-xl font-raleway text-slate-900 md:mb-6 mb-4"
               variants={itemVariants}
             >
-              Shockwave Therapy in St Albans, Hertfordshire
-              <br /> Erectile Dysfunction Treatment
+              Erectile Dysfunction Treatment
             </motion.h2>
 
             <motion.div
@@ -807,7 +905,7 @@ export default function SexualRejuvenationPage() {
               ].map((benefit, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-center gap-3 p-4 bg-gray-100 rounded-lg"
+                  className="flex md:items-center gap-3 p-4 bg-gray-100 rounded-lg"
                   variants={itemVariants}
                 >
                   <FaCheck className="w-3 mt-[0.1rem] h-3 text-[var(--brand-blue)] flex-shrink-0" />
@@ -822,11 +920,11 @@ export default function SexualRejuvenationPage() {
               href="https://wa.me/447990364147"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex text-sm items-center gap-2 px-8 py-4 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium"
+              className="inline-flex md:text-sm text-xs items-center gap-2 md:px-8 px-4 py-4 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium"
               variants={itemVariants}
               whileTap={{ scale: 0.95 }}
             >
-              <FaWhatsapp className="w-5 h-5" />
+              <FaWhatsapp className="w-5 h-5 md:block hidden" />
               Enquire Now About Shockwave Therapy
             </motion.a>
           </motion.div>
@@ -851,14 +949,14 @@ export default function SexualRejuvenationPage() {
               </div>
             </motion.div>
             <motion.h2
-              className="text-3xl text-text tracking-tight font-raleway text-navy-600 dark:text-white leading-tight text-center"
+              className="md:text-3xl text-xl tracking-tight font-raleway text-navy-600 leading-tight text-center"
               variants={itemVariants}
             >
               Common Questions About PRP Treatments
             </motion.h2>
 
             <motion.p
-              className="text-sm font-inter text-slate-600 dark:text-slate-300 mx-auto leading-relaxed text-center"
+              className="md:text-sm text-xs font-inter text-slate-600 mx-auto leading-relaxed text-center"
               variants={itemVariants}
             >
               Find answers to the most frequently asked questions about our PRP
@@ -882,7 +980,7 @@ export default function SexualRejuvenationPage() {
                     className="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50/50 transition-colors duration-300"
                     onClick={() => toggleFAQ(index)}
                   >
-                    <h3 className="font-raleway text-slate-900 pr-4 leading-relaxed">
+                    <h3 className="md:text-base text-sm text-slate-900 pr-4 leading-relaxed">
                       {faq.question}
                     </h3>
                     <motion.div

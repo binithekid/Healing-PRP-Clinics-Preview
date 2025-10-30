@@ -79,7 +79,10 @@ export default function PRPExplanationSection() {
   ];
 
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden">
+    <section
+      id="prp-explanation"
+      className="relative py-20 lg:py-32 overflow-hidden"
+    >
       {/* Seamless Gradient Background - continues from previous component */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-[#f6f7ff] to-transparent"></div>
@@ -109,7 +112,7 @@ export default function PRPExplanationSection() {
           </motion.h2>
 
           <motion.p
-            className="md:text-sm text-xs text-slate-600 dark:text-slate-300 max-w-2xl mx-auto"
+            className="md:text-sm text-xs text-slate-600 max-w-2xl mx-auto"
             variants={itemVariants}
           >
             At Healing-PRP Clinics in St Albans, Hertfordshire, we use
@@ -188,10 +191,10 @@ export default function PRPExplanationSection() {
 
                         {/* Content */}
                         <div className="flex flex-col flex-1">
-                          <h3 className="font-semibold text-navy-600 dark:text-white mb-2">
+                          <h3 className="font-semibold text-navy-600 mb-2">
                             {step.title}
                           </h3>
-                          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed flex-1">
+                          <p className="text-sm text-slate-600 leading-relaxed flex-1">
                             {step.description}
                           </p>
                         </div>
@@ -232,9 +235,7 @@ export default function PRPExplanationSection() {
                 variants={itemVariants}
               >
                 <div className="w-2 h-2 bg-[var(--brand-blue)] rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-slate-600 dark:text-slate-300 text-left">
-                  {benefit}
-                </span>
+                <span className="text-slate-600 text-left">{benefit}</span>
               </motion.div>
             ))}
           </motion.div>

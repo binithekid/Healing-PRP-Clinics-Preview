@@ -9,9 +9,11 @@ import {
   FaChevronUp,
   FaPlus,
   FaMinus,
+  FaEnvelope,
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
+import Link from "next/link";
 
 export default function FacialAestheticsPage() {
   const [expandedTreatment, setExpandedTreatment] = useState<string | null>(
@@ -311,12 +313,11 @@ export default function FacialAestheticsPage() {
 
         {/* Hero Content */}
         <div className="relative w-full z-20 flex h-full">
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+          <div className="w-full max-w-7xl mt-10 md:mt-0 mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
             <div className="text-white">
               <motion.div
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                animate="visible"
                 variants={containerVariants}
               >
                 <motion.div
@@ -327,14 +328,14 @@ export default function FacialAestheticsPage() {
                 </motion.div>
 
                 <motion.h1
-                  className="text-3xl lg:text-4xl text-gray-700 font-raleway leading-tight mb-2"
+                  className="text-2xl lg:text-4xl text-gray-700 font-raleway leading-tight mb-2"
                   variants={itemVariants}
                 >
                   Facial Aesthetics Treatments in St Albans, Hertfordshire
                 </motion.h1>
 
                 <motion.p
-                  className="text-base font-inter text-gray-500 leading-relaxed max-w-3xl"
+                  className="text-sm font-inter text-gray-500 leading-relaxed max-w-3xl"
                   variants={itemVariants}
                 >
                   Safe, natural, and effective treatments to restore youthful
@@ -345,12 +346,15 @@ export default function FacialAestheticsPage() {
                   variants={itemVariants}
                   className={`flex flex-col mt-3 sm:flex-row gap-4`}
                 >
-                  <button className="px-6 py-3 text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2">
+                  <button className="px-6 py-3 flex items-center justify-center text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2">
                     <FaWhatsapp className="w-5 h-5" />
                     Message on WhatsApp
                   </button>
-                  <button className="px-6 py-3 cursor-pointer text-sm border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg font-inter bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]">
-                    Browse treatments
+                  <button className="px-6 w-full md:w-max inline-flex items-center justify-center md:text-sm text-xs items-center gap-2 py-3 cursor-pointer border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg font-inter bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]">
+                    <Link className="flex items-center gap-2" href="/contact">
+                      <FaEnvelope className="w-5 h-5" />
+                      Contact Us
+                    </Link>
                   </button>
                 </motion.div>
               </motion.div>
@@ -369,8 +373,7 @@ export default function FacialAestheticsPage() {
           <motion.div
             className="flex flex-wrap justify-center gap-4"
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.a
@@ -400,12 +403,11 @@ export default function FacialAestheticsPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.p
-              className="text-base font-inter text-slate-600 mb-8 max-w-4xl"
+              className="text-sm font-inter text-slate-600 mb-8 max-w-4xl"
               variants={itemVariants}
             >
               At Healing‑PRP Clinics, we provide safe, natural, and effective
@@ -454,12 +456,11 @@ export default function FacialAestheticsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-8 text-center"
+              className="text-2xl lg:text-4xl font-raleway text-slate-900 mb-8 text-center"
               variants={itemVariants}
             >
               Our Facial Aesthetics Treatments
@@ -476,9 +477,9 @@ export default function FacialAestheticsPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                     <div>
                       <div className="flex items-center gap-2 mb-4">
-                        <h3 className="text-2xl font-raleway text-slate-900">
+                        <h3 className="md:text-2xl text-lg font-raleway text-slate-900">
                           {treatment.name} -{" "}
-                          <span className="text-xl font-inter font-semibold text-[var(--brand-blue)]">
+                          <span className="md:text-xl text-lg font-inter font-semibold text-[var(--brand-blue)]">
                             {treatment.price}
                           </span>
                         </h3>
@@ -504,23 +505,23 @@ export default function FacialAestheticsPage() {
                       </ul>
                     </div>
                     <div className="bg-white rounded-xl p-6">
-                      <h4 className="text-lg font-raleway font-semibold text-slate-900 mb-4">
+                      <h4 className="md:text-lg text-base font-raleway font-semibold text-slate-900 mb-4">
                         Treatment Details
                       </h4>
                       <div className="space-y-3">
                         <div>
-                          <span className="font-inter font-medium text-slate-700">
+                          <span className="font-inter md:text-base text-sm font-medium text-slate-700">
                             Duration:
                           </span>
-                          <span className="font-inter text-slate-600 ml-2">
+                          <span className="font-inter md:text-base text-sm text-slate-600 ml-2">
                             {treatment.duration}
                           </span>
                         </div>
                         <div>
-                          <span className="font-inter font-medium text-slate-700">
+                          <span className="font-inter md:text-base text-sm font-medium text-slate-700">
                             Course:
                           </span>
-                          <span className="font-inter text-slate-600 ml-2">
+                          <span className="font-inter md:text-base text-sm text-slate-600 ml-2">
                             {treatment.course}
                           </span>
                         </div>
@@ -612,7 +613,7 @@ export default function FacialAestheticsPage() {
 
                           {/* Common Questions */}
                           <div className="mt-8">
-                            <h4 className="text-lg font-raleway font-semibold text-slate-900 mb-4">
+                            <h4 className="md:text-lg text-base font-raleway font-semibold text-slate-900 mb-4">
                               Common Questions
                             </h4>
                             <div className="space-y-4">
@@ -622,10 +623,10 @@ export default function FacialAestheticsPage() {
                                     key={qaIndex}
                                     className="bg-slate-50 rounded-lg p-4"
                                   >
-                                    <h5 className="font-inter font-semibold text-slate-900 mb-2">
+                                    <h5 className="font-inter md:text-base text-sm font-semibold text-slate-900 mb-2">
                                       {qa.question}
                                     </h5>
-                                    <p className="text-sm font-inter text-slate-600">
+                                    <p className="md:text-sm text-xs font-inter text-slate-600">
                                       {qa.answer}
                                     </p>
                                   </div>
@@ -653,8 +654,7 @@ export default function FacialAestheticsPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.div
@@ -662,7 +662,7 @@ export default function FacialAestheticsPage() {
               variants={itemVariants}
             >
               <motion.h2
-                className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-6"
+                className="text-2xl lg:text-4xl font-raleway text-slate-900 mb-6"
                 variants={itemVariants}
               >
                 Platelet‑Rich Plasma (PRP) Vampire Facial in St Albans,
@@ -670,7 +670,7 @@ export default function FacialAestheticsPage() {
               </motion.h2>
 
               <motion.p
-                className="text-base font-inter text-slate-600 mb-6"
+                className="text-sm font-inter text-slate-600 mb-6"
                 variants={itemVariants}
               >
                 A regenerative skin treatment using your own PRP to stimulate
@@ -748,8 +748,7 @@ export default function FacialAestheticsPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.div
@@ -761,14 +760,14 @@ export default function FacialAestheticsPage() {
               </div>
             </motion.div>
             <motion.h2
-              className="text-3xl lg:text-4xl text-text tracking-tight font-raleway text-navy-600 dark:text-white leading-tight text-center"
+              className="text-2xl lg:text-4xl text-text tracking-tight font-raleway text-navy-600 leading-tight text-center"
               variants={itemVariants}
             >
               Common Questions About Facial Aesthetics
             </motion.h2>
 
             <motion.p
-              className="text-sm font-inter text-slate-600 dark:text-slate-300 mx-auto leading-relaxed text-center"
+              className="text-sm font-inter text-slate-600 mx-auto leading-relaxed text-center"
               variants={itemVariants}
             >
               Find answers to the most frequently asked questions about our
@@ -777,8 +776,7 @@ export default function FacialAestheticsPage() {
             <motion.div
               className="space-y-4 mt-4"
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
+              animate="visible"
               variants={containerVariants}
             >
               {faqs.map((faq, index) => (
@@ -793,7 +791,7 @@ export default function FacialAestheticsPage() {
                     onClick={() => toggleFAQ(index)}
                     whileTap={{ scale: 0.99 }}
                   >
-                    <h3 className="font-raleway text-slate-900 pr-4 leading-relaxed">
+                    <h3 className="text-slate-900 md:text-base text-sm font-raleway pr-4 leading-relaxed">
                       {faq.question}
                     </h3>
                     <motion.div

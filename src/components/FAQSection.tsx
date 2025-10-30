@@ -90,14 +90,14 @@ export default function FAQSection() {
           </motion.div>
 
           <motion.h2
-            className="text-2xl lg:text-3xl tracking-tight font-raleway text-navy-600 dark:text-white leading-tight"
+            className="text-2xl lg:text-3xl tracking-tight font-raleway text-navy-600 leading-tight"
             variants={itemVariants}
           >
             Common Questions About PRP Treatments
           </motion.h2>
 
           <motion.p
-            className="text-sm text-slate-600 dark:text-slate-300 mx-auto leading-relaxed"
+            className="text-sm text-slate-600 mx-auto leading-relaxed"
             variants={itemVariants}
           >
             Find answers to the most frequently asked questions about our PRP
@@ -116,16 +116,16 @@ export default function FAQSection() {
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden"
+              className="bg-white/90 backdrop-blur-sm rounded-xl border border-slate-200/50 overflow-hidden"
               variants={itemVariants}
             >
               {/* Question */}
               <motion.button
-                className="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50/50 dark:hover:bg-slate-700/50 transition-colors duration-300"
+                className="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50/50 transition-colors duration-300"
                 onClick={() => toggleFAQ(index)}
                 whileTap={{ scale: 0.99 }}
               >
-                <h3 className="font-raleway md:text-base text-sm text-navy-600 dark:text-white pr-4 leading-relaxed">
+                <h3 className="font-raleway md:text-base text-sm text-navy-600 pr-4 leading-relaxed">
                   {faq.question}
                 </h3>
                 <motion.div
@@ -166,8 +166,8 @@ export default function FAQSection() {
                     className="overflow-hidden"
                   >
                     <div className="px-6 pb-6">
-                      <div className="border-t border-slate-200/50 dark:border-slate-700/50 pt-4">
-                        <p className="font-inter md:text-sm text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                      <div className="border-t border-slate-200/50 pt-4">
+                        <p className="font-inter md:text-sm text-xs text-slate-600 leading-relaxed">
                           {faq.answer}
                         </p>
                       </div>

@@ -47,6 +47,8 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  // No theme initialization; dark mode removed
+
   const menuItems = [
     // { name: "About", hasDropdown: false, href: "/about" },
     {
@@ -100,7 +102,7 @@ const Header = () => {
             {/* Logo */}
             <div className="flex-shrink-0">
               <Link href="/">
-                <div className="text-base inline-flex items-center gap-1 tracking-tight font-medium text-black dark:text-[var(--brand-blue-light)]">
+                <div className="text-base inline-flex items-center gap-1 tracking-tight font-medium text-black">
                   <Flower className="w-5 h-5 text-blue-700" /> Healing PRP
                   Clinics
                 </div>
@@ -109,17 +111,17 @@ const Header = () => {
 
             {/* Phone number and Menu */}
             <div className="flex items-center space-x-2">
-              <span className="hidden md:inline text-[13px] font-medium font-raleway text-slate-800 dark:text-slate-400">
+              <span className="hidden md:inline text-[13px] font-medium font-raleway text-slate-800">
                 MENU
               </span>
               <button
                 onClick={toggleMenu}
-                className="p-2 cursor-pointer hover:bg-[var(--brand-blue-50)] dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="p-2 cursor-pointer hover:bg-[var(--brand-blue-50)] rounded-md transition-colors"
               >
                 {isMenuOpen ? (
-                  <X className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+                  <X className="h-5 w-5 text-slate-700" />
                 ) : (
-                  <Menu className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+                  <Menu className="h-5 w-5 text-slate-700" />
                 )}
               </button>
             </div>
@@ -135,7 +137,7 @@ const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-white dark:bg-slate-900 top-16 lg:top-20"
+            className="fixed inset-0 z-40 bg-white top-16 lg:top-20"
           >
             <div className="flex flex-col justify-center items-start min-h-full py-12">
               <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -154,13 +156,13 @@ const Header = () => {
                     >
                       <Link
                         href={item.href}
-                        className="text-2xl lg:text-3xl font-raleway text-slate-900 dark:text-white hover:text-[var(--brand-blue)] dark:hover:text-[var(--brand-blue-light)] transition-colors duration-300"
+                        className="text-2xl lg:text-3xl font-raleway text-slate-900 hover:text-[var(--brand-blue)] transition-colors duration-300"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         {item.name}
                       </Link>
                       {item.hasDropdown && (
-                        <ChevronDown className="h-5 w-5 lg:h-6 lg:w-6 text-slate-500 dark:text-slate-400" />
+                        <ChevronDown className="h-5 w-5 lg:h-6 lg:w-6 text-slate-500" />
                       )}
                     </motion.div>
                   ))}

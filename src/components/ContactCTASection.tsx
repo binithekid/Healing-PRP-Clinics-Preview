@@ -16,7 +16,7 @@ export default function ContactCTASection() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       y: 0,
@@ -63,7 +63,7 @@ export default function ContactCTASection() {
   ];
 
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-50 dark:bg-slate-900">
+    <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-50">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0">
         {/* Subtle diagonal shadow effect */}
@@ -84,7 +84,7 @@ export default function ContactCTASection() {
         >
           {/* Main Headline */}
           <motion.h2
-            className="md:text-3xl text-2xl font-raleway font-light text-slate-900 dark:text-white leading-tight"
+            className="md:text-3xl text-2xl font-raleway font-light text-slate-900 leading-tight"
             variants={itemVariants}
           >
             Book a Private Consultation
@@ -92,7 +92,7 @@ export default function ContactCTASection() {
 
           {/* Subtitle */}
           <motion.p
-            className="md:text-sm text-xs text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-5 leading-relaxed"
+            className="md:text-sm text-xs text-slate-600 max-w-2xl mx-auto mb-5 leading-relaxed"
             variants={itemVariants}
           >
             Take the first step toward natural healing and personal confidence.
@@ -109,7 +109,7 @@ export default function ContactCTASection() {
                 href={method.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group p-6 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 ${method.hoverBg} transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
+                className={`group p-6 bg-white rounded-xl border border-slate-200 ${method.hoverBg} transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -119,10 +119,10 @@ export default function ContactCTASection() {
                   >
                     <method.icon className={`w-6 h-6 ${method.color}`} />
                   </div>
-                  <h3 className="font-raleway text-slate-900 dark:text-white font-medium">
+                  <h3 className="font-raleway text-slate-900 font-medium">
                     {method.label}
                   </h3>
-                  <p className="text-sm font-inter text-slate-500 dark:text-slate-300">
+                  <p className="text-sm font-inter text-slate-500">
                     {method.value}
                   </p>
                 </div>
@@ -138,7 +138,7 @@ export default function ContactCTASection() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2 text-sm font-inter text-slate-600 dark:text-slate-300"
+                className="flex items-center gap-2 text-sm font-inter text-slate-600"
               >
                 <div className="w-1.5 h-1.5 bg-[var(--brand-blue)] rounded-full"></div>
                 <span>{feature}</span>

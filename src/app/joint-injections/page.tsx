@@ -9,9 +9,11 @@ import {
   FaChevronUp,
   FaPlus,
   FaMinus,
+  FaEnvelope,
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
+import Link from "next/link";
 
 export default function JointInjectionsPage() {
   const [expandedTreatment, setExpandedTreatment] = useState<string | null>(
@@ -178,8 +180,7 @@ export default function JointInjectionsPage() {
             <div className="text-white">
               <motion.div
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                animate="visible"
                 variants={containerVariants}
               >
                 <motion.div
@@ -190,14 +191,14 @@ export default function JointInjectionsPage() {
                 </motion.div>
 
                 <motion.h1
-                  className="text-3xl lg:text-4xl text-gray-700 font-raleway leading-tight mb-2"
+                  className="text-2xl lg:text-4xl text-gray-700 font-raleway leading-tight mb-2"
                   variants={itemVariants}
                 >
                   Private Joint Injections in St Albans & Hertfordshire
                 </motion.h1>
 
                 <motion.p
-                  className="text-base font-inter text-gray-500 leading-relaxed max-w-3xl"
+                  className="text-sm font-inter text-gray-500 leading-relaxed max-w-3xl"
                   variants={itemVariants}
                 >
                   GP-led pain relief for arthritis, sports injuries & joint
@@ -207,12 +208,15 @@ export default function JointInjectionsPage() {
                   variants={itemVariants}
                   className={`flex flex-col mt-3 sm:flex-row gap-4`}
                 >
-                  <button className="px-6 py-3 text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2">
+                  <button className="px-6 py-3 flex items-center justify-center text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2">
                     <FaWhatsapp className="w-5 h-5" />
                     Book Your Consultation
                   </button>
-                  <button className="px-6 py-3 cursor-pointer text-sm border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg font-inter bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]">
-                    Learn More
+                  <button className="px-6 w-full md:w-max inline-flex items-center justify-center md:text-sm text-xs items-center gap-2 py-3 cursor-pointer border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg font-inter bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]">
+                    <Link className="flex items-center gap-2" href="/contact">
+                      <FaEnvelope className="w-5 h-5" />
+                      Contact Us
+                    </Link>
                   </button>
                 </motion.div>
               </motion.div>
@@ -231,8 +235,7 @@ export default function JointInjectionsPage() {
           <motion.div
             className="flex flex-wrap justify-center gap-4"
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.a
@@ -286,18 +289,17 @@ export default function JointInjectionsPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-3"
+              className="text-2xl lg:text-3xl font-raleway text-slate-900 mb-3"
               variants={itemVariants}
             >
               What is a Joint Injection?
             </motion.h2>
             <motion.p
-              className="text-base font-inter text-slate-600 mb-8 max-w-4xl"
+              className="text-sm font-inter text-slate-600 mb-8 max-w-4xl"
               variants={itemVariants}
             >
               A joint injection delivers targeted therapy into a joint or
@@ -320,12 +322,11 @@ export default function JointInjectionsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-8 text-center"
+              className="text-2xl lg:text-3xl font-raleway text-slate-900 mb-8 text-center"
               variants={itemVariants}
             >
               Treatments Offered at Healing PRP Clinics
@@ -342,10 +343,10 @@ export default function JointInjectionsPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                     <div>
                       <div className="flex items-center gap-2 mb-4">
-                        <h3 className="text-2xl font-raleway text-slate-900">
+                        <h3 className="md:text-2xl text-lg font-raleway text-slate-900">
                           {treatment.name} -
                         </h3>
-                        <span className="text-xl font-inter font-semibold text-[var(--brand-blue)]">
+                        <span className="md:text-xl text-lg font-inter font-semibold text-[var(--brand-blue)]">
                           {treatment.price}
                         </span>
                       </div>
@@ -367,23 +368,23 @@ export default function JointInjectionsPage() {
                       </ul>
                     </div>
                     <div className="bg-white rounded-xl p-6">
-                      <h4 className="text-lg font-raleway font-semibold text-slate-900 mb-4">
+                      <h4 className="md:text-lg text-base font-raleway font-semibold text-slate-900 mb-4">
                         Treatment Details
                       </h4>
                       <div className="space-y-3">
                         <div>
-                          <span className="font-inter font-medium text-slate-700">
+                          <span className="font-inter md:text-base text-sm font-medium text-slate-700">
                             Duration:
                           </span>
-                          <span className="font-inter text-slate-600 ml-2">
+                          <span className="font-inter md:text-base text-sm text-slate-600 ml-2">
                             {treatment.duration}
                           </span>
                         </div>
                         <div>
-                          <span className="font-inter font-medium text-slate-700">
+                          <span className="font-inter md:text-base text-sm font-medium text-slate-700">
                             Course:
                           </span>
-                          <span className="font-inter text-slate-600 ml-2">
+                          <span className="font-inter md:text-base text-sm text-slate-600 ml-2">
                             {treatment.course}
                           </span>
                         </div>
@@ -392,10 +393,10 @@ export default function JointInjectionsPage() {
                         href="https://wa.me/447990364147"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center text-sm gap-2 mt-6 px-6 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+                        className="inline-flex items-center md:text-sm text-xs gap-2 mt-6 md:px-6 px-4 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
                         whileTap={{ scale: 0.95 }}
                       >
-                        <FaWhatsapp className="w-4 h-4" />
+                        <FaWhatsapp className="w-4 h-4 md:block hidden" />
                         Enquire About {treatment.name}
                       </motion.a>
                     </div>
@@ -475,7 +476,7 @@ export default function JointInjectionsPage() {
 
                           {/* Common Questions */}
                           <div className="mt-8">
-                            <h4 className="text-lg font-raleway font-semibold text-slate-900 mb-4">
+                            <h4 className="md:text-lg text-base font-raleway font-semibold text-slate-900 mb-4">
                               Common Questions
                             </h4>
                             <div className="space-y-4">
@@ -516,12 +517,11 @@ export default function JointInjectionsPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-8 text-center"
+              className="text-2xl lg:text-4xl font-raleway text-slate-900 mb-8 text-center"
               variants={itemVariants}
             >
               PRP vs Steroid – Which is Right for Me?
@@ -635,8 +635,7 @@ export default function JointInjectionsPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             <motion.div
@@ -648,14 +647,14 @@ export default function JointInjectionsPage() {
               </div>
             </motion.div>
             <motion.h2
-              className="text-3xl lg:text-4xl text-text tracking-tight font-raleway text-navy-600 dark:text-white leading-tight text-center"
+              className="text-2xl lg:text-4xl text-text tracking-tight font-raleway text-navy-600 leading-tight text-center"
               variants={itemVariants}
             >
               Common Questions About Joint Injections
             </motion.h2>
 
             <motion.p
-              className="text-sm font-inter text-slate-600 dark:text-slate-300 mx-auto leading-relaxed text-center"
+              className="text-xs lg:text-sm font-inter text-slate-600 mx-auto leading-relaxed text-center"
               variants={itemVariants}
             >
               Find answers to the most frequently asked questions about our
@@ -664,8 +663,7 @@ export default function JointInjectionsPage() {
             <motion.div
               className="space-y-4 mt-4"
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
+              animate="visible"
               variants={containerVariants}
             >
               {faqs.map((faq, index) => (

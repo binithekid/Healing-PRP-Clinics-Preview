@@ -11,6 +11,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import MobileMotionProvider from "@/components/MobileMotionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,8 +71,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${inter.variable} ${dmSans.variable} ${raleway.variable} ${merriweather.variable} ${manrope.variable} antialiased`}
       >
-        <Header />
-        {children}
+        <MobileMotionProvider>
+          <Header />
+          {children}
+        </MobileMotionProvider>
       </body>
     </html>
   );

@@ -358,7 +358,7 @@ export default function BlogPostPage() {
   if (notFound || !post) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+        {/* <div className="text-center">
           <h1 className="text-2xl font-raleway text-slate-900 mb-4">
             Post not found
           </h1>
@@ -372,7 +372,7 @@ export default function BlogPostPage() {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Blog
           </Link>
-        </div>
+        </div> */}
       </div>
     );
   }

@@ -7,6 +7,7 @@ import {
   FaMapMarkerAlt,
   FaPhone,
 } from "react-icons/fa";
+import Link from "next/link";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
 
@@ -47,12 +48,11 @@ export default function ContactPage() {
 
         {/* Hero Content */}
         <div className="relative z-20 flex h-full">
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+          <div className="w-full max-w-7xl mx-auto px-8 sm:px-6 lg:px-8 flex items-center">
             <div className="text-white text-center w-full">
               <motion.div
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                animate="visible"
                 variants={containerVariants}
               >
                 <motion.div
@@ -63,14 +63,14 @@ export default function ContactPage() {
                 </motion.div>
 
                 <motion.h1
-                  className="text-4xl lg:text-5xl font-raleway text-gray-800 font-light leading-tight mb-2"
+                  className="text-3xl lg:text-5xl font-raleway text-gray-800 font-light leading-tight mb-2"
                   variants={itemVariants}
                 >
                   Get in Touch
                 </motion.h1>
 
                 <motion.p
-                  className="text-base font-inter font-inter text-gray-500 leading-relaxed max-w-3xl mx-auto opacity-90"
+                  className="md:text-base text-xs font-inter font-inter text-gray-500 leading-relaxed max-w-3xl mx-auto opacity-90"
                   variants={itemVariants}
                 >
                   Reach out to us for appointments or any medical concerns. Your
@@ -82,13 +82,21 @@ export default function ContactPage() {
                   variants={itemVariants}
                   className={`flex flex-col items-center justify-center mt-4 sm:flex-row gap-4`}
                 >
-                  <button className="px-6 py-3 text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2">
+                  <a
+                    href="https://wa.me/447990364147"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2"
+                  >
                     <FaWhatsapp className="w-5 h-5" />
                     Book on WhatsApp
-                  </button>
-                  <button className="px-6 py-3 cursor-pointer text-sm border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg font-inter bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]">
-                    Explore Treatments
-                  </button>
+                  </a>
+                  <Link
+                    href="/blog"
+                    className="px-6 py-3 cursor-pointer text-sm border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] rounded-lg font-inter bg-white font-medium transition-all duration-300 hover:bg-[var(--brand-blue-50)]"
+                  >
+                    Learn More
+                  </Link>
                 </motion.div>
               </motion.div>
             </div>
@@ -98,12 +106,11 @@ export default function ContactPage() {
 
       {/* Get In Touch and Map Section */}
       <section className="py-20 lg:py-32 bg-slate-50">
-        <div className="max-w-7xl mx-auto lg:px-8">
+        <div className="max-w-7xl mx-auto lg:px-8 px-4">
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-2 gap-8"
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            animate="visible"
             variants={containerVariants}
           >
             {/* Get In Touch Component */}
@@ -112,14 +119,14 @@ export default function ContactPage() {
               variants={itemVariants}
             >
               <motion.div
-                className="text-sm uppercase tracking-widest font-inter font-medium text-[var(--brand-blue)] mb-4"
+                className="text-xs uppercase font-inter font-medium text-[var(--brand-blue)] mb-4"
                 variants={itemVariants}
               >
                 GET IN TOUCH
               </motion.div>
 
               <motion.h1
-                className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-6"
+                className="text-2xl lg:text-4xl font-raleway text-slate-900 mb-6"
                 variants={itemVariants}
               >
                 We&apos;re committed to providing you with care and support.
@@ -143,11 +150,11 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   {/* Address */}
                   <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 text-[var(--brand-blue)]">
+                    <div className="md:w-6 w-4 md:h-6 h-4 md:mt-0 mt-[0.2rem] text-[var(--brand-blue)]">
                       <FaMapMarkerAlt className="w-full h-full" />
                     </div>
                     <div>
-                      <p className="text-base font-inter text-slate-700">
+                      <p className="md:text-base text-sm font-inter text-slate-700">
                         21 Victoria Street, St Albans, AL1 3JJ
                       </p>
                     </div>
@@ -155,11 +162,11 @@ export default function ContactPage() {
 
                   {/* Phone */}
                   <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 text-[var(--brand-blue)]">
+                    <div className="md:w-6 w-4 md:h-6 h-4 md:mt-0 mt-[0.2rem] text-[var(--brand-blue)]">
                       <FaPhone className="w-full h-full" />
                     </div>
                     <div>
-                      <p className="text-base font-inter text-slate-700">
+                      <p className="md:text-base text-sm font-inter text-slate-700">
                         +44 7990 364147
                       </p>
                     </div>
@@ -167,11 +174,11 @@ export default function ContactPage() {
 
                   {/* Email */}
                   <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 text-[var(--brand-blue)]">
+                    <div className="md:w-6 w-4 md:h-6 h-4 md:mt-0 mt-[0.2rem] text-[var(--brand-blue)]">
                       <FaEnvelope className="w-full h-full" />
                     </div>
                     <div>
-                      <p className="text-base font-inter text-slate-700">
+                      <p className="md:text-base text-sm font-inter text-slate-700">
                         info@healing-prp.co.uk
                       </p>
                     </div>
@@ -202,7 +209,7 @@ export default function ContactPage() {
 
       {/* Contact Form Section */}
       <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-8 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -210,14 +217,14 @@ export default function ContactPage() {
             variants={containerVariants}
           >
             <motion.h2
-              className="text-3xl lg:text-4xl font-raleway text-slate-900 mb-6 text-center"
+              className="text-2xl lg:text-3xl font-raleway text-slate-900 mb-2 text-center"
               variants={itemVariants}
             >
               Send us a Message
             </motion.h2>
 
             <motion.p
-              className="text-base font-inter text-slate-600 mb-12 text-center max-w-2xl mx-auto"
+              className="md:text-base text-xs font-inter text-slate-600 mb-12 text-center max-w-2xl mx-auto"
               variants={itemVariants}
             >
               Ready to start your journey? Contact us for a confidential
@@ -225,7 +232,7 @@ export default function ContactPage() {
             </motion.p>
 
             <motion.div
-              className="bg-slate-50 rounded-2xl p-8 lg:p-12"
+              className="bg-slate-50 rounded-2xl p-4 lg:p-12"
               variants={itemVariants}
             >
               <form className="space-y-6">
@@ -242,7 +249,7 @@ export default function ContactPage() {
                       id="name"
                       name="name"
                       required
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter bg-white"
+                      className="w-full md:text-base text-xs md:px-4 px-2 md:py-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter bg-white"
                       placeholder="Your full name"
                     />
                   </div>
@@ -259,7 +266,7 @@ export default function ContactPage() {
                       id="email"
                       name="email"
                       required
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter bg-white"
+                      className="w-full md:text-base text-xs md:px-4 px-2 md:py-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter bg-white"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -277,7 +284,7 @@ export default function ContactPage() {
                       type="tel"
                       id="phone"
                       name="phone"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter bg-white"
+                      className="w-full md:text-base text-xs md:px-4 px-2 md:py-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter bg-white"
                       placeholder="+44 7xxx xxx xxx"
                     />
                   </div>
@@ -292,7 +299,7 @@ export default function ContactPage() {
                     <select
                       id="treatment"
                       name="treatment"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter bg-white"
+                      className="w-full md:text-base text-xs md:px-4 px-2 md:py-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter bg-white"
                     >
                       <option value="">Select Treatment</option>
                       <option value="sexual-rejuvenation-p">
@@ -345,7 +352,7 @@ export default function ContactPage() {
                     name="message"
                     rows={6}
                     required
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter resize-none bg-white"
+                    className="w-full md:text-base text-xs md:px-4 px-2 md:py-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter resize-none bg-white"
                     placeholder="Tell us about your goals and any questions you have..."
                   />
                 </div>
@@ -353,7 +360,7 @@ export default function ContactPage() {
                 <div className="text-center">
                   <motion.button
                     type="submit"
-                    className="px-8 py-4 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
+                    className="md:px-8 px-4 md:py-4 py-3 text-sm bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
                     whileTap={{ scale: 0.95 }}
                   >
                     <FaEnvelope className="w-4 h-4" />

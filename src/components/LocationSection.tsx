@@ -63,7 +63,7 @@ export default function LocationSection() {
             Visit Us in St Albans
           </motion.h2>
           <motion.p
-            className="text-sm text-slate-600 dark:text-slate-300 md:max-w-2xl max-w-xl mx-auto leading-relaxed"
+            className="text-sm text-slate-600 md:max-w-2xl max-w-xl mx-auto leading-relaxed"
             variants={itemVariants}
           >
             Ready to start your PRP journey? Contact us today to book your
@@ -81,28 +81,26 @@ export default function LocationSection() {
         >
           {/* Left Side - Combined Info */}
           <motion.div variants={itemVariants}>
-            <div className="p-8 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl border border-slate-200/50 dark:border-slate-700/50 h-full flex flex-col">
+            <div className="p-8 bg-white/90 backdrop-blur-sm rounded-xl border border-slate-200/50 h-full flex flex-col">
               {/* Address Section */}
               <div className="mb-8">
-                <h3 className="text-xl font-raleway text-navy-600 dark:text-white mb-2">
+                <h3 className="text-xl font-raleway text-navy-600 mb-2">
                   Our Location
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300">
+                <p className="text-sm text-slate-600">
                   21 Victoria Street, St Albans, AL1 3JJ
                 </p>
               </div>
 
               {/* Subtle Separator */}
-              <div className="border-t border-slate-200/50 dark:border-slate-700/50 mb-8"></div>
+              <div className="border-t border-slate-200/50 mb-8"></div>
 
               {/* Nearby Areas Section */}
               <div className="mb-8">
-                <h3 className="text-xl font-raleway text-navy-600 dark:text-white mb-3">
+                <h3 className="text-xl font-raleway text-navy-600 mb-3">
                   Conveniently Located
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
-                  Close to:
-                </p>
+                <p className="text-sm text-slate-600 mb-2">Close to:</p>
                 <div className="flex flex-wrap gap-2">
                   {nearbyAreas.map((area, index) => (
                     <span
@@ -116,14 +114,14 @@ export default function LocationSection() {
               </div>
 
               {/* Subtle Separator */}
-              <div className="border-t border-slate-200/50 dark:border-slate-700/50 mb-8"></div>
+              <div className="border-t border-slate-200/50 mb-8"></div>
 
               {/* Transport Info Section */}
               <div className="flex-1">
-                <h3 className="text-xl font-raleway text-navy-600 dark:text-white mb-3">
+                <h3 className="text-xl font-raleway text-navy-600 mb-3">
                   Easy Access
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-600 leading-relaxed">
                   Short walk from St Albans City station (fast trains to
                   London).
                 </p>

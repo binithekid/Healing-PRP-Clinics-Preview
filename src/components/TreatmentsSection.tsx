@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
+import Link from "next/link";
 import { FaUser, FaVenus, FaHeartbeat } from "react-icons/fa";
 
 export default function TreatmentsSection() {
@@ -17,12 +18,11 @@ export default function TreatmentsSection() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 60 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
       },
     },
   };
@@ -80,7 +80,7 @@ export default function TreatmentsSection() {
             </motion.p>
             {/* Main Headline */}
             <motion.h2
-              className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight"
+              className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight transition-colors"
               variants={itemVariants}
             >
               Sexual Rejuvenation in St Albans, Hertfordshire
@@ -88,7 +88,7 @@ export default function TreatmentsSection() {
 
             {/* Introductory Paragraph */}
             <motion.p
-              className="text-base mt-2 text-slate-600 leading-relaxed"
+              className="text-base mt-2 text-slate-600 leading-relaxed transition-colors"
               variants={itemVariants}
             >
               Evidence‑based treatments using your own Platelet‑Rich Plasma
@@ -106,7 +106,7 @@ export default function TreatmentsSection() {
               {treatments.map((treatment, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white border border-slate-200 rounded-xl p-5 hover:shadow transition-all duration-300"
+                  className="bg-white border border-slate-200 rounded-xl p-5 hover:shadow transition-colors duration-300"
                   variants={itemVariants}
                 >
                   <div className="flex gap-4">
@@ -119,16 +119,18 @@ export default function TreatmentsSection() {
                           {treatment.tag}
                         </span>
                       </div>
-                      <h3 className="text-xl font-raleway font-medium text-slate-900 mb-2">
+                      <h3 className="text-xl font-raleway font-medium text-slate-900 mb-2 transition-colors">
                         {treatment.title}
                       </h3>
-                      <p className="text-sm text-slate-500 leading-relaxed mb-4">
+                      <p className="text-sm text-slate-500 leading-relaxed mb-4 transition-colors">
                         {treatment.description}
                       </p>
-                      <button className="flex text-sm items-center gap-2 text-[var(--brand-blue)] font-medium hover:text-[var(--brand-blue-dark)] transition-colors duration-300 group">
-                        <span>{treatment.cta}</span>
-                        <MoveRight className="w-4 h-4 mt-[0.1rem] transition-transform duration-300 group-hover:translate-x-1" />
-                      </button>
+                      <Link href="/contact">
+                        <button className="flex cursor-pointer text-sm items-center gap-2 text-[var(--brand-blue)] font-medium hover:text-[var(--brand-blue-dark)] transition-colors duration-300 group">
+                          <span>{treatment.cta}</span>
+                          <MoveRight className="w-4 h-4 mt-[0.1rem] transition-transform duration-300 group-hover:translate-x-1" />
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>
