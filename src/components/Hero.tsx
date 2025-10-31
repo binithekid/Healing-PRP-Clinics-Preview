@@ -95,10 +95,18 @@ export default function Hero() {
                 </a>
                 )
               </h1>
-
+              <h2
+                className={`mt-1 md:text-lg text-base text-white font-semibold leading-relaxed transition-opacity transition-transform duration-1000 delay-500 ${
+                  isLoaded
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8"
+                }`}
+              >
+                Confidential Care by a GMC-Registered GP.
+              </h2>
               {/* Description */}
               <p
-                className={`mt-1 text-sm md:text-base text-white leading-relaxed transition-opacity transition-transform duration-1000 delay-500 ${
+                className={`mt-1 text-sm text-white leading-relaxed transition-opacity transition-transform duration-1000 delay-500 ${
                   isLoaded
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
