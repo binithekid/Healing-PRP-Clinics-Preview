@@ -115,9 +115,10 @@ export default function PRPExplanationSection() {
             className="md:text-sm text-xs text-slate-600 max-w-2xl mx-auto"
             variants={itemVariants}
           >
-            At Healing-PRP Clinics in St Albans, Hertfordshire, we use
-            Platelet-Rich Plasma (PRP) — a natural treatment derived from your
-            own blood.
+            PRP (Platelet‑Rich Plasma) is derived from a small sample of your
+            own blood and processed in a medical centrifuge to concentrate the
+            platelets. These platelets are rich in growth factors that stimulate
+            natural healing, repair, and regeneration.
           </motion.p>
         </motion.div>
 

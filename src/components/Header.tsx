@@ -101,7 +101,7 @@ const Header = () => {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link href="/">
+              <Link href="/" onClick={() => setIsMenuOpen(false)}>
                 <div className="text-base inline-flex items-center gap-1 tracking-tight font-medium text-black">
                   <Flower className="w-5 h-5 text-blue-700" /> Healing PRP
                   Clinics
