@@ -100,8 +100,7 @@ export default function SexualRejuvenationPage() {
   const treatments = [
     {
       name: "P‑Shot®",
-      previousPrice: "£800",
-      price: "£600",
+      price: "£750",
       description:
         "Standard PRP treatment for mild to moderate erectile dysfunction",
       benefits: [
@@ -147,8 +146,7 @@ export default function SexualRejuvenationPage() {
     },
     {
       name: "Exomine® P‑Shot",
-      previousPrice: "£1,300",
-      price: "£1,000",
+      price: "£1,250",
       description:
         "Advanced PRP treatment with stronger, longer-lasting results",
       benefits: [
@@ -189,7 +187,7 @@ export default function SexualRejuvenationPage() {
     },
     {
       name: "O‑Shot®",
-      price: "£600",
+      price: "£750",
       description:
         "Female rejuvenation for improved sensitivity and vaginal health",
       benefits: [
@@ -235,7 +233,7 @@ export default function SexualRejuvenationPage() {
     },
     {
       name: "Exomine® O‑Shot",
-      price: "£1,000",
+      price: "£1,250",
       description: "Advanced female rejuvenation with enhanced results",
       benefits: [
         "Improves natural lubrication & sensitivity",
@@ -652,11 +650,11 @@ export default function SexualRejuvenationPage() {
                           {treatment.name} -
                         </h3>
                         <div className="flex items-center gap-2">
-                          {treatment.previousPrice && (
+                          {/* {treatment.previousPrice && (
                             <span className="text-xl font-inter font-semibold text-slate-400 line-through">
                               {treatment.previousPrice}
                             </span>
-                          )}
+                          )} */}
                           <span className="text-xl font-inter font-semibold text-[var(--brand-blue)]">
                             {treatment.price}
                           </span>
