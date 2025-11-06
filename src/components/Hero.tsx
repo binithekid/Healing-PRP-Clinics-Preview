@@ -74,31 +74,22 @@ export default function Hero() {
 
   return (
     <div className="relative md:h-[calc(100vh-4rem)] pb-5 md:pb-0 lg:h-[calc(100vh-5rem)] overflow-hidden">
-      {/* Background Images */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        {/* Mobile: single static background (no carousel) */}
+        {/* Mobile background */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat sm:hidden"
-          style={{ backgroundImage: "url('/Pic3.jpg')" }}
+          style={{ backgroundImage: "url('/mobilehero.png')" }}
         ></div>
-        {/* Desktop+: animated carousel */}
+        {/* Desktop background */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden sm:block animate-image1-fade"
-          style={{ backgroundImage: "url('/Pic1.jpg')" }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden sm:block"
+          style={{
+            backgroundImage: "url('/herobg.png')",
+            transform: "scaleX(-1)",
+          }}
         ></div>
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden sm:block animate-image2-fade"
-          style={{ backgroundImage: "url('/Pic2.jpg')" }}
-        ></div>
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden sm:block animate-image3-fade"
-          style={{ backgroundImage: "url('/Pic3.jpg')" }}
-        ></div>
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden sm:block animate-image4-fade"
-          style={{ backgroundImage: "url('/Pic4.jpg')" }}
-        ></div>
-        {/* Subtle overlay to ensure text readability */}
+        {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/45"></div>
       </div>
 

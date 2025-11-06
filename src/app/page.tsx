@@ -7,6 +7,7 @@ import JointInjectionsSection from "@/components/JointInjectionsSection";
 import PRPExplanationSection from "@/components/PRPExplanationSection";
 import CTASection from "@/components/CTASection";
 import LocationSection from "@/components/LocationSection";
+import LocationsCTASection from "@/components/LocationsCTASection";
 import FAQSection from "@/components/FAQSection";
 import ContactCTASection from "@/components/ContactCTASection";
 import Footer from "@/components/Footer";
@@ -22,6 +23,7 @@ export default function Home() {
         <PRPExplanationSection />
         <CTASection />
         <LocationSection />
+        <LocationsCTASection />
         <FAQSection />
         <ContactCTASection />
       </main>
