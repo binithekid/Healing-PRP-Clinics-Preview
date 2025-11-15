@@ -41,7 +41,7 @@ export default function CTASection() {
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/Pic1.jpg')" }}
+          style={{ backgroundImage: "url('/Firefly.jpg')" }}
         ></div>
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/60"></div>
