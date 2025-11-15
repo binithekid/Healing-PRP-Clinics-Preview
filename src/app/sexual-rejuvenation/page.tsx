@@ -451,7 +451,7 @@ export default function SexualRejuvenationPage() {
               className="px-4 py-2 text-sm bg-white text-[var(--brand-blue)] border border-gray-100 shadow-xs rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
               variants={itemVariants}
             >
-              Peyronie's Disease
+              Peyronie&apos;s Disease
             </motion.button>
           </motion.div>
         </div>
@@ -743,18 +743,18 @@ export default function SexualRejuvenationPage() {
               className="md:text-3xl text-2xl font-raleway text-slate-900 mb-6"
               variants={itemVariants}
             >
-              Understanding Peyronie's Disease
+              Understanding Peyronie&apos;s Disease
             </motion.h2>
 
             <motion.p
               className="text-sm font-inter text-slate-600 mb-8 max-w-4xl leading-relaxed"
               variants={itemVariants}
             >
-              Peyronie's Disease occurs when fibrous scar tissue (plaques) forms
-              in the tunica albuginea, causing penile curvature, indentation,
-              pain, and sometimes shortening. It often follows micro‑trauma; in
-              many cases, the cause is unclear. Emotional impact is common and
-              treatable.
+              Peyronie&apos;s Disease occurs when fibrous scar tissue (plaques)
+              forms in the tunica albuginea, causing penile curvature,
+              indentation, pain, and sometimes shortening. It often follows
+              micro‑trauma; in many cases, the cause is unclear. Emotional
+              impact is common and treatable.
             </motion.p>
 
             <motion.div

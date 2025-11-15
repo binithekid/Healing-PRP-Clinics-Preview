@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import {
   FaWhatsapp,
   FaCheck,
-  FaChevronDown,
   FaPlus,
   FaMinus,
   FaEnvelope,
@@ -191,7 +190,7 @@ export default function PeyroniesDiseasePage() {
                 className="text-3xl lg:text-5xl font-raleway text-slate-900 font-light leading-tight mb-4"
                 variants={itemVariants}
               >
-                Peyronie's Disease Treatment
+                Peyronie&apos;s Disease Treatment
               </motion.h1>
 
               <motion.p
@@ -325,18 +324,18 @@ export default function PeyroniesDiseasePage() {
               className="text-2xl lg:text-3xl font-raleway text-slate-900 mb-6"
               variants={itemVariants}
             >
-              Understanding Peyronie's Disease
+              Understanding Peyronie&apos;s Disease
             </motion.h2>
 
             <motion.p
               className="text-sm font-inter text-slate-600 max-w-4xl leading-relaxed"
               variants={itemVariants}
             >
-              Peyronie's Disease occurs when fibrous scar tissue (plaques) forms
-              in the tunica albuginea, causing penile curvature, indentation,
-              pain, and sometimes shortening. It often follows micro‑trauma; in
-              many cases, the cause is unclear. Emotional impact is common and
-              treatable.
+              Peyronie&apos;s Disease occurs when fibrous scar tissue (plaques)
+              forms in the tunica albuginea, causing penile curvature,
+              indentation, pain, and sometimes shortening. It often follows
+              micro‑trauma; in many cases, the cause is unclear. Emotional
+              impact is common and treatable.
             </motion.p>
           </motion.div>
         </div>
