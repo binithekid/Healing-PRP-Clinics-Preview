@@ -74,8 +74,8 @@ export default function LocationSection() {
             className="text-sm text-slate-600 md:max-w-2xl max-w-xl mx-auto leading-relaxed"
             variants={itemVariants}
           >
-            Ready to start your PRP journey? Contact us today to book your
-            consultation.
+            Conveniently located minutes from London with easy access from
+            surrounding areas.
           </motion.p>
         </motion.div>
 
@@ -212,8 +212,8 @@ export default function LocationSection() {
             className="text-sm text-slate-600 md:max-w-2xl max-w-xl mx-auto leading-relaxed"
             variants={itemVariants}
           >
-            Ready to start your PRP journey? Contact us today to book your
-            consultation.
+            Serving patients across the West Midlands with convenient access
+            from surrounding areas.
           </motion.p>
         </motion.div>
 
