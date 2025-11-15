@@ -352,33 +352,68 @@ export default function JointInjectionsPage() {
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#f6f7ff] to-transparent"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.h2
-              className="text-2xl lg:text-3xl font-raleway text-slate-900 mb-3"
-              variants={itemVariants}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left Side: Content */}
+            <div>
+              {/* Section 1: What is a Joint Injection */}
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
+                className="mb-8"
+              >
+                <motion.h2
+                  className="text-2xl lg:text-3xl font-raleway text-slate-900 mb-3"
+                  variants={itemVariants}
+                >
+                  What is a Joint Injection?
+                </motion.h2>
+                <motion.p
+                  className="text-sm font-inter text-slate-600"
+                  variants={itemVariants}
+                >
+                  A joint injection delivers targeted therapy into a joint or
+                  surrounding soft tissue to reduce inflammation, relieve pain,
+                  improve mobility, and support recovery.
+                </motion.p>
+              </motion.div>
+
+              {/* Section 2: Common Uses */}
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
+              >
+                <motion.p
+                  className="text-sm font-inter text-slate-600"
+                  variants={itemVariants}
+                >
+                  Common uses: osteoarthritis (knee, hip, shoulder, hand),
+                  tendonitis, bursitis, frozen shoulder, sports & overuse
+                  injuries.
+                </motion.p>
+              </motion.div>
+            </div>
+
+            {/* Right Side: Image */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+              className="relative flex justify-center lg:justify-end"
             >
-              What is a Joint Injection?
-            </motion.h2>
-            <motion.p
-              className="text-sm font-inter text-slate-600 mb-8 max-w-4xl"
-              variants={itemVariants}
-            >
-              A joint injection delivers targeted therapy into a joint or
-              surrounding soft tissue to reduce inflammation, relieve pain,
-              improve mobility, and support recovery.
-            </motion.p>
-            <motion.p
-              className="text-sm font-inter text-slate-600 max-w-4xl"
-              variants={itemVariants}
-            >
-              Common uses: osteoarthritis (knee, hip, shoulder, hand),
-              tendonitis, bursitis, frozen shoulder, sports & overuse injuries.
-            </motion.p>
-          </motion.div>
+              <motion.div
+                className="relative rounded-lg overflow-hidden shadow-lg max-w-md w-full"
+                variants={itemVariants}
+              >
+                <img
+                  src="/joint-injections.jpg"
+                  alt="Joint injection treatment"
+                  className="w-full h-auto object-cover rounded-lg"
+                />
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

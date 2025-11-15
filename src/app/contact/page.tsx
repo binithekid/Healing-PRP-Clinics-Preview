@@ -23,6 +23,7 @@ export default function ContactPage() {
     email: "",
     phone: "",
     treatment: "",
+    consultation: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -149,6 +150,7 @@ export default function ContactPage() {
         from_email: formData.email,
         phone: formData.phone || "Not provided",
         treatment: formData.treatment || "Not specified",
+        consultation: formData.consultation || "Not specified",
         message: formData.message,
       };
 
@@ -166,6 +168,7 @@ export default function ContactPage() {
         email: "",
         phone: "",
         treatment: "",
+        consultation: "",
         message: "",
       });
     } catch (error) {
@@ -268,13 +271,19 @@ export default function ContactPage() {
                       Book on WhatsApp
                     </a>
                   )}
-                  <Link
-                    href="/blog"
+                  <button
+                    onClick={() => {
+                      const formSection =
+                        document.getElementById("contact-form");
+                      if (formSection) {
+                        formSection.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
                     className="px-6 py-3 hidden md:inline-flex gap-2 items-center cursor-pointer text-sm border-2 text-[var(--brand-blue)] backdrop-blur-md bg-white/30 shadow-sm rounded-lg text-[var(--brand-blue)] font-semibold transition-all duration-300 hover:opacity-50"
                   >
                     <BookOpen className="w-5 h-5 text-[var(--brand-blue)]" />
-                    Read Our Blog
-                  </Link>
+                    Book Consultation
+                  </button>
                 </motion.div>
               </motion.div>
             </div>
@@ -386,7 +395,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-20 lg:py-32 bg-white">
+      <section id="contact-form" className="py-20 lg:py-32 bg-white">
         <div className="max-w-4xl mx-auto px-8 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -515,6 +524,26 @@ export default function ContactPage() {
                       <option value="other">Other</option>
                     </select>
                   </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="consultation"
+                    className="block text-sm font-inter font-medium text-slate-700 mb-2"
+                  >
+                    Consultation
+                  </label>
+                  <select
+                    id="consultation"
+                    name="consultation"
+                    value={formData.consultation}
+                    onChange={handleInputChange}
+                    className="w-full md:text-base text-xs md:px-4 px-2 md:py-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent font-inter bg-white"
+                  >
+                    <option value="">Select Consultation Type</option>
+                    <option value="online">Online</option>
+                    <option value="face-to-face">Face to Face</option>
+                  </select>
                 </div>
 
                 <div>

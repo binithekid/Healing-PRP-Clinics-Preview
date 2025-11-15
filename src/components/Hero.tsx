@@ -85,12 +85,11 @@ export default function Hero() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden sm:block"
           style={{
-            backgroundImage: "url('/herobg.png')",
-            transform: "scaleX(-1)",
+            backgroundImage: "url('/herobg.jpg')",
           }}
         ></div>
         {/* Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-black/45"></div>
+        <div className="absolute inset-0 bg-black/55"></div>
       </div>
 
       {/* Main Content */}
@@ -140,7 +139,7 @@ export default function Hero() {
                     : "opacity-0 translate-y-8"
                 }`}
               >
-                Confidential Care by a GMC-Registered GP
+                Confidential Care by a GMC Registered Experienced Doctor
               </h2>
               {/* Description */}
               <p

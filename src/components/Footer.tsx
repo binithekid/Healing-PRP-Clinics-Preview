@@ -49,8 +49,8 @@ export default function Footer() {
     {
       icon: FaInstagram,
       label: "Instagram",
-      value: "@healingprp",
-      href: "https://instagram.com/healingprp",
+      value: "@healing_prp",
+      href: "https://www.instagram.com/Healing_Prp",
     },
   ];
 

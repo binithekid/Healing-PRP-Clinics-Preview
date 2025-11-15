@@ -28,7 +28,7 @@ export default function CTASection() {
   };
 
   const benefits = [
-    "GMC‑registered GP‑led clinic",
+    "GMC Registered Experienced Doctor led clinic",
     "Discreet St Albans location",
     "Natural, drug‑free options (PRP)",
     "Private 1:1 appointments",

@@ -346,7 +346,7 @@ export default function SexualRejuvenationPage() {
                   variants={itemVariants}
                 >
                   Erectile Dysfunction & Natural Regeneration Treatment with PRP
-                  — Confidential Care by a GMC-Registered GP{" "}
+                  — Confidential Care by a GMC Registered Experienced Doctor
                 </motion.h1>
 
                 <motion.p
@@ -427,6 +427,32 @@ export default function SexualRejuvenationPage() {
             >
               Comparison
             </motion.a>
+            <motion.button
+              onClick={() => {
+                const section = document.getElementById(
+                  "premature-ejaculation"
+                );
+                if (section) {
+                  section.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="px-4 py-2 text-sm bg-white text-[var(--brand-blue)] border border-gray-100 shadow-xs rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+              variants={itemVariants}
+            >
+              Premature Ejaculation
+            </motion.button>
+            <motion.button
+              onClick={() => {
+                const section = document.getElementById("peyronies-disease");
+                if (section) {
+                  section.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="px-4 py-2 text-sm bg-white text-[var(--brand-blue)] border border-gray-100 shadow-xs rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+              variants={itemVariants}
+            >
+              Peyronie's Disease
+            </motion.button>
           </motion.div>
         </div>
       </section>
@@ -615,6 +641,174 @@ export default function SexualRejuvenationPage() {
                   <span className="font-inter text-slate-700">{benefit}</span>
                 </motion.div>
               ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Understanding Premature Ejaculation Section */}
+      <section id="premature-ejaculation" className="py-20 lg:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+          >
+            <motion.h2
+              className="md:text-3xl text-2xl font-raleway text-slate-900 mb-6"
+              variants={itemVariants}
+            >
+              Understanding Premature Ejaculation
+            </motion.h2>
+
+            <motion.p
+              className="text-sm font-inter text-slate-600 mb-8 max-w-4xl leading-relaxed"
+              variants={itemVariants}
+            >
+              Premature ejaculation is reaching climax sooner than desired,
+              often within a minute of penetration. Causes are multifactorial —
+              including heightened sensitivity, anxiety, and neurochemical or
+              hormonal factors — and it frequently co‑exists with performance
+              anxiety.
+            </motion.p>
+
+            <motion.h3
+              className="md:text-2xl text-xl font-raleway text-slate-900 mb-4"
+              variants={itemVariants}
+            >
+              How It Works
+            </motion.h3>
+
+            <motion.p
+              className="text-sm font-inter text-slate-600 mb-6 max-w-4xl leading-relaxed"
+              variants={itemVariants}
+            >
+              At Healing‑PRP we use a stepwise, evidence‑informed plan — not PRP
+              — combining:
+            </motion.p>
+
+            <motion.div className="space-y-4 mb-8" variants={containerVariants}>
+              {[
+                "Behavioural techniques (stop‑start, squeeze method) to improve ejaculatory control",
+                "Pelvic floor training to strengthen the bulbocavernosus & pelvic musculature",
+                "Custom topical numbing creams designed to remain effective in vaginal pH for better consistency",
+                "Tailored medication regimens where appropriate to delay climax and reduce hypersensitivity",
+                "Lifestyle optimisation (sleep, stress, alcohol/smoking) and partner‑inclusive guidance if desired",
+              ].map((point, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-start gap-3"
+                  variants={itemVariants}
+                >
+                  <FaCheck className="w-4 h-4 mt-[0.2rem] text-[var(--brand-blue)] flex-shrink-0" />
+                  <span className="text-sm font-inter text-slate-700 leading-relaxed">
+                    {point}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.p
+              className="text-sm font-inter text-slate-600 max-w-4xl leading-relaxed mb-8"
+              variants={itemVariants}
+            >
+              Sessions are discreet, and most patients resume normal activities
+              immediately after consultation.
+            </motion.p>
+
+            <motion.div variants={itemVariants}>
+              <Link
+                href="/premature-ejaculation"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+              >
+                Learn More
+                <FaChevronDown className="w-3 h-3 rotate-[-90deg]" />
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Understanding Peyronie's Disease Section */}
+      <section id="peyronies-disease" className="py-20 lg:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+          >
+            <motion.h2
+              className="md:text-3xl text-2xl font-raleway text-slate-900 mb-6"
+              variants={itemVariants}
+            >
+              Understanding Peyronie's Disease
+            </motion.h2>
+
+            <motion.p
+              className="text-sm font-inter text-slate-600 mb-8 max-w-4xl leading-relaxed"
+              variants={itemVariants}
+            >
+              Peyronie's Disease occurs when fibrous scar tissue (plaques) forms
+              in the tunica albuginea, causing penile curvature, indentation,
+              pain, and sometimes shortening. It often follows micro‑trauma; in
+              many cases, the cause is unclear. Emotional impact is common and
+              treatable.
+            </motion.p>
+
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"
+              variants={containerVariants}
+            >
+              {[
+                "Curvature or indentation during erection",
+                "Penile pain (usually early phase)",
+                "Perceived shortening or loss of elasticity",
+                "Erectile difficulties and confidence issues",
+              ].map((symptom, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-start gap-3 p-4 bg-slate-50 rounded-lg"
+                  variants={itemVariants}
+                >
+                  <FaCheck className="w-4 h-4 mt-[0.2rem] text-[var(--brand-blue)] flex-shrink-0" />
+                  <span className="text-sm font-inter text-slate-700 leading-relaxed">
+                    {symptom}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.h3
+              className="md:text-2xl text-xl font-raleway text-slate-900 mb-4"
+              variants={itemVariants}
+            >
+              How It Works
+            </motion.h3>
+
+            <motion.p
+              className="text-sm font-inter text-slate-600 max-w-4xl leading-relaxed mb-8"
+              variants={itemVariants}
+            >
+              We combine Platelet Rich Plasma (PRP) P Shot with Low Intensity
+              Shockwave Therapy (LiSWT) to encourage plaque remodelling and
+              vascular regeneration. A small blood sample is processed into PRP;
+              after topical anaesthetic, targeted injections are performed
+              alongside scheduled shockwave sessions. Most patients return to
+              normal activities the same day. A course of 6 or more shockwave
+              sessions may be recommended depending on the individual case,
+              curvature, and symptom severity.
+            </motion.p>
+
+            <motion.div variants={itemVariants}>
+              <Link
+                href="/peyronies-disease"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+              >
+                Learn More
+                <FaChevronDown className="w-3 h-3 rotate-[-90deg]" />
+              </Link>
             </motion.div>
           </motion.div>
         </div>
@@ -819,7 +1013,7 @@ export default function SexualRejuvenationPage() {
       </section>
 
       {/* Comparison Table Section */}
-      <section className="py-20 lg:py-32 bg-slate-50">
+      <section id="comparison" className="py-20 lg:py-32 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"

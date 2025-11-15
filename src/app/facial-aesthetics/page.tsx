@@ -100,7 +100,7 @@ export default function FacialAestheticsPage() {
   const treatments = [
     {
       name: "Polynucleotide Treatments",
-      price: "From £150",
+      price: "From £300",
       description:
         "Advanced skin boosters that repair, hydrate, and rejuvenate at a cellular level",
       benefits: [
@@ -143,7 +143,7 @@ export default function FacialAestheticsPage() {
     },
     {
       name: "Non‑Crosslinked Hyaluronic Acid (HA) Skin Boosters",
-      price: "From £100",
+      price: "From £300",
       description:
         "Light, hydrating injections designed to deeply rehydrate and plump the skin",
       benefits: [
@@ -785,10 +785,10 @@ export default function FacialAestheticsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-lg font-inter font-semibold text-slate-900">
-                      Price: £300
+                      Price: £550
                     </span>
                     <p className="text-sm font-inter text-slate-600">
-                      (or 2 sessions for £500)
+                      (or course of 3 for £1500)
                     </p>
                   </div>
                   {/* <motion.a
@@ -797,7 +797,6 @@ export default function FacialAestheticsPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
                     whileTap={{ scale: 0.95 }}
-                  >
                     <FaWhatsapp className="w-4 h-4" />
                     Enquire Now
                   </motion.a> */}

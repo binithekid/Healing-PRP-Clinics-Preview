@@ -49,7 +49,7 @@ export default function ContactCTASection() {
       icon: FaInstagram,
       label: "Instagram",
       value: "@healingprp",
-      href: "https://instagram.com/healingprp",
+      href: "https://www.instagram.com/Healing_Prp/",
       color: "text-pink-600",
       bgColor: "bg-pink-50",
       hoverBg: "hover:bg-pink-100",
