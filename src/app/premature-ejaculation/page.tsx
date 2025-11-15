@@ -201,7 +201,7 @@ export default function PrematureEjaculationPage() {
               </motion.p>
 
               <motion.div
-                className="flex flex-row justify-center gap-4 mb-8"
+                className="md:flex hidden flex-row justify-center gap-4 mb-8"
                 variants={itemVariants}
               >
                 {benefits.map((benefit, index) => (
