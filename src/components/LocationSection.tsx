@@ -33,6 +33,14 @@ export default function LocationSection() {
     "Welwyn Garden City",
   ];
 
+  const birminghamNearbyAreas = [
+    "Edgbaston",
+    "Harborne",
+    "Moseley",
+    "Selly Oak",
+    "City Centre",
+  ];
+
   return (
     <section className="relative py-20 lg:py-32 overflow-hidden">
       {/* Seamless Gradient Background - continues from previous component */}
@@ -53,7 +61,7 @@ export default function LocationSection() {
             className="inline-block mb-2 font-inter md:px-4 px-3 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
             variants={itemVariants}
           >
-            Where to Find us
+            St Albans Location
           </motion.div>
 
           <motion.h2
@@ -175,6 +183,117 @@ export default function LocationSection() {
             </motion.button>
           </motion.div>
         </motion.div> */}
+      </div>
+
+      {/* Birmingham Section */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-40">
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={containerVariants}
+        >
+          <motion.div
+            className="inline-block mb-2 font-inter md:px-4 px-3 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
+            variants={itemVariants}
+          >
+            Midlands Location
+          </motion.div>
+
+          <motion.h2
+            className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight"
+            variants={itemVariants}
+          >
+            Visit Us in Birmingham
+          </motion.h2>
+          <motion.p
+            className="text-sm text-slate-600 md:max-w-2xl max-w-xl mx-auto leading-relaxed"
+            variants={itemVariants}
+          >
+            Ready to start your PRP journey? Contact us today to book your
+            consultation.
+          </motion.p>
+        </motion.div>
+
+        {/* Content Grid */}
+        <motion.div
+          className="grid grid-cols-1 -mt-6 md:mt-0 lg:grid-cols-2 gap-12 items-stretch"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+        >
+          {/* Left Side - Combined Info */}
+          <motion.div variants={itemVariants}>
+            <div className="p-8 bg-white/90 backdrop-blur-sm rounded-xl border border-slate-200/50 h-full flex flex-col">
+              {/* Address Section */}
+              <div className="mb-8">
+                <h3 className="text-xl font-raleway text-navy-600 mb-2">
+                  Our Location
+                </h3>
+                <p className="text-sm text-slate-600">
+                  Consulting Rooms 38 LTD
+                </p>
+                <p className="text-sm text-slate-600">
+                  38 Harborne Rd, Edgbaston, Birmingham, B15 3EB
+                </p>
+              </div>
+
+              {/* Subtle Separator */}
+              <div className="border-t border-slate-200/50 mb-8"></div>
+
+              {/* Nearby Areas Section */}
+              <div className="mb-8">
+                <h3 className="text-xl font-raleway text-navy-600 mb-3">
+                  Conveniently Located
+                </h3>
+                <p className="text-sm text-slate-600 mb-2">Close to:</p>
+                <div className="flex flex-wrap gap-2">
+                  {birminghamNearbyAreas.map((area, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
+                    >
+                      {area}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Subtle Separator */}
+              <div className="border-t border-slate-200/50 mb-8"></div>
+
+              {/* Transport Info Section */}
+              <div className="flex-1">
+                <h3 className="text-xl font-raleway text-navy-600 mb-3">
+                  Easy Access
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Conveniently located in Edgbaston with easy access via public
+                  transport.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Side - Map */}
+          <motion.div className="relative h-full" variants={itemVariants}>
+            <div className="relative rounded-xl overflow-hidden shadow-xl h-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2430.4929728157417!2d-1.9274453233218645!3d52.47020937204814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870bc54343bc8ad%3A0xc94d1b9b140259f!2sConsulting%20Rooms%20Birmingham%20(Consulting%20Rooms%2038%20Ltd)!5e0!3m2!1sen!2suk!4v1763228247952!5m2!1sen!2suk"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-xl"
+              ></iframe>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
