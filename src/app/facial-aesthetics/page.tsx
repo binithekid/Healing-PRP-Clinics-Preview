@@ -441,19 +441,24 @@ export default function FacialAestheticsPage() {
             animate="visible"
             variants={containerVariants}
           >
-            <motion.a
-              href="#treatments"
-              className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
-              variants={itemVariants}
-            >
-              Treatments
-            </motion.a>
+            {treatments.map((treatment, index) => (
+              <motion.a
+                key={index}
+                href={`#${treatment.name
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]/g, "-")}`}
+                className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
+                variants={itemVariants}
+              >
+                {treatment.name}
+              </motion.a>
+            ))}
             <motion.a
               href="#prp-vampire"
               className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
               variants={itemVariants}
             >
-              PRP Vampire Facial
+              Vampire Facial
             </motion.a>
           </motion.div>
         </div>
@@ -591,16 +596,27 @@ export default function FacialAestheticsPage() {
                           </span>
                         </div>
                       </div>
-                      <motion.a
-                        href="https://wa.me/447990364147"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-sm gap-2 mt-6 px-6 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <FaWhatsapp className="w-4 h-4" />
-                        Enquire Now
-                      </motion.a>
+                      {isDesktop ? (
+                        <motion.button
+                          onClick={handleWhatsAppClick}
+                          className="inline-flex items-center text-sm gap-2 mt-6 px-6 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaWhatsapp className="w-4 h-4" />
+                          Enquire Now
+                        </motion.button>
+                      ) : (
+                        <motion.a
+                          href="https://wa.me/447990364147"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-sm gap-2 mt-6 px-6 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaWhatsapp className="w-4 h-4" />
+                          Enquire Now
+                        </motion.a>
+                      )}
                     </div>
                   </div>
 

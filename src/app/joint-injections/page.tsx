@@ -99,7 +99,7 @@ export default function JointInjectionsPage() {
 
   const treatments = [
     {
-      name: "PRP Joint Injections",
+      name: "PRP (Platelet‑Rich Plasma) Joint Injections",
       price: "From £400",
       description: "Natural healing using your own platelet-rich plasma",
       benefits: [
@@ -331,13 +331,13 @@ export default function JointInjectionsPage() {
             >
               FAQs
             </motion.a>
-            <motion.a
+            {/* <motion.a
               href="#contact"
               className="px-4 py-2 text-sm border border-gray-100 shadow-xs bg-white text-[var(--brand-blue)] rounded-lg font-inter font-medium hover:bg-[var(--brand-blue-50)] transition-colors duration-300"
               variants={itemVariants}
             >
               Contact
-            </motion.a>
+            </motion.a> */}
           </motion.div>
         </div>
       </section>
@@ -444,7 +444,18 @@ export default function JointInjectionsPage() {
                     <div>
                       <div className="flex items-center gap-2 mb-4">
                         <h3 className="md:text-2xl text-lg font-raleway text-slate-900">
-                          {treatment.name} -
+                          {treatment.name.includes("PRP") ? (
+                            <Link
+                              href="/#prp-explanation"
+                              scroll={false}
+                              className="underline decoration-transparent hover:decoration-[var(--brand-blue)]"
+                            >
+                              {treatment.name}
+                            </Link>
+                          ) : (
+                            treatment.name
+                          )}{" "}
+                          -
                         </h3>
                         <span className="md:text-xl text-lg font-inter font-semibold text-[var(--brand-blue)]">
                           {treatment.price}
@@ -489,16 +500,27 @@ export default function JointInjectionsPage() {
                           </span>
                         </div>
                       </div>
-                      <motion.a
-                        href="https://wa.me/447990364147"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center md:text-sm text-xs gap-2 mt-6 md:px-6 px-4 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <FaWhatsapp className="w-4 h-4 md:block hidden" />
-                        Enquire About {treatment.name}
-                      </motion.a>
+                      {isDesktop ? (
+                        <motion.button
+                          onClick={handleWhatsAppClick}
+                          className="inline-flex items-center md:text-sm text-xs gap-2 mt-6 md:px-6 px-4 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaWhatsapp className="w-4 h-4 md:block hidden" />
+                          Enquire About {treatment.name}
+                        </motion.button>
+                      ) : (
+                        <motion.a
+                          href="https://wa.me/447990364147"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center md:text-sm text-xs gap-2 mt-6 md:px-6 px-4 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaWhatsapp className="w-4 h-4 md:block hidden" />
+                          Enquire About {treatment.name}
+                        </motion.a>
+                      )}
                     </div>
                   </div>
 

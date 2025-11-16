@@ -83,7 +83,7 @@ export default function JointInjectionsSection() {
               className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight"
               variants={itemVariants}
             >
-              Joint Injections in St Albans, Hertfordshire
+              Joint Injections in St Albans, Hertfordshire and Birmingham
             </motion.h2>
 
             {/* Introductory Paragraph */}

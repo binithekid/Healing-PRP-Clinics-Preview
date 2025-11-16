@@ -135,9 +135,9 @@ export default function Footer() {
                   <FaMapMarkerAlt className="w-4 h-4 mt-1 text-slate-300" />
                   <div>
                     <p className="text-sm text-slate-300">
-                      21 Victoria Street
+                      St Albans &
                       <br />
-                      St Albans, AL1 3JJ
+                      Birmingham{" "}
                     </p>
                   </div>
                 </div>

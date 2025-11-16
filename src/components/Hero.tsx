@@ -150,8 +150,8 @@ export default function Hero() {
                 }`}
               >
                 Evidence-based, non-surgical treatments for sexual wellness,
-                facial aesthetics & hair, and joint pain in the heart of St
-                Albans, minutes from London.
+                facial aesthetics & hair, and joint pain — with clinics in St
+                Albans and Birmingham.
               </p>
 
               {/* CTA Buttons */}
@@ -280,7 +280,7 @@ export default function Hero() {
                   Discreet location
                 </div>
                 <div className="text-blue-100 text-xs">
-                  21 Victoria Street, St Albans
+                  St Albans & Birmingham
                 </div>
               </div>
               <div className="text-center">

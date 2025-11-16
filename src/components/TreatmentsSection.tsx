@@ -83,7 +83,7 @@ export default function TreatmentsSection() {
               className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight transition-colors"
               variants={itemVariants}
             >
-              Sexual Rejuvenation in St Albans, Hertfordshire
+              Sexual Rejuvenation in St Albans, Hertfordshire and Birmingham
             </motion.h2>
 
             {/* Introductory Paragraph */}

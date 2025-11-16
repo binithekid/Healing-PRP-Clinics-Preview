@@ -103,7 +103,7 @@ export default function AestheticSection() {
               className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight"
               variants={itemVariants}
             >
-              Aesthetic & Hair PRP Treatments in St Albans
+              Aesthetic & Hair PRP Treatments in St Albans and Birmingham
             </motion.h2>
 
             {/* Introductory Paragraph */}

@@ -519,15 +519,25 @@ export default function SexualRejuvenationPage() {
               confidence, performance, and intimacy over time.
             </motion.p>
             <motion.div variants={itemVariants}>
-              <Link
-                href="https://wa.me/447990364147"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2"
-              >
-                <FaWhatsapp className="w-5 h-5" />
-                Book a consultation
-              </Link>
+              {isDesktop ? (
+                <button
+                  onClick={handleWhatsAppClick}
+                  className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2"
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                  Book a consultation
+                </button>
+              ) : (
+                <a
+                  href="https://wa.me/447990364147"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center gap-2"
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                  Book a consultation
+                </a>
+              )}
             </motion.div>
           </motion.div>
         </div>
@@ -893,16 +903,27 @@ export default function SexualRejuvenationPage() {
                           </span>
                         </div>
                       </div>
-                      <motion.a
-                        href="https://wa.me/447990364147"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center md:text-sm text-xs gap-2 mt-6 md:px-6 px-4 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <FaWhatsapp className="w-4 h-4 md:block hidden" />
-                        Enquire About {treatment.name}
-                      </motion.a>
+                      {isDesktop ? (
+                        <motion.button
+                          onClick={handleWhatsAppClick}
+                          className="inline-flex items-center cursor-pointer md:text-sm text-xs gap-2 mt-6 md:px-6 px-4 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaWhatsapp className="w-4 h-4 md:block hidden" />
+                          Enquire About {treatment.name}
+                        </motion.button>
+                      ) : (
+                        <motion.a
+                          href="https://wa.me/447990364147"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center cursor-pointer md:text-sm text-xs gap-2 mt-6 md:px-6 px-4 py-3 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300"
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaWhatsapp className="w-4 h-4 md:block hidden" />
+                          Enquire About {treatment.name}
+                        </motion.a>
+                      )}
                     </div>
                   </div>
 
@@ -1114,10 +1135,10 @@ export default function SexualRejuvenationPage() {
                         Cost
                       </td>
                       <td className="px-6 py-4 font-inter text-slate-600">
-                        £600 (London clinics typically £1,300–£1,500)
+                        £750 (London clinics typically £1,300–£1,500)
                       </td>
                       <td className="px-6 py-4 font-inter text-slate-600">
-                        £1,000 (London clinics typically £1,500–£1,700)
+                        £1,250 (London clinics typically £1,500–£1,700)
                       </td>
                     </tr>
                   </tbody>
@@ -1178,17 +1199,29 @@ export default function SexualRejuvenationPage() {
               ))}
             </motion.div>
 
-            <motion.a
-              href="https://wa.me/447990364147"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex md:text-sm text-xs items-center gap-2 md:px-8 px-4 py-4 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium"
-              variants={itemVariants}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaWhatsapp className="w-5 h-5 md:block hidden" />
-              Enquire Now About Shockwave Therapy
-            </motion.a>
+            {isDesktop ? (
+              <motion.button
+                onClick={handleWhatsAppClick}
+                className="inline-flex md:text-sm text-xs items-center gap-2 md:px-8 px-4 py-4 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium"
+                variants={itemVariants}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaWhatsapp className="w-5 h-5 md:block hidden" />
+                Enquire Now About Shockwave Therapy
+              </motion.button>
+            ) : (
+              <motion.a
+                href="https://wa.me/447990364147"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex md:text-sm text-xs items-center gap-2 md:px-8 px-4 py-4 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium"
+                variants={itemVariants}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaWhatsapp className="w-5 h-5 md:block hidden" />
+                Enquire Now About Shockwave Therapy
+              </motion.a>
+            )}
           </motion.div>
         </div>
       </section>
