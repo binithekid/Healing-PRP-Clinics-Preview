@@ -690,20 +690,20 @@ export default function SexualRejuvenationPage() {
               How It Works
             </motion.h3>
 
-            <motion.p
+            {/* <motion.p
               className="text-sm font-inter text-slate-600 mb-6 max-w-4xl leading-relaxed"
               variants={itemVariants}
             >
               At Healing‑PRP we use a stepwise, evidence‑informed plan — not PRP
               — combining:
-            </motion.p>
+            </motion.p> */}
 
             <motion.div className="space-y-4 mb-8" variants={containerVariants}>
               {[
-                "Behavioural techniques (stop‑start, squeeze method) to improve ejaculatory control",
-                "Pelvic floor training to strengthen the bulbocavernosus & pelvic musculature",
                 "Custom topical numbing creams designed to remain effective in vaginal pH for better consistency",
                 "Tailored medication regimens where appropriate to delay climax and reduce hypersensitivity",
+                "Behavioural techniques (stop‑start, squeeze method) to improve ejaculatory control",
+                "Pelvic floor training to strengthen the bulbocavernosus & pelvic musculature",
                 "Lifestyle optimisation (sleep, stress, alcohol/smoking) and partner‑inclusive guidance if desired",
               ].map((point, index) => (
                 <motion.div

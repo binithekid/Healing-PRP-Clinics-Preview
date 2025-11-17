@@ -55,12 +55,12 @@ export default function CTASection() {
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
         >
-          <motion.div
+          {/* <motion.div
             className="inline-block md:px-4 px-3 mb-2 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs font-inter md:font-medium"
             variants={itemVariants}
           >
             About Healing‑PRP
-          </motion.div>
+          </motion.div> */}
           <motion.h2
             className="md:text-3xl text-2xl font-raleway text-slate-100 leading-tight"
             variants={itemVariants}

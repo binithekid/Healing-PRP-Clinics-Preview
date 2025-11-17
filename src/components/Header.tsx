@@ -103,7 +103,7 @@ const Header = () => {
             <div className="flex-shrink-0">
               <Link href="/" onClick={() => setIsMenuOpen(false)}>
                 <div className="text-base inline-flex items-center gap-1 tracking-tight font-medium text-black">
-                  <Flower className="w-5 h-5 text-blue-700" /> Healing PRP
+                  <Flower className="w-5 h-5 text-blue-700" /> Healing-PRP
                   Clinics
                 </div>
               </Link>

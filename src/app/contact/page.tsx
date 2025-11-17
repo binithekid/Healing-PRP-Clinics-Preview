@@ -18,6 +18,9 @@ import emailjs from "@emailjs/browser";
 export default function ContactPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState<
+    "st-albans" | "birmingham"
+  >("st-albans");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,6 +34,11 @@ export default function ContactPage() {
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
+
+  const stAlbansMapUrl =
+    "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d39523.58522865622!2d-0.314299!3d51.747226!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487638a0e793c909%3A0x71ec848046a64059!2sSt%20Albans%2C%20UK!5e0!3m2!1sen!2sus!4v1757801875339!5m2!1sen!2sus";
+  const birminghamMapUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2430.4929728157417!2d-1.9274453233218645!3d52.47020937204814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870bc54343bc8ad%3A0xc94d1b9b140259f!2sConsulting%20Rooms%20Birmingham%20(Consulting%20Rooms%2038%20Ltd)!5e0!3m2!1sen!2suk!4v1763228247952!5m2!1sen!2suk";
 
   useEffect(() => {
     // Check if desktop
@@ -323,7 +331,7 @@ export default function ContactPage() {
                 className="text-sm font-inter text-slate-600 mb-8 leading-relaxed"
                 variants={itemVariants}
               >
-                Whether you have questions about our PRP treatments, need to
+                Whether you have questions about our treatments, need to
                 schedule an appointment, or want to learn more about improving
                 your health and confidence, we&apos;re just a message or call
                 away. Our team is available Monday through Friday, 9:00 AM to
@@ -334,21 +342,59 @@ export default function ContactPage() {
                 className="border-t border-slate-200 pt-6"
                 variants={itemVariants}
               >
-                <div className="space-y-4">
-                  {/* Address */}
-                  <div className="flex items-start gap-4">
-                    <div className="md:w-6 w-4 md:h-6 h-4 md:mt-0 mt-[0.2rem] text-[var(--brand-blue)]">
+                <div className="">
+                  {/* St Albans Address */}
+                  <button
+                    onClick={() => setSelectedLocation("st-albans")}
+                    className={`flex items-start gap-4 w-full text-left transition-all duration-300 rounded-lg p-2 -m-2 ${
+                      selectedLocation === "st-albans"
+                        ? "bg-[var(--brand-blue-50)] border-2 border-[var(--brand-blue)]"
+                        : "hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className="md:w-6 w-4 md:h-6 h-4 md:mt-0 mt-[0.2rem] text-[var(--brand-blue)] flex-shrink-0">
                       <FaMapMarkerAlt className="w-full h-full" />
                     </div>
                     <div>
-                      <p className="md:text-base text-sm font-inter text-slate-700">
+                      <p
+                        className={`md:text-base text-sm font-inter ${
+                          selectedLocation === "st-albans"
+                            ? "text-[var(--brand-blue)] font-semibold"
+                            : "text-slate-700"
+                        }`}
+                      >
                         21 Victoria Street, St Albans, AL1 3JJ
                       </p>
                     </div>
-                  </div>
+                  </button>
+
+                  {/* Birmingham Address */}
+                  <button
+                    onClick={() => setSelectedLocation("birmingham")}
+                    className={`flex items-start mt-4 gap-4 w-full text-left transition-all duration-300 rounded-lg p-2 -m-2 ${
+                      selectedLocation === "birmingham"
+                        ? "bg-[var(--brand-blue-50)] border-2 border-[var(--brand-blue)]"
+                        : "hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className="md:w-6 w-4 md:h-6 h-4 md:mt-0 mt-[0.2rem] text-[var(--brand-blue)] flex-shrink-0">
+                      <FaMapMarkerAlt className="w-full h-full" />
+                    </div>
+                    <div>
+                      <p
+                        className={`md:text-base text-sm font-inter ${
+                          selectedLocation === "birmingham"
+                            ? "text-[var(--brand-blue)] font-semibold"
+                            : "text-slate-700"
+                        }`}
+                      >
+                        38 Harborne Rd, Birmingham, B15 3EB
+                      </p>
+                    </div>
+                  </button>
 
                   {/* Phone */}
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start mt-5 gap-4">
                     <div className="md:w-6 w-4 md:h-6 h-4 md:mt-0 mt-[0.2rem] text-[var(--brand-blue)]">
                       <FaPhone className="w-full h-full" />
                     </div>
@@ -360,7 +406,7 @@ export default function ContactPage() {
                   </div>
 
                   {/* Email */}
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start mt-5 gap-4">
                     <div className="md:w-6 w-4 md:h-6 h-4 md:mt-0 mt-[0.2rem] text-[var(--brand-blue)]">
                       <FaEnvelope className="w-full h-full" />
                     </div>
@@ -378,16 +424,26 @@ export default function ContactPage() {
             <motion.div
               className="h-full min-h-[400px] lg:min-h-[500px] rounded-2xl overflow-hidden"
               variants={itemVariants}
+              key={selectedLocation}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d39523.58522865622!2d-0.314299!3d51.747226!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487638a0e793c909%3A0x71ec848046a64059!2sSt%20Albans%2C%20UK!5e0!3m2!1sen!2sus!4v1757801875339!5m2!1sen!2sus"
+                src={
+                  selectedLocation === "st-albans"
+                    ? stAlbansMapUrl
+                    : birminghamMapUrl
+                }
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Healing-PRP Clinics Location"
+                title={`Healing-PRP Clinics Location - ${
+                  selectedLocation === "st-albans" ? "St Albans" : "Birmingham"
+                }`}
               ></iframe>
             </motion.div>
           </motion.div>
