@@ -100,7 +100,7 @@ export default function JointInjectionsPage() {
   const treatments = [
     {
       name: "PRP (Platelet‑Rich Plasma) Joint Injections",
-      price: "From £400",
+      price: "From £350",
       description: "Natural healing using your own platelet-rich plasma",
       benefits: [
         "Encourages cartilage & soft‑tissue repair",
