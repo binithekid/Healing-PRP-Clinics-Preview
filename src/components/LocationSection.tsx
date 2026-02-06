@@ -1,299 +1,127 @@
 "use client";
 
+import { FaMapMarkerAlt, FaDirections, FaClock, FaExternalLinkAlt } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
 export default function LocationSection() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
+  const pathname = usePathname();
+  const isBirmingham = pathname?.startsWith("/birmingham");
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 60 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-      },
-    },
-  };
-
-  const nearbyAreas = [
-    "Watford",
-    "Harpenden",
-    "Luton",
-    "Hertford",
-    "Welwyn Garden City",
-  ];
-
-  const birminghamNearbyAreas = [
-    "Edgbaston",
-    "Harborne",
-    "Moseley",
-    "Selly Oak",
-    "City Centre",
-  ];
+  const clinic = isBirmingham 
+    ? {
+        name: "Birmingham Clinic",
+        district: "Edgbaston Medical Quarter",
+        address: "38 Harborne Rd, Edgbaston, B15 3EB",
+        hours: "Mon-Fri: 9am - 6pm",
+        mapLink: "https://www.google.com/maps/search/?api=1&query=38+Harborne+Rd,+Edgbaston,+Birmingham+B15+3EB", 
+      }
+    : {
+        name: "St Albans Clinic",
+        district: "City Centre",
+        address: "21 Victoria Street, St Albans, AL1 3JJ",
+        hours: "Mon-Fri: 9am - 6pm",
+        mapLink: "https://www.google.com/maps/search/?api=1&query=21+Victoria+Street,+St+Albans,+AL1+3JJ", 
+      };
 
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden">
-      {/* Seamless Gradient Background - continues from previous component */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-[#f6f7ff] to-transparent"></div>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
-        >
-          <motion.div
-            className="inline-block mb-2 font-inter md:px-4 px-3 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
-            variants={itemVariants}
-          >
-            St Albans Location
-          </motion.div>
-
-          <motion.h2
-            className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight"
-            variants={itemVariants}
-          >
-            Visit Us in St Albans
-          </motion.h2>
-          <motion.p
-            className="text-sm text-slate-600 md:max-w-2xl max-w-xl mx-auto leading-relaxed"
-            variants={itemVariants}
-          >
-            Conveniently located minutes from London with easy access from
-            surrounding areas.
-          </motion.p>
-        </motion.div>
-
-        {/* Content Grid */}
-        <motion.div
-          className="grid grid-cols-1 -mt-6 md:mt-0 lg:grid-cols-2 gap-12 items-stretch"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-        >
-          {/* Left Side - Combined Info */}
-          <motion.div variants={itemVariants}>
-            <div className="p-8 bg-white/90 backdrop-blur-sm rounded-xl border border-slate-200/50 h-full flex flex-col">
-              {/* Address Section */}
-              <div className="mb-8">
-                <h3 className="text-xl font-raleway text-navy-600 mb-2">
-                  Our Location
-                </h3>
-                <p className="text-sm text-slate-600">
-                  21 Victoria Street, St Albans, AL1 3JJ
-                </p>
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 mt-6 transform-gpu">
+      <div className="bg-white border border-slate-100 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-md transition-all duration-500">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+          
+          {/* LEFT: CLINICAL DETAILS (Reduced Padding) */}
+          <div className="lg:col-span-7 p-8 lg:p-10 flex flex-col justify-center bg-white relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <span className="flex h-1.5 w-1.5 rounded-full bg-[#4041d1] animate-pulse" />
+                <h4 className="text-[10px] font-bold uppercase text-[#4041d1] tracking-[0.2em] font-inter">
+                  Visit Our Clinic
+                </h4>
               </div>
 
-              {/* Subtle Separator */}
-              <div className="border-t border-slate-200/50 mb-8"></div>
+              <h3 className="text-2xl lg:text-3xl font-raleway font-bold text-slate-900 mb-1">
+                {clinic.name}
+              </h3>
+              <p className="text-[#4041d1] font-bold text-[11px] mb-6 uppercase tracking-wide font-inter">
+                {clinic.district}
+              </p>
 
-              {/* Nearby Areas Section */}
-              <div className="mb-8">
-                <h3 className="text-xl font-raleway text-navy-600 mb-3">
-                  Conveniently Located
-                </h3>
-                <p className="text-sm text-slate-600 mb-2">Close to:</p>
-                <div className="flex flex-wrap gap-2">
-                  {nearbyAreas.map((area, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
-                    >
-                      {area}
-                    </span>
-                  ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 bg-[var(--brand-blue-50)] text-[#4041d1] rounded-xl flex items-center justify-center shrink-0 border border-slate-100">
+                    <FaMapMarkerAlt size={16} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5 font-inter">Address</p>
+                    <p className="text-sm text-slate-700 font-medium leading-tight font-inter">
+                      {clinic.address}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center shrink-0 border border-slate-100">
+                    <FaClock size={16} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5 font-inter">Clinic Hours</p>
+                    <p className="text-sm text-slate-600 font-medium font-inter">Mon-Fri: 9am - 6pm</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Subtle Separator */}
-              <div className="border-t border-slate-200/50 mb-8"></div>
+              <a 
+                href={clinic.mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                // BRAND COLOR LOCK: #4041d1
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#4041d1] text-white rounded-xl font-bold text-xs hover:bg-[#2a2bb8] transition-all shadow-lg shadow-blue-200 group w-full sm:w-fit font-inter"              
+              >
+                <FaDirections className="group-hover:rotate-12 transition-transform" />
+                Get Directions
+                <FaExternalLinkAlt size={10} className="ml-1 opacity-40" />
+              </a>
+            </motion.div>
+          </div>
 
-              {/* Transport Info Section */}
-              <div className="flex-1">
-                <h3 className="text-xl font-raleway text-navy-600 mb-3">
-                  Easy Access
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  Short walk from St Albans City station (fast trains to
-                  London).
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Side - Map */}
-          <motion.div className="relative h-full" variants={itemVariants}>
-            <div className="relative rounded-xl overflow-hidden shadow-xl h-full">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d39523.58522865622!2d-0.314299!3d51.747226!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487638a0e793c909%3A0x71ec848046a64059!2sSt%20Albans%2C%20UK!5e0!3m2!1sen!2sus!4v1757801875339!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="rounded-xl"
-              ></iframe>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Bottom CTA */}
-        {/* <motion.div
-          className="text-center mt-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
-        >
-          <motion.div
-            className="inline-flex flex-col sm:flex-row gap-4"
-            variants={itemVariants}
-          >
-            <motion.button
-              className="px-8 py-4 bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-dark)] text-white rounded-lg font-inter font-medium transition-all duration-300 flex items-center justify-center gap-3"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          {/* RIGHT: FIXED CSS MAP (Ensures display without asset errors) */}
+          <div className="lg:col-span-5 relative min-h-[220px] lg:min-h-full overflow-hidden bg-slate-50">
+            <a 
+              href={clinic.mapLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block h-full w-full relative group"
             >
-              <FaMapMarkerAlt className="w-5 h-5" />
-              Get Directions
-            </motion.button>
-            <motion.button
-              className="px-8 py-4 border-2 border-[var(--brand-blue)] text-[var(--brand-blue)] bg-white/80 hover:bg-[var(--brand-blue-50)] rounded-lg font-inter font-medium transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Us
-            </motion.button>
-          </motion.div>
-        </motion.div> */}
-      </div>
-
-      {/* Birmingham Section */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-40">
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
-        >
-          <motion.div
-            className="inline-block mb-2 font-inter md:px-4 px-3 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
-            variants={itemVariants}
-          >
-            Midlands Location
-          </motion.div>
-
-          <motion.h2
-            className="md:text-3xl text-2xl font-raleway text-slate-900 leading-tight"
-            variants={itemVariants}
-          >
-            Visit Us in Birmingham
-          </motion.h2>
-          <motion.p
-            className="text-sm text-slate-600 md:max-w-2xl max-w-xl mx-auto leading-relaxed"
-            variants={itemVariants}
-          >
-            Serving patients across the West Midlands with convenient access
-            from surrounding areas.
-          </motion.p>
-        </motion.div>
-
-        {/* Content Grid */}
-        <motion.div
-          className="grid grid-cols-1 -mt-6 md:mt-0 lg:grid-cols-2 gap-12 items-stretch"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-        >
-          {/* Left Side - Combined Info */}
-          <motion.div variants={itemVariants}>
-            <div className="p-8 bg-white/90 backdrop-blur-sm rounded-xl border border-slate-200/50 h-full flex flex-col">
-              {/* Address Section */}
-              <div className="mb-8">
-                <h3 className="text-xl font-raleway text-navy-600 mb-2">
-                  Our Location
-                </h3>
-                <p className="text-sm text-slate-600">
-                  Consulting Rooms 38 LTD
-                </p>
-                <p className="text-sm text-slate-600">
-                  38 Harborne Rd, Edgbaston, Birmingham, B15 3EB
-                </p>
-              </div>
-
-              {/* Subtle Separator */}
-              <div className="border-t border-slate-200/50 mb-8"></div>
-
-              {/* Nearby Areas Section */}
-              <div className="mb-8">
-                <h3 className="text-xl font-raleway text-navy-600 mb-3">
-                  Conveniently Located
-                </h3>
-                <p className="text-sm text-slate-600 mb-2">Close to:</p>
-                <div className="flex flex-wrap gap-2">
-                  {birminghamNearbyAreas.map((area, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
-                    >
-                      {area}
-                    </span>
-                  ))}
+              {/* This CSS pattern mimics a clean medical map grid */}
+              <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:20px_20px] opacity-40" />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent" />
+              
+              {/* Map Centering Pin */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative">
+                  <div className="absolute -inset-6 bg-[#4041d1]/20 rounded-full animate-ping" />
+                  <div className="relative bg-white p-3 rounded-full shadow-xl border border-blue-100">
+                    <FaMapMarkerAlt className="text-[#4041d1]" size={20} />
+                  </div>
+                  <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 whitespace-nowrap bg-white px-3 py-1 rounded-full text-[10px] font-bold text-slate-900 shadow-md border border-slate-100 font-inter">
+                    {clinic.name} location map
+                  </div>
                 </div>
               </div>
 
-              {/* Subtle Separator */}
-              <div className="border-t border-slate-200/50 mb-8"></div>
-
-              {/* Transport Info Section */}
-              <div className="flex-1">
-                <h3 className="text-xl font-raleway text-navy-600 mb-3">
-                  Easy Access
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  Conveniently located in Edgbaston with easy access via public
-                  transport.
-                </p>
+              {/* View Map Badge */}
+              <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-white/50 flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-[9px] font-bold text-slate-900 uppercase tracking-widest font-inter">Open in Maps</span>
               </div>
-            </div>
-          </motion.div>
+            </a>
+          </div>
 
-          {/* Right Side - Map */}
-          <motion.div className="relative h-full" variants={itemVariants}>
-            <div className="relative rounded-xl overflow-hidden shadow-xl h-full">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2430.4929728157417!2d-1.9274453233218645!3d52.47020937204814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870bc54343bc8ad%3A0xc94d1b9b140259f!2sConsulting%20Rooms%20Birmingham%20(Consulting%20Rooms%2038%20Ltd)!5e0!3m2!1sen!2suk!4v1763228247952!5m2!1sen!2suk"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="rounded-xl"
-              ></iframe>
-            </div>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,257 +1,173 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { MoveRight } from "lucide-react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useState } from "react";
-import { FaSyringe, FaSync, FaGem, FaStar } from "react-icons/fa";
+import { FaSyringe, FaSync, FaGem, FaStar, FaCheckCircle } from "react-icons/fa";
 
 export default function PRPExplanationSection() {
   const [activeStep, setActiveStep] = useState(0);
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.05, delayChildren: 0.1 },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 60 },
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-
-      transition: {
-        duration: 0.8,
-      },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
-  };
-
-  const stepVariants = {
-    inactive: { scale: 1, opacity: 0.6 },
-    active: { scale: 1.05, opacity: 1 },
   };
 
   const steps = [
-    {
-      number: 1,
-      icon: FaSyringe,
-      title: "Blood Collection",
-      description: "A small amount of blood is taken from your arm.",
-      color: "text-slate-600",
-      bgColor: "bg-slate-100",
-    },
-    {
-      number: 2,
-      icon: FaSync,
-      title: "Centrifuge Process",
-      description: "It's spun in a centrifuge to isolate the PRP layer.",
-      color: "text-slate-600",
-      bgColor: "bg-slate-100",
-    },
-    {
-      number: 3,
-      icon: FaGem,
-      title: "PRP Concentration",
-      description: "Concentrated PRP — rich in growth factors — is collected.",
-      color: "text-[var(--brand-blue)]",
-      bgColor: "bg-[var(--brand-blue-100)]",
-    },
-    {
-      number: 4,
-      icon: FaStar,
-      title: "Injection & Healing",
-      description: "PRP is injected to stimulate healing and regeneration.",
-      color: "text-amber-600",
-      bgColor: "bg-amber-100",
-    },
+    { number: 1, icon: FaSyringe, title: "Blood Collection", description: "A small amount of blood is taken from your arm, similar to a standard test." },
+    { number: 2, icon: FaSync, title: "Centrifuge Process", description: "It's spun in a medical centrifuge to isolate the concentrated PRP layer." },
+    { number: 3, icon: FaGem, title: "PRP Concentration", description: "Pure Platelet-Rich Plasma—dense with growth factors—is carefully collected." },
+    { number: 4, icon: FaStar, title: "Injection & Healing", description: "PRP is injected into the target area to stimulate natural repair and regeneration." },
   ];
 
-  const benefits = [
-    "Stimulates natural healing and regeneration",
-    "Improves blood circulation",
-    "Reduces inflammation and pain",
-    "Promotes new tissue growth",
+  const applications = [
+    { title: "Hair Restoration", desc: "Supports scalp health and follicle density." },
+    { title: "Facial Aesthetics", desc: "Improves skin quality, texture, and collagen." },
+    { title: "Joint & Soft Tissue", desc: "Aids recovery and reduces discomfort." },
+    { title: "Sexual Wellness", desc: "Supports tissue health and blood flow." },
   ];
 
   return (
-    <section
-      id="prp-explanation"
-      className="relative py-20 lg:py-32 overflow-hidden"
+    <section 
+      id="prp-explanation" 
+      className="relative py-20 lg:py-28 bg-[#0A1128] overflow-hidden font-inter"
+      style={{ backgroundImage: 'radial-gradient(circle at 10% 10%, rgba(64, 65, 209, 0.15) 0%, transparent 40%)' }}
     >
-      {/* Seamless Gradient Background - continues from previous component */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-[#f6f7ff] to-transparent"></div>
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <motion.div
-          className="text-center mb-5"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
-        >
-          <motion.div
-            className="inline-block font-inter md:px-4 px-3 md:py-2 py-1 bg-[var(--brand-blue-100)] text-[var(--brand-blue-700)] rounded-full text-xs"
-            variants={itemVariants}
-          >
-            Understanding PRP
-          </motion.div>
-
-          <motion.h2
-            className="md:text-3xl text-xl py-2 font-raleway text-slate-900 leading-tight"
-            variants={itemVariants}
-          >
-            What is Platelet-Rich Plasma - PRP?
-          </motion.h2>
-
-          <motion.p
-            className="md:text-sm text-xs text-slate-600 max-w-2xl mx-auto"
-            variants={itemVariants}
-          >
-            PRP (Platelet‑Rich Plasma) is derived from a small sample of your
-            own blood and processed in a medical centrifuge to concentrate the
-            platelets. These platelets are rich in growth factors that stimulate
-            natural healing, repair, and regeneration.
-          </motion.p>
-        </motion.div>
-
-        {/* Interactive PRP Process Trail */}
-        <motion.div
-          className="mb-16"
+          className="text-center mb-12"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
         >
-          <div className="max-w-5xl mx-auto">
-            {/* Step Trail */}
-            <div className="relative mb-8">
-              {/* Connection Line */}
-              {/* <div className="absolute top-16 left-0 right-0 h-0.5 bg-gradient-to-r from-slate-200 via-[var(--brand-blue-200)] to-amber-200 hidden lg:block"></div> */}
-              <motion.div
-                className="text-center mb-8"
-                key={activeStep}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--brand-blue)]/10 rounded-full">
-                  <div className="w-2 h-2 bg-[var(--brand-blue)] rounded-full"></div>
-                  <span className="text-sm font-medium text-[var(--brand-blue)]">
-                    Step {steps[activeStep].number}: {steps[activeStep].title}
-                  </span>
+          <motion.div
+            // BRAND COLOR LOCK: Lightened #4041d1 for contrast against dark mode
+            className="inline-block px-4 py-1.5 bg-[#4041d1]/20 text-[#8ea3ff] rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-6 border border-[#4041d1]/30 font-raleway"
+            variants={itemVariants}
+          >
+            Scientific Excellence
+          </motion.div>
+
+          <motion.h2
+            className="text-3xl md:text-4xl font-raleway font-bold text-white leading-tight mb-6 tracking-tight"
+            variants={itemVariants}
+          >
+            What is Platelet-Rich Plasma?
+          </motion.h2>
+
+          <div className="max-w-4xl mx-auto space-y-8">
+            <motion.p
+              className="text-base text-slate-200 leading-relaxed font-medium font-inter"
+              variants={itemVariants}
+            >
+              Platelet-Rich Plasma (PRP) is prepared using a small sample of your own blood, 
+              carefully processed to concentrate platelets, growth factors, and healing proteins. 
+              These components play a key role in supporting tissue repair and collagen production.
+            </motion.p>
+
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left"
+              variants={itemVariants}
+            >
+              {applications.map((app, i) => (
+                <div key={i} className="flex items-start gap-3 p-4 bg-white/[0.03] rounded-2xl border border-white/10 hover:border-[#4041d1]/40 transition-colors duration-300">
+                  <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0 w-3.5 h-3.5" />
+                  <div>
+                    <span className="text-white font-bold block text-sm font-raleway">{app.title}</span>
+                    <span className="text-slate-400 text-xs font-inter">{app.desc}</span>
+                  </div>
                 </div>
-              </motion.div>
-              {/* Steps Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {steps.map((step, index) => {
-                  const IconComponent = step.icon;
-                  const isActive = activeStep === index;
+              ))}
+            </motion.div>
 
-                  return (
-                    <motion.div
-                      key={index}
-                      className="relative cursor-pointer"
-                      onClick={() => setActiveStep(index)}
-                      variants={stepVariants}
-                      animate={isActive ? "active" : "inactive"}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <div
-                        className={`p-6 rounded-xl border-2 transition-all duration-300 flex flex-col h-full ${
-                          isActive
-                            ? "border-[var(--brand-blue)] bg-white shadow-lg shadow-[var(--brand-blue)]/10"
-                            : "border-slate-200 bg-white/80 hover:border-[var(--brand-blue)]/50"
-                        }`}
-                      >
-                        {/* Step Number */}
-                        {/* <div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mb-4 ${
-                            isActive
-                              ? "bg-[var(--brand-blue)] text-white"
-                              : "bg-slate-200 text-slate-600"
-                          }`}
-                        >
-                          {step.number}
-                        </div> */}
-
-                        {/* Icon */}
-                        <div
-                          className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${step.bgColor}`}
-                        >
-                          <IconComponent className={`w-6 h-6 ${step.color}`} />
-                        </div>
-
-                        {/* Content */}
-                        <div className="flex flex-col flex-1">
-                          <h3 className="font-semibold text-navy-600 mb-2">
-                            {step.title}
-                          </h3>
-                          <p className="text-sm text-slate-600 leading-relaxed flex-1">
-                            {step.description}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Active Step Highlight */}
+            <motion.p
+              className="text-xs text-slate-400 italic font-inter"
+              variants={itemVariants}
+            >
+              Because PRP is derived from your own blood, it is biocompatible and tailored to your body’s natural healing processes.
+            </motion.p>
           </div>
         </motion.div>
 
-        {/* Why PRP Works Section */}
-        <motion.div
-          className="text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
-        >
-          <motion.h3
-            className="md:text-3xl text-xl py-2 font-raleway text-slate-900 leading-tight"
-            variants={itemVariants}
-          >
-            Why PRP Works?
-          </motion.h3>
+        {/* Process Steps */}
+        <div className="max-w-6xl mx-auto mt-16 relative">
+          <div className="text-center mb-10">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeStep}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.2 }}
+                // UPDATED: Increased padding, larger border, and bigger text
+                className="inline-flex items-center gap-3 px-6 py-3 bg-[#4041d1]/10 border border-[#4041d1]/40 rounded-full shadow-[0_0_15px_rgba(64,65,209,0.25)] backdrop-blur-md"
+              >
+                <span className="flex h-2 w-2 rounded-full bg-[#4041d1] animate-pulse shadow-[0_0_8px_#4041d1]" />
+                <span className="text-xs font-bold text-white uppercase tracking-[0.25em] font-raleway">
+                  Phase 0{steps[activeStep].number}: {steps[activeStep].title}
+                </span>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto mb-12"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative"
             variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                className="flex items-start shadow-sm gap-3 p-4 bg-white/80 rounded-lg border border-slate-200/50"
-                variants={itemVariants}
-              >
-                <div className="w-2 h-2 bg-[var(--brand-blue)] rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-slate-600 text-left">{benefit}</span>
-              </motion.div>
-            ))}
-          </motion.div>
+            <div className="hidden lg:block absolute top-[100px] left-0 w-full h-[1px] border-t border-dashed border-white/10 -z-10" />
 
-          {/* CTA Link */}
-          <motion.a
-            href="/sexual-rejuvenation"
-            className="inline-flex items-center gap-2 text-[var(--brand-blue)] text-sm cursor-pointer hover:text-[var(--brand-blue-dark)] transition-colors duration-300"
-            variants={itemVariants}
-            whileHover={{ x: 4 }}
-          >
-            <span>Learn more on our Sexual Rejuvenation page</span>
-            <MoveRight className="w-4 h-4 mt-[0.1rem] transition-transform duration-300 group-hover:translate-x-1" />
-          </motion.a>
-        </motion.div>
+            {steps.map((step, index) => {
+              const IconComponent = step.icon;
+              const isActive = activeStep === index;
+
+              return (
+                <motion.div
+                  key={index}
+                  className="relative group will-change-transform transform-gpu"
+                  onClick={() => setActiveStep(index)}
+                  variants={itemVariants}
+                >
+                  <div
+                    className={`p-6 rounded-[2rem] border transition-all duration-300 cursor-pointer h-full flex flex-col ${
+                      isActive
+                        // BRAND COLOR LOCK: Active state border uses Brand Blue
+                        ? "border-[#4041d1] bg-white shadow-xl shadow-[#4041d1]/20 scale-105 z-20"
+                        : "border-white/10 bg-white/[0.04] opacity-70 hover:opacity-100"
+                    }`}
+                  >
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 ${
+                      isActive ? "bg-[#4041d1] text-white shadow-lg" : "bg-white/10 text-slate-300 group-hover:text-[#4041d1]"
+                    }`}>
+                      <IconComponent className="w-5 h-5" />
+                    </div>
+
+                    <h3 className={`font-raleway font-bold mb-2 text-base transition-colors ${isActive ? "text-slate-900" : "text-white"}`}>
+                      {step.title}
+                    </h3>
+                    <p className={`text-xs leading-relaxed font-inter transition-colors ${isActive ? "text-slate-600" : "text-slate-400"}`}>
+                      {step.description}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

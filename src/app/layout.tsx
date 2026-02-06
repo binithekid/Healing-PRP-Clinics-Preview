@@ -1,66 +1,42 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Playfair_Display,
-  Inter,
-  DM_Sans,
-  Raleway,
-  Merriweather,
-  Manrope,
-} from "next/font/google";
+import { Inter, Raleway } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import MobileMotionProvider from "@/components/MobileMotionProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway" });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-});
-
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const raleway = Raleway({
-  variable: "--font-raleway",
-  subsets: ["latin"],
-});
-
-const merriweather = Merriweather({
-  variable: "--font-merriweather",
-  subsets: ["latin"],
-  weight: ["300", "400", "700", "900"],
-});
-
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
+// --- GLOBAL SEO DEFAULTS ---
 export const metadata: Metadata = {
-  title: "Healing PRP Clinics - Natural Regeneration with PRP | St Albans",
-  description:
-    "Confidential care by a GGMC Registered Experienced Doctor. Evidence-based, non-surgical treatments for sexual wellness, facial aesthetics & hair, and joint pain in St Albans, minutes from London.",
+  metadataBase: new URL("https://www.healing-prp.co.uk"),
+  title: {
+    // This is the default title if a page doesn't have one
+    default: "Healing-PRP Clinics | Doctor-Led Regenerative Medicine",
+    // General brand template for top-level pages (Home, About, Contact)
+    template: "%s | Healing-PRP Clinics", 
+  },
+  description: "Specialist private clinic in St Albans & Birmingham. PRP Hair Restoration, Joint Injections, P-Shot & O-Shot treatments by GMC-registered doctors.",
+  keywords: [
+    "PRP Clinic UK",
+    "Private Doctor St Albans",
+    "Private Doctor Birmingham",
+    "Regenerative Medicine",
+    "Erectile Dysfunction Treatment",
+    "Hair Loss Clinic",
+    "Joint Pain Injections"
+  ],
   icons: {
-    icon: "/favicon.png",
+    icon: "/Logo2.png", 
+    shortcut: "/Logo2.png",
+    apple: "/Logo2.png", 
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: "https://www.healing-prp.co.uk",
+    siteName: "Healing-PRP Clinics",
+    title: "Healing-PRP Clinics | Specialist Regenerative Medicine",
+    description: "Doctor-led PRP treatments in St Albans and Birmingham for hair, joints, and sexual wellness.",
   },
 };
 
@@ -70,14 +46,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${inter.variable} ${dmSans.variable} ${raleway.variable} ${merriweather.variable} ${manrope.variable} antialiased`}
-      >
-        <MobileMotionProvider>
-          <Header />
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.variable} ${raleway.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
+        {/* Header appears on ALL pages */}
+        <Header /> 
+        
+        {/* Main Content Area */}
+        <main>
           {children}
-        </MobileMotionProvider>
+        </main>
+        
+        {/* Footer is typically called within page.tsx to allow for 
+            location-specific footer details, but can be added here 
+            if you want a universal one. */}
       </body>
     </html>
   );
