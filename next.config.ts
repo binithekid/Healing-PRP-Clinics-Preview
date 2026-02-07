@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   
-  async redirects() {
+  // redirects have been removed to allow blog posts to load correctly
+  /* async redirects() {
     return [
       // 1. Redirect old Skin/Face blog -> Facial Aesthetics Page
       {
@@ -25,6 +26,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  */
 };
 
 export default nextConfig;
