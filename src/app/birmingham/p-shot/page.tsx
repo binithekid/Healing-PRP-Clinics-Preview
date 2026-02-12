@@ -2,55 +2,67 @@ import type { Metadata } from "next";
 import PShotClient from "@/components/pages/PShotClient";
 
 export const metadata: Metadata = {
-  // The layout adds " | St Albans Clinic" automatically
-  title: "P-Shot® (Priapus Shot) Male Rejuvenation",
-
-  description:
-    "Official P-Shot® provider serving Luton, St Albans & Hertfordshire. Advanced PRP therapy to enhance sensitivity, erection quality, and performance. Book your private consultation.",
-
-  alternates: {
-    canonical: "https://www.healing-prp.co.uk/p-shot",
+  title: {
+    // Strong, location-first title for Google ranking
+    absolute: "P-Shot Treatment Birmingham | Priapus Shot® | Healing-PRP",
   },
-
+  description:
+    "Official P-Shot® (Priapus Shot) clinic in Birmingham. GMC-registered doctor offering PRP & Exo-P therapy for erectile rejuvenation. Private clinic in Edgbaston.",
   keywords: [
-    // High-Priority Location Terms (Luton Focus)
-    "P-Shot treatment Luton",
-    "Male sexual rejuvenation Luton",
-    "PRP injection for penis Luton",
-    "Male enhancement clinic Luton",
-    "Priapus Shot Bedfordshire",
-
-    // Core Clinical Terms (St Albans/Herts Base)
-    "P-Shot treatment St Albans",
-    "Priapus Shot Hertfordshire",
-    "Penile sensitivity treatment",
-    "Male enhancement St Albans",
-    "Sexual performance therapy Watford",
+    // Core Service Keywords
+    "P-Shot Birmingham",
+    "Priapus Shot Birmingham",
+    "PRP injection for ED Birmingham",
+    "Male enhancement Birmingham",
     
-    // Specific Conditions & Cost
-    "P-Shot cost UK",
-    "Lichen Sclerosus male treatment",
-    "Natural male enhancement Harpenden",
-    "Sexual wellness clinic North London", 
-    "St Albans aesthetic medicine"
-  ],
+    // Advanced/New Options (Matches your new Exo-P section)
+    "Exo-P Shot Birmingham",
+    "Exosome therapy for ED West Midlands",
 
+    // Specific Conditions
+    "Peyronies disease treatment Birmingham",
+    "Penile rejuvenation Birmingham",
+
+    // Hyper-Local & Regional Locations
+    "P-Shot clinic Edgbaston",
+    "Private PRP clinic Solihull",
+    "Mens health Sutton Coldfield",
+    "Priapus Shot West Midlands",
+    "P-Shot Wolverhampton",
+
+    // User Intent (Cost/Doctor)
+    "P-Shot cost Birmingham",
+    "GMC registered P-Shot doctor",
+    "Non-surgical erectile treatment"
+  ],
+  alternates: {
+    // NOTE: Ensure this matches your actual live domain
+    canonical: "https://healing-practice.co.uk/birmingham/p-shot",
+  },
   openGraph: {
-    title: "P-Shot® Male Rejuvenation | Luton & St Albans",
-    description:
-      "Enhance sensitivity and performance with the P-Shot®. Doctor-led PRP therapy serving patients from Luton and St Albans.",
-    url: "https://www.healing-prp.co.uk/p-shot",
+    title: "P-Shot Treatment (Priapus Shot) | Birmingham",
+    description: "Doctor-led P-Shot & Exo-P clinic in Birmingham. Advanced PRP therapy for performance and rejuvenation.",
+    url: "https://healing-practice.co.uk/birmingham/p-shot",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
+    images: [
+      {
+        url: "/p-shot-consultation.webp",
+        width: 1200,
+        height: 630,
+        alt: "P-Shot Treatment Consultation Birmingham",
+      },
+    ],
   },
 };
 
-export default function Page() {
+export default function BirminghamPShotPage() {
   return (
-    <PShotClient 
-      locationName="St Albans"
-      servingAreas="Harpenden • Luton • Watford • Hertfordshire"
+    <PShotClient
+      // Passes "Birmingham" so the text changes from "St Albans"
+      locationName="Birmingham"
+      servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
     />
   );
 }
