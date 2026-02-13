@@ -98,7 +98,7 @@ export default function SexualHealthClient({
       course: "Up to 3 injections",
       // LINK TO NEW P-SHOT PAGE
       pageLink: pShotUrl,
-      pageLinkText: "View Full P-Shot® Details",
+      pageLinkText: "View Full P-Shot Details",
       expandedContent: {
         howItWorks:
           "A small blood sample of around 40ml is taken from your arm, just like a routine blood test. The blood is then placed in a medical centrifuge to create high‑quality PRP (Platelet‑Rich Plasma). Before treatment, a numbing cream is applied to ensure comfort. The PRP is then carefully injected into precise areas of the penis to stimulate repair and regeneration. You may feel very mild discomfort during the injection, which usually settles within 5–30 minutes. You can return to work straight away. The whole procedure typically takes 30–45 minutes. Depending on your medical history and individual response, you may require a course of up to three injections, which will be discussed in detail during your online consultation. After treatment, you will receive personalised aftercare instructions.",
@@ -147,7 +147,7 @@ export default function SexualHealthClient({
       course: "Up to 3 injections",
       // LINK TO NEW P-SHOT PAGE
       pageLink: pShotUrl,
-      pageLinkText: "View Exomine® P-Shot Details",
+      pageLinkText: "View Exomine P-Shot Details",
       expandedContent: {
         howItWorks:
           "A small blood sample of around 40ml is taken from your arm. The blood is processed using the Exomine kit, producing PRP with growth factors already released and active. After numbing cream is applied, the enriched PRP is carefully injected into precise areas of the penis to stimulate repair and regeneration. Mild discomfort usually settles within 5–30 minutes, and you can return to work straight away. The procedure is very similar to the standard P‑Shot® but typically takes around 1 hour. Depending on your history and response, you may require a course of up to three injections for optimal results.",
@@ -178,7 +178,7 @@ export default function SexualHealthClient({
       },
     },
     {
-      name: "O‑Shot®",
+      name: "O‑Shot",
       price: "",
       description:
         "Female rejuvenation for improved sensitivity and vaginal health",
@@ -224,7 +224,7 @@ export default function SexualHealthClient({
       },
     },
     {
-      name: "Exomine® O‑Shot",
+      name: "Exomine O‑Shot",
       price: "",
       description: "Advanced female rejuvenation with enhanced results",
       benefits: [
@@ -1110,7 +1110,7 @@ export default function SexualHealthClient({
               className="md:text-3xl text-xl font-raleway font-bold text-slate-900 md:mb-6 mb-4"
               variants={itemVariants}
             >
-              P-Shot® vs Exomine® P-Shot{" "}
+              P-Shot vs Exomine P-Shot{" "}
               <span className="hidden md:inline">- Comparison</span>
             </motion.h2>
 
@@ -1126,7 +1126,7 @@ export default function SexualHealthClient({
                         Feature
                       </th>
                       <th className="px-6 py-4 text-left font-raleway font-bold text-slate-900">
-                        P-Shot® (Priapus Shot®)
+                        P-Shot (Priapus Shot®)
                       </th>
                       <th className="px-6 py-4 text-left font-raleway font-bold text-slate-900">
                         Exomine® P-Shot (Priapus Shot®)
