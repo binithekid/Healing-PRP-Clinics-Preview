@@ -9,10 +9,30 @@ import {
   FaPlus,
   FaMinus,
   FaEnvelope,
+  FaArrowRight,
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
 import Link from "next/link";
+import Image from "next/image"; // Added for optimized images
+
+// --- TYPES ---
+// This interface defines the shape of our data, making @ts-ignore unnecessary
+interface Treatment {
+  name: string;
+  price: string;
+  description: string;
+  benefits: string[];
+  duration: string;
+  course: string;
+  pageLink?: string;     // Optional: Only some treatments have this
+  pageLinkText?: string; // Optional
+  expandedContent: {
+    howItWorks: string;
+    whoIsItFor: string[];
+    commonQuestions: { question: string; answer: string }[];
+  };
+}
 
 type SexualHealthClientProps = {
   locationName?: string;
@@ -24,11 +44,18 @@ export default function SexualHealthClient({
   const [expandedTreatment, setExpandedTreatment] = useState<string | null>(null);
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
 
+  // --- DYNAMIC LINKS BASED ON LOCATION ---
+  const isBirmingham = locationName === "Birmingham";
+  
+  const pShotUrl = isBirmingham ? "/birmingham/p-shot" : "/p-shot";
+  const edUrl = isBirmingham ? "/birmingham/erectile-dysfunction" : "/erectile-dysfunction";
+  const pricesUrl = isBirmingham ? "/birmingham/prices" : "/prices";
+  const faqUrl = isBirmingham ? "/birmingham/faq" : "/faq";
+
   // Determine nearby areas text based on location
-  const nearbyAreas =
-    locationName === "Birmingham"
-      ? "Solihull, Edgbaston, Sutton Coldfield, and the West Midlands"
-      : "Harpenden, Watford, Welwyn Garden City, Hitchin, Luton, Hertford, and London";
+  const nearbyAreas = isBirmingham
+    ? "Solihull, Edgbaston, Sutton Coldfield, and the West Midlands"
+    : "Harpenden, Watford, Welwyn Garden City, Hitchin, Luton, Hertford, and London";
 
   const toggleFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
@@ -55,7 +82,8 @@ export default function SexualHealthClient({
     },
   };
 
-  const treatments = [
+  // Typed array using the Interface defined above
+  const treatments: Treatment[] = [
     {
       name: "P‑Shot®",
       price: "",
@@ -68,6 +96,9 @@ export default function SexualHealthClient({
       ],
       duration: "30–45 minutes",
       course: "Up to 3 injections",
+      // LINK TO NEW P-SHOT PAGE
+      pageLink: pShotUrl,
+      pageLinkText: "View Full P-Shot® Details",
       expandedContent: {
         howItWorks:
           "A small blood sample of around 40ml is taken from your arm, just like a routine blood test. The blood is then placed in a medical centrifuge to create high‑quality PRP (Platelet‑Rich Plasma). Before treatment, a numbing cream is applied to ensure comfort. The PRP is then carefully injected into precise areas of the penis to stimulate repair and regeneration. You may feel very mild discomfort during the injection, which usually settles within 5–30 minutes. You can return to work straight away. The whole procedure typically takes 30–45 minutes. Depending on your medical history and individual response, you may require a course of up to three injections, which will be discussed in detail during your online consultation. After treatment, you will receive personalised aftercare instructions.",
@@ -114,6 +145,9 @@ export default function SexualHealthClient({
       ],
       duration: "~60 minutes",
       course: "Up to 3 injections",
+      // LINK TO NEW P-SHOT PAGE
+      pageLink: pShotUrl,
+      pageLinkText: "View Exomine® P-Shot Details",
       expandedContent: {
         howItWorks:
           "A small blood sample of around 40ml is taken from your arm. The blood is processed using the Exomine kit, producing PRP with growth factors already released and active. After numbing cream is applied, the enriched PRP is carefully injected into precise areas of the penis to stimulate repair and regeneration. Mild discomfort usually settles within 5–30 minutes, and you can return to work straight away. The procedure is very similar to the standard P‑Shot® but typically takes around 1 hour. Depending on your history and response, you may require a course of up to three injections for optimal results.",
@@ -271,13 +305,15 @@ export default function SexualHealthClient({
     <>
       {/* Hero Section */}
       <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image - Optimized with Next.js Image */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white z-10" />
-          <img
+          <Image
             src="/hero_img.png"
-            alt="Projects background"
-            className="w-full h-full object-cover"
+            alt="Sexual Rejuvenation Background"
+            fill
+            className="object-cover"
+            priority // Loads this image first for better performance (LCP)
           />
         </div>
 
@@ -409,8 +445,6 @@ export default function SexualHealthClient({
         </div>
       </section>
 
-      {/* Introduction Section */}
-
       {/* Understanding ED Section */}
       <section className="py-12 lg:py-24 bg-gradient-to-b from-[#f6f7ff] to-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -424,55 +458,65 @@ export default function SexualHealthClient({
               className="text-2xl lg:text-3xl font-raleway font-bold text-slate-900 mb-3"
               variants={itemVariants}
             >
-              Understanding Erectile Dysfunction (ED)
+            Understanding Erectile Dysfunction (ED)
             </motion.h2>
-
+            
             <motion.p
               className="text-sm font-inter text-slate-600 leading-relaxed mb-4"
               variants={itemVariants}
             >
-              Erectile dysfunction (ED) is a common condition in which achieving
-              or maintaining an erection becomes difficult. It often results
-              from a combination of factors, including reduced blood flow,
-              stress, hormonal imbalance, diabetes, high blood pressure, nerve
-              changes, or certain medications.
+              Erectile dysfunction (ED) is a common medical condition in which achieving or
+              maintaining an erection becomes difficult. It often develops due to a
+              combination of factors, including reduced blood flow, stress, hormonal
+              imbalance, diabetes, high blood pressure, nerve sensitivity changes, or the
+              effects of certain medications.
             </motion.p>
-
-            <motion.p
-              className="text-sm font-inter text-slate-600 leading-relaxed mb-3 "
-              variants={itemVariants}
-            >
-              Sometimes, the blood vessels supplying the penis can become
-              narrow, and the penile muscles may weaken, reducing the ability to
-              maintain a firm erection. PRP (Platelet-Rich Plasma) therapy can
-              help by improving blood flow, regenerating tissue, and
-              strengthening the smooth muscle responsible for erections.
-            </motion.p>
-
+            
             <motion.p
               className="text-sm font-inter text-slate-600 leading-relaxed mb-3"
               variants={itemVariants}
             >
-              At Healing-PRP Clinics, we recognise that ED can affect both
-              physical confidence and emotional wellbeing. Many men prefer to
-              avoid invasive procedures and instead explore natural,
-              regenerative options. Our treatments — including PRP-based
-              therapies such as the P-Shot® and Exomine® P-Shot — use your
-              body’s own growth factors to support tissue healing and
-              sensitivity.
+              In many cases, the blood vessels supplying the penis may become narrowed, and
+              the smooth muscle within erectile tissue may weaken over time. These changes
+              can reduce rigidity and make it harder to maintain an erection, particularly
+              during sustained intimacy.
             </motion.p>
-
+            
             <motion.p
               className="text-sm font-inter text-slate-600 leading-relaxed mb-3"
               variants={itemVariants}
             >
-              Because PRP is derived from your own blood, the treatment is
-              autologous, and minimally invasive. While results vary between
-              individuals, PRP therapy is designed to address contributing
-              factors rather than simply masking symptoms, with the aim of
-              supporting erectile function, confidence, and intimacy over time.
+              Platelet-Rich Plasma (PRP) therapy may help by supporting blood flow,
+              encouraging tissue repair, and improving the health of erectile tissue.
+              Rather than acting as a temporary stimulant, PRP aims to work at a
+              regenerative level by using growth factors derived from your own blood.
             </motion.p>
-            <motion.div variants={itemVariants}>
+            
+            <motion.p
+              className="text-sm font-inter text-slate-600 leading-relaxed mb-3"
+              variants={itemVariants}
+            >
+              At Healing-PRP Clinics, we recognise that erectile dysfunction can affect both
+              physical confidence and emotional wellbeing. Many men wish to avoid invasive
+              procedures or long-term reliance on medication and instead explore medical
+              options that support natural function. Our doctor-led treatments — including
+              PRP-based therapies such as the P-Shot® and Exomine® P-Shot — are designed to
+              support tissue health, sensitivity, and vascular function.
+            </motion.p>
+            
+            <motion.p
+              className="text-sm font-inter text-slate-600 leading-relaxed mb-3"
+              variants={itemVariants}
+            >
+              Because PRP is autologous (derived from your own blood), treatment is minimally
+              invasive and generally well tolerated. Outcomes vary between individuals, and
+              suitability is assessed during a medical consultation. PRP therapy is
+              intended to address contributing factors rather than simply masking symptoms,
+              with the aim of supporting erectile function, confidence, and intimacy over
+              time.
+            </motion.p>
+
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 mt-6">
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -480,12 +524,20 @@ export default function SexualHealthClient({
                   const section = document.getElementById("contact-form-section");
                   if (section) section.scrollIntoView({ behavior: "smooth" });
                 }}
-                // BRAND COLOR LOCK
-                className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2 group"
+                className="px-6 py-3 w-max text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2 group shadow-lg"
               >
                 <FaEnvelope className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                 Book Consultation
               </button>
+
+              {/* NEW BUTTON: Link to the Dedicated ED Page */}
+              <Link
+                href={edUrl}
+                className="px-6 py-3 w-max text-sm cursor-pointer bg-white border border-[#4041d1] text-[#4041d1] hover:bg-blue-50 rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2"
+              >
+                <FaArrowRight className="w-4 h-4" />
+                View Erectile Dysfunction Treatments
+              </Link>
             </motion.div>
           </motion.div>
         </div>
@@ -651,7 +703,7 @@ export default function SexualHealthClient({
                 may not be appropriate for everyone.
               </p>
             </motion.div>
-           <motion.div variants={itemVariants}>
+            <motion.div variants={itemVariants}>
               <Link
                 href="/blog"
                 target="_blank"
@@ -921,6 +973,19 @@ export default function SexualHealthClient({
                         <FaEnvelope className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                         Book Consultation
                       </motion.button>
+                      
+                      {/* NEW BUTTON: Optional "View Full Details" link if this treatment has one */}
+                      {treatment.pageLink && (
+                        <div className="mt-4 pt-4 border-t border-slate-100">
+                           <Link 
+                              href={treatment.pageLink}
+                              className="inline-flex items-center gap-2 text-[#4041d1] font-bold text-sm hover:underline"
+                           >
+                             {treatment.pageLinkText} <FaArrowRight className="w-3 h-3" />
+                           </Link>
+                        </div>
+                      )}
+
                       {/* Empty space to maintain tag alignment */}
                       <div className="hidden"></div>
                     </div>
@@ -1153,7 +1218,7 @@ export default function SexualHealthClient({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-center items-center gap-4">
           {/* Prices Link */}
           <Link
-            href={locationName === "Birmingham" ? "/birmingham/prices" : "/prices"}
+            href={pricesUrl}
             // BRAND COLOR LOCK
             className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex items-center gap-2"
           >
@@ -1162,7 +1227,7 @@ export default function SexualHealthClient({
           
           {/* FAQ Link */}
           <Link
-            href={locationName === "Birmingham" ? "/birmingham/faq" : "/faq"}
+            href={faqUrl}
             // BRAND COLOR LOCK
             className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-[#4041d1]/5 bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex items-center gap-2"
           >
