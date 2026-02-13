@@ -39,7 +39,7 @@ const Header = () => {
     
     // SPECIFIC ITEMS
     { 
-      name: "P-Shot® Treatment", 
+      name: "P-Shot Treatment", 
       href: isBirmingham ? "/birmingham/p-shot" : "/p-shot",
       isSubItem: true 
     },
