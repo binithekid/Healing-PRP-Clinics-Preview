@@ -11,6 +11,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // 1. High Priority: Main Landing Pages
     { url: "", priority: 1.0 },
     { url: "/sexual-rejuvenation", priority: 0.9 },
+    
+    // ✅ NEW ST ALBANS PAGES (High Priority)
+    { url: "/p-shot", priority: 0.95 },
+    { url: "/erectile-dysfunction", priority: 0.95 },
+
     { url: "/peyronies-disease", priority: 0.9 },
     { url: "/premature-ejaculation", priority: 0.9 },
     { url: "/hair-restoration", priority: 0.9 },
@@ -19,10 +24,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     
     // 2. Birmingham Location Pages (Men's Health)
     { url: "/birmingham/sexual-rejuvenation", priority: 0.85 },
+    
+    // ✅ NEW BIRMINGHAM PAGES (High Priority)
+    { url: "/birmingham/p-shot", priority: 0.9 },
+    { url: "/birmingham/erectile-dysfunction", priority: 0.9 },
+
     { url: "/birmingham/peyronies-disease", priority: 0.85 },
     { url: "/birmingham/premature-ejaculation", priority: 0.85 },
 
-    // 3. ✅ ADDED: Birmingham Location Pages (Face, Hair, Joints)
+    // 3. Birmingham Location Pages (Face, Hair, Joints)
     { url: "/birmingham/hair-restoration", priority: 0.85 },
     { url: "/birmingham/facial-aesthetics", priority: 0.85 },
     { url: "/birmingham/joint-injections", priority: 0.85 },
