@@ -18,8 +18,9 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
       items: [
         { name: "Polynucleotides", price: "From £150", sessions: "1-3 sessions", details: "Advanced skin repair & hydration" },
         { name: "HA Skin Boosters", price: "£250", sessions: "2-3 sessions", details: "Deep hydration & glow" },
+        { name: "Exosome-Enhanced Skin Regeneration", price: "£375", sessions: "Course of 3: £1100", details: "Advanced cellular repair & skin revitalisation" },
         { name: "PRP Microneedling", price: "£150", sessions: "2-3 sessions", details: "Texture & acne scar support" },
-        { name: "Vampire Facial", price: "£550", sessions: "Course of 3: £1500", details: "Full face regeneration" },
+        { name: "Vampire Facial", price: "£400", sessions: "Course of 3: £1150", details: "Full face regeneration" },
         { name: "Botox (3 Areas)", price: "£200", sessions: "Single", details: "Anti-wrinkle injections" },
       ]
     },
