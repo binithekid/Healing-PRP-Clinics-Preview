@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
   alternates: {
     // NOTE: Ensures Google knows this is the Birmingham specific page
-    canonical: "https://healing-practice.co.uk/birmingham/erectile-dysfunction",
+    canonical: "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
   },
 
   keywords: [
