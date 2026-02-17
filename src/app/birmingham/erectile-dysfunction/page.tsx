@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: "Erectile Dysfunction Treatment | Birmingham & Midlands",
     description:
       "Confidential, doctor-led ED treatments in Birmingham. Shockwave & PRP therapy. Conveniently serving Edgbaston, Solihull & Sutton Coldfield.",
-    url: "https://healing-practice.co.uk/birmingham/erectile-dysfunction",
+    url: "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
