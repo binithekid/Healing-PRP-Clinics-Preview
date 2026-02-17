@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     // NOTE: Ensure this matches your actual live domain
-    canonical: "https://healing-practice.co.uk/birmingham/p-shot",
+    canonical: "https://www.healing-prp.co.uk/birmingham/p-shot",
   },
   openGraph: {
     title: "P-Shot Treatment (Priapus Shot) | Birmingham",
