@@ -4,7 +4,7 @@ import PShotClient from "@/components/pages/PShotClient";
 export const metadata: Metadata = {
   title: {
     // Strong, location-first title for Google ranking
-    absolute: "P-Shot Treatment Birmingham | Priapus Shot® | Healing-PRP",
+    absolute: "P-Shot Birmingham | Doctor-Led PRP (Priapus Shot®) | Healing-PRP Clinics",
   },
   description:
     "Official P-Shot® (Priapus Shot) clinic in Birmingham. GMC-registered doctor offering PRP & Exo-P therapy for erectile rejuvenation. Private clinic in Edgbaston.",
