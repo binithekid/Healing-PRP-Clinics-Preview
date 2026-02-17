@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "P-Shot Treatment (Priapus Shot) | Birmingham",
     description: "Doctor-led P-Shot & Exo-P clinic in Birmingham. Advanced PRP therapy for performance and rejuvenation.",
-    url: "https://healing-practice.co.uk/birmingham/p-shot",
+    url: "https://www.healing-prp.co.uk/birmingham/p-shot",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
