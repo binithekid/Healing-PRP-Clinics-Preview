@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "Doctor-Led PRP & ED Treatments St Albans",
   
   description:
-    "Doctor-led St Albans clinic for PRP Hair, Facial Aesthetics, Joint Injections, P-Shot, O-Shot & ED. Serving Luton & Hertfordshire."
+    "Doctor-led St Albans clinic for PRP Hair, Facial Aesthetics, Joint Injections, P-Shot, O-Shot & ED. Serving Luton & Hertfordshire.",
     
   keywords: [
     "PRP Clinic St Albans",
