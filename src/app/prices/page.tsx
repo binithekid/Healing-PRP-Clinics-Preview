@@ -14,16 +14,32 @@ export const metadata: Metadata = {
 
   // 2. Expanded Local & Pricing Keywords
   keywords: [
-    "PRP treatment cost St Albans",
-    "Hair restoration prices Hertfordshire",
-    "Joint injection cost Harpenden",
+    // --- MEN'S HEALTH & ED ---
+    "ED treatment cost St Albans",
+    "Personalised ED medication prices Hertfordshire",
     "P-Shot price Watford",
+    
+    // --- WOMEN'S HEALTH ---
     "O-Shot cost Radlett",
+    
+    // --- HAIR RESTORATION ---
+    "Hair restoration prices Hertfordshire",
+    "Affordable PRP hair loss North London",
+    "Hair regrowth course price St Albans",
+    
+    // --- JOINT PAIN ---
+    "Joint injection cost Harpenden",
+    "Regenerative joint therapy cost Berkhamsted",
+    
+    // --- SKIN & AESTHETICS ---
     "Vampire Facial price list St Albans",
-    "Private doctor consultation fees",
     "Polynucleotide treatment cost Hemel Hempstead",
-    "Affordable PRP therapy North London",
-    "Regenerative medicine prices Berkhamsted"
+    "Polynucleotide package cost Hertfordshire",
+    
+    // --- GENERAL CLINIC INTENT ---
+    "PRP treatment cost St Albans",
+    "Private doctor consultation fees",
+    "Regenerative medicine prices North London"
   ],
 
   openGraph: {
