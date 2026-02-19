@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PricesClient from "@/components/pages/PricesClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Optimized Title: Result will be "Treatment Prices & Packages | Birmingham Clinic"
@@ -13,17 +14,31 @@ export const metadata: Metadata = {
 
   // 2. Expanded Local & Intent-Based Keywords
   keywords: [
-    "PRP treatment cost Birmingham",
+    // --- MEN'S HEALTH & ED ---
+    "ED treatment cost Birmingham",
+    "Erectile dysfunction clinic prices West Midlands",
+    "Personalised ED medication cost",
     "P-Shot price West Midlands",
+    
+    // --- WOMEN'S HEALTH ---
     "O-Shot cost Solihull",
+    
+    // --- HAIR RESTORATION ---
     "Affordable PRP hair loss Sutton Coldfield",
+    "Hair regrowth course price West Midlands",
+    
+    // --- JOINT PAIN ---
     "Joint injection prices Wolverhampton",
-    "Vampire Facial cost Harborne",
+    "Joint pain therapy cost Dudley",
+    
+    // --- SKIN & AESTHETICS ---
     "Polynucleotides price Birmingham",
+    "Polynucleotide package cost West Midlands", 
+    "Vampire Facial cost Harborne",
+    
+    // --- GENERAL CLINIC INTENT ---
     "Private clinic prices Edgbaston",
-    "PRP treatment packages Birmingham", // Added: targets users looking for courses
-    "Hair regrowth course price West Midlands", // Added
-    "Joint pain therapy cost Dudley" // Added
+    "PRP treatment packages Birmingham"
   ],
 
   openGraph: {
@@ -36,6 +51,31 @@ export const metadata: Metadata = {
   },
 };
 
+// 3. The Local SEO Schema for Birmingham
+const priceSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": "Healing-PRP Clinics Birmingham",
+  "priceRange": "£120 - £1800",
+  "image": "https://www.healing-prp.co.uk/Logo2.png",
+  "description": "Doctor-led regenerative medicine prices for Birmingham, Edgbaston, and the West Midlands.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Birmingham",
+    "addressRegion": "West Midlands",
+    "addressCountry": "UK"
+  }
+};
+
 export default function BirminghamPricesPage() {
-  return <PricesClient isBirmingham={true} />;
+  return (
+    <>
+      <Script
+        id="price-schema-birmingham"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(priceSchema) }}
+      />
+      <PricesClient isBirmingham={true} />
+    </>
+  );
 }
