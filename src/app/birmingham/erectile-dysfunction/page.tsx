@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ErectileDysfunctionClient from "@/components/pages/ErectileDysfunctionClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
@@ -16,28 +17,30 @@ export const metadata: Metadata = {
   },
 
   keywords: [
-    // Core Birmingham Keywords
+    // --- CORE BIRMINGHAM KEYWORDS ---
     "Erectile dysfunction treatment Birmingham",
     "ED clinic Birmingham",
     "P-Shot Birmingham",
     "Shockwave therapy Birmingham",
     
-    // Hidden Reach Keywords (Manchester / Midlands)
+    // --- HIDDEN REACH KEYWORDS (Manchester / Midlands) ---
     "Mens health clinic Manchester",
     "ED treatment Manchester",
     "Erectile dysfunction clinic Midlands",
     "Shockwave therapy West Midlands",
     
-    // Hyper-Local Keywords
+    // --- HYPER-LOCAL KEYWORDS ---
     "Private ED clinic Edgbaston",
     "Erectile dysfunction clinic Solihull",
     "ED treatment Sutton Coldfield",
     
-    // Intent Keywords
+    // --- INTENT & COST KEYWORDS ---
     "Non-surgical impotence treatment",
     "GMC registered male health doctor",
     "Male performance clinic Birmingham",
-    "Private impotence doctor West Midlands"
+    "Private impotence doctor West Midlands",
+    "ED treatment cost Birmingham",
+    "Erectile dysfunction clinic consultation West Midlands"
   ],
 
   openGraph: {
@@ -59,17 +62,52 @@ export const metadata: Metadata = {
   },
 };
 
+// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
+const edSchemaBirmingham = [
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "name": "Healing-PRP Clinics Birmingham",
+    "description": "Specialist erectile dysfunction clinic in Birmingham offering Shockwave Therapy and PRP.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Birmingham",
+      "addressRegion": "West Midlands",
+      "addressCountry": "UK"
+    },
+    "medicalSpecialty": "Urology"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalTherapy",
+    "name": "Erectile Dysfunction Treatment",
+    "alternateName": ["Shockwave Therapy for ED", "P-Shot®", "PRP for ED"],
+    "description": "Non-surgical, restorative treatments for erectile dysfunction including Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT) and Platelet-Rich Plasma (P-Shot) in Birmingham.",
+    "relevantSpecialty": {
+      "@type": "MedicalSpecialty",
+      "name": "Urology"
+    }
+  }
+];
+
 export default function BirminghamEDPage() {
   return (
-    <ErectileDysfunctionClient 
-      // 1. HEADLINE: "Healing-PRP Clinics, Birmingham"
-      locationName="Birmingham"
-      
-      // 2. BADGE: Local catchment areas
-      servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
-      
-      // 3. LINK: Points to your BIRMINGHAM P-Shot page (crucial for navigation)
-      pShotLink="/birmingham/p-shot"
-    />
+    <>
+      <Script
+        id="ed-schema-birmingham"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(edSchemaBirmingham) }}
+      />
+      <ErectileDysfunctionClient 
+        // 1. HEADLINE: "Healing-PRP Clinics, Birmingham"
+        locationName="Birmingham"
+        
+        // 2. BADGE: Local catchment areas
+        servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
+        
+        // 3. LINK: Points to your BIRMINGHAM P-Shot page (crucial for navigation)
+        pShotLink="/birmingham/p-shot"
+      />
+    </>
   );
 }
