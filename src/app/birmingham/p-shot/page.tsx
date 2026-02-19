@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PShotClient from "@/components/pages/PShotClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
@@ -57,12 +58,47 @@ export const metadata: Metadata = {
   },
 };
 
+// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
+const pShotSchemaBirmingham = [
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "name": "Healing-PRP Clinics Birmingham",
+    "description": "Doctor-led clinic in Edgbaston, Birmingham providing the official P-Shot® (Priapus Shot) and advanced Exo-P male rejuvenation therapies.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Birmingham",
+      "addressRegion": "West Midlands",
+      "addressCountry": "UK"
+    },
+    "medicalSpecialty": ["Urology", "Men's Health"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalTherapy",
+    "name": "P-Shot® (Priapus Shot) & Exo-P Shot",
+    "alternateName": ["Platelet-Rich Plasma (PRP) Male Rejuvenation", "Exosome Penile Therapy", "Peyronie's Disease PRP Treatment"],
+    "description": "Advanced autologous Platelet-Rich Plasma (PRP) and Exosome injection therapies designed to improve penile health, tissue regeneration, blood flow, and treat conditions like Peyronie's disease and Erectile Dysfunction in Birmingham.",
+    "relevantSpecialty": {
+      "@type": "MedicalSpecialty",
+      "name": "Urology"
+    }
+  }
+];
+
 export default function BirminghamPShotPage() {
   return (
-    <PShotClient
-      // Passes "Birmingham" so the text changes from "St Albans"
-      locationName="Birmingham"
-      servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
-    />
+    <>
+      <Script
+        id="pshot-schema-birmingham"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pShotSchemaBirmingham) }}
+      />
+      <PShotClient
+        // Passes "Birmingham" so the text changes from "St Albans"
+        locationName="Birmingham"
+        servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
+      />
+    </>
   );
 }
