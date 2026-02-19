@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import Link from "next/link"; // IMPORTANT: Added this import
+import Link from "next/link";
 import Hero from "@/components/Hero";
 import ServiceOverview from "@/components/ServiceOverview";
 import PRPExplanationSection from "@/components/PRPExplanationSection";
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   title: "Doctor-Led PRP & ED Treatments St Albans",
   
   description:
-    "Private specialist clinic in St Albans. Expert doctor-led treatments for PRP Hair Restoration, Joint Pain injections, P-Shot®, O-Shot® & ED solutions. Serving Hertfordshire, London, Watford & Harpenden.",
-  
+    "Doctor-led St Albans clinic for PRP Hair, Facial Aesthetics, Joint Injections, P-Shot, O-Shot & ED. Serving Luton & Hertfordshire."
+    
   keywords: [
     "PRP Clinic St Albans",
     "Private Doctor Hertfordshire",
@@ -36,9 +36,10 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "Healing-PRP Clinics | St Albans & Birmingham",
+    // UPDATED: Removed Birmingham to keep the local SEO strictly focused on the St Albans clinic
+    title: "Healing-PRP Clinics | St Albans",
     description:
-      "Doctor-led private care for Hair Restoration, Sexual Wellness & Pain Relief. Specialists in P-Shot and PRP therapy.",
+      "Doctor-led private care for Hair Restoration, Sexual Wellness & Pain Relief in St Albans and Hertfordshire. Specialists in P-Shot and PRP therapy.",
     url: "https://www.healing-prp.co.uk",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
         url: "/hero_img.png",
         width: 1200,
         height: 630,
-        alt: "Healing-PRP Clinics - Regenerative Medicine Specialists",
+        alt: "Healing-PRP Clinics - Regenerative Medicine Specialists St Albans", // Updated alt text
       },
     ],
   },
@@ -81,7 +82,7 @@ export default function Home() {
       "latitude": 51.7527, 
       "longitude": -0.3394
     },
-    "medicalSpecialty": ["RegenerativeMedicine", "Urology", "Orthopaedic", "Dermatology"],
+    "medicalSpecialty": ["Regenerative Medicine", "Urology", "Orthopaedics", "Dermatology"],
     "priceRange": "££",
     "openingHoursSpecification": [
       {
@@ -112,7 +113,8 @@ export default function Home() {
             {/* Prices Link */}
             <Link
               href="/prices"
-              className="px-8 py-3.5 w-full md:w-max flex items-center justify-center text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg active:scale-95 gap-2"
+              // Synced to Brand Color #4041d1
+              className="px-8 py-3.5 w-full md:w-max flex items-center justify-center text-sm bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all shadow-lg active:scale-95 gap-2"
             >
               View Treatment Prices
             </Link>
@@ -120,7 +122,8 @@ export default function Home() {
             {/* FAQ Link */}
             <Link
               href="/faq"
-              className="px-8 py-3.5 w-full md:w-max flex items-center justify-center text-sm border-2 border-blue-600 text-blue-600 hover:bg-blue-50 bg-white rounded-xl font-bold transition-all active:scale-95 gap-2"
+              // Synced to Brand Color #4041d1
+              className="px-8 py-3.5 w-full md:w-max flex items-center justify-center text-sm border-2 border-[#4041d1] text-[#4041d1] hover:bg-blue-50 bg-white rounded-xl font-bold transition-all active:scale-95 gap-2"
             >
               View Clinic FAQs
             </Link>
