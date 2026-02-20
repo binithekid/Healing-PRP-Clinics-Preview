@@ -30,7 +30,16 @@ const Header = () => {
   }, [isMenuOpen]);
 
   const menuItems: MenuItem[] = [
+    // MAIN CATEGORY
     { name: "Facial Aesthetics", href: isBirmingham ? "/birmingham/facial-aesthetics" : "/facial-aesthetics" },
+    
+    // NEW SPECIFIC ITEM
+    { 
+      name: "Polynucleotides", 
+      href: isBirmingham ? "/birmingham/polynucleotides" : "/polynucleotides",
+      isSubItem: true 
+    },
+
     { name: "Joint Injections", href: isBirmingham ? "/birmingham/joint-injections" : "/joint-injections" },
     { name: "Hair Restoration", href: isBirmingham ? "/birmingham/hair-restoration" : "/hair-restoration" },
     
@@ -58,7 +67,7 @@ const Header = () => {
       isContact: true 
     },
   ];
-
+  
   return (
     <>
       <header className="sticky top-0 left-0 right-0 z-50 bg-[#0f172a] border-b border-white/10 shadow-lg">
