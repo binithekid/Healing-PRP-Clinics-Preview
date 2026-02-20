@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import PRPExplanationSection from "@/components/PRPExplanationSection";
 import FAQSection from "@/components/FAQSection";
 import LocationSection from "@/components/LocationSection";
+import TrustReviews from "@/components/TrustReviews";
 
 export default function BirminghamHomeClient() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -187,6 +188,8 @@ export default function BirminghamHomeClient() {
       </section>
 
       <FAQSection />
+
+      <TrustReviews widgetUrl="https://cdn.trustindex.io/loader.js?e2cf4a365239367f2a3607c0513" />
 
       <div id="contact-form-section" className="contain-layout">
         <ContactCTASection />
