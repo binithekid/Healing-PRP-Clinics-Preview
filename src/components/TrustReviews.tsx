@@ -44,7 +44,7 @@ export default function TrustReviews({ widgetUrl }: TrustReviewsProps) {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-4xl font-raleway font-bold text-slate-900"
           >
-            Trusted by men across the UK
+            Trusted by patients across the UK
           </motion.h2>
         </div>
 
