@@ -133,7 +133,7 @@ export default function Home() {
 
         <FAQSection />
 
-        <TrustReviews widgetUrl="https://cdn.trustindex.io/loader.eb147a565c3c36945f26281e586" />
+        <TrustReviews widgetUrl="https://cdn.trustindex.io/loader.js?eb147a565c3c36945f26281e586" />
 
         <ContactCTASection />
         <LocationSection />
