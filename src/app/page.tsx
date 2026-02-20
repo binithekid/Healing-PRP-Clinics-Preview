@@ -8,6 +8,7 @@ import FAQSection from "@/components/FAQSection";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
 import Footer from "@/components/Footer";
+import TrustReviews from "@/components/TrustReviews";
 
 // --- SEO OPTIMISATION ---
 export const metadata: Metadata = {
@@ -131,6 +132,9 @@ export default function Home() {
         </section>
 
         <FAQSection />
+
+        <TrustReviews widgetUrl="https://cdn.trustindex.io/loader.eb147a565c3c36945f26281e586" />
+
         <ContactCTASection />
         <LocationSection />
       </main>
