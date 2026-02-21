@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import { useState, useEffect } from "react";
 import {
   FaCheck,
   FaChevronDown,
@@ -10,14 +10,19 @@ import {
   FaMinus,
   FaEnvelope,
   FaArrowRight,
+  FaGoogle,
+  FaStar,
+  FaLock,
+  FaMapMarkerAlt
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
+import LocationSection from "@/components/LocationSection";
+import TrustReviews from "@/components/TrustReviews";
 import Link from "next/link";
-import Image from "next/image"; // Added for optimized images
+import Image from "next/image";
 
 // --- TYPES ---
-// This interface defines the shape of our data, making @ts-ignore unnecessary
 interface Treatment {
   name: string;
   price: string;
@@ -25,8 +30,8 @@ interface Treatment {
   benefits: string[];
   duration: string;
   course: string;
-  pageLink?: string;     // Optional: Only some treatments have this
-  pageLinkText?: string; // Optional
+  pageLink?: string;     
+  pageLinkText?: string; 
   expandedContent: {
     howItWorks: string;
     whoIsItFor: string[];
@@ -43,6 +48,7 @@ export default function SexualHealthClient({
 }: SexualHealthClientProps) {
   const [expandedTreatment, setExpandedTreatment] = useState<string | null>(null);
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // --- DYNAMIC LINKS BASED ON LOCATION ---
   const isBirmingham = locationName === "Birmingham";
@@ -57,10 +63,29 @@ export default function SexualHealthClient({
     ? "Solihull, Edgbaston, Sutton Coldfield, and the West Midlands"
     : "Harpenden, Watford, Welwyn Garden City, Hitchin, Luton, Hertford, and London";
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setIsLoaded(true);
+  }, []);
+
   const toggleFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
   
+  // --- ANIMATION VARIANTS ---
+  const fadeUpVariants: Variants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        delay: i * 0.15,
+        ease: "easeOut",
+      },
+    }),
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -96,7 +121,6 @@ export default function SexualHealthClient({
       ],
       duration: "30–45 minutes",
       course: "Up to 3 injections",
-      // LINK TO NEW P-SHOT PAGE
       pageLink: pShotUrl,
       pageLinkText: "View Full P-Shot Details",
       expandedContent: {
@@ -145,7 +169,6 @@ export default function SexualHealthClient({
       ],
       duration: "~60 minutes",
       course: "Up to 3 injections",
-      // LINK TO NEW P-SHOT PAGE
       pageLink: pShotUrl,
       pageLinkText: "View Exomine P-Shot Details",
       expandedContent: {
@@ -303,88 +326,166 @@ export default function SexualHealthClient({
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image - Optimized with Next.js Image */}
+      {/* --- HERO SECTION --- */}
+      <div className="relative md:h-[calc(100vh-4rem)] pb-5 md:pb-0 lg:h-[calc(100vh-5rem)] overflow-hidden flex items-center justify-center bg-black">
+        {/* Background Section */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white z-10" />
+          <div className="absolute inset-0 bg-black/60 z-10" /> 
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80 z-10" />
           <Image
             src="/hero_img.png"
             alt="Sexual Rejuvenation Background"
             fill
             className="object-cover"
-            priority // Loads this image first for better performance (LCP)
+            priority
           />
         </div>
 
-        {/* Hero Content */}
-        <div className="relative w-full z-20 mt-10 md:mt-0 flex h-full">
-          <div className="w-full flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <div className="text-white">
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={containerVariants}
-              >
-                <motion.div
-                  // BRAND COLOR LOCK: Light blue background, brand text
-                  className="inline-flex gap-1 px-4 py-2 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-inter font-bold mb-4 uppercase tracking-wider"
-                  variants={itemVariants}
-                >
-                  GMC‑registered | CE‑marked equipment{" "}
-                  <span className="hidden md:block">| Confidential</span>
-                </motion.div>
+        {/* Main Content */}
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 pb-20">
+          
+          <motion.div 
+            custom={1}
+            initial="hidden"
+            animate={isLoaded ? "visible" : "hidden"}
+            variants={fadeUpVariants}
+            className="inline-flex gap-1 px-4 py-2 bg-white/10 text-blue-100 border border-white/20 rounded-full text-xs font-inter font-bold mb-6 uppercase tracking-wider backdrop-blur-sm"
+          >
+            GMC‑registered | CE‑marked equipment <span className="hidden md:block">| Confidential</span>
+          </motion.div>
 
-               <motion.h1
-                  className="text-2xl lg:text-4xl text-slate-900 font-raleway font-bold leading-snug mb-2"
-                  variants={itemVariants}
-                >
-                  Sexual Rejuvenation & Natural Regeneration in {locationName}
-                  {/* "block" forces this span to start on a new line */}
-                  <span className="block mt-1">Healing-PRP Clinics</span>
-                </motion.h1>
+          <motion.h1 
+            custom={2}
+            initial="hidden"
+            animate={isLoaded ? "visible" : "hidden"}
+            variants={fadeUpVariants}
+            className="md:text-5xl text-3xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
+          >
+            Sexual Rejuvenation & Natural Regeneration in {locationName}
+            <span className="block mt-2 text-white/90">
+              Healing-PRP Clinics
+            </span>
+          </motion.h1>
 
-                <motion.p
-                  className="md:text-base text-xs font-inter text-slate-600 leading-relaxed max-w-3xl"
-                  variants={itemVariants}
-                >
-                  Patient-centred, non-surgical solutions to support confidence,
-                  sensitivity and intimacy — delivered by a fully insured,
-                  GMC-registered doctor in {locationName}.
-                </motion.p>
-                <motion.div
-                  variants={itemVariants}
-                  className={`flex flex-col items-center md:items-start mb-10 md:mb-0 mt-6 sm:flex-row gap-4`}
-                >
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.dispatchEvent(new CustomEvent("open-contact-drawer"));
-                      const section = document.getElementById("contact-form-section");
-                      if (section) section.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    // BRAND COLOR LOCK: #4041d1 with hover #2a2bb8
-                    className="px-8 py-3.5 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-inter font-bold transition-all duration-300 shadow-xl shadow-blue-500/25 gap-2 group"
-                  >
-                    <FaEnvelope className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                    Book Consultation
-                  </button>
-                  {/* Empty space to maintain line count if needed */}
-                  <div className="hidden"></div>
-                  <div className="hidden"></div>
-                  <div className="hidden"></div>
-                  <div className="hidden"></div>
-                  <div className="hidden"></div>
-                </motion.div>
-              </motion.div>
+          <motion.p 
+            custom={3}
+            initial="hidden"
+            animate={isLoaded ? "visible" : "hidden"}
+            variants={fadeUpVariants}
+            className="mt-4 text-sm md:text-base text-white/80 font-inter leading-relaxed max-w-3xl mx-auto mb-8"
+          >
+            Patient-centred, non-surgical solutions to support confidence,
+            sensitivity and intimacy — delivered by a fully insured,
+            GMC-registered doctor in {locationName}.
+          </motion.p>
+
+          <motion.div 
+            custom={4}
+            initial="hidden"
+            animate={isLoaded ? "visible" : "hidden"}
+            variants={fadeUpVariants}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent("open-contact-drawer"));
+                const section = document.getElementById("contact-form-section");
+                if (section) section.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="px-10 py-3.5 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-xl shadow-[#4041d1]/20 active:scale-95 font-inter group"
+            >
+              <FaEnvelope className="w-4 h-4 group-hover:rotate-12 transition-transform" /> 
+              Book Consultation
+            </button>
+          </motion.div>
+
+          <motion.div 
+            custom={5}
+            initial="hidden"
+            animate={isLoaded ? "visible" : "hidden"}
+            variants={fadeUpVariants}
+            className="inline-flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 px-6 py-3 bg-[#4041d1] text-white rounded-2xl sm:rounded-full text-[10px] md:text-xs mt-8 font-bold uppercase tracking-widest font-inter shadow-lg border border-white/10 max-w-[90%] mx-auto text-center"
+          >
+             <div className="flex items-center gap-1.5 text-white/80">
+               <FaMapMarkerAlt className="w-3 h-3" /> 
+               <span>Serving:</span>
+             </div>
+             <span className="leading-relaxed">{nearbyAreas}</span>
+          </motion.div>
+        </div>
+
+        {/* --- HERO TRUST BADGES (LOWER BORDER) --- */}
+        <div className={`md:block absolute hidden bottom-0 left-0 right-0 bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div className="px-2 py-4 max-w-7xl mx-auto">
+            <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
+              
+              {/* 1. Google 5-Star Link */}
+              <a href="#reviews" onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
+              }} className="flex justify-center items-center group cursor-pointer px-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#4285F4] group-hover:scale-110 transition-transform shadow-md">
+                    <FaGoogle className="w-4 h-4" />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <div className="flex text-amber-400 text-[10px] mb-0.5">
+                      <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                    </div>
+                    <span className="text-white text-[9px] font-bold tracking-widest uppercase opacity-90 group-hover:opacity-100 font-inter">
+                      5.0 Patient Rating
+                    </span>
+                  </div>
+                </div>
+              </a>
+
+              {/* 2. Experience Badge */}
+              <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-[#4041d1] rounded-full flex items-center justify-center text-white font-bold text-[12px] shadow-md border border-white/10">
+                    10+
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Years</span>
+                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Experience</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. GMC Badge */}
+              <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-[#1f3a68] rounded-full flex items-center justify-center text-white font-bold text-[11px] shadow-md border border-white/10">
+                    GMC
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Registered</span>
+                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctors</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Privacy & Discreet Care */}
+              <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center text-slate-300 shadow-md border border-white/10">
+                    <FaLock className="w-3.5 h-3.5" />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Strictly 1:1</span>
+                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Discreet Care</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-      </section>
+      </div>
       
       {/* Navigation */}
       <section className="py-8 border-b border-t shadow-xs border-slate-100 relative">
-        {/* Background Elements */}
         <div className="absolute inset-0 z-0">
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-white to-gray-50"></div>
         </div>
@@ -530,7 +631,6 @@ export default function SexualHealthClient({
                 Book Consultation
               </button>
 
-              {/* NEW BUTTON: Link to the Dedicated ED Page */}
               <Link
                 href={edUrl}
                 className="px-6 py-3 w-max text-sm cursor-pointer bg-white border border-[#4041d1] text-[#4041d1] hover:bg-blue-50 rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2"
@@ -544,8 +644,6 @@ export default function SexualHealthClient({
       </section>
       
       <section className="py-12 lg:py-16 relative">
-        {/* Background Elements */}
-
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -591,10 +689,8 @@ export default function SexualHealthClient({
                 href="/blog"
                 target="_blank"
                 rel="noopener noreferrer"
-                // BRAND COLOR LOCK
                 className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2"
               >
-                {/* Using FaCheck instead of BookOpen to avoid the error */}
                 <FaCheck className="w-4 h-4" /> 
                 Read More
               </Link>
@@ -662,8 +758,6 @@ export default function SexualHealthClient({
       </section>
 
       <section className="py-12 lg:py-16 relative">
-        {/* Background Elements */}
-
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -710,7 +804,6 @@ export default function SexualHealthClient({
                 rel="noopener noreferrer"
                 className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2"
               >
-                {/* Using FaCheck instead of BookOpen to avoid the error */}
                 <FaCheck className="w-4 h-4" /> 
                 Read More
               </Link>
@@ -785,7 +878,6 @@ export default function SexualHealthClient({
             <motion.div variants={itemVariants}>
               <Link
                 href="/premature-ejaculation"
-                // BRAND COLOR LOCK
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300"
               >
                 Learn More
@@ -816,7 +908,7 @@ export default function SexualHealthClient({
               className="text-sm font-inter text-slate-600 mb-8 max-w-4xl leading-relaxed"
               variants={itemVariants}
             >
-              Peyronie&apos;s Disease Disease occurs when fibrous scar tissue
+              Peyronie&apos;s Disease occurs when fibrous scar tissue
               (plaques) forms in the tunica albuginea, causing penile curvature,
               indentation, pain, and sometimes shortening. It often follows
               micro‑trauma; in many cases, the cause is unclear. Emotional
@@ -870,7 +962,6 @@ export default function SexualHealthClient({
             <motion.div variants={itemVariants}>
               <Link
                 href="/peyronies-disease"
-                // BRAND COLOR LOCK
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300"
               >
                 Learn More
@@ -966,7 +1057,6 @@ export default function SexualHealthClient({
                             section.scrollIntoView({ behavior: "smooth" });
                           }
                         }}
-                        // BRAND COLOR LOCK
                         className="inline-flex items-center text-sm gap-2 mt-6 px-8 py-3.5 bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-inter font-bold transition-all duration-300 shadow-lg shadow-blue-500/20 group"
                         whileTap={{ scale: 0.95 }}
                       >
@@ -974,20 +1064,17 @@ export default function SexualHealthClient({
                         Book Consultation
                       </motion.button>
                       
-                      {/* NEW BUTTON: Optional "View Full Details" link if this treatment has one */}
+                      {/* Optional "View Full Details" link */}
                       {treatment.pageLink && (
                         <div className="mt-4 pt-4 border-t border-slate-100">
                            <Link 
                               href={treatment.pageLink}
                               className="inline-flex items-center gap-2 text-[#4041d1] font-bold text-sm hover:underline"
                            >
-                             {treatment.pageLinkText} <FaArrowRight className="w-3 h-3" />
+                              {treatment.pageLinkText} <FaArrowRight className="w-3 h-3" />
                            </Link>
                         </div>
                       )}
-
-                      {/* Empty space to maintain tag alignment */}
-                      <div className="hidden"></div>
                     </div>
                   </div>
 
@@ -1216,19 +1303,14 @@ export default function SexualHealthClient({
      {/* Reusable CTA Bar */}
       <section className="py-12 bg-white border-t border-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-center items-center gap-4">
-          {/* Prices Link */}
           <Link
             href={pricesUrl}
-            // BRAND COLOR LOCK
             className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex items-center gap-2"
           >
             View Treatment Prices
           </Link>
-          
-          {/* FAQ Link */}
           <Link
             href={faqUrl}
-            // BRAND COLOR LOCK
             className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-[#4041d1]/5 bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex items-center gap-2"
           >
             View Clinic FAQs
@@ -1280,7 +1362,6 @@ export default function SexualHealthClient({
                   className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
                   variants={itemVariants}
                 >
-                  {/* Question */}
                   <motion.button
                     className="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50 transition-colors duration-300"
                     onClick={() => toggleFAQ(index)}
@@ -1314,8 +1395,6 @@ export default function SexualHealthClient({
                       </motion.div>
                     </motion.div>
                   </motion.button>
-
-                  {/* Answer */}
                   <AnimatePresence>
                     {openFAQIndex === index && (
                       <motion.div
@@ -1342,8 +1421,22 @@ export default function SexualHealthClient({
         </div>
       </section>
 
+      {/* --- GOOGLE REVIEWS SECTION --- */}
+      <div id="reviews-section">
+        <TrustReviews 
+          widgetUrl={
+            isBirmingham 
+              ? "https://cdn.trustindex.io/loader.js?e2cf4a365239367f2a3607c0513" 
+              : "https://cdn.trustindex.io/loader.js?eb147a565c3c36945f26281e586"
+          } 
+        />
+      </div>
+
       {/* Contact Section */}
-      <ContactCTASection />
+      <div id="contact-form-section" className="contain-layout">
+        <ContactCTASection />
+        <LocationSection />
+      </div>
 
       <Footer />
     </>
