@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
-import { FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { 
+  FaEnvelope, 
+  FaMapMarkerAlt, 
+  FaGoogle, 
+  FaStar, 
+  FaLock 
+} from "react-icons/fa";
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -114,23 +120,70 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Feature Banner - Height Refined */}
+      {/* --- HERO TRUST BADGES (LOWER BORDER) --- */}
       <div className={`md:block absolute hidden bottom-0 left-0 right-0 bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-        <div className="px-4 py-5">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-4 gap-4">
-              {[
-                { label: "GMC-registered doctor", sub: "Over 10 years experience" },
-                { label: "Drug-free options", sub: "Natural PRP Treatments" },
-                { label: "Discreet location", sub: "St Albans & Birmingham" },
-                { label: "Private consultations", sub: "Strictly 1:1 Care" }
-              ].map((item, idx) => (
-                <div key={idx} className={`text-center ${idx !== 3 ? 'border-r border-white/10' : ''}`}>
-                  <div className="text-white font-bold text-[10px] md:text-xs uppercase tracking-widest mb-1 font-inter">{item.label}</div>
-                  <div className="text-blue-300 text-[10px] md:text-[11px] font-semibold font-inter">{item.sub}</div>
+        <div className="px-2 py-4 max-w-7xl mx-auto">
+          <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
+            
+            {/* 1. Google 5-Star Link */}
+            <a href="#reviews" onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
+            }} className="flex justify-center items-center group cursor-pointer px-2">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#4285F4] group-hover:scale-110 transition-transform shadow-md">
+                  <FaGoogle className="w-4 h-4" />
                 </div>
-              ))}
+                <div className="flex flex-col items-start">
+                  <div className="flex text-amber-400 text-[10px] mb-0.5">
+                    <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                  </div>
+                  <span className="text-white text-[9px] font-bold tracking-widest uppercase opacity-90 group-hover:opacity-100 font-inter">
+                    5.0 Patient Rating
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            {/* 2. CQC Badge */}
+            <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 bg-[#8b2346] rounded-full flex items-center justify-center text-white font-bold text-[10px] shadow-md border border-white/10">
+                  CQC
+                </div>
+                <div className="flex flex-col items-start">
+                  <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Regulated</span>
+                  <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Provider</span>
+                </div>
+              </div>
             </div>
+
+            {/* 3. GMC Badge */}
+            <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 bg-[#1f3a68] rounded-full flex items-center justify-center text-white font-bold text-[11px] shadow-md border border-white/10">
+                  GMC
+                </div>
+                <div className="flex flex-col items-start">
+                  <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Registered</span>
+                  <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctors</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 4. Privacy & Discreet Care */}
+            <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center text-slate-300 shadow-md border border-white/10">
+                  <FaLock className="w-3.5 h-3.5" />
+                </div>
+                <div className="flex flex-col items-start">
+                  <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Strictly 1:1</span>
+                  <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Discreet Care</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
