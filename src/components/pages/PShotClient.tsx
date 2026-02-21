@@ -15,16 +15,20 @@ import {
   FaExpandArrowsAlt,
   FaShieldAlt,
   FaArrowRight,
-  FaRegClock, // Time icon
-  FaLeaf,     // Natural/Treatment icon
-  FaWalking,  // Downtime icon
-  FaUserMd,   // Medical icon
-  FaMicroscope, // Added for Exo-P section
-  FaVial,       // Added for Exo-P section
+  FaRegClock, 
+  FaLeaf,     
+  FaWalking,  
+  FaUserMd,   
+  FaMicroscope, 
+  FaVial,
+  FaGoogle,
+  FaStar,
+  FaLock
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
+import TrustReviews from "@/components/TrustReviews";
 
 // --- INTERFACE ---
 interface PShotProps {
@@ -40,6 +44,8 @@ export default function PShotClient({
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [activeStep, setActiveStep] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const isBirmingham = locationName === "Birmingham";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -255,22 +261,70 @@ export default function PShotClient({
           </motion.div>
         </div>
 
+        {/* --- HERO TRUST BADGES (LOWER BORDER) --- */}
         <div className={`md:block absolute hidden bottom-0 left-0 right-0 bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          <div className="px-4 py-5">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-4 gap-4">
-                {[
-                  { label: "GMC-registered doctor", sub: "Specialist Care" },
-                  { label: "100% Natural", sub: "Uses Your Own PRP" },
-                  { label: "Minimal Downtime", sub: "Return to Routine" },
-                  { label: "Private & Confidential", sub: "Strictly 1:1" }
-                ].map((item, idx) => (
-                  <div key={idx} className={`text-center ${idx !== 3 ? 'border-r border-white/10' : ''}`}>
-                    <div className="text-white font-bold text-[10px] md:text-xs uppercase tracking-widest mb-1 font-inter">{item.label}</div>
-                    <div className="text-blue-300 text-[10px] md:text-[11px] font-semibold font-inter">{item.sub}</div>
+          <div className="px-2 py-4 max-w-7xl mx-auto">
+            <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
+              
+              {/* 1. Google 5-Star Link */}
+              <a href="#reviews" onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
+              }} className="flex justify-center items-center group cursor-pointer px-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#4285F4] group-hover:scale-110 transition-transform shadow-md">
+                    <FaGoogle className="w-4 h-4" />
                   </div>
-                ))}
+                  <div className="flex flex-col items-start">
+                    <div className="flex text-amber-400 text-[10px] mb-0.5">
+                      <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                    </div>
+                    <span className="text-white text-[9px] font-bold tracking-widest uppercase opacity-90 group-hover:opacity-100 font-inter">
+                      5.0 Patient Rating
+                    </span>
+                  </div>
+                </div>
+              </a>
+
+              {/* 2. Experience Badge */}
+              <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-[#4041d1] rounded-full flex items-center justify-center text-white font-bold text-[12px] shadow-md border border-white/10">
+                    10+
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Years</span>
+                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Experience</span>
+                  </div>
+                </div>
               </div>
+
+              {/* 3. GMC Badge */}
+              <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-[#1f3a68] rounded-full flex items-center justify-center text-white font-bold text-[11px] shadow-md border border-white/10">
+                    GMC
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Registered</span>
+                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctors</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Privacy & Discreet Care */}
+              <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center text-slate-300 shadow-md border border-white/10">
+                    <FaLock className="w-3.5 h-3.5" />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Strictly 1:1</span>
+                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Discreet Care</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -740,7 +794,7 @@ export default function PShotClient({
 
             {/* 2. Prices Link */}
             <Link
-              href={locationName === "Birmingham" ? "/birmingham/prices" : "/prices"}
+              href={isBirmingham ? "/birmingham/prices" : "/prices"}
               className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg"
             >
               View Treatment Prices
@@ -748,7 +802,7 @@ export default function PShotClient({
             
             {/* 3. FAQ Link */}
             <Link
-              href={locationName === "Birmingham" ? "/birmingham/faq" : "/faq"}
+              href={isBirmingham ? "/birmingham/faq" : "/faq"}
               className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-blue-50 bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2"
             >
               View Clinic FAQs
@@ -809,6 +863,17 @@ export default function PShotClient({
           </div>
         </div>
       </section>
+
+      {/* --- GOOGLE REVIEWS SECTION --- */}
+      <div id="reviews-section">
+        <TrustReviews 
+          widgetUrl={
+            isBirmingham 
+              ? "https://cdn.trustindex.io/loader.js?e2cf4a365239367f2a3607c0513" 
+              : "https://cdn.trustindex.io/loader.js?eb147a565c3c36945f26281e586"
+          } 
+        />
+      </div>
 
       <ContactCTASection />
       
