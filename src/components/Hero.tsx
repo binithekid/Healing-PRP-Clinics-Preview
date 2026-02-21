@@ -145,19 +145,19 @@ export default function Hero() {
               </div>
             </a>
 
-            {/* 2. CQC Badge */}
+            {/* 2. Experience Badge */}
             <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#8b2346] rounded-full flex items-center justify-center text-white font-bold text-[10px] shadow-md border border-white/10">
-                  CQC
+                <div className="w-9 h-9 bg-[#4041d1] rounded-full flex items-center justify-center text-white font-bold text-[12px] shadow-md border border-white/10">
+                  10+
                 </div>
                 <div className="flex flex-col items-start">
-                  <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Regulated</span>
-                  <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Provider</span>
+                  <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Years</span>
+                  <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Experience</span>
                 </div>
               </div>
             </div>
-
+            
             {/* 3. GMC Badge */}
             <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
               <div className="flex items-center gap-3">
@@ -166,7 +166,7 @@ export default function Hero() {
                 </div>
                 <div className="flex flex-col items-start">
                   <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Registered</span>
-                  <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctors</span>
+                  <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctor</span>
                 </div>
               </div>
             </div>
