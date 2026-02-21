@@ -307,7 +307,7 @@ export default function PShotClient({
                   </div>
                   <div className="flex flex-col items-start">
                     <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Registered</span>
-                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctors</span>
+                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctor</span>
                   </div>
                 </div>
               </div>
