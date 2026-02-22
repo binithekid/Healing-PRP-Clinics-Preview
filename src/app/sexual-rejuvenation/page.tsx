@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SexualRejuvenationClient from "@/components/pages/SexualRejuvenationClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Optimized Title: The layout template will add " | St Albans Clinic"
@@ -121,8 +122,36 @@ const faqs = [
   }
 ];
 
+// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (St Albans) ---
+const medicalSchemaStAlbans = [
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "name": "Healing-PRP Clinics St Albans",
+    "description": "Specialist sexual rejuvenation clinic in St Albans offering P-Shot, O-Shot, and Shockwave Therapy.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "St Albans",
+      "addressRegion": "Hertfordshire",
+      "addressCountry": "UK"
+    },
+    "medicalSpecialty": ["Urology", "Gynecology"] // Covers both P-Shot and O-Shot demographics
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalTherapy",
+    "name": "Sexual Rejuvenation Treatment",
+    "alternateName": ["P-Shot®", "O-Shot®", "PRP for ED", "Shockwave Therapy"],
+    "description": "Non-surgical, regenerative treatments for male and female sexual health including Platelet-Rich Plasma (P-Shot, O-Shot) and Shockwave Therapy in St Albans.",
+    "relevantSpecialty": {
+      "@type": "MedicalSpecialty",
+      "name": "Urology"
+    }
+  }
+];
+
 export default function SexualRejuvenationPage() {
-  // --- GENERATE JSON-LD SCHEMA ---
+  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -138,10 +167,16 @@ export default function SexualRejuvenationPage() {
 
   return (
     <main>
-      {/* Injecting JSON-LD safely. 
-        Note: We use a standard script tag here, safely stringifying the JSON.
-      */}
-      <script
+      {/* 1. Inject Medical Entity Schema */}
+      <Script
+        id="medical-schema-stalbans"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalSchemaStAlbans) }}
+      />
+
+      {/* 2. Inject FAQ Schema */}
+      <Script
+        id="faq-schema-stalbans"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
