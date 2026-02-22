@@ -4,8 +4,6 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useState, useEffect } from "react";
 import {
   FaCheck,
-  FaChevronDown,
-  FaChevronUp,
   FaPlus,
   FaMinus,
   FaEnvelope,
@@ -13,7 +11,16 @@ import {
   FaGoogle,
   FaStar,
   FaLock,
-  FaMapMarkerAlt
+  FaMapMarkerAlt,
+  FaHeartbeat,
+  FaDna,
+  FaSyringe,
+  FaShieldAlt,
+  FaCheckCircle,
+  FaUserMd,
+  FaLeaf,
+  FaPills,
+  FaChevronDown
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
@@ -22,23 +29,6 @@ import TrustReviews from "@/components/TrustReviews";
 import Link from "next/link";
 import Image from "next/image";
 
-// --- TYPES ---
-interface Treatment {
-  name: string;
-  price: string;
-  description: string;
-  benefits: string[];
-  duration: string;
-  course: string;
-  pageLink?: string;     
-  pageLinkText?: string; 
-  expandedContent: {
-    howItWorks: string;
-    whoIsItFor: string[];
-    commonQuestions: { question: string; answer: string }[];
-  };
-}
-
 type SexualHealthClientProps = {
   locationName?: string;
 };
@@ -46,15 +36,19 @@ type SexualHealthClientProps = {
 export default function SexualHealthClient({
   locationName = "St Albans",
 }: SexualHealthClientProps) {
-  const [expandedTreatment, setExpandedTreatment] = useState<string | null>(null);
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   // --- DYNAMIC LINKS BASED ON LOCATION ---
   const isBirmingham = locationName === "Birmingham";
   
   const pShotUrl = isBirmingham ? "/birmingham/p-shot" : "/p-shot";
   const edUrl = isBirmingham ? "/birmingham/erectile-dysfunction" : "/erectile-dysfunction";
+  const peUrl = isBirmingham ? "/birmingham/premature-ejaculation" : "/premature-ejaculation";
+  const peyroniesUrl = isBirmingham ? "/birmingham/peyronies-disease" : "/peyronies-disease";
+  const oShotUrl = isBirmingham ? "/birmingham/o-shot" : "/o-shot"; 
+  const medsUrl = isBirmingham ? "/birmingham/personalised-ed-medication" : "/personalised-ed-medication";
   const pricesUrl = isBirmingham ? "/birmingham/prices" : "/prices";
   const faqUrl = isBirmingham ? "/birmingham/faq" : "/faq";
 
@@ -78,262 +72,218 @@ export default function SexualHealthClient({
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        delay: i * 0.15,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.8, delay: i * 0.15, ease: "easeOut" },
     }),
   };
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-      },
-    },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
-  // Typed array using the Interface defined above
-  const treatments: Treatment[] = [
+  // --- NEW BIG CARDS DATA ---
+  const treatmentCards = [
     {
-      name: "P‑Shot®",
-      price: "",
-      description:
-        "Standard PRP treatment for mild to moderate erectile dysfunction",
-      benefits: [
-        "Improve erection firmness and duration",
-        "Enhance sensitivity and confidence",
-        "Support blood flow and repair",
+      title: "Erectile Dysfunction",
+      category: "Men's Health",
+      description: "A comprehensive, doctor-led approach focusing on vascular restoration and long-term tissue health rather than temporary medication.",
+      bullets: [
+        "In-depth medical and lifestyle assessment",
+        "Low-Intensity Shockwave Therapy (LiSWT)",
+        "Focuses on natural vascular regeneration"
       ],
-      duration: "30–45 minutes",
-      course: "Up to 3 injections",
-      pageLink: pShotUrl,
-      pageLinkText: "View Full P-Shot Details",
-      expandedContent: {
-        howItWorks:
-          "A small blood sample of around 40ml is taken from your arm, just like a routine blood test. The blood is then placed in a medical centrifuge to create high‑quality PRP (Platelet‑Rich Plasma). Before treatment, a numbing cream is applied to ensure comfort. The PRP is then carefully injected into precise areas of the penis to stimulate repair and regeneration. You may feel very mild discomfort during the injection, which usually settles within 5–30 minutes. You can return to work straight away. The whole procedure typically takes 30–45 minutes. Depending on your medical history and individual response, you may require a course of up to three injections, which will be discussed in detail during your online consultation. After treatment, you will receive personalised aftercare instructions.",
-        whoIsItFor: [
-          "Men with mild to moderate erectile dysfunction",
-          "Those wanting to improve erection firmness and duration",
-          "Reduced penile sensitivity or performance anxiety",
-          "Restoring sexual confidence after conditions such as diabetes or circulatory problems",
-          "Peyronie's disease (penile curvature due to scar tissue)",
-        ],
-        commonQuestions: [
-          {
-            question: "Is the P‑Shot painful?",
-            answer:
-              "Only mild discomfort, numbing cream is applied before injection.",
-          },
-          {
-            question: "How soon will I see results?",
-            answer:
-              "Many men notice improvements within weeks, with further gains over 2–3 months. Results may vary from patient to patient.",
-          },
-          {
-            question: "Is it safe?",
-            answer:
-              "Yes. We use your own PRP prepared with CE‑marked, medical‑grade equipment.",
-          },
-          {
-            question: "Is recovery quick?",
-            answer:
-              "Absolutely. You can return to daily activities straight away.",
-          },
-        ],
-      },
+      link: edUrl,
+      icon: FaHeartbeat
     },
     {
-      name: "Exomine® P‑Shot",
-      price: "",
-      description:
-        "Advanced PRP treatment with stronger, longer-lasting results",
-      benefits: [
-        "Improve erection strength and firmness",
-        "Increase sensitivity and responsiveness",
-        "Boost vascular regeneration",
+      title: "The P-Shot® (Priapus Shot)",
+      category: "Men's Health",
+      description: "Advanced Platelet-Rich Plasma (PRP) therapy designed to rejuvenate penile tissue, support firmness, and enhance sensitivity.",
+      bullets: [
+        "Uses your own body's natural growth factors",
+        "Aims to improve erection strength & stamina",
+        "Exomine® (Advanced Exosome) options available"
       ],
-      duration: "~60 minutes",
-      course: "Up to 3 injections",
-      pageLink: pShotUrl,
-      pageLinkText: "View Exomine P-Shot Details",
-      expandedContent: {
-        howItWorks:
-          "A small blood sample of around 40ml is taken from your arm. The blood is processed using the Exomine kit, producing PRP with growth factors already released and active. After numbing cream is applied, the enriched PRP is carefully injected into precise areas of the penis to stimulate repair and regeneration. Mild discomfort usually settles within 5–30 minutes, and you can return to work straight away. The procedure is very similar to the standard P‑Shot® but typically takes around 1 hour. Depending on your history and response, you may require a course of up to three injections for optimal results.",
-        whoIsItFor: [
-          "Moderate to severe erectile dysfunction",
-          "Patients wanting stronger, longer‑lasting results than the standard P‑Shot®",
-          "Poor response to other therapies",
-          "Diabetes or poor circulation",
-          "Peyronie's disease (penile curvature caused by scar tissue)",
-        ],
-        commonQuestions: [
-          {
-            question: "How is it different from the standard P‑Shot?",
-            answer:
-              "Standard PRP contains platelets that release growth factors gradually. Exomine PRP has growth factors already released into the plasma, so they are ready to work immediately.",
-          },
-          {
-            question: "Is it longer lasting?",
-            answer:
-              "Often yes, due to deeper tissue repair and stronger regenerative signalling. Results may vary from patient to patient.",
-          },
-          {
-            question: "Who is it best for?",
-            answer:
-              "Men with longstanding ED, diabetes, poor response to standard therapies, or Peyronie's disease.",
-          },
-        ],
-      },
+      link: pShotUrl,
+      icon: FaSyringe
     },
     {
-      name: "O‑Shot",
-      price: "",
-      description:
-        "Female rejuvenation for improved sensitivity and vaginal health",
-      benefits: [
-        "Enhances sensation & supports vaginal rejuvenation",
-        "Minimal discomfort, no downtime",
-        "Uses your own PRP",
+      title: "Premature Ejaculation",
+      category: "Men's Health",
+      description: "Medical management for hypersensitivity and climax control, helping you regain confidence and extend intimacy.",
+      bullets: [
+        "Custom topical treatments & medication",
+        "Neurochemical and sensitivity balancing",
+        "Behavioural technique guidance"
       ],
-      duration: "30–45 minutes",
-      course: "Up to 3 injections",
-      expandedContent: {
-        howItWorks:
-          "A small blood sample is processed into high‑quality PRP (Platelet‑Rich Plasma). After numbing cream is applied, the PRP is carefully injected into precise areas of the vagina to stimulate regeneration and improved sensitivity. Most women experience only mild, brief discomfort. You can return to work straight away.",
-        whoIsItFor: [
-          "Vaginal dryness or discomfort during intimacy",
-          "Reduced sensitivity or difficulty achieving orgasm",
-          "Stress urinary incontinence (leakage when coughing, sneezing, or exercising)",
-          "Post‑menopausal vaginal rejuvenation",
-          "Enhancing sexual confidence and overall intimate health",
-        ],
-        commonQuestions: [
-          {
-            question: "Will it help with vaginal dryness?",
-            answer:
-              "Yes, many women (especially post‑menopausal) experience improved natural lubrication.",
-          },
-          {
-            question: "Is recovery quick?",
-            answer:
-              "Absolutely. You can return to daily activities straight away.",
-          },
-          {
-            question: "How soon will I see results?",
-            answer:
-              "Improvements are often noticed within weeks and continue over time. Results may vary from patient to patient.",
-          },
-          {
-            question: "Is it safe?",
-            answer:
-              "Yes, the O‑Shot uses your body's own plasma, prepared with CE‑certified equipment.",
-          },
-        ],
-      },
+      link: peUrl,
+      icon: FaShieldAlt
     },
     {
-      name: "Exomine O‑Shot",
-      price: "",
-      description: "Advanced female rejuvenation with enhanced results",
-      benefits: [
-        "Improves natural lubrication & sensitivity",
-        "Supports collagen and blood vessel repair",
-        "Stronger, longer-lasting results",
+      title: "Peyronie's Disease",
+      category: "Men's Health",
+      description: "Targeted regenerative treatments aiming to support plaque remodelling, reduce curvature, and relieve discomfort.",
+      bullets: [
+        "Combined PRP and Shockwave protocols",
+        "Supports breakdown of fibrous scar tissue",
+        "Non-surgical intervention"
       ],
-      duration: "~60 minutes",
-      course: "Up to 3 injections",
-      expandedContent: {
-        howItWorks:
-          "A small blood sample is processed into Exomine PRP (Platelet‑Rich Plasma) using the Exomine kit. After numbing cream is applied, the PRP is injected into targeted vaginal areas for maximum regenerative benefit. Any mild discomfort resolves quickly. You can return to work straight away. The whole procedure usually takes around 1 hour, and in some cases a course of up to three injections may be recommended.",
-        whoIsItFor: [
-          "Want stronger, longer‑lasting results than the standard O‑Shot®",
-          "Vaginal laxity or dryness, especially after menopause",
-          "Stress urinary incontinence that affects quality of life",
-          "Reduced sensitivity or difficulty achieving orgasm",
-          "Restore vaginal health and confidence after hormonal changes",
-        ],
-        commonQuestions: [
-          {
-            question: "How is this different from the standard O‑Shot?",
-            answer:
-              "Standard PRP releases growth factors gradually. Exomine PRP already has growth factors in the plasma, so they are ready to act immediately after injection.",
-          },
-          {
-            question: "Will it help with incontinence?",
-            answer:
-              "Yes, it can reduce stress urinary incontinence in many women.",
-          },
-          {
-            question: "Is it suitable post‑menopause?",
-            answer:
-              "Absolutely. Many post‑menopausal women benefit from improved sensitivity, lubrication, and vaginal health.",
-          },
-          {
-            question: "How soon will I see results?",
-            answer:
-              "Many women notice benefits within weeks, with continued improvement over time. Results may vary from patient to patient.",
-          },
-          {
-            question: "How long do results last?",
-            answer:
-              "Most patients notice benefits for 12 months or more. Results may vary from patient to patient.",
-          },
-        ],
-      },
+      link: peyroniesUrl,
+      icon: FaDna
     },
+    {
+      title: "The O-Shot®",
+      category: "Female Rejuvenation",
+      description: "A natural, PRP-based treatment to support vaginal health, improve natural lubrication, and enhance sexual sensation.",
+      bullets: [
+        "Highly effective for post-menopausal dryness",
+        "Helps reduce stress urinary incontinence",
+        "Enhances overall sensitivity and comfort"
+      ],
+      link: oShotUrl,
+      icon: FaSyringe
+    },
+    {
+      title: "Personalised Medications",
+      category: "Men's Health",
+      description: "Custom-tailored prescription treatments designed to address your specific symptoms, from climax control to performance enhancement.",
+      bullets: [
+        "Doctor-prescribed custom formulations",
+        "Targeted symptom management",
+        "Discreet consultation and guidance"
+      ],
+      link: medsUrl,
+      icon: FaPills
+    }
   ];
 
+  // --- SEO RICH FAQS ---
   const faqs = [
     {
-      question: "How soon will I see results?",
-      answer:
-        "Within weeks, with continued improvement over time. Results may vary from patient to patient.",
+      question: "Are PRP and regenerative sexual treatments safe?",
+      answer: "Yes. PRP, shockwave therapy, the P-Shot and O-Shot are considered safe. PRP uses your own blood, reducing allergy risk, and all procedures are performed by trained clinicians."
     },
     {
-      question: "Is this a natural erectile dysfunction treatment?",
-      answer:
-        "Yes — PRP uses your own blood; Exomine PRP provides extra benefit because growth factors are already released and ready to work immediately. Results may vary from patient to patient.",
+      question: "Will my consultation be strictly confidential?",
+      answer: "Yes. All consultations are private, one-to-one, and conducted discreetly by a doctor. No information is ever shared without your consent."
     },
     {
-      question: "Are your products safe?",
-      answer:
-        "Absolutely — we only use CE‑marked devices and medical‑grade kits for PRP preparation.",
+      question: "How long do regenerative sexual treatments take to work?",
+      answer: "Some patients notice early changes within weeks, but optimal results develop over 8–12 weeks as blood flow, nerves and tissue naturally regenerate."
     },
     {
-      question: "Is there downtime after O‑Shot?",
-      answer: "Minimal. Most resume daily activity the same day.",
+      question: "Do I need a GP referral?",
+      answer: "No. You may book directly for assessment and treatment of ED, premature ejaculation, Peyronie’s disease or vaginal rejuvenation without needing a referral."
     },
     {
-      question: `Do you offer this near ${locationName}?`,
-      answer: `Yes — our clinic in ${locationName} is convenient for patients in ${nearbyAreas}.`,
+      question: "Who can benefit from PRP treatment?",
+      answer: "Men and women with reduced sensitivity, erectile issues, vaginal dryness, pelvic trauma or age-related tissue decline may benefit, as PRP supports natural healing and function."
     },
+    {
+      question: "What is PRP sexual rejuvenation?",
+      answer: "PRP sexual rejuvenation uses concentrated growth factors from your own blood to improve blood flow, sensitivity, lubrication and natural sexual performance."
+    },
+    {
+      question: "Is PRP safe for sexual rejuvenation?",
+      answer: "Yes. PRP is very safe because it is autologous, meaning it comes from your own blood. Side effects are mild and short-lived."
+    },
+    {
+      question: "What are the benefits of the P-Shot?",
+      answer: "The P-Shot may enhance erection strength, sensitivity and circulation by delivering PRP into penile tissue to support natural erectile function."
+    },
+    {
+      question: "Are there any P-Shot side effects?",
+      answer: "Side effects are mild, such as temporary swelling or tenderness. Allergic reactions are extremely rare because PRP comes from your own blood."
+    },
+    {
+      question: "How long does the O-Shot last?",
+      answer: "Many women notice benefits for 12–18 months, including improved lubrication, sensitivity and sexual comfort. Duration varies between individuals."
+    },
+    {
+      question: "What is vaginal rejuvenation without surgery?",
+      answer: "Non-surgical vaginal rejuvenation uses PRP or energy-based treatments to improve lubrication, sensitivity, tissue health and comfort without downtime or invasive procedures."
+    },
+    {
+      question: "What is a natural treatment for erectile dysfunction?",
+      answer: "PRP and shockwave therapy are natural ED treatments that stimulate blood-flow regeneration and tissue repair, addressing the root causes rather than relying on tablets."
+    },
+    {
+      question: "Is shockwave therapy effective for erectile dysfunction?",
+      answer: "Shockwave therapy promotes new blood vessel growth in erectile tissue and can improve circulation. Many patients see benefits after a structured treatment course."
+    },
+    {
+      question: "What are natural alternatives to Viagra or Cialis?",
+      answer: "PRP and shockwave therapy offer non-medication alternatives by improving vascular health and supporting spontaneous erections without reliance on tablets."
+    },
+    {
+      question: "Can premature ejaculation be treated naturally?",
+      answer: "Yes. Techniques, topical therapies and PRP to support nerve balance can help improve timing, sensitivity control and confidence."
+    },
+    {
+      question: "What is a non-surgical treatment for Peyronie’s disease?",
+      answer: "PRP and shockwave therapy may help soften plaque, reduce discomfort and support curvature improvement without requiring invasive surgery."
+    },
+    {
+      question: "Is this a private sexual health clinic?",
+      answer: "Yes. We operate as a discreet, doctor-led private clinic offering confidential assessments and personalised regenerative treatment plans."
+    }
   ];
+
+  // Slice FAQs based on state
+  const displayedFaqs = showAllFaqs ? faqs : faqs.slice(0, 5);
+
+  // --- JSON-LD FAQ SCHEMA ---
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  };
+
+  // --- UNIFIED ACTION HANDLER ---
+  const handleAction = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent("open-contact-drawer"));
+    setTimeout(() => {
+      const section = document.getElementById("contact-form-section");
+      if (section) {
+        const headerOffset = 100;
+        const elementPosition = section.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }, 100);
+  };
 
   return (
     <>
-      {/* --- HERO SECTION --- */}
+      {/* --- INJECT SEO SCHEMA --- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
+      {/* --- HERO SECTION (Dark Premium) --- */}
       <div className="relative md:h-[calc(100vh-4rem)] pb-5 md:pb-0 lg:h-[calc(100vh-5rem)] overflow-hidden flex items-center justify-center bg-black">
-        {/* Background Section */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/60 z-10" /> 
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80 z-10" />
+          <div className="absolute inset-0 bg-black/50 z-10" /> 
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 z-10" />
           <Image
-            src="/hero_img.png"
+            src="/personalised-meds-hero.webp"
             alt="Sexual Rejuvenation Background"
             fill
             className="object-cover"
@@ -341,38 +291,26 @@ export default function SexualHealthClient({
           />
         </div>
 
-        {/* Main Content */}
-        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 pb-20">
+        {/* Pushed down with pt-32 md:pt-48 to frame the doctor's face perfectly */}
+        <div className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 md:pt-48 pb-16">
           
-          <motion.div 
+          <motion.h1 
             custom={1}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="inline-flex gap-1 px-4 py-2 bg-white/10 text-blue-100 border border-white/20 rounded-full text-xs font-inter font-bold mb-6 uppercase tracking-wider backdrop-blur-sm"
+            className="md:text-[2.75rem] lg:text-5xl text-3xl font-bold font-raleway text-white leading-tight mb-6 tracking-tight drop-shadow-lg"
           >
-            GMC‑registered | CE‑marked equipment <span className="hidden md:block">| Confidential</span>
-          </motion.div>
+            <span className="md:whitespace-nowrap">Sexual Rejuvenation & Natural Regeneration</span> <br className="hidden md:block" />
+            in {locationName}
+          </motion.h1>
 
-          <motion.h1 
+          <motion.p 
             custom={2}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="md:text-5xl text-3xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
-          >
-            Sexual Rejuvenation & Natural Regeneration in {locationName}
-            <span className="block mt-2 text-white/90">
-              Healing-PRP Clinics
-            </span>
-          </motion.h1>
-
-          <motion.p 
-            custom={3}
-            initial="hidden"
-            animate={isLoaded ? "visible" : "hidden"}
-            variants={fadeUpVariants}
-            className="mt-4 text-sm md:text-base text-white/80 font-inter leading-relaxed max-w-3xl mx-auto mb-8"
+            className="mt-6 text-sm md:text-base text-white/90 font-inter leading-relaxed max-w-3xl mx-auto mb-8 drop-shadow"
           >
             Patient-centred, non-surgical solutions to support confidence,
             sensitivity and intimacy — delivered by a fully insured,
@@ -380,19 +318,14 @@ export default function SexualHealthClient({
           </motion.p>
 
           <motion.div 
-            custom={4}
+            custom={3}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <button 
-              onClick={(e) => {
-                e.preventDefault();
-                window.dispatchEvent(new CustomEvent("open-contact-drawer"));
-                const section = document.getElementById("contact-form-section");
-                if (section) section.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={handleAction}
               className="px-10 py-3.5 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-xl shadow-[#4041d1]/20 active:scale-95 font-inter group"
             >
               <FaEnvelope className="w-4 h-4 group-hover:rotate-12 transition-transform" /> 
@@ -401,7 +334,7 @@ export default function SexualHealthClient({
           </motion.div>
 
           <motion.div 
-            custom={5}
+            custom={4}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
@@ -419,7 +352,6 @@ export default function SexualHealthClient({
         <div className={`md:block absolute hidden bottom-0 left-0 right-0 bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="px-2 py-4 max-w-7xl mx-auto">
             <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
-              
               {/* 1. Google 5-Star Link */}
               <a href="#reviews" onClick={(e) => {
                 e.preventDefault();
@@ -478,946 +410,302 @@ export default function SexualHealthClient({
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
-      
-      {/* Navigation */}
-      <section className="py-8 border-b border-t shadow-xs border-slate-100 relative">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-white to-gray-50"></div>
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="flex flex-wrap justify-center gap-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-          >
-            {treatments.map((treatment, index) => (
-              <motion.a
-                key={index}
-                href={`#${treatment.name
-                  .toLowerCase()
-                  .replace(/[^a-z0-9]/g, "-")}`}
-                className="px-4 py-2 text-sm border border-slate-100 shadow-xs bg-white text-[#4041d1] rounded-lg font-inter font-bold hover:bg-[#4041d1]/5 transition-colors duration-300"
-                variants={itemVariants}
-              >
-                {treatment.name}
-              </motion.a>
-            ))}
-            <motion.a
-              href="#comparison"
-              className="px-4 py-2 text-sm bg-white text-[#4041d1] border border-slate-100 shadow-xs rounded-lg font-inter font-bold hover:bg-[#4041d1]/5 transition-colors duration-300"
-              variants={itemVariants}
-            >
-              Comparison
-            </motion.a>
-            <motion.button
-              onClick={() => {
-                const section = document.getElementById(
-                  "premature-ejaculation"
-                );
-                if (section) {
-                  section.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="px-4 py-2 text-sm bg-white text-[#4041d1] border border-slate-100 shadow-xs rounded-lg font-inter font-bold hover:bg-[#4041d1]/5 transition-colors duration-300"
-              variants={itemVariants}
-            >
-              Premature Ejaculation
-            </motion.button>
-            <motion.button
-              onClick={() => {
-                const section = document.getElementById("peyronies-disease");
-                if (section) {
-                  section.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="px-4 py-2 text-sm bg-white text-[#4041d1] border border-slate-100 shadow-xs rounded-lg font-inter font-bold hover:bg-[#4041d1]/5 transition-colors duration-300"
-              variants={itemVariants}
-            >
-              Peyronie&apos;s Disease
-            </motion.button>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Understanding ED Section */}
-      <section className="py-12 lg:py-24 bg-gradient-to-b from-[#f6f7ff] to-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* --- EDUCATION: DYNAMIC GRAPHIC CARDS --- */}
+      <section className="py-20 lg:py-28 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.2 }}
             variants={containerVariants}
+            className="text-center mb-16 max-w-4xl mx-auto"
           >
-            <motion.h2
-              className="text-2xl lg:text-3xl font-raleway font-bold text-slate-900 mb-3"
-              variants={itemVariants}
-            >
-            Understanding Erectile Dysfunction (ED)
-            </motion.h2>
-            
-            <motion.p
-              className="text-sm font-inter text-slate-600 leading-relaxed mb-4"
-              variants={itemVariants}
-            >
-              Erectile dysfunction (ED) is a common medical condition in which achieving or
-              maintaining an erection becomes difficult. It often develops due to a
-              combination of factors, including reduced blood flow, stress, hormonal
-              imbalance, diabetes, high blood pressure, nerve sensitivity changes, or the
-              effects of certain medications.
-            </motion.p>
-            
-            <motion.p
-              className="text-sm font-inter text-slate-600 leading-relaxed mb-3"
-              variants={itemVariants}
-            >
-              In many cases, the blood vessels supplying the penis may become narrowed, and
-              the smooth muscle within erectile tissue may weaken over time. These changes
-              can reduce rigidity and make it harder to maintain an erection, particularly
-              during sustained intimacy.
-            </motion.p>
-            
-            <motion.p
-              className="text-sm font-inter text-slate-600 leading-relaxed mb-3"
-              variants={itemVariants}
-            >
-              Platelet-Rich Plasma (PRP) therapy may help by supporting blood flow,
-              encouraging tissue repair, and improving the health of erectile tissue.
-              Rather than acting as a temporary stimulant, PRP aims to work at a
-              regenerative level by using growth factors derived from your own blood.
-            </motion.p>
-            
-            <motion.p
-              className="text-sm font-inter text-slate-600 leading-relaxed mb-3"
-              variants={itemVariants}
-            >
-              At Healing-PRP Clinics, we recognise that erectile dysfunction can affect both
-              physical confidence and emotional wellbeing. Many men wish to avoid invasive
-              procedures or long-term reliance on medication and instead explore medical
-              options that support natural function. Our doctor-led treatments — including
-              PRP-based therapies such as the P-Shot® and Exomine® P-Shot — are designed to
-              support tissue health, sensitivity, and vascular function.
-            </motion.p>
-            
-            <motion.p
-              className="text-sm font-inter text-slate-600 leading-relaxed mb-3"
-              variants={itemVariants}
-            >
-              Because PRP is autologous (derived from your own blood), treatment is minimally
-              invasive and generally well tolerated. Outcomes vary between individuals, and
-              suitability is assessed during a medical consultation. PRP therapy is
-              intended to address contributing factors rather than simply masking symptoms,
-              with the aim of supporting erectile function, confidence, and intimacy over
-              time.
-            </motion.p>
-
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 mt-6">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.dispatchEvent(new CustomEvent("open-contact-drawer"));
-                  const section = document.getElementById("contact-form-section");
-                  if (section) section.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="px-6 py-3 w-max text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2 group shadow-lg"
-              >
-                <FaEnvelope className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                Book Consultation
-              </button>
-
-              <Link
-                href={edUrl}
-                className="px-6 py-3 w-max text-sm cursor-pointer bg-white border border-[#4041d1] text-[#4041d1] hover:bg-blue-50 rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2"
-              >
-                <FaArrowRight className="w-4 h-4" />
-                View Erectile Dysfunction Treatments
-              </Link>
+            <motion.div className="inline-block px-4 py-1.5 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-bold uppercase tracking-wider mb-6" variants={itemVariants}>
+              Education & Philosophy
             </motion.div>
+            <motion.h2
+              className="text-3xl lg:text-5xl font-raleway font-bold text-slate-900 mb-8 leading-tight tracking-tight"
+              variants={itemVariants}
+            >
+              A Medical Approach to Intimacy & Wellbeing
+            </motion.h2>
           </motion.div>
-        </div>
-      </section>
-      
-      <section className="py-12 lg:py-16 relative">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-          >
-            <motion.h2
-              className="text-2xl lg:text-3xl font-raleway font-bold text-slate-900 mb-3"
-              variants={itemVariants}
-            >
-              A Personal, Medical Approach to Sexual Wellness
-            </motion.h2>
 
-            <motion.div
-              className="prose prose-lg text-sm max-w-none text-slate-600 font-inter leading-relaxed space-y-6"
-              variants={itemVariants}
+          <div className="space-y-8">
+            {/* Paragraph 1: What is it? (Wide Dark Box with Dynamic Graphics) */}
+            <motion.div 
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={itemVariants} 
+              className="bg-[#0A1128] text-white p-8 md:p-12 rounded-[2rem] border border-white/10 relative overflow-hidden shadow-xl"
             >
-              <p>
-                Sexual health is deeply personal and deserves thoughtful,
-                evidence-based care. At Healing-PRP Clinics in {locationName},
-                we provide doctor-led regenerative treatments for concerns such
-                as erectile dysfunction (ED) and reduced sensitivity. Our
-                approach focuses on supporting the body’s natural repair
-                processes and healthy blood flow, delivered within a
-                confidential, professional clinical setting and tailored to each
-                individual.
-              </p>
-              <p>
-                We only use CE‑marked, medical‑grade products and prepare
-                high‑quality PRP (Platelet‑Rich Plasma) with the latest
-                technology, ensuring maximum safety and effectiveness.
-              </p>
-              <p>
-                Serving {nearbyAreas}. All treatments begin with a medical
-                consultation to assess suitability. Recommendations are based on
-                individual clinical assessment and may not be appropriate for
-                everyone.
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#4041d1]/20 rounded-full blur-3xl pointer-events-none" />
+              <FaHeartbeat className="absolute -bottom-10 -right-10 text-[15rem] text-white opacity-5 pointer-events-none transform -rotate-12" />
+              
+              <h3 className="text-2xl md:text-3xl font-raleway font-bold mb-6 flex items-center justify-center gap-4 relative z-10 text-white">
+                <div className="p-3 bg-[#4041d1]/20 rounded-xl border border-[#4041d1]/30">
+                  <FaHeartbeat className="text-[#4041d1] text-xl" />
+                </div> 
+                What is sexual rejuvenation?
+              </h3>
+              <p className="text-base md:text-lg font-inter text-slate-100 leading-relaxed text-center relative z-10 max-w-4xl mx-auto">
+                Sexual rejuvenation refers to a range of evidence-based, regenerative treatments that support the natural function of sexual tissues. These therapies focus on improving blood flow, nerve signalling, sensitivity, lubrication, and overall performance — not through artificial stimulation, but by promoting the body’s own healing and repair processes.
               </p>
             </motion.div>
-            <motion.div variants={itemVariants}>
-              <Link
-                href="/blog"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2"
+
+            {/* Paragraph 2 & 3: Why it matters & Healthy Life (2 Columns, Slate-900 Cards) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <motion.div 
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={itemVariants} 
+                className="bg-[#0f172a] text-white p-8 md:p-10 rounded-[2rem] border border-white/5 shadow-lg relative overflow-hidden group hover:border-white/10 transition-colors flex flex-col justify-center"
               >
-                <FaCheck className="w-4 h-4" /> 
-                Read More
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+                <FaLeaf className="absolute -top-8 -right-8 text-[10rem] text-white opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-700" />
+                <h3 className="text-xl font-raleway font-bold text-white mb-4 flex items-center justify-center gap-3 relative z-10">
+                  <div className="w-2 h-2 rounded-full bg-[#4041d1]" /> Why it matters
+                </h3>
+                <p className="text-sm md:text-base font-inter text-slate-100 leading-relaxed text-center relative z-10">
+                  Changes in sexual function are extremely common and can occur due to ageing, hormonal shifts, vascular decline, childbirth, stress, illness, medication, or lifestyle factors. While many people feel embarrassed to speak about these issues, they have a significant impact on confidence, emotional wellbeing, relationships, and overall quality of life. Addressing these concerns early helps prevent long-term decline and supports healthier ageing.
+                </p>
+              </motion.div>
 
-      {/* PRP Explanation Section */}
-      <section id="what-is-prp" className="py-12 lg:py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-          >
-            <motion.h2
-              className="md:text-3xl text-2xl font-raleway font-bold text-slate-900 mb-3"
-              variants={itemVariants}
-            >
-              What is PRP (Platelet‑Rich Plasma)?
-            </motion.h2>
-
-            <motion.div
-              className="prose prose-lg text-sm max-w-none text-slate-600 font-inter leading-relaxed mb-6"
-              variants={itemVariants}
-            >
-              <p>
-                PRP (Platelet‑Rich Plasma) is derived from a small sample of
-                your own blood and processed in a medical centrifuge to
-                concentrate the platelets. These platelets are rich in growth
-                factors that stimulate natural healing, repair, and
-                regeneration.
-              </p>
-              <p className="mt-3">
-                When injected into targeted areas, PRP can:
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="grid grid-cols-1 text-sm md:grid-cols-2 gap-4"
-              variants={itemVariants}
-            >
-              {[
-                "Improve blood flow and sensitivity",
-                "Stimulate collagen production and new tissue growth",
-                "Support repair of nerves, blood vessels, and muscles",
-                "Enhance natural function and overall rejuvenation",
-                "PRP comes from your own body",
-                "Safe, natural and non‑surgical treatment",
-              ].map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center gap-3 p-4 bg-white rounded-lg border border-slate-100"
-                  variants={itemVariants}
-                >
-                  <FaCheck className="w-4 h-4 text-[#4041d1] flex-shrink-0" />
-                  <span className="font-inter text-slate-700">{benefit}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-12 lg:py-16 relative">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-          >
-            <motion.h2
-              className="text-2xl lg:text-3xl font-raleway font-bold text-slate-900 mb-3"
-              variants={itemVariants}
-            >
-              What PRP therapy cannot do
-            </motion.h2>
-
-            <motion.div
-              className="prose prose-lg text-sm max-w-none text-slate-600 font-inter leading-relaxed space-y-6"
-              variants={itemVariants}
-            >
-              <p>
-                PRP therapy is not a guaranteed treatment for erectile
-                dysfunction, and individual responses vary. PRP therapy is not a
-                cure for erectile dysfunction and outcomes vary between
-                individuals. It may not be effective where erectile dysfunction
-                is primarily caused by severe nerve damage, advanced vascular
-                disease, significant psychological factors, or untreated
-                hormonal imbalance
-              </p>
-              <p>
-                PRP therapy cannot provide immediate results and should not be
-                viewed as a replacement for appropriate medical assessment,
-                lifestyle modification, or conventional treatments where these
-                are clinically indicated. A consultation is required to assess
-                suitability and discuss realistic expectations.
-              </p>
-              <p>
-                Recommendations are based on individual clinical assessment and
-                may not be appropriate for everyone.
-              </p>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Link
-                href="/blog"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 mt-4 w-max text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 flex items-center gap-2"
+              <motion.div 
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={itemVariants} 
+                className="bg-[#0f172a] text-white p-8 md:p-10 rounded-[2rem] border border-white/5 shadow-lg relative overflow-hidden group hover:border-white/10 transition-colors flex flex-col justify-center"
               >
-                <FaCheck className="w-4 h-4" /> 
-                Read More
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Understanding Premature Ejaculation Section */}
-      <section id="premature-ejaculation" className="py-12 lg:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-          >
-            <motion.h2
-              className="md:text-3xl text-2xl font-raleway font-bold text-slate-900 mb-6"
-              variants={itemVariants}
-            >
-              Understanding Premature Ejaculation
-            </motion.h2>
-
-            <motion.p
-              className="text-sm font-inter text-slate-600 mb-8 max-w-4xl leading-relaxed"
-              variants={itemVariants}
-            >
-              Premature ejaculation is reaching climax sooner than desired,
-              often within a minute of penetration. Causes are multifactorial —
-              including heightened sensitivity, anxiety, and neurochemical or
-              hormonal factors — and it frequently co‑exists with performance
-              anxiety.
-            </motion.p>
-
-            <motion.h3
-              className="md:text-2xl text-xl font-raleway font-semibold text-slate-900 mb-4"
-              variants={itemVariants}
-            >
-              How It Works
-            </motion.h3>
-
-            <motion.div className="space-y-4 mb-8" variants={containerVariants}>
-              {[
-                "Custom topical numbing creams designed to remain effective in vaginal pH for better consistency",
-                "Tailored medication regimens where appropriate to delay climax and reduce hypersensitivity",
-                "Behavioural techniques (stop‑start, squeeze method) to improve ejaculatory control",
-                "Pelvic floor training to strengthen the bulbocavernosus & pelvic musculature",
-                "Lifestyle optimisation (sleep, stress, alcohol/smoking) and partner‑inclusive guidance if desired",
-              ].map((point, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-start gap-3"
-                  variants={itemVariants}
-                >
-                  <FaCheck className="w-4 h-4 mt-[0.2rem] text-[#4041d1] flex-shrink-0" />
-                  <span className="text-sm font-inter text-slate-700 leading-relaxed">
-                    {point}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.p
-              className="text-sm font-inter text-slate-600 max-w-4xl leading-relaxed mb-8"
-              variants={itemVariants}
-            >
-              Sessions are discreet, and most patients resume normal activities
-              immediately after consultation.
-            </motion.p>
-
-            <motion.div variants={itemVariants}>
-              <Link
-                href="/premature-ejaculation"
-                className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300"
-              >
-                Learn More
-                <FaChevronDown className="w-3 h-3 rotate-[-90deg]" />
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Understanding Peyronie's Disease Section */}
-      <section id="peyronies-disease" className="py-12 lg:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-          >
-            <motion.h2
-              className="md:text-3xl text-2xl font-raleway font-bold text-slate-900 mb-6"
-              variants={itemVariants}
-            >
-              Understanding Peyronie&apos;s Disease
-            </motion.h2>
-
-            <motion.p
-              className="text-sm font-inter text-slate-600 mb-8 max-w-4xl leading-relaxed"
-              variants={itemVariants}
-            >
-              Peyronie&apos;s Disease occurs when fibrous scar tissue
-              (plaques) forms in the tunica albuginea, causing penile curvature,
-              indentation, pain, and sometimes shortening. It often follows
-              micro‑trauma; in many cases, the cause is unclear. Emotional
-              impact is common and treatable.
-            </motion.p>
-
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"
-              variants={containerVariants}
-            >
-              {[
-                "Curvature or indentation during erection",
-                "Penile pain (usually early phase)",
-                "Perceived shortening or loss of elasticity",
-                "Erectile difficulties and confidence issues",
-              ].map((symptom, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-start gap-3 p-4 bg-slate-50 rounded-lg"
-                  variants={itemVariants}
-                >
-                  <FaCheck className="w-4 h-4 mt-[0.2rem] text-[#4041d1] flex-shrink-0" />
-                  <span className="text-sm font-inter text-slate-700 leading-relaxed">
-                    {symptom}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.h3
-              className="md:text-2xl text-xl font-raleway font-semibold text-slate-900 mb-4"
-              variants={itemVariants}
-            >
-              How It Works
-            </motion.h3>
-
-            <motion.p
-              className="text-sm font-inter text-slate-600 max-w-4xl leading-relaxed mb-8"
-              variants={itemVariants}
-            >
-              We combine Platelet Rich Plasma (PRP) P Shot with Low Intensity
-              Shockwave Therapy (LiSWT) to encourage plaque remodelling and
-              vascular regeneration. A small blood sample is processed into PRP;
-              after topical anaesthetic, targeted injections are performed
-              alongside scheduled shockwave sessions. Most patients return to
-              normal activities the same day. A course of 6 or more shockwave
-              sessions may be recommended depending on the individual case,
-              curvature, and symptom severity.
-            </motion.p>
-
-            <motion.div variants={itemVariants}>
-              <Link
-                href="/peyronies-disease"
-                className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300"
-              >
-                Learn More
-                <FaChevronDown className="w-3 h-3 rotate-[-90deg]" />
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Treatments Section */}
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.h2
-              className="md:text-3xl text-2xl font-raleway font-bold text-slate-900 mb-8"
-              variants={itemVariants}
-            >
-              Treatments Offered at Healing‑PRP Clinics
-            </motion.h2>
-
-            <div className="space-y-16">
-              {treatments.map((treatment, index) => (
-                <motion.div
-                  key={index}
-                  id={treatment.name
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]/g, "-")}
-                  className="bg-slate-50 rounded-2xl p-8 lg:p-12 border border-slate-100"
-                  variants={itemVariants}
-                >
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                    <div>
-                      <div className="flex items-center gap-2 mb-4">
-                        <h3 className="md:text-2xl text-xl font-raleway font-bold text-slate-900">
-                          {treatment.name} -
-                        </h3>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xl font-inter font-bold text-[#4041d1]">
-                            {treatment.price}
-                          </span>
-                        </div>
-                      </div>
-                      <p className="text-sm font-inter text-slate-600 mb-6">
-                        {treatment.description}
-                      </p>
-                      <ul className="space-y-3 mb-6">
-                        {treatment.benefits.map((benefit, benefitIndex) => (
-                          <li
-                            key={benefitIndex}
-                            className="flex items-start gap-3"
-                          >
-                            <FaCheck className="w-3 h-3 mt-[0.3rem] text-[#4041d1] flex-shrink-0 mt-0.5" />
-                            <span className="font-inter text-sm text-slate-700">
-                              {benefit}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="bg-white rounded-xl md:p-6 p-4 border border-slate-100 shadow-sm">
-                      <h4 className="md:text-lg text-base font-raleway font-bold text-slate-900 mb-4">
-                        Treatment Details
-                      </h4>
-                      <div className="space-y-3  md:text-base text-sm ">
-                        <div>
-                          <span className="font-inter font-bold text-slate-700">
-                            Duration:
-                          </span>
-                          <span className="font-inter text-slate-600 ml-2">
-                            {treatment.duration}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="font-inter font-bold text-slate-700">
-                            Course:
-                          </span>
-                          <span className="font-inter text-slate-600 ml-2">
-                            {treatment.course}
-                          </span>
-                        </div>
-                      </div>
-                      <motion.button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          window.dispatchEvent(new CustomEvent("open-contact-drawer"));
-                          const section = document.getElementById("contact-form-section");
-                          if (section) {
-                            section.scrollIntoView({ behavior: "smooth" });
-                          }
-                        }}
-                        className="inline-flex items-center text-sm gap-2 mt-6 px-8 py-3.5 bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-inter font-bold transition-all duration-300 shadow-lg shadow-blue-500/20 group"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <FaEnvelope className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                        Book Consultation
-                      </motion.button>
-                      
-                      {/* Optional "View Full Details" link */}
-                      {treatment.pageLink && (
-                        <div className="mt-4 pt-4 border-t border-slate-100">
-                           <Link 
-                              href={treatment.pageLink}
-                              className="inline-flex items-center gap-2 text-[#4041d1] font-bold text-sm hover:underline"
-                           >
-                              {treatment.pageLinkText} <FaArrowRight className="w-3 h-3" />
-                           </Link>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Learn More Button */}
-                  <div className="">
-                    <motion.button
-                      onClick={() =>
-                        setExpandedTreatment(
-                          expandedTreatment === treatment.name
-                            ? null
-                            : treatment.name
-                        )
-                      }
-                      className="inline-flex items-center gap-2 py-3 text-[#4041d1] rounded-lg font-inter text-sm font-bold transition-all duration-300 hover:opacity-70 cursor-pointer"
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {expandedTreatment === treatment.name ? (
-                        <>
-                          Show Less
-                          <FaChevronUp className="w-3 h-3" />
-                        </>
-                      ) : (
-                        <>
-                          Learn More
-                          <FaChevronDown className="w-3 h-3 mt-[0.1rem]" />
-                        </>
-                      )}
-                    </motion.button>
-                  </div>
-
-                  {/* Expanded Content */}
-                  <AnimatePresence>
-                    {expandedTreatment === treatment.name && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden mt-6"
-                      >
-                        <div className="bg-white rounded-xl p-6 border border-slate-200">
-                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            {/* How It Works */}
-                            <div>
-                              <h4 className="text-lg font-raleway font-bold text-slate-900 mb-4">
-                                How It Works
-                              </h4>
-                              <p className="md:text-sm text-xs font-inter text-slate-600 leading-relaxed">
-                                {treatment.expandedContent.howItWorks}
-                              </p>
-                            </div>
-
-                            {/* Who Is It For */}
-                            <div>
-                              <h4 className="md:text-lg text-base font-raleway font-bold text-slate-900 mb-4">
-                                Who Is It For?
-                              </h4>
-                              <ul className="space-y-2 md:text-sm text-xs">
-                                {treatment.expandedContent.whoIsItFor.map(
-                                  (item, itemIndex) => (
-                                    <li
-                                      key={itemIndex}
-                                      className="flex items-start gap-3"
-                                    >
-                                      <FaCheck className="w-3 h-3 mt-[0.3rem] text-[#4041d1] flex-shrink-0" />
-                                      <span className="font-inter text-slate-700">
-                                        {item}
-                                      </span>
-                                    </li>
-                                  )
-                                )}
-                              </ul>
-                            </div>
-                          </div>
-
-                          {/* Common Questions */}
-                          <div className="mt-8">
-                            <h4 className="md:text-lg text-base font-raleway font-bold text-slate-900 mb-4">
-                              Common Questions
-                            </h4>
-                            <div className="space-y-4">
-                              {treatment.expandedContent.commonQuestions.map(
-                                (qa, qaIndex) => (
-                                  <div
-                                    key={qaIndex}
-                                    className="bg-slate-50 rounded-lg md:p-4 p-2 border border-slate-100"
-                                  >
-                                    <h5 className="font-inter md:text-base text-sm font-bold text-slate-900 mb-2">
-                                      {qa.question}
-                                    </h5>
-                                    <p className="md:text-sm text-xs font-inter text-slate-600">
-                                      {qa.answer}
-                                    </p>
-                                  </div>
-                                )
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
+                <FaDna className="absolute -bottom-8 -right-8 text-[10rem] text-white opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-700" />
+                <h3 className="text-xl font-raleway font-bold text-white mb-4 flex items-center justify-center gap-3 relative z-10">
+                  <div className="w-2 h-2 rounded-full bg-[#4041d1]" /> The role of a healthy sexual life
+                </h3>
+                <p className="text-sm md:text-base font-inter text-slate-100 leading-relaxed text-center relative z-10">
+                  A fulfilling sexual life is medically linked to lower stress levels, improved cardiovascular health, hormone balance, immune function, better sleep quality, and stronger emotional connection with partners. For many, rejuvenation can restore not only physical function but also self-esteem and psychological wellbeing.
+                </p>
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Paragraph 4: Our Approach (Dark Premium Box with Blue Glow) */}
+            <motion.div 
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={itemVariants} 
+              className="bg-[#0A1128] text-white p-8 md:p-12 rounded-[2rem] border border-[#4041d1]/30 shadow-[0_0_40px_rgba(64,65,209,0.1)] relative overflow-hidden flex flex-col justify-center"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-[#4041d1]/10 to-transparent pointer-events-none" />
+              <FaUserMd className="absolute top-10 right-10 text-[8rem] text-white opacity-5 pointer-events-none" />
+              <h3 className="text-2xl md:text-3xl font-raleway font-bold mb-4 relative z-10 flex items-center justify-center gap-3 text-white">
+                <FaCheckCircle className="text-[#4041d1] text-xl" /> Our clinic’s patient-centred approach
+              </h3>
+              <p className="text-base md:text-lg font-inter text-slate-100 leading-relaxed text-center relative z-10 max-w-4xl mx-auto">
+                At Healing-PRP Clinics, we take a comprehensive, non-judgemental approach to sexual wellness. Every patient receives a private, 1:1 medical consultation to understand the underlying causes of their symptoms. We focus on long-term regenerative improvement — not temporary quick fixes — using advanced PRP, Exosome, and shockwave technologies to encourage real tissue repair, vascular restoration, and improved natural performance.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Comparison Table Section */}
-      <section id="comparison" className="py-12 lg:py-16 bg-slate-50">
+      {/* --- BIG CARDS: TREATMENT PATHWAYS (Dark Theme) --- */}
+      <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-          >
-            <motion.h2
-              className="md:text-3xl text-xl font-raleway font-bold text-slate-900 md:mb-6 mb-4"
-              variants={itemVariants}
-            >
-              P-Shot vs Exomine P-Shot{" "}
-              <span className="hidden md:inline">- Comparison</span>
-            </motion.h2>
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h3 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
+              Our Treatment Pathways
+            </h3>
+            <p className="text-slate-600 text-lg font-inter">
+              Doctor-led, evidence-based treatments tailored to your specific needs. Select a pathway below to learn more about the procedure, benefits, and pricing.
+            </p>
+          </div>
 
-            <motion.div
-              className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
-              variants={itemVariants}
-            >
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs">
-                  <thead className="bg-slate-50 border-b border-slate-200">
-                    <tr>
-                      <th className="px-6 py-4 text-left font-raleway font-bold text-slate-900">
-                        Feature
-                      </th>
-                      <th className="px-6 py-4 text-left font-raleway font-bold text-slate-900">
-                        P-Shot (Priapus Shot®)
-                      </th>
-                      <th className="px-6 py-4 text-left font-raleway font-bold text-slate-900">
-                        Exomine® P-Shot (Priapus Shot®)
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    <tr>
-                      <td className="px-6 py-4 font-inter font-bold text-slate-700">
-                        Type of PRP
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        Standard PRP (Platelet-Rich Plasma)
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        Exomine PRP – platelets stressed so growth factors are
-                        released outside the platelets
-                      </td>
-                    </tr>
-                    <tr className="bg-slate-50/50">
-                      <td className="px-6 py-4 font-inter font-bold text-slate-700">
-                        Growth Factor Release
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        Gradual release over time as platelets break down
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        Growth factors are already active and ready to work
-                        immediately
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 font-inter font-bold text-slate-700">
-                        Procedure Time
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        ~30-45 minutes
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        ~60 minutes (extra preparation steps)
-                      </td>
-                    </tr>
-                    <tr className="bg-slate-50/50">
-                      <td className="px-6 py-4 font-inter font-bold text-slate-700">
-                        Course of Treatment
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        May require up to 3 injections depending on history
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        May require up to 3 injections depending on history
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 font-inter font-bold text-slate-700">
-                        Best For
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        Mild-moderate ED, sensitivity loss, confidence issues,
-                        Peyronie&apos;s disease (early cases)
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        Longstanding or severe ED, diabetes-related ED, poor
-                        response to standard PRP, Peyronie&apos;s disease (more
-                        advanced cases)
-                      </td>
-                    </tr>
-                    <tr className="bg-slate-50/50">
-                      <td className="px-6 py-4 font-inter font-bold text-slate-700">
-                        Cost
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        £1,300–£1,500 (at Healing-PRP Clinics)
-                      </td>
-                      <td className="px-6 py-4 font-inter text-slate-600">
-                        £1,500–£1,700 (at Healing-PRP Clinics)
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          {/* 2-Column Grid for Big Dark Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {treatmentCards.map((card, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.3, delay: idx * 0.05 }}
+                className="bg-[#0f172a] rounded-[2rem] p-8 md:p-10 border border-slate-800 shadow-xl hover:shadow-2xl hover:border-[#4041d1]/50 transition-all duration-300 flex flex-col h-full group relative overflow-hidden"
+              >
+                {/* Subtle hover gradient inside card */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#4041d1]/0 via-transparent to-[#4041d1]/0 group-hover:from-[#4041d1]/10 transition-colors duration-500 pointer-events-none"></div>
 
-     {/* Reusable CTA Bar */}
-      <section className="py-12 bg-white border-t border-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-center items-center gap-4">
-          <Link
-            href={pricesUrl}
-            className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex items-center gap-2"
-          >
-            View Treatment Prices
-          </Link>
-          <Link
-            href={faqUrl}
-            className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-[#4041d1]/5 bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex items-center gap-2"
-          >
-            View Clinic FAQs
-          </Link>
-        </div>
-      </section>
+                {/* Card Header */}
+                <div className="flex items-center gap-4 mb-6 relative z-10">
+                  <div className="w-14 h-14 bg-[#4041d1]/20 text-[#4041d1] rounded-2xl flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <card.icon />
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#4041d1] block mb-1">
+                      {card.category}
+                    </span>
+                    <h4 className="text-2xl font-raleway font-bold text-white">
+                      {card.title}
+                    </h4>
+                  </div>
+                </div>
 
-      {/* FAQs Section */}
-      <section id="faqs" className="py-12 lg:py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-          >
-            <motion.div
-              className="flex justify-center mb-2"
-              variants={itemVariants}
-            >
-              <div className="inline-block px-4 py-2 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-inter font-bold uppercase tracking-wider">
-                Frequently Asked Questions
-              </div>
-            </motion.div>
-            <motion.h2
-              className="md:text-3xl text-xl tracking-tight font-raleway font-bold text-slate-900 leading-tight text-center mb-6"
-              variants={itemVariants}
-            >
-              Common Questions About PRP Treatments
-            </motion.h2>
+                {/* Description */}
+                <p className="text-slate-200 font-inter text-sm md:text-base leading-relaxed mb-8 relative z-10">
+                  {card.description}
+                </p>
 
-            <motion.p
-              className="md:text-sm text-xs font-inter text-slate-600 mx-auto leading-relaxed text-center max-w-2xl"
-              variants={itemVariants}
-            >
-              Find answers to the most frequently asked questions about our PRP
-              treatments and services in {locationName}.
-            </motion.p>
-            <motion.div
-              className="space-y-4 mt-8"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={containerVariants}
-            >
-              {faqs.map((faq, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
-                  variants={itemVariants}
+                {/* Bullet Points */}
+                <ul className="space-y-4 mb-10 flex-grow relative z-10">
+                  {card.bullets.map((bullet, bIdx) => (
+                    <li key={bIdx} className="flex items-start gap-3">
+                      <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0" />
+                      <span className="text-slate-100 text-sm font-medium">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Card CTA */}
+                <Link
+                  href={card.link}
+                  className="w-full py-4 px-6 bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-inter font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 relative z-10 group/btn shadow-lg shadow-[#4041d1]/20"
                 >
-                  <motion.button
-                    className="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50 transition-colors duration-300"
-                    onClick={() => toggleFAQ(index)}
-                  >
-                    <h3 className="md:text-base text-sm font-raleway font-bold text-slate-900 pr-4 leading-relaxed">
-                      {faq.question}
-                    </h3>
+                  Explore Treatment <FaArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- THE SCIENCE: HOW REGENERATION WORKS --- */}
+      <section className="py-20 lg:py-28 bg-[#0A1128] text-white relative overflow-hidden border-t border-white/5">
+        {/* Background glow */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none transform-gpu" />
+        
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-raleway font-bold mb-6">
+              The Science of Regeneration
+            </h2>
+            <p className="text-slate-200 text-lg leading-relaxed max-w-3xl mx-auto font-inter">
+              We utilise advanced Platelet-Rich Plasma (PRP) and Exosome therapies to target the root causes of sexual dysfunction—not just mask the symptoms.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="p-6">
+              <div className="w-16 h-16 mx-auto bg-white/10 rounded-full flex items-center justify-center text-blue-400 text-2xl mb-6">
+                <FaSyringe />
+              </div>
+              <h4 className="text-xl font-bold font-raleway mb-3">1. Autologous Healing</h4>
+              <p className="text-slate-200 text-sm leading-relaxed font-inter">
+                We draw a small sample of your own blood, eliminating the risk of allergic reactions or rejection.
+              </p>
+            </div>
+            
+            <div className="p-6 border-t md:border-t-0 md:border-l border-white/10">
+              <div className="w-16 h-16 mx-auto bg-white/10 rounded-full flex items-center justify-center text-blue-400 text-2xl mb-6">
+                <FaDna />
+              </div>
+              <h4 className="text-xl font-bold font-raleway mb-3">2. Concentration</h4>
+              <p className="text-slate-200 text-sm leading-relaxed font-inter">
+                Using a medical centrifuge, we isolate the platelets, which contain hundreds of powerful growth factors and signaling proteins.
+              </p>
+            </div>
+
+            <div className="p-6 border-t md:border-t-0 md:border-l border-white/10">
+              <div className="w-16 h-16 mx-auto bg-white/10 rounded-full flex items-center justify-center text-blue-400 text-2xl mb-6">
+                <FaHeartbeat />
+              </div>
+              <h4 className="text-xl font-bold font-raleway mb-3">3. Angiogenesis</h4>
+              <p className="text-slate-200 text-sm leading-relaxed font-inter">
+                When injected into target areas, these factors stimulate the creation of new blood vessels (angiogenesis) and rejuvenate nerve pathways.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- FAQs Section with Show More functionality --- */}
+      <section id="faqs" className="py-20 lg:py-28 bg-white border-t border-slate-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* --- ACTION BUTTONS ROW (From ED Page) --- */}
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4 w-full mb-16">
+            <button
+              onClick={handleAction}
+              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg shadow-[#4041d1]/20 active:scale-95"
+            >
+              <FaEnvelope className="w-4 h-4" /> Book Consultation
+            </button>
+
+            <Link
+              href={pricesUrl}
+              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg shadow-[#4041d1]/20"
+            >
+              View Treatment Prices
+            </Link>
+            
+            <Link
+              href={faqUrl}
+              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-blue-50 bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2"
+            >
+              View Clinic FAQs
+            </Link>
+          </div>
+
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
+              Common Questions
+            </h2>
+            <p className="text-slate-600 font-inter">Find answers regarding safety, discretion, and our general clinical approach.</p>
+          </div>
+          
+          <div className="space-y-4">
+            {displayedFaqs.map((faq, index) => (
+              <div key={index} className="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <button
+                  className="w-full p-6 text-left flex items-center justify-between hover:bg-slate-100 transition-colors duration-300"
+                  onClick={() => toggleFAQ(index)}
+                >
+                  <h3 className="font-raleway font-bold text-slate-900 pr-4">
+                    {faq.question}
+                  </h3>
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${openFAQIndex === index ? 'bg-[#4041d1] text-white' : 'bg-[#4041d1]/10 text-[#4041d1]'}`}>
+                    {openFAQIndex === index ? <FaMinus className="w-3 h-3" /> : <FaPlus className="w-3 h-3" />}
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {openFAQIndex === index && (
                     <motion.div
-                      className="flex-shrink-0 w-8 h-8 bg-[#4041d1]/10 rounded-full flex items-center justify-center"
-                      animate={{ rotate: openFAQIndex === index ? 180 : 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
                     >
-                      <motion.div
-                        animate={{
-                          opacity: openFAQIndex === index ? 0 : 1,
-                          scale: openFAQIndex === index ? 0 : 1,
-                        }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <FaPlus className="w-3 h-3 text-[#4041d1]" />
-                      </motion.div>
-                      <motion.div
-                        className="absolute"
-                        animate={{
-                          opacity: openFAQIndex === index ? 1 : 0,
-                          scale: openFAQIndex === index ? 1 : 0,
-                        }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <FaMinus className="w-3 h-3 text-[#4041d1]" />
-                      </motion.div>
+                      <div className="px-6 pb-6 pt-2 border-t border-slate-200/60 mt-2">
+                        <p className="font-inter text-sm text-slate-600 leading-relaxed font-medium">
+                          {faq.answer}
+                        </p>
+                      </div>
                     </motion.div>
-                  </motion.button>
-                  <AnimatePresence>
-                    {openFAQIndex === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-6">
-                          <div className="border-t border-slate-100 pt-4">
-                            <p className="font-inter text-sm text-slate-600 leading-relaxed">
-                              {faq.answer}
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+
+          {/* Toggle All FAQs Button */}
+          {faqs.length > 5 && (
+            <div className="mt-8 text-center">
+              <button
+                onClick={() => setShowAllFaqs(!showAllFaqs)}
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-[#4041d1]/5 rounded-xl font-inter font-bold transition-all duration-300"
+              >
+                {showAllFaqs ? "Show Less FAQs" : "View All FAQs"}
+                <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${showAllFaqs ? "rotate-180" : ""}`} />
+              </button>
+            </div>
+          )}
+
         </div>
       </section>
 
