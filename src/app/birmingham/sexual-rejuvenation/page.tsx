@@ -3,10 +3,10 @@ import SexualRejuvenationClient from "@/components/pages/SexualRejuvenationClien
 
 export const metadata: Metadata = {
   // 1. Short Clean Title: Template will add "| Birmingham Clinic"
-  title: "Erectile Dysfunction & P-Shot",
+  title: "Erectile Dysfunction, P-Shot & O-Shot",
   
   description:
-    "Confidential, doctor-led Erectile Dysfunction (ED) treatments in Birmingham Edgbaston. Specialist P-Shot® and O-Shot® PRP therapy for patients in Solihull, Sutton Coldfield, and the West Midlands.",
+    "Confidential, doctor-led sexual rejuvenation & ED treatments in Birmingham. Specialist P-Shot® & O-Shot® PRP therapy serving Solihull & West Midlands.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/sexual-rejuvenation",
