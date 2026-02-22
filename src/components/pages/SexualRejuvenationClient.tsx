@@ -36,10 +36,10 @@ type FaqType = {
 
 type SexualHealthClientProps = {
   locationName?: string;
-  faqs: FaqType[]; // <--- Now expecting FAQs as a prop
+  faqs: FaqType[]; // Expecting FAQs from the Server (page.tsx)
 };
 
-export default function SexualHealthClient({
+export default function SexualRejuvenationClient({
   locationName = "St Albans",
   faqs,
 }: SexualHealthClientProps) {
