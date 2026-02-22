@@ -126,7 +126,7 @@ export default function SexualRejuvenationPage() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map((faq) => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
       acceptedAnswer: {
@@ -137,13 +137,17 @@ export default function SexualRejuvenationPage() {
   };
 
   return (
-    <>
+    <main>
+      {/* Injecting JSON-LD safely. 
+        Note: We use a standard script tag here, safely stringifying the JSON.
+      */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      
       {/* Pass the faqs array as a prop to the client component */}
       <SexualRejuvenationClient locationName="St Albans" faqs={faqs} />
-    </>
+    </main>
   );
 }
