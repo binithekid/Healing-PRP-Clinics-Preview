@@ -4,10 +4,10 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Optimized Title: The layout template will add " | St Albans Clinic"
-  title: "P-Shot, O-Shot & ED Treatments",
+  title: "Erectile Dysfunction, P-Shot & O-Shot",
   
   description:
-    "Doctor-led sexual rejuvenation in St Albans. Specialist P-Shot® (Erectile Dysfunction) & O-Shot® treatments using advanced PRP therapy. Confidential & non-surgical care serving Hertfordshire.",
+    "Doctor-led sexual rejuvenation in St Albans. Specialist P-Shot® (ED) & O-Shot® PRP treatments. Confidential, non-surgical care serving Hertfordshire.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/sexual-rejuvenation",
