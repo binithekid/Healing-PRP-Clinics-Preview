@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   
   // TRIMMED: Exactly 143 characters to guarantee no cut-offs on Google search results
   description:
-    "Official Polynucleotide clinic in Birmingham. Regenerative 'DNA Glow' therapy for dark circles & skin quality by a GMC doctor in Edgbaston.",
+    "Polynucleotides in Birmingham. Doctor-led regenerative DNA Glow therapy for under-eye rejuvenation and skin quality improvement in Edgbaston.",
   
   keywords: [
     // --- Core Service ---
