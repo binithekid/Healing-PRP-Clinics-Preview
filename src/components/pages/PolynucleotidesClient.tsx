@@ -29,14 +29,21 @@ import LocationSection from "@/components/LocationSection";
 import TrustReviews from "@/components/TrustReviews";
 import Image from "next/image";
 
+type FaqType = {
+  question: string;
+  answer: string;
+};
+
 interface PolynucleotidesProps {
   locationName?: string;
   servingAreas?: string;
+  faqs: FaqType[]; // <--- Now expecting FAQs as a prop
 }
 
 export default function PolynucleotidesClient({
   locationName = "St Albans",
   servingAreas = "Harpenden • Luton • Watford • Hertfordshire",
+  faqs,
 }: PolynucleotidesProps) {
   
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
@@ -148,29 +155,6 @@ export default function PolynucleotidesClient({
     },
   ];
 
-  const faqs = [
-    {
-      question: "What exactly are Polynucleotides?",
-      answer: "Polynucleotides are highly purified DNA fragments used in regenerative aesthetics to support collagen stimulation and tissue repair. They act as biostimulators, encouraging the skin’s natural regenerative processes.",
-    },
-    {
-      question: "What makes the DNA Glow Concept™ different?",
-      answer: "Unlike standard treatments that use a single product, our concept combines three powerful modalities: Polynucleotides for deep repair, Non-Cross-Linked HA for hydration, and Microneedling for surface texture. This creates a multi-layered result.",
-    },
-    {
-      question: "Are polynucleotides better than filler?",
-      answer: "They serve different purposes. Fillers add structural volume to change the shape of your face. Polynucleotides improve the quality of the skin itself—making it thicker, hydrated, and more elastic without changing your natural features.",
-    },
-    {
-      question: "How many sessions do I need?",
-      answer: "We typically recommend a course of 3 treatments spaced 2–4 weeks apart to achieve the full effect. Maintenance is usually one session every 6–9 months.",
-    },
-    {
-      question: "Is there downtime?",
-      answer: "Minimal. Because we treat multiple layers of the skin, you may have some redness or small bumps (papules) for 24–48 hours. This is a sign the product is working.",
-    },
-  ];
-
   return (
     <>
       {/* --- HERO SECTION --- */}
@@ -255,7 +239,6 @@ export default function PolynucleotidesClient({
             variants={fadeUpVariants}
             className="inline-flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 px-6 py-3 bg-[#4041d1] text-white rounded-2xl sm:rounded-full text-[10px] md:text-xs mt-8 font-bold uppercase tracking-widest font-inter shadow-lg border border-white/10 max-w-[90%] mx-auto text-center"
           >
-             {/* Updated to text-white so it is bright and crisp! */}
              <div className="flex items-center gap-1.5 text-white">
                <FaMapMarkerAlt className="w-3 h-3" /> 
                <span>Serving:</span>
@@ -419,7 +402,7 @@ export default function PolynucleotidesClient({
             {/* --- THE BEFORE & AFTER SLIDER & BUTTON --- */}
             <div className="lg:w-1/2 relative w-full flex flex-col items-center">
                 <div className="relative h-[450px] w-full bg-slate-200 rounded-[2.5rem] overflow-hidden shadow-2xl transform-gpu group select-none mb-8">
-                   
+                    
                    {/* AFTER IMAGE */}
                    <div className="absolute inset-0 z-0">
                       <Image 
