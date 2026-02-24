@@ -6,46 +6,59 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import {
   FaPlus,
   FaMinus,
-  FaSyringe,
   FaDna,
-  FaCheckCircle,
+  FaSyringe,
+  FaShieldAlt,
   FaEnvelope,
   FaMapMarkerAlt,
-  FaBurn,
-  FaExpandArrowsAlt,
-  FaShieldAlt,
-  FaArrowRight,
-  FaRegClock, 
-  FaLeaf,     
-  FaWalking,  
-  FaUserMd,   
-  FaMicroscope, 
-  FaVial,
+  FaCheckCircle,
+  FaRegClock,
+  FaWalking,
+  FaUserMd,
+  FaMicroscope,
+  FaChevronLeft,
+  FaChevronRight,
   FaGoogle,
   FaStar,
-  FaLock
+  FaLock,
+  FaChevronDown 
 } from "react-icons/fa";
+import { FaWandSparkles } from "react-icons/fa6";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
 import TrustReviews from "@/components/TrustReviews";
+import Image from "next/image";
 
-// --- INTERFACE ---
-interface PShotProps {
+type FaqType = {
+  question: string;
+  answer: string;
+};
+
+interface PolynucleotidesProps {
   locationName?: string;
   servingAreas?: string;
+  faqs: FaqType[];
 }
 
-export default function PShotClient({
+export default function PolynucleotidesClient({
   locationName = "St Albans",
   servingAreas = "Harpenden • Luton • Watford • Hertfordshire",
-}: PShotProps) {
+  faqs,
+}: PolynucleotidesProps) {
   
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(0); 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showAllFaqs, setShowAllFaqs] = useState(false); 
+  
+  // State for the Before/After Slider (starts at 50%)
+  const [sliderPosition, setSliderPosition] = useState(50);
 
+  // Dynamic Links
   const isBirmingham = locationName === "Birmingham";
+  const pricesUrl = isBirmingham ? "/birmingham/prices" : "/prices";
+  const faqUrl = isBirmingham ? "/birmingham/faq" : "/faq";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -56,25 +69,16 @@ export default function PShotClient({
     setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
 
-  // --- ACTION HANDLER ---
   const handleAction = (e: React.MouseEvent) => {
     e.preventDefault();
     window.dispatchEvent(new CustomEvent("open-contact-drawer"));
     setTimeout(() => {
       const section = document.getElementById("contact-form-section");
-      if (section) {
-        const headerOffset = 100;
-        const elementPosition = section.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - headerOffset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
+      if (section) section.scrollIntoView({ behavior: "smooth" });
     }, 100);
   };
 
-  // --- VARIANTS ---
+  // Animation Variants
   const fadeUpVariants: Variants = {
     hidden: { opacity: 0, y: 15 },
     visible: (i: number) => ({
@@ -86,7 +90,10 @@ export default function PShotClient({
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+    },
   };
 
   const itemVariants = {
@@ -94,167 +101,149 @@ export default function PShotClient({
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
-  // --- DATA ---
+  // --- DATA: The DNA Glow Concept (Benefits) ---
   const benefits = [
     {
-      title: "Erectile Strength",
-      description:
-        "Improved blood flow and tissue support may contribute to firmer, more sustainable erections in suitable patients.",
-      icon: FaBurn,
-      color: "bg-rose-50 text-rose-600",
-    },
-    {
-      title: "Enhanced Sensitivity",
-      description:
-        "Supporting nerve responsiveness and tissue health may improve sensation and overall sexual experience.",
+      title: "Deep Repair – Polynucleotides",
+      description: "Supports collagen stimulation and tissue repair within the dermis, improving skin quality, resilience, and overall texture over time.",
       icon: FaDna,
-      color: "bg-indigo-50 text-indigo-600",
+      color: "bg-blue-50 text-blue-600",
+      hoverBorder: "hover:border-blue-100",
+      hoverShadow: "hover:shadow-blue-900/5",
     },
     {
-      title: "Support for Peyronie’s",
-      description:
-        "May support tissue quality in selected cases where curvature or scar tissue are contributing factors.",
-      icon: FaExpandArrowsAlt,
+      title: "Internal Hydration – Non-Cross-Linked HA",
+      description: "Delivers evenly distributed dermal hydration without adding structural volume, supporting smoother, more luminous skin.",
+      icon: FaSyringe,
+      color: "bg-purple-50 text-purple-600",
+      hoverBorder: "hover:border-purple-100",
+      hoverShadow: "hover:shadow-purple-900/5",
+    },
+    {
+      title: "Surface Optimisation – Microneedling",
+      description: "Enhances product absorption and refines skin texture and pore appearance, contributing to a more polished and even finish.",
+      icon: FaMicroscope,
       color: "bg-teal-50 text-teal-600",
-    },
-    {
-      title: "Improved Fullness",
-      description:
-        "Some patients report improved firmness or fullness as tissue health and vascular function improve over time.",
-      icon: FaExpandArrowsAlt,
-      color: "bg-[#f0f0ff] text-[#4041d1]",
+      hoverBorder: "hover:border-teal-100",
+      hoverShadow: "hover:shadow-teal-900/5",
     },
   ];
 
+  // --- DATA: Protocol Steps ---
   const protocolSteps = [
     {
       number: 1,
-      icon: FaSyringe,
-      title: "Blood Draw",
-      description: "A small amount of blood is drawn from your arm, similar to a standard blood test. Quick and simple.",
+      icon: FaUserMd,
+      title: "Assessment",
+      description: "We assess your skin quality and target areas to ensure the DNA Glow Concept™ is the perfect match for your goals.",
     },
     {
       number: 2,
-      icon: FaDna,
-      title: "PRP Preparation",
-      description: "Your blood is spun in a centrifuge to separate the Platelet-Rich Plasma (PRP), concentrating healing factors.",
+      icon: FaShieldAlt,
+      title: "Preparation",
+      description: "Your skin is deeply cleaned and a potent numbing cream is applied to ensure the procedure is comfortable.",
     },
     {
       number: 3,
-      icon: FaShieldAlt,
-      title: "Numbing Application",
-      description: "A potent local anaesthetic cream is applied to ensure the procedure is comfortable and virtually pain-free.",
+      icon: FaSyringe,
+      title: "Delivery & Texture",
+      description: "We use micro-injections for depth and microneedling for surface texture to ensure even distribution.",
     },
     {
       number: 4,
-      icon: FaSyringe,
-      title: "The Injection",
-      description: "The PRP is injected into specific areas of the penis using a tiny needle. The process takes just a few minutes.",
+      icon: FaRegClock,
+      title: "Recovery",
+      description: "You may see tiny bumps (papules) or redness. This is normal and usually settles within 24 hours.",
     },
   ];
 
-  const faqs = [
-    {
-      question: "Is the P-Shot painful?",
-      answer:
-        "Local anaesthetic is used to maximise comfort during the procedure. Most patients describe the treatment as well tolerated, with only mild temporary discomfort at the injection sites.",
-    },
-    {
-      question: "How long does the procedure take?",
-      answer:
-        "The full appointment usually lasts around 45–60 minutes. This includes consultation review, blood collection, PRP preparation, and the treatment itself.",
-    },
-    {
-      question: "When might I notice changes?",
-      answer:
-        "Individual responses vary. Some men notice gradual changes within a few weeks, while regenerative processes may continue to develop over several months as tissue healing occurs.",
-    },
-    {
-      question: "Is the P-Shot permanent?",
-      answer:
-        "PRP therapy is not considered a permanent treatment. While some men report sustained improvement, results vary and may gradually change over time depending on age, vascular health, and lifestyle factors. Maintenance treatment can be discussed where appropriate.",
-    },
-    {
-      question: "How long may the effects last?",
-      answer:
-        "Duration varies depending on age, vascular health, and underlying conditions. Some patients report sustained improvement for many months, and maintenance treatment may be discussed where appropriate.",
-    },
-    {
-      question: "Are there any side effects?",
-      answer:
-        "Because PRP is derived from your own blood, the risk of allergic reaction is extremely low. Temporary swelling, mild bruising, or tenderness at the injection site can occur and usually settles within a few days.",
-    },
-  ];
+  // --- Slice FAQs based on state ---
+  const displayedFaqs = showAllFaqs ? faqs : faqs.slice(0, 5);
 
   return (
     <>
       {/* --- HERO SECTION --- */}
       <div className="relative md:h-[calc(100vh-4rem)] pb-5 md:pb-0 lg:h-[calc(100vh-5rem)] overflow-hidden flex items-center justify-center bg-black">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/60 z-10" /> 
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80 z-10" />
-          <img 
-            src="/ed-doctor-consultation.webp" 
-            alt="P-Shot treatment consultation" 
-            className="absolute inset-0 w-full h-full object-cover"
-            onError={(e) => (e.currentTarget.src = "/ed-doctor-consultation.webp")}
+          <div className="absolute inset-0 bg-black/40 z-10" /> 
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-10" />
+          <Image 
+            src="/polynucleotides-hero.webp" 
+            alt="Polynucleotides Skin Treatment" 
+            fill
+            className="object-cover opacity-90"
+            priority
+            onError={(e) => {
+               e.currentTarget.style.display = 'none';
+            }}
           />
         </div>
 
-        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16">
+        {/* --- FIXED: Added md:pb-24 to push the content up off the footer! --- */}
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 md:pb-24">
+          <motion.div 
+            custom={0}
+            initial="hidden"
+            animate={isLoaded ? "visible" : "hidden"}
+            variants={fadeUpVariants}
+            className="inline-block px-4 py-1.5 mb-4 border border-blue-400/30 rounded-full bg-blue-900/20 backdrop-blur-sm transform-gpu"
+          >
+            <span className="text-blue-200 text-xs font-bold tracking-widest uppercase font-inter">Regenerative Aesthetics</span>
+          </motion.div>
+
           <motion.h1 
             custom={1}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="md:text-5xl text-3xl font-bold font-raleway text-white leading-tight mb-3 tracking-tight"
+            className="text-[28px] sm:text-3xl md:text-5xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
           >
-            The P-Shot (Priapus Shot)<br />
-            <span className="block mt-2">Healing-PRP Clinics, {locationName}</span>
+            Polynucleotides in <br className="sm:hidden" /> {locationName}
+            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-purple-200">
+              The DNA Glow Concept™
+            </span>
+            <span className="block text-xl sm:text-2xl md:text-3xl text-white/80 mt-2 font-medium">
+              Healing-PRP Clinics
+            </span>
           </motion.h1>
 
-          <motion.h2 
+         <motion.p 
             custom={2}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="mt-1 md:text-lg text-base text-blue-100 font-medium font-raleway leading-relaxed"
+            /* FIXED: Changed mb-8 to mb-6 to tighten spacing */
+            className="mt-4 text-sm md:text-lg text-white/90 font-inter leading-relaxed max-w-4xl mx-auto mb-6 px-2"
           >
-            Advanced Platelet-Rich Plasma (PRP) Therapy for Men
-          </motion.h2>
+            A doctor-led regenerative treatment combining polynucleotides, non-cross-linked
+            <br className="hidden md:block" />{" "}
+            hyaluronic acid, and precision microneedling to enhance skin quality, resilience, and natural luminosity
+            <br className="hidden md:block" />{" "}
+            through our structured three-dimensional approach.
+          </motion.p>
 
-          <motion.p 
+          <motion.div 
             custom={3}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="mt-3 text-sm md:text-base text-white/80 font-inter leading-relaxed max-w-2xl mx-auto mb-8"
+            className="flex justify-center"
           >
-            A natural, non-surgical treatment designed to rejuvenate tissue, 
-            enhance performance, and improve vascular health using your body’s own healing factors.
-          </motion.p>
-
+            <button 
+              onClick={handleAction}
+              className="px-8 py-4 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] text-white hover:bg-[#2a2bb8] rounded-xl font-bold transition duration-300 ease-out gap-2 shadow-xl shadow-[#4041d1]/20 active:scale-95 font-inter transform-gpu"
+            >
+              <FaEnvelope className="w-4 h-4" /> Book Consultation
+            </button>
+          </motion.div>
+          
           <motion.div 
             custom={4}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <button 
-              onClick={handleAction}
-              className="px-10 py-3.5 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-xl shadow-[#4041d1]/20 active:scale-95 font-inter"
-            >
-              <FaEnvelope className="w-4 h-4" /> Book Consultation
-            </button>
-          </motion.div>
-
-          <motion.div 
-            custom={5}
-            initial="hidden"
-            animate={isLoaded ? "visible" : "hidden"}
-            variants={fadeUpVariants}
-            className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-[#4041d1] text-white rounded-full text-[10px] md:text-xs mt-8 font-bold uppercase tracking-widest font-inter shadow-lg border border-white/10"
+            /* FIXED: Changed mt-8 to mt-6 to tighten spacing */
+            className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-[#4041d1] text-white rounded-full text-[10px] md:text-xs mt-6 font-bold uppercase tracking-widest font-inter shadow-lg border border-white/10"
           >
              <FaMapMarkerAlt className="text-white/80 mb-0.5" /> 
              <span>Serving: {servingAreas}</span>
@@ -266,7 +255,6 @@ export default function PShotClient({
           <div className="px-2 py-4 max-w-7xl mx-auto">
             <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
               
-              {/* 1. Google 5-Star Link */}
               <a href="#reviews" onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -286,7 +274,6 @@ export default function PShotClient({
                 </div>
               </a>
 
-              {/* 2. Experience Badge */}
               <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-[#4041d1] rounded-full flex items-center justify-center text-white font-bold text-[12px] shadow-md border border-white/10">
@@ -299,7 +286,6 @@ export default function PShotClient({
                 </div>
               </div>
 
-              {/* 3. GMC Badge */}
               <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-[#1f3a68] rounded-full flex items-center justify-center text-white font-bold text-[11px] shadow-md border border-white/10">
@@ -307,12 +293,11 @@ export default function PShotClient({
                   </div>
                   <div className="flex flex-col items-start">
                     <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Registered</span>
-                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctor</span>
+                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctors</span>
                   </div>
                 </div>
               </div>
 
-              {/* 4. Privacy & Discreet Care */}
               <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center text-slate-300 shadow-md border border-white/10">
@@ -329,60 +314,161 @@ export default function PShotClient({
           </div>
         </div>
       </div>
-
-      {/* --- BENEFITS SECTION --- */}
-      <section className="py-24 bg-slate-50 font-inter relative z-30">
+      
+     {/* --- LIGHT SECTION 1: What Makes Us Different & The Concept --- */}
+      <section className="py-20 bg-white font-inter">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6"
-            >
-              Potential Benefits of the P-Shot
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-slate-600 text-lg leading-relaxed font-inter"
-            >
-              By stimulating growth factors, the P-Shot aims to rejuvenate penile tissue, leading to improved function and sensation.
-            </motion.p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 hover:border-[#4041d1]/20 transition-all duration-300 flex flex-col h-full group cursor-default"
-              >
-                <div
-                  className={`w-14 h-14 rounded-2xl ${benefit.color} flex items-center justify-center mb-6 text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}
-                >
-                  <benefit.icon />
-                </div>
-                <h3 className="text-xl font-raleway font-bold text-slate-900 mb-3 group-hover:text-[#4041d1] transition-colors">
-                  {benefit.title}
-                </h3>
-                <p className="text-slate-600 text-sm leading-relaxed font-inter">
-                  {benefit.description}
+            
+            <div className="text-center mb-16">
+                <span className="text-[#4041d1] font-bold tracking-widest text-xs uppercase mb-2 block">Our Signature Protocol</span>
+                <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
+                  What Makes Our Polynucleotide Treatment Different?
+                </h2>
+                <p className="text-slate-600 leading-relaxed max-w-3xl mx-auto">
+                  Unlike standard single-product approaches, our doctor-led protocol is built around a
+                  structured, three-dimensional concept designed to support deeper skin regeneration,
+                  internal hydration, and refined surface quality. This creates a more balanced and
+                  natural result that evolves gradually through the skin’s own restorative processes.
                 </p>
-              </motion.div>
-            ))}
+                <div className="w-24 h-1 bg-[#4041d1] mx-auto mt-8 rounded-full transform-gpu"></div>
+            </div>
+
+            <div className="text-center mb-12">
+                <h3 className="text-2xl font-raleway font-bold text-slate-900 mb-4">
+                  What Are Polynucleotides?
+                </h3>
+                <p className="text-slate-600 leading-relaxed max-w-3xl mx-auto mb-12 text-lg font-inter">
+                  Polynucleotides are highly purified DNA fragments used in regenerative medicine to
+                  support collagen stimulation, hydration, and tissue repair. They work as biostimulators,
+                  creating an optimal environment for the skin to renew itself naturally.
+                </p>
+                <h3 className="text-2xl md:text-3xl font-raleway font-bold text-slate-900 mb-2">
+                  The DNA Glow Concept™
+                </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {benefits.map((benefit, index) => {
+                  const Icon = benefit.icon;
+                  return (
+                    <div key={index} className={`relative group p-8 rounded-[2rem] bg-slate-50 border border-slate-100 ${benefit.hoverBorder} ${benefit.hoverShadow} transition duration-300 transform-gpu hover:-translate-y-1`}>
+                        <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
+                            <Icon className="w-24 h-24" />
+                        </div>
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm ${benefit.color}`}>
+                            <Icon />
+                        </div>
+                        <h3 className="text-xl font-raleway font-bold text-slate-900 mb-3">{benefit.title}</h3>
+                        <p className="text-slate-600 leading-relaxed text-sm">
+                            {benefit.description}
+                        </p>
+                    </div>
+                  );
+                })}
+            </div>
+
+        </div>
+      </section>
+
+      {/* --- LIGHT SECTION 2: What Can Polynucleotides Help Improve? (WITH SLIDER) --- */}
+      <section className="py-20 bg-slate-50 font-inter border-t border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6 leading-tight">
+                What Can Polynucleotides <span className="text-[#4041d1]">Help Improve?</span>
+              </h2>
+              <p className="text-slate-600 text-lg leading-relaxed mb-8">
+                Polynucleotides are commonly used to support improvement in:
+              </p>
+              
+              <ul className="space-y-4 mb-8">
+                {[
+                  "Under-eye dark circles and crepey skin",
+                  "Fine lines and early textural ageing",
+                  "Dull or dehydrated skin",
+                  "Mild acne scarring",
+                  "Neck and décolletage skin quality"
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm transform-gpu">
+                    <FaCheckCircle className="text-[#4041d1] text-xl shrink-0" />
+                    <span className="text-slate-700 font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* --- THE BEFORE & AFTER SLIDER & BUTTON --- */}
+            <div className="lg:w-1/2 relative w-full flex flex-col items-center">
+                <div className="relative h-[450px] w-full bg-slate-200 rounded-[2.5rem] overflow-hidden shadow-2xl transform-gpu group select-none mb-8">
+                    
+                   {/* AFTER IMAGE */}
+                   <div className="absolute inset-0 z-0">
+                      <Image 
+                        src="/polynucleotides-after.webp" 
+                        alt="After Treatment"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute top-4 right-6 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-bold tracking-widest uppercase">
+                        After
+                      </div>
+                   </div>
+
+                   {/* BEFORE IMAGE */}
+                   <div 
+                      className="absolute inset-0 z-10 will-change-transform transform-gpu"
+                      style={{ clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)` }}
+                   >
+                      <Image 
+                        src="/polynucleotides-before.webp" 
+                        alt="Before Treatment"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute top-4 left-6 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-bold tracking-widest uppercase">
+                        Before
+                      </div>
+                   </div>
+
+                   {/* SLIDER HANDLE */}
+                   <div 
+                      className="absolute inset-y-0 z-20 w-1 bg-white pointer-events-none transform-gpu"
+                      style={{ left: `calc(${sliderPosition}% - 2px)` }}
+                   >
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.3)] flex items-center justify-center transition-transform group-hover:scale-110">
+                         <FaChevronLeft className="text-slate-600 w-3 h-3 ml-0.5" />
+                         <FaChevronRight className="text-slate-600 w-3 h-3 mr-0.5" />
+                      </div>
+                   </div>
+
+                   {/* INVISIBLE RANGE INPUT */}
+                   <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={sliderPosition}
+                      onChange={(e) => setSliderPosition(Number(e.target.value))}
+                      className="absolute inset-0 z-30 w-full h-full opacity-0 cursor-ew-resize"
+                   />
+                </div>
+                
+                {/* BLUE BUTTON UNDER SLIDER */}
+                <button 
+                  onClick={handleAction}
+                  className="px-8 py-4 w-full sm:w-auto inline-flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] text-white hover:bg-blue-700 rounded-xl font-bold transition duration-300 ease-out transform-gpu gap-2 shadow-lg hover:shadow-[0_0_20px_rgba(64,65,209,0.3)] active:scale-95 font-inter"
+                >
+                  <FaEnvelope className="w-4 h-4" /> Book Consultation
+                </button>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* --- PROTOCOL SECTION (Updated with Quick Facts) --- */}
+      {/* --- DARK SECTION 1: THE PROCEDURE & QUICK FACTS --- */}
       <section
-        className="relative py-20 lg:py-28 bg-[#0A1128] overflow-hidden font-inter"
+        className="relative py-20 lg:py-28 bg-[#0A1128] overflow-hidden font-inter border-t border-slate-800"
         style={{
           backgroundImage:
             "radial-gradient(circle at 10% 10%, rgba(64, 65, 209, 0.15) 0%, transparent 40%)",
@@ -397,7 +483,7 @@ export default function PShotClient({
             variants={containerVariants}
           >
             <motion.div
-              className="inline-block px-5 py-2 bg-[#4041d1]/20 text-[#8ea3ff] rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 border border-[#4041d1]/30 font-raleway shadow-[0_0_15px_rgba(64,65,209,0.1)]"
+              className="inline-block px-5 py-2 bg-[#4041d1]/20 text-[#8ea3ff] rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 border border-[#4041d1]/30 font-raleway shadow-[0_0_15px_rgba(64,65,209,0.1)] transform-gpu"
               variants={itemVariants}
             >
               The Procedure
@@ -406,17 +492,17 @@ export default function PShotClient({
               className="text-3xl md:text-5xl font-raleway font-bold text-white leading-tight mb-8 tracking-tight"
               variants={itemVariants}
             >
-              Simple, Safe & Effective
+              Structured Clinical Assessment
             </motion.h2>
             <motion.p
               className="text-lg text-slate-200 leading-relaxed max-w-3xl mx-auto font-medium font-inter"
               variants={itemVariants}
             >
-              The P-Shot is a straightforward in-clinic procedure that uses the healing power of your own blood. There is no surgery, and downtime is minimal.
+              A straightforward, doctor-led procedure designed to minimise discomfort and downtime while maximising skin regeneration.
             </motion.p>
           </motion.div>
 
-          <div className="max-w-6xl mx-auto mt-12 relative">
+         <div className="max-w-6xl mx-auto mt-12 relative">
             {/* Steps Visualizer */}
             <div className="text-center mb-12">
               <AnimatePresence mode="wait">
@@ -426,7 +512,7 @@ export default function PShotClient({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -5 }}
                   transition={{ duration: 0.2 }}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-[#4041d1]/20 border border-[#4041d1]/50 rounded-full shadow-[0_0_25px_rgba(64,65,209,0.3)] backdrop-blur-md"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-[#4041d1]/30 border border-[#4041d1]/50 rounded-full shadow-[0_0_25px_rgba(64,65,209,0.3)] transform-gpu"
                 >
                   <span className="flex h-3 w-3 rounded-full bg-[#4041d1] animate-pulse shadow-[0_0_10px_#4041d1]" />
                   <span className="text-sm font-bold text-white uppercase tracking-[0.2em] font-raleway">
@@ -445,25 +531,25 @@ export default function PShotClient({
               viewport={{ once: true }}
             >
               <div className="hidden lg:block absolute top-[100px] left-0 w-full h-[1px] border-t border-dashed border-white/10 -z-10" />
-              {protocolSteps.map((step, index) => {
+             {protocolSteps.map((step, index) => {
                 const IconComponent = step.icon;
                 const isActive = activeStep === index;
                 return (
                   <motion.div
                     key={index}
                     className="relative group cursor-pointer"
-                    onClick={() => setActiveStep(index)}
+                    onPointerDown={() => setActiveStep(index)}
                     variants={itemVariants}
                   >
                     <div
-                      className={`p-6 rounded-[2.5rem] border transition-all duration-300 h-full flex flex-col ${
+                      className={`p-6 rounded-[2.5rem] border transition duration-300 ease-out transform-gpu h-full flex flex-col ${
                         isActive
                           ? "border-[#4041d1] bg-white shadow-[0_0_40px_rgba(64,65,209,0.2)] scale-105 z-20"
                           : "border-white/10 bg-white/[0.03] opacity-80 hover:opacity-100 hover:bg-white/[0.07]"
                       }`}
                     >
                       <div
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 ${
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition duration-300 ease-out transform-gpu ${
                           isActive
                             ? "bg-[#4041d1] text-white shadow-lg scale-110"
                             : "bg-white/10 text-slate-300 group-hover:text-[#4041d1] group-hover:scale-105"
@@ -472,14 +558,14 @@ export default function PShotClient({
                         <IconComponent className="w-6 h-6" />
                       </div>
                       <h3
-                        className={`font-raleway font-bold mb-3 text-lg transition-colors ${
+                        className={`font-raleway font-bold mb-3 text-lg transition-colors duration-300 ${
                           isActive ? "text-slate-900" : "text-white"
                         }`}
                       >
                         {step.title}
                       </h3>
                       <p
-                        className={`text-xs leading-relaxed font-inter transition-colors ${
+                        className={`text-xs leading-relaxed font-inter transition-colors duration-300 ${
                           isActive ? "text-slate-600 font-medium" : "text-slate-400"
                         }`}
                       >
@@ -499,36 +585,32 @@ export default function PShotClient({
                transition={{ delay: 0.4 }}
                className="grid grid-cols-2 md:grid-cols-4 gap-4"
             >
-              {/* Card 1: Time */}
-              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors">
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors duration-300 transform-gpu">
                    <FaRegClock className="text-[#4041d1] text-xl mb-2" />
                    <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Time</div>
-                   <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">Approx. 60 Mins</div>
-                   <div className="text-slate-500 text-[10px] font-medium">Includes consultation & prep</div>
+                   <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">30-45 Mins</div>
+                   <div className="text-slate-500 text-[10px] font-medium">Inc. numbing time</div>
               </div>
 
-              {/* Card 2: Comfort */}
-              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors">
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors duration-300 transform-gpu">
                    <FaShieldAlt className="text-[#4041d1] text-xl mb-2" />
                    <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Comfort</div>
-                   <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">Local Anaesthetic</div>
-                   <div className="text-slate-500 text-[10px] font-medium">Well tolerated</div>
+                   <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">Minimal Pain</div>
+                   <div className="text-slate-500 text-[10px] font-medium">Numbing cream used</div>
               </div>
 
-              {/* Card 3: Downtime */}
-              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors">
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors duration-300 transform-gpu">
                    <FaWalking className="text-[#4041d1] text-xl mb-2" />
                    <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Downtime</div>
-                   <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">Little to None</div>
-                   <div className="text-slate-500 text-[10px] font-medium">Resume daily activities</div>
+                   <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">~24 Hours</div>
+                   <div className="text-slate-500 text-[10px] font-medium">For papules to settle</div>
               </div>
 
-              {/* Card 4: Method */}
-              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors">
-                   <FaUserMd className="text-[#4041d1] text-xl mb-2" />
-                   <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Treatment</div>
-                   <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">Autologous PRP</div>
-                   <div className="text-slate-500 text-[10px] font-medium">Your own growth factors</div>
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors duration-300 transform-gpu">
+                   <FaDna className="text-[#4041d1] text-xl mb-2" />
+                   <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Course</div>
+                   <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">3 Sessions</div>
+                   <div className="text-slate-500 text-[10px] font-medium">For optimal results</div>
               </div>
             </motion.div>
 
@@ -536,331 +618,144 @@ export default function PShotClient({
         </div>
       </section>
 
-      {/* --- NEW SECTION: EXO-P SHOT (ADVANCED OPTION) --- */}
-      <section className="py-24 bg-gradient-to-br from-[#f8f9ff] to-white relative overflow-hidden font-inter border-t border-slate-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center mb-16">
-            <div className="inline-block px-4 py-1.5 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-[#4041d1]/20">
-              Advanced Option
-            </div>
-            <h2 className="text-3xl md:text-5xl font-raleway font-bold text-slate-900 mb-6 leading-tight">
-              The Exo-P Shot
+      {/* --- LIGHT SECTION 3: Treatment Effect --- */}
+      <section className="py-20 bg-white font-inter">
+         <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-3xl font-raleway font-bold text-slate-900 mb-6">
+              Treatment Effect & Recovery
             </h2>
-            <p className="text-slate-600 text-lg leading-relaxed max-w-3xl mx-auto">
-              For men seeking a non-surgical, doctor-led option, the Exo-P Shot offers an advanced PRP-based treatment enhanced with exosome-derived regenerative signalling.
+            <p className="text-slate-600 leading-relaxed text-lg">
+              Improvements develop gradually as part of the skin’s natural regenerative cycle. Results may be sustained for several months, depending on individual response and the recommended treatment course.
             </p>
-          </div>
+         </div>
+      </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* --- DARK SECTION 2: DNA GLOW PLUS (The PRP Upgrade) --- */}
+      <section className="py-20 lg:py-28 bg-[#0A1128] font-inter relative overflow-hidden border-t border-white/5">
+         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[100px] mix-blend-screen pointer-events-none transform-gpu" />
+         
+         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-16 bg-white/5 border border-white/10 p-10 md:p-16 lg:p-20 rounded-[3rem] backdrop-blur-xl transform-gpu shadow-2xl">
+               <div className="md:w-2/3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-200 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-purple-500/30">
+                     <FaWandSparkles className="w-3 h-3" /> Premium Upgrade
+                  </div>
+                  <h2 className="text-3xl md:text-5xl font-raleway font-bold text-white mb-6 leading-tight">
+                    DNA Glow Plus™
+                  </h2>
+                  <p className="text-slate-300 text-lg leading-relaxed mb-10">
+                    For patients seeking enhanced regenerative support, DNA Glow Plus™ builds upon the DNA Glow Concept™ by incorporating PRP-based microneedling. 
+                    <br/><br/>
+                    Platelet-Rich Plasma (PRP), derived from your own blood, contains growth factors involved in natural tissue repair and may further support skin resilience and recovery.
+                  </p>
+                  
+                  <button 
+                    onClick={handleAction}
+                    className="px-8 py-4 inline-flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] text-white hover:bg-[#2a2bb8] rounded-xl font-bold transition duration-300 ease-out transform-gpu gap-2 shadow-lg shadow-[#4041d1]/20 active:scale-95 font-inter"
+                  >
+                    <FaEnvelope className="w-4 h-4" /> Book Consultation
+                  </button>
+               </div>
+               
+               <div className="md:w-1/3 flex justify-center">
+                  <div className="relative w-56 h-56 lg:w-64 lg:h-64">
+                     <div className="absolute inset-0 border-4 border-dashed border-purple-500/30 rounded-full animate-[spin_20s_linear_infinite] transform-gpu" />
+                     <div className="absolute inset-4 border-2 border-blue-500/40 rounded-full animate-[spin_15s_linear_infinite_reverse] transform-gpu" />
+                     <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-32 h-32 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full blur-sm opacity-80 transform-gpu" />
+                        <span className="absolute text-white font-bold font-raleway text-2xl tracking-wider">PLUS™</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      {/* --- MATCHING BOTTOM CTA BAR NOW ABOVE FAQS --- */}
+      <section className="py-24 bg-white border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 text-center">
             
-            {/* Left Column: Description */}
-            <div className="space-y-8">
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 relative overflow-hidden group hover:border-[#4041d1]/20 transition-colors">
-                <div className="absolute top-0 left-0 w-1 h-full bg-[#4041d1]"></div>
-                <h3 className="text-2xl font-raleway font-bold text-slate-900 mb-4 flex items-center gap-3">
-                  <FaMicroscope className="text-[#4041d1] text-2xl" />
-                  Regenerative Signalling
-                </h3>
-                <p className="text-slate-600 text-base leading-relaxed">
-                  This approach uses your own platelet-rich plasma (PRP), enhanced with exosome-derived regenerative signalling, and is designed to support tissue repair and blood flow.
-                </p>
-                <div className="mt-6 flex items-center gap-2 text-xs font-bold text-[#4041d1] uppercase tracking-widest">
-                  <FaMapMarkerAlt /> Available in St Albans, Birmingham & London
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold font-raleway text-slate-900">Safety & Transparency</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {[
-                    "Doctor-led treatment",
-                    "Uses your own blood (autologous)",
-                    "No synthetic fillers",
-                    "Not a stem cell treatment"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm text-slate-700 font-medium bg-slate-50 px-4 py-3 rounded-xl border border-slate-100">
-                      <FaCheckCircle className="text-[#4041d1] shrink-0" /> {item}
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-slate-500 italic mt-2">
-                  * Results are not guaranteed. Individual response varies and more than one session may be recommended.
-                </p>
-              </div>
-            </div>
-
-            {/* Right Column: How it Works (Visual) */}
-            <div className="bg-slate-900 text-white p-8 md:p-10 rounded-[2.5rem] relative overflow-hidden">
-              {/* Background Glow */}
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#4041d1]/30 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-slate-900 to-transparent z-10"></div>
-
-              <h3 className="text-2xl font-raleway font-bold mb-8 relative z-20">How Does it Work?</h3>
-              
-              <div className="space-y-8 relative z-20">
-                {/* Step 1 */}
-                <div className="flex gap-5">
-                  <div className="flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-[#4041d1] flex items-center justify-center shrink-0 shadow-lg shadow-[#4041d1]/30">
-                      <span className="font-bold text-sm">1</span>
-                    </div>
-                    <div className="w-0.5 h-full bg-[#4041d1]/50 mt-2"></div>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold font-raleway mb-2 text-blue-100">Platelet Activation</h4>
-                    <p className="text-sm text-slate-300 leading-relaxed">
-                      A key step in PRP-based treatments. During processing, platelets are physiologically activated, encouraging the release of growth factors involved in tissue repair and vascular support.                    
-                    </p>
-                  </div>
-                </div>
-
-                {/* Step 2 */}
-                <div className="flex gap-5">
-                  <div className="flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-[#5a5bfa] flex items-center justify-center shrink-0 shadow-lg shadow-[#5a5bfa]/30">
-                      <span className="font-bold text-sm">2</span>
-                    </div>
-                    <div className="w-0.5 h-full bg-[#4041d1]/50 mt-2"></div>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold font-raleway mb-2 text-blue-100">Exosome Support</h4>
-                    <p className="text-sm text-slate-300 leading-relaxed">
-                      Exosome-derived bioactive factors are incorporated to support cellular communication and help optimise the regenerative environment within treated tissue.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Step 3 */}
-                <div className="flex gap-5">
-                  <div className="flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center shrink-0 shadow-lg">
-                      <FaVial className="text-sm" />
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold font-raleway mb-2 text-white">Integrated Regeneration</h4>
-                    <p className="text-sm text-slate-300 leading-relaxed">
-                      This combined protocol is designed to support tissue health, endothelial function, and blood flow associated with erectile performance.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* --- WHAT P-SHOT CAN DO (Reality Check) --- */}
-      <section className="py-24 bg-white font-inter">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h3 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
-              The P-Shot: Realistic Expectations
-            </h3>
-            <p className="text-slate-600 text-lg leading-relaxed mb-6">
-              Platelet-Rich Plasma (PRP) therapy is a powerful regenerative tool, 
-              but it is important to understand what it can achieve. We believe in 
-              honest, medical-led advice so you can make an informed decision.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* COLUMN 1: Benefits */}
-            <div className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100">
-              <h4 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
-                <span className="w-2 h-8 bg-[#4041d1] rounded-full block"></span>
-                What the P-Shot aims to deliver
-              </h4>
-              <ul className="space-y-4">
-                {[
-                  "Enhanced sensitivity and nerve responsiveness",
-                  "Firmer, more sustainable erections",
-                  "Potential improvement in girth and blood flow",
-                  "Support for straightening (Peyronie’s Disease)",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0" />
-                    <span className="text-slate-700 text-sm md:text-base font-medium leading-relaxed">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 pt-6 border-t border-blue-100/50">
-                 <p className="text-xs text-slate-500 italic">
-                   * Results are based on tissue regeneration, which is a gradual process. Best results are typically seen 8-12 weeks after treatment.
-                 </p>
-              </div>
-            </div>
-
-            {/* COLUMN 2: Limitations */}
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200">
-              <h4 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
-                <span className="w-2 h-8 bg-slate-400 rounded-full block"></span>
-                Important limitations
-              </h4>
-              <ul className="space-y-4">
-                {[
-                   "It is not a surgical enlargement procedure (length gains are variable)",
-                   "Results depend on age, health, and hormone levels",
-                   "It cannot fix severe structural damage instantly",
-                   "A medical consultation is required to assess suitability",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="mt-1 shrink-0 text-slate-400">
-                       <FaCheckCircle className="text-slate-400" /> 
-                    </div>
-                    <span className="text-slate-700 text-sm md:text-base font-medium leading-relaxed">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 pt-6 border-t border-slate-200">
-                 <p className="text-xs text-slate-500 italic">
-                   The P-Shot is often most effective when combined with a healthy lifestyle or other therapies like Shockwave.
-                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- DOCTOR & PRIVACY SECTION (Text-Only + Buttons) --- */}
-      <section className="py-24 bg-slate-50 font-inter">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          
-          <div className="inline-block px-4 py-1.5 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-bold uppercase tracking-wider mb-6">
-            Patient Privacy Priority
-          </div>
-          <h3 className="text-3xl md:text-5xl font-raleway font-bold text-slate-900 mb-8 leading-tight">
-            Discreet, Private & Professional
-          </h3>
-
-          <div className="prose prose-lg prose-slate mx-auto mb-12">
-            <p className="text-slate-600 font-inter text-lg leading-relaxed mb-6">
-              We understand that discussing sexual health can feel uncomfortable. 
-              Our clinics provide a discreet, confidential, and judgement-free 
-              medical environment, where concerns are addressed professionally 
-              and with respect.
-            </p>
-            <p className="text-slate-600 font-inter text-lg leading-relaxed">
-              Whether you are seeking performance enhancement or restoration, 
-              seeking assessment allows you to explore your options with clarity 
-              and medical guidance — without pressure to proceed unless it feels 
-              right for you.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-left">
-            {[
-              "Direct access to GMC-Registered Doctors",
-              "No GP referral required",
-              "Same-day appointments may be available",
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center md:items-start md:text-left hover:border-[#4041d1]/30 transition-colors"
+           {/* Pricing Info Box */}
+           <div className="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-8 mb-8 shadow-sm">
+              <p className="text-slate-600 leading-relaxed text-sm md:text-base font-inter">
+                 Our pricing is intentionally kept accessible compared with many London clinics, while maintaining the same medical-grade equipment, evidence-based protocols, and experienced doctor-led care.
+              </p>
+           </div>
+           
+           {/* 3-Button Layout matching ED page */}
+           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              <button 
+                onClick={handleAction}
+                className="w-full sm:w-auto px-8 py-3.5 inline-flex items-center justify-center text-sm bg-[#4041d1] text-white hover:bg-[#2a2bb8] rounded-xl font-bold transition duration-300 ease-out transform-gpu gap-2 shadow-sm font-inter"
               >
-                <FaCheckCircle className="text-[#4041d1] text-2xl mb-3" /> 
-                <span className="text-slate-800 font-bold font-inter text-sm md:text-base">
-                  {item}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className="max-w-3xl mx-auto p-6 bg-white rounded-2xl border border-slate-200 mb-10 shadow-sm">
-            <p className="text-slate-600 text-sm leading-relaxed font-medium">
-              Our pricing is intentionally kept accessible compared with many
-              London clinics, while maintaining the same medical-grade
-              equipment, evidence-based protocols, and experienced doctor-led care.
-            </p>
-          </div>
-
-          {/* --- ACTION BUTTONS ROW --- */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4 w-full">
-            
-            {/* 1. Book Consultation (Main Action) */}
-            <button
-              onClick={handleAction}
-              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg shadow-[#4041d1]/20 active:scale-95"
-            >
-              <FaEnvelope className="w-4 h-4" /> Speak To A Specialist
-            </button>
-
-            {/* 2. Prices Link */}
-            <Link
-              href={isBirmingham ? "/birmingham/prices" : "/prices"}
-              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg"
-            >
-              View Treatment Prices
-            </Link>
-            
-            {/* 3. FAQ Link */}
-            <Link
-              href={isBirmingham ? "/birmingham/faq" : "/faq"}
-              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-blue-50 bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2"
-            >
-              View Clinic FAQs
-            </Link>
-            
-          </div>
+                 <FaEnvelope className="w-4 h-4"/> Book Consultation
+              </button>
+              
+              <Link 
+                href={pricesUrl} 
+                className="w-full sm:w-auto px-8 py-3.5 inline-flex items-center justify-center text-sm bg-[#4041d1] text-white hover:bg-[#2a2bb8] rounded-xl font-bold transition duration-300 ease-out transform-gpu shadow-sm font-inter"
+              >
+                 View Treatment Prices
+              </Link>
+              
+              <Link 
+                href={faqUrl} 
+                className="w-full sm:w-auto px-8 py-3.5 inline-flex items-center justify-center text-sm bg-white border border-[#4041d1] text-[#4041d1] hover:bg-slate-50 rounded-xl font-bold transition duration-300 ease-out transform-gpu font-inter"
+              >
+                 View Clinic FAQs
+              </Link>
+           </div>
 
         </div>
       </section>
 
-      {/* --- FAQs --- */}
-      <section id="faqs" className="py-24 bg-white font-inter">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-raleway font-bold text-slate-900 mb-6">
-              Common Questions
-            </h2>
+      {/* --- LIGHT SECTION 4: FAQs NOW BELOW CTA BAR --- */}
+      <section className="py-24 bg-slate-50 font-inter border-b border-slate-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-raleway font-bold text-slate-900">Common Questions</h2>
           </div>
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
-              >
+            {displayedFaqs.map((faq, index) => (
+              <div key={index} className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transform-gpu">
                 <button
-                  className="w-full p-6 md:p-8 text-left flex items-center justify-between hover:bg-slate-50 transition-colors duration-300"
+                  className="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
                   onClick={() => toggleFAQ(index)}
                 >
-                  <h3 className="font-raleway font-bold text-slate-900 pr-8 text-base md:text-lg">
-                    {faq.question}
-                  </h3>
-                  <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${openFAQIndex === index ? 'bg-[#4041d1] text-white' : 'bg-[#4041d1]/10 text-[#4041d1]'}`}>
-                    {openFAQIndex === index ? (
-                      <FaMinus className="w-4 h-4" />
-                    ) : (
-                      <FaPlus className="w-4 h-4" />
-                    )}
-                  </div>
+                  <span className="font-bold text-slate-900 pr-8 text-sm md:text-base">{faq.question}</span>
+                  {openFAQIndex === index ? <FaMinus className="text-blue-600 shrink-0" /> : <FaPlus className="text-slate-400 shrink-0" />}
                 </button>
                 <AnimatePresence>
                   {openFAQIndex === index && (
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                      initial={{ height: 0 }}
+                      animate={{ height: "auto" }}
+                      exit={{ height: 0 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 md:px-8 pb-8 border-t border-slate-100 pt-6">
-                        <p className="font-inter text-base text-slate-600 leading-relaxed font-medium">
-                          {faq.answer}
-                        </p>
+                      <div className="p-6 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100 mt-2">
+                        {faq.answer}
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             ))}
           </div>
+
+          {/* Toggle All FAQs Button */}
+          {faqs.length > 5 && (
+            <div className="mt-8 text-center">
+              <button
+                onClick={() => setShowAllFaqs(!showAllFaqs)}
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-[#4041d1]/5 rounded-xl font-inter font-bold transition-all duration-300"
+              >
+                {showAllFaqs ? "Show Less FAQs" : "View All FAQs"}
+                <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${showAllFaqs ? "rotate-180" : ""}`} />
+              </button>
+            </div>
+          )}
+          
         </div>
       </section>
 
@@ -875,11 +770,11 @@ export default function PShotClient({
         />
       </div>
 
-      <ContactCTASection />
+      <div id="contact-form-section" className="contain-layout">
+        <ContactCTASection />
+        <LocationSection />
+      </div>
       
-      {/* Location Section Added Here */}
-      <LocationSection />
-
       <Footer />
     </>
   );
