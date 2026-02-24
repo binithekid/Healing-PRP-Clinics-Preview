@@ -20,7 +20,8 @@ import {
   FaChevronRight,
   FaGoogle,
   FaStar,
-  FaLock
+  FaLock,
+  FaChevronDown // <--- Added this import
 } from "react-icons/fa";
 import { FaWandSparkles } from "react-icons/fa6";
 import Footer from "@/components/Footer";
@@ -37,7 +38,7 @@ type FaqType = {
 interface PolynucleotidesProps {
   locationName?: string;
   servingAreas?: string;
-  faqs: FaqType[]; // <--- Now expecting FAQs as a prop
+  faqs: FaqType[];
 }
 
 export default function PolynucleotidesClient({
@@ -49,6 +50,7 @@ export default function PolynucleotidesClient({
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [activeStep, setActiveStep] = useState(0); 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showAllFaqs, setShowAllFaqs] = useState(false); // <--- Added FAQ toggle state
   
   // State for the Before/After Slider (starts at 50%)
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -155,6 +157,9 @@ export default function PolynucleotidesClient({
     },
   ];
 
+  // --- Slice FAQs based on state ---
+  const displayedFaqs = showAllFaqs ? faqs : faqs.slice(0, 5);
+
   return (
     <>
       {/* --- HERO SECTION --- */}
@@ -192,7 +197,6 @@ export default function PolynucleotidesClient({
             variants={fadeUpVariants}
             className="text-[28px] sm:text-3xl md:text-5xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
           >
-            {/* Added a responsive line break so 'Birmingham' doesn't squish */}
             Polynucleotides in <br className="sm:hidden" /> {locationName}
             <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-purple-200">
               The DNA Glow Concept™
@@ -223,7 +227,6 @@ export default function PolynucleotidesClient({
             variants={fadeUpVariants}
             className="flex justify-center"
           >
-            {/* HERO BUTTON: Single, centered Blue Button */}
             <button 
               onClick={handleAction}
               className="px-8 py-4 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] text-white hover:bg-blue-700 rounded-xl font-bold transition duration-300 ease-out gap-2 shadow-xl hover:shadow-[0_0_20px_rgba(64,65,209,0.4)] active:scale-95 font-inter transform-gpu"
@@ -252,7 +255,6 @@ export default function PolynucleotidesClient({
           <div className="px-2 py-4 max-w-7xl mx-auto">
             <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
               
-              {/* 1. Google 5-Star Link */}
               <a href="#reviews" onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -272,7 +274,6 @@ export default function PolynucleotidesClient({
                 </div>
               </a>
 
-              {/* 2. Experience Badge */}
               <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-[#4041d1] rounded-full flex items-center justify-center text-white font-bold text-[12px] shadow-md border border-white/10">
@@ -285,7 +286,6 @@ export default function PolynucleotidesClient({
                 </div>
               </div>
 
-              {/* 3. GMC Badge */}
               <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-[#1f3a68] rounded-full flex items-center justify-center text-white font-bold text-[11px] shadow-md border border-white/10">
@@ -298,7 +298,6 @@ export default function PolynucleotidesClient({
                 </div>
               </div>
 
-              {/* 4. Privacy & Discreet Care */}
               <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center text-slate-300 shadow-md border border-white/10">
@@ -679,7 +678,7 @@ export default function PolynucleotidesClient({
             <h2 className="text-3xl font-raleway font-bold text-slate-900">Common Questions</h2>
           </div>
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
+            {displayedFaqs.map((faq, index) => (
               <div key={index} className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transform-gpu">
                 <button
                   className="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
@@ -705,6 +704,20 @@ export default function PolynucleotidesClient({
               </div>
             ))}
           </div>
+
+          {/* Toggle All FAQs Button */}
+          {faqs.length > 5 && (
+            <div className="mt-8 text-center">
+              <button
+                onClick={() => setShowAllFaqs(!showAllFaqs)}
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-[#4041d1]/5 rounded-xl font-inter font-bold transition-all duration-300"
+              >
+                {showAllFaqs ? "Show Less FAQs" : "View All FAQs"}
+                <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${showAllFaqs ? "rotate-180" : ""}`} />
+              </button>
+            </div>
+          )}
+          
         </div>
       </section>
 
