@@ -64,8 +64,24 @@ export default function ErectileDysfunctionClient({
   };
 
   // --- UNIFIED ACTION HANDLER ---
-  const handleAction = (e: React.MouseEvent) => {
+ const handleAction = (e: React.MouseEvent) => {
     e.preventDefault();
+
+    // --- NEW GA4 CONVERSION TRACKING (Strict TypeScript Compliant) ---
+    if (typeof window !== "undefined") {
+      // Safely tell TypeScript that window might have a gtag function
+      const w = window as Window & { gtag?: (...args: unknown[]) => void };
+      
+      if (w.gtag) {
+        w.gtag("event", "generate_lead", {
+          event_category: "engagement",
+          event_label: "opened_contact_drawer",
+          page_path: window.location.pathname,
+        });
+      }
+    }
+    // -----------------------------------------------------------------
+
     window.dispatchEvent(new CustomEvent("open-contact-drawer"));
     setTimeout(() => {
       const section = document.getElementById("contact-form-section");
