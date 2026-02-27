@@ -23,27 +23,36 @@ import {
   FaVial,
   FaGoogle,
   FaStar,
-  FaLock
+  FaLock,
+  FaChevronDown // <--- Added for FAQ Dropdown
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
 import TrustReviews from "@/components/TrustReviews";
 
-// --- INTERFACE ---
+// --- INTERFACE FOR DYNAMIC PROPS ---
+type FaqType = {
+  question: string;
+  answer: string;
+};
+
 interface PShotProps {
   locationName?: string;
   servingAreas?: string;
+  faqs: FaqType[]; // <--- Added faqs array to props for SEO
 }
 
 export default function PShotClient({
   locationName = "St Albans",
   servingAreas = "Harpenden • Luton • Watford • Hertfordshire",
+  faqs,
 }: PShotProps) {
   
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [activeStep, setActiveStep] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showAllFaqs, setShowAllFaqs] = useState(false); // <--- Added FAQ toggle state
 
   const isBirmingham = locationName === "Birmingham";
 
@@ -153,38 +162,8 @@ export default function PShotClient({
     },
   ];
 
-  const faqs = [
-    {
-      question: "Is the P-Shot painful?",
-      answer:
-        "Local anaesthetic is used to maximise comfort during the procedure. Most patients describe the treatment as well tolerated, with only mild temporary discomfort at the injection sites.",
-    },
-    {
-      question: "How long does the procedure take?",
-      answer:
-        "The full appointment usually lasts around 45–60 minutes. This includes consultation review, blood collection, PRP preparation, and the treatment itself.",
-    },
-    {
-      question: "When might I notice changes?",
-      answer:
-        "Individual responses vary. Some men notice gradual changes within a few weeks, while regenerative processes may continue to develop over several months as tissue healing occurs.",
-    },
-    {
-      question: "Is the P-Shot permanent?",
-      answer:
-        "PRP therapy is not considered a permanent treatment. While some men report sustained improvement, results vary and may gradually change over time depending on age, vascular health, and lifestyle factors. Maintenance treatment can be discussed where appropriate.",
-    },
-    {
-      question: "How long may the effects last?",
-      answer:
-        "Duration varies depending on age, vascular health, and underlying conditions. Some patients report sustained improvement for many months, and maintenance treatment may be discussed where appropriate.",
-    },
-    {
-      question: "Are there any side effects?",
-      answer:
-        "Because PRP is derived from your own blood, the risk of allergic reaction is extremely low. Temporary swelling, mild bruising, or tenderness at the injection site can occur and usually settles within a few days.",
-    },
-  ];
+  // Slice FAQs based on state
+  const displayedFaqs = showAllFaqs ? faqs : faqs.slice(0, 5);
 
   return (
     <>
@@ -201,41 +180,44 @@ export default function PShotClient({
           />
         </div>
 
-        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16">
+        {/* FIXED: Added md:pb-24 to push content above the trust badge footer */}
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 md:pb-24">
+          
+          {/* NEW: Top Sleek Badge */}
+          <motion.div 
+            custom={0}
+            initial="hidden"
+            animate={isLoaded ? "visible" : "hidden"}
+            variants={fadeUpVariants}
+            className="inline-block px-4 py-1.5 mb-4 border border-blue-400/30 rounded-full bg-blue-900/20 backdrop-blur-sm transform-gpu"
+          >
+            <span className="text-blue-200 text-xs font-bold tracking-widest uppercase font-inter">Doctor-Led Private Clinic</span>
+          </motion.div>
+
           <motion.h1 
             custom={1}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="md:text-5xl text-3xl font-bold font-raleway text-white leading-tight mb-3 tracking-tight"
+            className="md:text-6xl text-4xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
           >
-            The P-Shot (Priapus Shot)<br />
-            <span className="block mt-2">Healing-PRP Clinics, {locationName}</span>
+            The P-Shot (Priapus Shot)<br className="hidden sm:block" />
+            <span className="md:text-5xl text-3xl">in {locationName}</span>
           </motion.h1>
 
-          <motion.h2 
+          <motion.p 
             custom={2}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="mt-1 md:text-lg text-base text-blue-100 font-medium font-raleway leading-relaxed"
-          >
-            Advanced Platelet-Rich Plasma (PRP) Therapy for Men
-          </motion.h2>
-
-          <motion.p 
-            custom={3}
-            initial="hidden"
-            animate={isLoaded ? "visible" : "hidden"}
-            variants={fadeUpVariants}
-            className="mt-3 text-sm md:text-base text-white/80 font-inter leading-relaxed max-w-2xl mx-auto mb-8"
+            className="mt-2 text-base md:text-xl text-blue-50/90 font-inter leading-relaxed max-w-2xl mx-auto mb-8 font-medium"
           >
             A natural, non-surgical treatment designed to rejuvenate tissue, 
             enhance performance, and improve vascular health using your body’s own healing factors.
           </motion.p>
 
           <motion.div 
-            custom={4}
+            custom={3}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
@@ -250,11 +232,11 @@ export default function PShotClient({
           </motion.div>
 
           <motion.div 
-            custom={5}
+            custom={4}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-[#4041d1] text-white rounded-full text-[10px] md:text-xs mt-8 font-bold uppercase tracking-widest font-inter shadow-lg border border-white/10"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-[#4041d1]/10 text-white rounded-full text-[10px] md:text-xs mt-8 font-bold uppercase tracking-widest font-inter shadow-lg border border-white/10 backdrop-blur-sm"
           >
              <FaMapMarkerAlt className="text-white/80 mb-0.5" /> 
              <span>Serving: {servingAreas}</span>
@@ -566,7 +548,7 @@ export default function PShotClient({
                   This approach uses your own platelet-rich plasma (PRP), enhanced with exosome-derived regenerative signalling, and is designed to support tissue repair and blood flow.
                 </p>
                 <div className="mt-6 flex items-center gap-2 text-xs font-bold text-[#4041d1] uppercase tracking-widest">
-                  <FaMapMarkerAlt /> Available in St Albans, Birmingham & London
+                  <FaMapMarkerAlt /> Available in St Albans & Birmingham
                 </div>
               </div>
 
@@ -822,7 +804,7 @@ export default function PShotClient({
             </h2>
           </div>
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
+            {displayedFaqs.map((faq, index) => (
               <motion.div
                 key={index}
                 className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
@@ -861,6 +843,20 @@ export default function PShotClient({
               </motion.div>
             ))}
           </div>
+
+          {/* --- ADDED: TOGGLE ALL FAQS BUTTON --- */}
+          {faqs.length > 5 && (
+            <div className="mt-8 text-center">
+              <button
+                onClick={() => setShowAllFaqs(!showAllFaqs)}
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-[#4041d1]/5 rounded-xl font-inter font-bold transition-all duration-300"
+              >
+                {showAllFaqs ? "Show Less FAQs" : "View All FAQs"}
+                <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${showAllFaqs ? "rotate-180" : ""}`} />
+              </button>
+            </div>
+          )}
+
         </div>
       </section>
 
