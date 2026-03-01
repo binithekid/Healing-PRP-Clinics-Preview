@@ -195,15 +195,15 @@ export default function PShotClient({
             <span className="text-blue-200 text-xs font-bold tracking-widest uppercase font-inter">Doctor-Led Private Clinic</span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             custom={1}
             initial="hidden"
-            animate={isLoaded ? "visible" : "hidden"}
+            animate="visible"
             variants={fadeUpVariants}
             className="text-3xl md:text-4xl lg:text-5xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
           >
-            The P-Shot (Priapus Shot)<br className="hidden sm:block" />
-            <span className="text-xl md:text-3xl lg:text-4xl text-blue-100">in {locationName}</span>
+            The P-Shot (Priapus Shot) <br />
+            <span className="text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2 inline-block">in {locationName}</span>
           </motion.h1>
 
           <motion.p 
