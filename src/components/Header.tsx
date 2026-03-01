@@ -30,31 +30,48 @@ const Header = () => {
   }, [isMenuOpen]);
 
   const menuItems: MenuItem[] = [
-    // MAIN CATEGORY
+    // FACIAL AESTHETICS & SUB-ITEMS
     { name: "Facial Aesthetics", href: isBirmingham ? "/birmingham/facial-aesthetics" : "/facial-aesthetics" },
-    
-    // NEW SPECIFIC ITEM
     { 
       name: "Polynucleotides", 
       href: isBirmingham ? "/birmingham/polynucleotides" : "/polynucleotides",
       isSubItem: true 
     },
-
+    
+    // OTHER MAIN CATEGORIES
     { name: "Joint Injections", href: isBirmingham ? "/birmingham/joint-injections" : "/joint-injections" },
     { name: "Hair Restoration", href: isBirmingham ? "/birmingham/hair-restoration" : "/hair-restoration" },
     
-    // MAIN CATEGORY
+    // SEXUAL REJUVENATION & SUB-ITEMS
     { name: "Sexual Rejuvenation", href: isBirmingham ? "/birmingham/sexual-rejuvenation" : "/sexual-rejuvenation" },
-    
-    // SPECIFIC ITEMS
     { 
-      name: "P-Shot Treatment", 
+      name: "P-Shot® Treatment", 
       href: isBirmingham ? "/birmingham/p-shot" : "/p-shot",
+      isSubItem: true 
+    },
+    { 
+      name: "O-Shot® Treatment", 
+      href: isBirmingham ? "/birmingham/o-shot" : "/o-shot",
       isSubItem: true 
     },
     { 
       name: "Erectile Dysfunction", 
       href: isBirmingham ? "/birmingham/erectile-dysfunction" : "/erectile-dysfunction",
+      isSubItem: true 
+    },
+    { 
+      name: "Premature Ejaculation", 
+      href: isBirmingham ? "/birmingham/premature-ejaculation" : "/premature-ejaculation",
+      isSubItem: true 
+    },
+    { 
+      name: "Peyronie's Disease", 
+      href: isBirmingham ? "/birmingham/peyronies-disease" : "/peyronies-disease",
+      isSubItem: true 
+    },
+    { 
+      name: "Personalised Medication", 
+      href: isBirmingham ? "/birmingham/personalised-ed-medication" : "/personalised-ed-medication",
       isSubItem: true 
     },
 
@@ -67,7 +84,7 @@ const Header = () => {
       isContact: true 
     },
   ];
-  
+
   return (
     <>
       <header className="sticky top-0 left-0 right-0 z-50 bg-[#0f172a] border-b border-white/10 shadow-lg">
@@ -183,7 +200,6 @@ const Header = () => {
                             ? "font-medium text-slate-300 hover:text-[#4041d1]" 
                             : "font-medium text-white hover:text-[#4041d1]"
                       }`}
-                      // FIX: REMOVED SCROLL LOGIC. NOW JUST CLOSES MENU & NAVIGATES.
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}

@@ -5,6 +5,7 @@ import { FaEnvelope, FaChevronRight } from "react-icons/fa";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
 import Footer from "@/components/Footer";
+import Script from "next/script";
 import Link from "next/link";
 
 export default function PricesClient({ isBirmingham = false }: { isBirmingham?: boolean }) {
@@ -17,11 +18,11 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
       items: [
         { name: "DNA Glow Plus™", price: "£500", sessions: "Course of 3: £1400", details: "Premium: Poly + HA + PRP Microneedling" },
         { name: "DNA Glow Concept™", price: "£375", sessions: "Course of 3: £1100", details: "Signature: Poly + HA + Microneedling" },
+        { name: "Exosome-Enhanced Skin Regeneration", price: "£375", sessions: "Course of 3: £1100", details: "Advanced cellular repair & skin revitalisation" },
         { name: "Polynucleotides", price: "From £150", sessions: "1-3 sessions", details: "Advanced skin repair & hydration" },
         { name: "HA Skin Boosters", price: "£250", sessions: "2-3 sessions", details: "Deep hydration & glow" },
-        { name: "Exosome-Enhanced Skin Regeneration", price: "£375", sessions: "Course of 3: £1100", details: "Advanced cellular repair & skin revitalisation" },
         { name: "PRP Microneedling", price: "£150", sessions: "2-3 sessions", details: "Texture & acne scar support" },
-        { name: "Vampire Facial", price: "£400", sessions: "Course of 3: £1150", details: "Full face regeneration" },
+        { name: "Vampire Facial", price: "£550", sessions: "Course of 3: £1500", details: "Full face regeneration" },
         { name: "Botox (3 Areas)", price: "£200", sessions: "Single", details: "Anti-wrinkle injections" },
       ]
     },
@@ -48,10 +49,21 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
         { name: "P-Shot® (PRP)", price: "£650", sessions: "Course of 3: £1800", details: "Male performance & repair" },
         { name: "O-Shot® (PRP)", price: "£700", sessions: "1-3 sessions", details: "Female health & sensitivity" },
         { name: "EXO P-Shot®", price: "£1200", sessions: "Enhanced", details: "Advanced exosome protocol" },
+        { name: "Personalised Medication", price: "Upon Consultation", sessions: "6-12 months course", details: "Male Performance" },
       ]
     }
   ];
 
+  const priceSchema = {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Healing-PRP Clinics",
+    "priceRange": "£120 - £1800",
+    "image": "https://www.healing-prp.co.uk/Logo2.png",
+    "description": `Doctor-led regenerative medicine prices for ${locationName}.`
+  };
+
+  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
@@ -71,6 +83,12 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
 
   return (
     <>
+      <Script
+        id="price-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(priceSchema) }}
+      />
+
       {/* Hero Section */}
       <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -110,6 +128,7 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
                   Doctor-led regenerative treatments with clear, upfront costs. Serving patients across {isBirmingham ? "the West Midlands" : "Hertfordshire"}.
                 </motion.p>
 
+                {/* Stacked Layout */}
                 <motion.div variants={itemVariants} className="flex flex-col mt-8 gap-6 justify-center items-center">
                   <div className="flex flex-wrap justify-center gap-2 max-w-2xl">
                     {categories.map(cat => (
@@ -148,6 +167,7 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
               </h2>
 
               <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden transition-all hover:border-slate-200">
+                {/* Table Header - Desktop Only */}
                 <div className="hidden md:grid grid-cols-4 bg-slate-50/50 p-4 border-b border-slate-100 text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em] font-inter">
                   <div className="col-span-1 pl-2">Treatment</div>
                   <div className="col-span-1 text-center">Investment</div>
@@ -155,6 +175,7 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
                   <div className="col-span-1 text-right pr-2">Action</div>
                 </div>
 
+                {/* Pricing Rows */}
                 {cat.items.map((item, idx) => (
                   <div 
                     key={idx} 
