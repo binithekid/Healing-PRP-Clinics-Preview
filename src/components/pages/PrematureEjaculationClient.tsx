@@ -110,31 +110,30 @@ export default function PrematureEjaculationClient({
 
   return (
     <>
-      {/* --- HERO SECTION (Optimized for Instant Load) --- */}
-      <div className="relative min-h-[100vh] lg:min-h-[calc(100vh-5rem)] overflow-hidden flex items-end justify-center bg-[#0a0a0a]">
+    {/* --- HERO SECTION --- */}
+      <div className="relative md:h-[calc(100vh-4rem)] pb-5 md:pb-0 lg:h-[calc(100vh-5rem)] overflow-hidden flex items-center justify-center bg-black">
+        
+        {/* Background Section */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/40 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-black/60 to-transparent z-10" />
-          <img
-            src="/ed-doctor-consultation.webp"
-            alt="Premature Ejaculation Treatment"
-            className="absolute inset-0 w-full h-full object-cover"
+          <div className="absolute inset-0 bg-black/60 z-10" /> 
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80 z-10" />
+          <img 
+            src="/ed-doctor-consultation.webp" 
+            alt="Premature Ejaculation Treatment" 
+            className="absolute inset-0 w-full h-full object-cover opacity-90"
             fetchPriority="high"
-            onError={(e) => {
-               e.currentTarget.src = "/ed-doctor-consultation.webp";
-            }}
           />
         </div>
 
-        {/* HERO CONTENT: Renders Instantly */}
-        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-40 pb-20 md:pb-24">
+        {/* Main Content */}
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 md:pb-24">
           
           <motion.div
             custom={0}
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            className="inline-block px-4 py-1.5 mb-4 border border-blue-400/30 rounded-full bg-blue-900/20 backdrop-blur-sm"
+            className="inline-block px-4 py-1.5 mb-6 border border-blue-400/30 rounded-full bg-blue-900/20 backdrop-blur-sm transform-gpu"
           >
             <span className="text-blue-200 text-xs font-bold tracking-widest uppercase font-inter">Male Sexual Health</span>
           </motion.div>
@@ -146,8 +145,8 @@ export default function PrematureEjaculationClient({
             variants={fadeUpVariants}
             className="text-3xl md:text-4xl lg:text-5xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
           >
-            Premature Ejaculation (PE) <br className="hidden md:block" />
-            <span className="text-xl md:text-3xl lg:text-4xl text-blue-100">Treatment in {locationName}</span>
+            Premature Ejaculation (PE) <br />
+            <span className="text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2 inline-block">Treatment in {locationName}</span>
           </motion.h1>
 
           <motion.p
@@ -180,13 +179,13 @@ export default function PrematureEjaculationClient({
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-[#4041d1]/10 text-white rounded-full text-[10px] md:text-xs mt-8 font-bold uppercase tracking-widest font-inter shadow-lg border border-white/10 backdrop-blur-sm"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-[#4041d1]/10 text-white rounded-full text-[10px] md:text-xs mt-10 font-bold uppercase tracking-widest font-inter shadow-lg border border-white/10 backdrop-blur-sm"
           >
              <FaMapMarkerAlt className="text-white/80 mb-0.5" />
              <span>Serving: {servingAreas}</span>
           </motion.div>
         </div>
-
+        
         {/* --- HERO TRUST BADGES --- */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
