@@ -196,17 +196,17 @@ export default function OShotClient({
             <span className="text-blue-200 text-xs font-bold tracking-widest uppercase font-inter">Women&apos;s Private Clinic</span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             custom={1}
             initial="hidden"
-            animate={isLoaded ? "visible" : "hidden"}
+            animate="visible"
             variants={fadeUpVariants}
-            className="md:text-6xl text-4xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
           >
-            The O-Shot® (Orgasm Shot)<br className="hidden sm:block" />
-            <span className="md:text-5xl text-3xl">in {locationName}</span>
+            The O-Shot® (Orgasm Shot) <br />
+            <span className="text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2 inline-block">in {locationName}</span>
           </motion.h1>
-
+          
           <motion.p 
             custom={2}
             initial="hidden"
