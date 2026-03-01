@@ -45,12 +45,12 @@ const Header = () => {
     // SEXUAL REJUVENATION & SUB-ITEMS
     { name: "Sexual Rejuvenation", href: isBirmingham ? "/birmingham/sexual-rejuvenation" : "/sexual-rejuvenation" },
     { 
-      name: "P-Shot® Treatment", 
+      name: "P-Shot Treatment", 
       href: isBirmingham ? "/birmingham/p-shot" : "/p-shot",
       isSubItem: true 
     },
     { 
-      name: "O-Shot® Treatment", 
+      name: "O-Shot Treatment", 
       href: isBirmingham ? "/birmingham/o-shot" : "/o-shot",
       isSubItem: true 
     },
