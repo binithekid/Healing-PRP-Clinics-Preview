@@ -465,7 +465,7 @@ export default function PersonalisedEDMedicationClient({
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/60 to-transparent"></div>
               </div>
               <div className="relative h-full flex flex-col justify-center items-center p-8 text-center z-10">
-                <h3 className="text-3xl font-raleway font-bold text-white mb-3 group-hover:text-blue-200 transition-colors">The P-Shot®</h3>
+                <h3 className="text-3xl font-raleway font-bold text-white mb-3 group-hover:text-blue-200 transition-colors">The P-Shot</h3>
                 <div className="text-white/80 text-sm font-medium tracking-wider mb-6">Treatment Details</div>
                 <p className="text-slate-300 text-sm leading-relaxed font-medium max-w-[250px]">
                   Combine your tailored medication protocol with autologous PRP for maximum tissue restoration and vascular health.
