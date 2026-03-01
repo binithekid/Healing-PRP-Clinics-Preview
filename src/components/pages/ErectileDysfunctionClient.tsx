@@ -162,7 +162,7 @@ export default function ErectileDysfunctionClient({
     {
       number: 2,
       icon: FaSyringe,
-      title: "PRP (P-Shot®)",
+      title: "PRP (P-Shot)",
       description: "Platelet-rich plasma from your own blood is injected to support tissue repair and nerve responsiveness.",
     },
     {
@@ -615,7 +615,7 @@ export default function ErectileDysfunctionClient({
               href={pShotLink} 
               className="shrink-0 px-8 py-3 bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 text-sm flex items-center gap-2 group whitespace-nowrap shadow-xl shadow-[#4041d1]/20 active:scale-95 font-inter"
             >
-              View P-Shot® Treatment
+              View P-Shot Treatment
               <FaArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
