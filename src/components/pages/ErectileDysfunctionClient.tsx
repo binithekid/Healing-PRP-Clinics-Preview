@@ -43,7 +43,7 @@ interface ErectileDysfunctionProps {
 export default function ErectileDysfunctionClient({
   locationName = "St Albans",
   servingAreas = "Harpenden • Luton • Watford • Hertfordshire",
-  pShotLink = "/p-shot-treatment",
+  pShotLink = "/p-shot",
   faqs, 
 }: ErectileDysfunctionProps) {
   
