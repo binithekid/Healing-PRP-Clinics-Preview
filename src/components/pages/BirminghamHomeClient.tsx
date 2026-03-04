@@ -14,9 +14,20 @@ import Link from "next/link";
 import ContactCTASection from "@/components/ContactCTASection";
 import Footer from "@/components/Footer";
 import PRPExplanationSection from "@/components/PRPExplanationSection";
-import DynamicFAQ from "@/components/DynamicFAQ";
 import LocationSection from "@/components/LocationSection";
 import TrustReviews from "@/components/TrustReviews";
+// 1. Swap the old static FAQ import for the new Dynamic one
+import DynamicFAQ from "@/components/DynamicFAQ";
+
+// 2. Define the prop interface
+type FaqType = {
+  question: string;
+  answer: string;
+};
+
+interface BirminghamClientProps {
+  faqs: FaqType[];
+}
 
 export default function BirminghamHomeClient() {
   const [isLoaded, setIsLoaded] = useState(false);
