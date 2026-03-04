@@ -29,11 +29,11 @@ const birminghamFaqs = [
 export const metadata: Metadata = {
   // FIXED TITLE: Using absolute ensures the layout doesn't override it.
   title: {
-    absolute: "Doctor-Led PRP & ED Treatments Birmingham | Healing-PRP",
+   absolute: "Doctor-Led PRP & ED Clinic Birmingham | Healing-PRP Clinics",
   },
   
   description:
-    "Leading private clinic in Birmingham for PRP Hair Restoration, Joint Injections & Sexual Rejuvenation. Specialist Erectile Dysfunction (ED) solutions and P-Shot® therapy. Doctor-led care serving Birmingham, Solihull & Sutton Coldfield.",
+    "Private, doctor-led clinic in Birmingham for sexual rejuvenation and P-Shot® (PRP), plus PRP hair restoration and PRP joint injections. Discreet consultations.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham",
