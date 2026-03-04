@@ -2,9 +2,35 @@ import type { Metadata } from "next";
 import BirminghamHomeClient from "@/components/pages/BirminghamHomeClient";
 import Script from "next/script";
 
+// --- SEO RICH FAQS (Birmingham Focus) ---
+const birminghamFaqs = [
+  {
+    question: "Do I need a GP referral for treatment at your Birmingham clinic?",
+    answer: "No, a GP referral is not required. You can book a private, confidential consultation directly with Dr Syed Abdi at our Birmingham clinic for any of our regenerative treatments."
+  },
+  {
+    question: "Who will perform my consultation and treatment in Birmingham?",
+    answer: "All consultations and treatments are performed exclusively by Dr Syed Abdi, our GMC-registered Medical Director who brings over 10 years of NHS and private clinical experience."
+  },
+  {
+    question: "Is the P-Shot® available at the Birmingham location?",
+    answer: "Yes, Dr Abdi is an officially licensed and CMA-certified provider of the P-Shot® and O-Shot®, and regularly performs these regenerative procedures at our Birmingham clinic."
+  },
+  {
+    question: "How long does a PRP procedure take?",
+    answer: "Most PRP treatments, including the P-Shot and joint injections, take between 45 to 60 minutes. This includes a thorough medical review, blood draw, premium double-spin centrifugation, and the treatment itself."
+  },
+  {
+    question: "What areas does the Birmingham clinic serve?",
+    answer: "Our Birmingham clinic is conveniently located to serve patients across the West Midlands, including Solihull, Sutton Coldfield, Wolverhampton, and Dudley."
+  }
+];
+
 export const metadata: Metadata = {
-  // REDUCED TITLE: The layout will now add " | Birmingham Clinic" automatically
-  title: "Healing-PRP Clinics", 
+  // FIXED TITLE: Using absolute ensures the layout doesn't override it.
+  title: {
+    absolute: "Doctor-Led PRP & ED Treatments Birmingham | Healing-PRP",
+  },
   
   description:
     "Leading private clinic in Birmingham for PRP Hair Restoration, Joint Injections & Sexual Rejuvenation. Specialist Erectile Dysfunction (ED) solutions and P-Shot® therapy. Doctor-led care serving Birmingham, Solihull & Sutton Coldfield.",
@@ -72,6 +98,11 @@ const birminghamHomeSchema = {
     "addressRegion": "West Midlands",
     "addressCountry": "UK"
   },
+  // The "Power Move" for Local SEO:
+  "areaServed": {
+    "@type": "City",
+    "name": "Birmingham"
+  },
   // Broad medical specialties to capture wide local search intent
   "medicalSpecialty": [
     "Urology", 
@@ -79,10 +110,30 @@ const birminghamHomeSchema = {
     "Women's Health", 
     "Dermatology", 
     "Rheumatology"
-  ]
+  ],
+  // --- E-E-A-T UPGRADE: Connecting the Doctor to the Birmingham clinic ---
+  "medicalDirector": {
+    "@type": "Physician",
+    "name": "Dr Syed Abdi",
+    "url": "https://www.healing-prp.co.uk/our-doctor"
+  }
 };
 
 export default function BirminghamPage() {
+  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": birminghamFaqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  };
+
   return (
     <>
       <Script
@@ -90,7 +141,14 @@ export default function BirminghamPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(birminghamHomeSchema) }}
       />
-      <BirminghamHomeClient />
+      <Script
+        id="faq-schema-birmingham"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      
+      {/* Passing the FAQs down as a prop so DynamicFAQ can render them inside the client */}
+      <BirminghamHomeClient faqs={birminghamFaqs} />
     </>
   );
 }
