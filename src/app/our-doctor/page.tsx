@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Meet Your Doctor | Healing-PRP Clinics",
-  description: "Dr Syed Abdi is the Medical Director of Healing-PRP Clinics. Full clinical profile coming soon.",
+  description: "Full clinical profile coming soon.",
   robots: {
     index: false, // Tells Google not to heavily index this temporary page yet
     follow: true,
@@ -28,7 +28,7 @@ export default function OurDoctorComingSoon() {
 
           {/* Main Headings */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-raleway font-bold text-white tracking-tight">
-            Dr Syed Abdi
+            Comming Soon
           </h1>
           
           <div className="w-16 h-1 bg-[#4041d1] mx-auto rounded-full"></div>
@@ -39,7 +39,7 @@ export default function OurDoctorComingSoon() {
 
           {/* Explanation Text */}
           <p className="text-base md:text-lg text-slate-400 font-inter leading-relaxed max-w-2xl mx-auto">
-            We are currently integrating our new private practice platform. Dr Abdi is a GMC-registered doctor with over 10 years of clinical experience, serving as our Medical Director across all locations. 
+            We are currently integrating our new private practice platform. GMC-registered doctor with over 10 years of clinical experience, serving as our Medical Director across all locations. 
             <br className="hidden md:block" />
             His full clinical profile, NHS background, and regenerative medicine credentials will be available here shortly.
           </p>
