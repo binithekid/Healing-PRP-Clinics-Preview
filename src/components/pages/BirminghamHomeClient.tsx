@@ -14,7 +14,7 @@ import Link from "next/link";
 import ContactCTASection from "@/components/ContactCTASection";
 import Footer from "@/components/Footer";
 import PRPExplanationSection from "@/components/PRPExplanationSection";
-import FAQSection from "@/components/FAQSection";
+import DynamicFAQ from "@/components/DynamicFAQ";
 import LocationSection from "@/components/LocationSection";
 import TrustReviews from "@/components/TrustReviews";
 
@@ -239,7 +239,7 @@ export default function BirminghamHomeClient() {
         </div>
       </section>
 
-      <FAQSection />
+     <DynamicFAQ faqs={faqs} locationName="Birmingham" />
 
       {/* Google Reviews wrapped for Smooth Scrolling */}
       <div id="reviews-section">
