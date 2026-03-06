@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Raleway } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import Script from "next/script"; // <-- 1. Added this import
+import GlobalStickyCTAs from "@/components/GlobalStickyCTAs";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway" });
@@ -49,22 +49,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${raleway.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
-        
-        {/* --- 2. GOOGLE ANALYTICS ADDED HERE --- */}
-        <Script 
-          src="https://www.googletagmanager.com/gtag/js?id=G-PB0GD280PD" 
-          strategy="afterInteractive" 
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-PB0GD280PD');
-          `}
-        </Script>
-
         {/* Header appears on ALL pages */}
         <Header /> 
         
@@ -76,6 +60,8 @@ export default function RootLayout({
         {/* Footer is typically called within page.tsx to allow for 
             location-specific footer details, but can be added here 
             if you want a universal one. */}
+        {/* NEW: The Global Sticky Buttons */}
+        <GlobalStickyCTAs />
       </body>
     </html>
   );
