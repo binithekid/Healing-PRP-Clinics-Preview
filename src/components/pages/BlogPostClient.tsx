@@ -1,209 +1,336 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { ArrowLeft, Dot, ChevronRight } from "lucide-react";
+import React from "react";
+import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-// Removed Next/Image to avoid config errors
-import { BlogPost, getBlogPostBySlug, getBlogPostNavigation } from "@/lib/contentful";
+import { ArrowLeft, ChevronRight, Phone } from "lucide-react";
+import { FaWhatsapp, FaGoogle, FaStar, FaLock } from "react-icons/fa"; 
+import ContactCTASection from "@/components/ContactCTASection";
+import TrustReviews from "@/components/TrustReviews";
 import Footer from "@/components/Footer";
+import { BlogPost } from "@/lib/contentful";
 
-// Specific types to replace 'any'
+// --- TYPESCRIPT INTERFACES ---
+interface NavItem {
+  slug: string;
+}
+
+interface NavigationData {
+  next?: NavItem;
+  prev?: NavItem;
+}
+
+interface RichTextChild {
+  value: string;
+}
+
+interface RichTextData {
+  target?: {
+    fields?: {
+      file?: { url?: string };
+      title?: string;
+    };
+  };
+}
+
 interface RichTextNode {
   nodeType: string;
-  value?: string;
-  content?: RichTextNode[];
+  content?: RichTextChild[];
+  data?: RichTextData;
 }
 
-interface RichTextContent {
+interface RichTextDocument {
   content: RichTextNode[];
 }
+// -----------------------------
 
-// ✅ HELPER: Adds 'https:' to images so they definitely load
-const getImageUrl = (url: string) => {
-  if (!url) return "";
-  if (url.startsWith("//")) {
-    return `https:${url}`;
-  }
-  return url;
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-export default function BlogPostClient({ slug }: { slug: string }) {
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [navigation, setNavigation] = useState<{
-    previous: BlogPost | null;
-    next: BlogPost | null;
-  }>({ previous: null, next: null });
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [notFound, setNotFound] = useState(false);
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const fetchPost = async () => {
-      try {
-        const [blogPost, nav] = await Promise.all([
-          getBlogPostBySlug(slug),
-          getBlogPostNavigation(slug),
-        ]);
+const getImageUrl = (url: string | undefined) => {
+  if (!url) return "";
+  return url.startsWith("//") ? `https:${url}` : url;
+};
 
-        if (blogPost) {
-          setPost(blogPost);
-          setNavigation(nav);
-        } else {
-          setNotFound(true);
-        }
-      } catch (error) {
-        console.error("Error fetching post:", error);
-        setNotFound(true);
-      }
-    };
-    fetchPost();
-    const timer = setTimeout(() => setIsLoaded(true), 300);
-    return () => clearTimeout(timer);
-  }, [slug]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.8, staggerChildren: 0.15 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+export default function BlogPostClient({ post, navigation }: { post: BlogPost; navigation: NavigationData }) {
+  
+  const openContactForm = () => {
+    window.dispatchEvent(new CustomEvent("open-contact-drawer"));
+    const element = document.getElementById("contact-form-section");
+    element?.scrollIntoView({ behavior: "smooth" });
   };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-GB", {
-      year: "numeric",
-      month: "long",
       day: "numeric",
+      month: "long",
+      year: "numeric",
     });
   };
 
-  const renderRichText = (content: unknown) => {
-    const richContent = content as RichTextContent;
-    if (!richContent || !richContent.content) return null;
-
-    return richContent.content.map((node, index) => {
-      if (node.nodeType === "paragraph") {
-        return (
-          // FONT FIX: Reduced to text-sm/base (was text-lg)
-          <p key={index} className="mb-6 text-sm md:text-base text-slate-600 font-inter leading-relaxed">
-            {node.content?.map((textNode) => textNode.value).join("")}
-          </p>
-        );
-      }
-      if (node.nodeType.startsWith("heading-")) {
-        return (
-          // FONT FIX: Reduced heading size
-          <h2 key={index} className="text-xl md:text-2xl font-raleway font-semibold text-slate-900 mt-10 mb-4 leading-tight">
-            {node.content?.map((textNode) => textNode.value).join("")}
-          </h2>
-        );
-      }
-      return null;
-    });
+  // --- SMART SCALING LOGIC FOR TITLES ---
+  const getTitleSizeClasses = (title: string) => {
+    if (!title) return "text-3xl md:text-5xl lg:text-[54px]"; 
+    const length = title.length;
+    
+    if (length < 40) return "text-4xl md:text-6xl lg:text-[64px]";
+    else if (length < 80) return "text-3xl md:text-5xl lg:text-[54px]";
+    else return "text-3xl md:text-4xl lg:text-[44px]";
   };
 
-  if (notFound || !post) return <div className="min-h-screen bg-white" />;
+  // --- UPGRADED: TRUE 50/50 EZRA GRID RENDERER ---
+  const renderRichText = (content: RichTextDocument | undefined) => {
+    if (!content || !content.content) return null;
+    
+    // 1. Chunk the article into sections (Image + Associated Paragraphs)
+    const sections: { image: RichTextNode | null; text: RichTextNode[] }[] = [];
+    let currentText: RichTextNode[] = [];
+    let currentImage: RichTextNode | null = null;
+
+    content.content.forEach((node: RichTextNode) => {
+      if (node.nodeType === "embedded-asset-block") {
+        // If we hit a new image, save the previous chunk and start a new one
+        if (currentText.length > 0 || currentImage) {
+          sections.push({ image: currentImage, text: currentText });
+          currentText = [];
+          currentImage = null;
+        }
+        currentImage = node;
+      } else {
+        currentText.push(node);
+      }
+    });
+
+    // Push the final chunk
+    if (currentText.length > 0 || currentImage) {
+      sections.push({ image: currentImage, text: currentText });
+    }
+
+    let imageCounter = 0;
+
+    // 2. Render the chunks
+    return sections.map((section, index) => {
+      
+      // Helper to render the text nodes beautifully
+      const renderText = (nodes: RichTextNode[]) => (
+        nodes.map((n, i) => {
+          if (n.nodeType === "paragraph") {
+            return (
+              <p key={i} className="mb-6 text-slate-700 leading-relaxed text-base md:text-lg font-light font-inter">
+                {n.content?.map((c: RichTextChild) => c.value).join("")}
+              </p>
+            );
+          }
+          // Catch all for headings inside the rich text if you ever use them
+          if (n.nodeType.includes("heading")) {
+             return (
+               <h3 key={i} className="text-2xl font-serif text-slate-900 mb-4 mt-8">
+                 {n.content?.map((c: RichTextChild) => c.value).join("")}
+               </h3>
+             )
+          }
+          return null;
+        })
+      );
+
+      // --- LAYOUT A: TEXT ONLY (Usually the intro before the first image) ---
+      if (!section.image) {
+        return (
+          <div key={index} className="max-w-3xl mx-auto px-4 sm:px-6 w-full mb-16">
+            {renderText(section.text)}
+          </div>
+        );
+      }
+
+      // --- LAYOUT B: THE 50/50 EZRA GRID ---
+      imageCounter++;
+      const isEven = imageCounter % 2 === 0;
+      
+      const url = section.image.data?.target?.fields?.file?.url;
+      const title = section.image.data?.target?.fields?.title || "Editorial Image";
+      const imgUrl = getImageUrl(url);
+
+      return (
+        <div key={index} className="max-w-7xl mx-auto w-full px-4 sm:px-6 py-12 md:py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+            
+            {/* IMAGE COLUMN (Alternates left/right based on even/odd) */}
+            <div className={`w-full ${isEven ? "md:order-2" : "md:order-1"}`}>
+              <div className="rounded-2xl overflow-hidden shadow-xl border border-slate-100 bg-slate-50">
+                {imgUrl && <img src={imgUrl} alt={title} className="w-full h-auto object-cover" />}
+              </div>
+            </div>
+
+            {/* TEXT COLUMN */}
+            <div className={`w-full flex flex-col justify-center ${isEven ? "md:order-1" : "md:order-2"}`}>
+              {renderText(section.text)}
+            </div>
+
+          </div>
+        </div>
+      );
+    });
+  };
 
   return (
-    <motion.div initial="hidden" animate={isLoaded ? "visible" : "hidden"} variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
+    <div className="bg-white min-h-screen font-inter flex flex-col">
       
-      {/* Background Hero Image - Standardized */}
-      <div className="absolute top-0 left-0 w-full h-[55vh] z-[-1] overflow-hidden">
-         <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-white z-10"></div>
-         <img 
-            src="/hero_img.png" 
-            alt="Background" 
-            className="w-full h-full object-cover opacity-50"
-         />
-      </div>
+      <header className="relative pt-8 md:pt-10 pb-12 md:pb-16 bg-[#0A1128] overflow-hidden">
+        {/* Background Overlay */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[#0A1128]/90 z-10"></div>
+          <img src="/hero_img.png" alt="Background" className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
+        </div>
 
-      <header className="pt-32 md:pt-40 pb-12">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <motion.div variants={containerVariants} initial="hidden" animate="visible">
+        {/* --- HORIZON NAVIGATION --- */}
+        <div className="relative z-20 max-w-[1200px] mx-auto px-6 mb-8 md:mb-10">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-between">
+            <Link href="/blog" className="inline-flex items-center text-[10px] md:text-xs font-semibold text-slate-400 hover:text-white transition-all uppercase tracking-widest">
+              <ArrowLeft className="w-3 h-3 mr-2" /> Back to Insights
+            </Link>
             
-            {/* Navigation Bar */}
-            <motion.div variants={itemVariants} className="flex items-center justify-between mb-8 pb-4 border-b border-slate-200/60">
-              <Link href="/blog" className="inline-flex items-center text-[10px] md:text-xs font-inter font-bold text-[#4041d1] hover:opacity-70 transition-colors uppercase tracking-widest">
-                <ArrowLeft className="w-3 h-3 mr-1" /> Back to Insights
+            {navigation.next ? (
+              <Link href={`/blog/${navigation.next.slug}`} className="text-[10px] md:text-xs font-semibold text-slate-400 hover:text-white flex items-center uppercase tracking-widest transition-colors">
+                Next Article <ChevronRight className="w-3 h-3 ml-2" />
               </Link>
-              {navigation.next && (
-                <Link href={`/blog/${navigation.next.slug}`} className="text-[10px] md:text-xs font-inter font-bold text-[#4041d1] hover:underline flex items-center uppercase tracking-widest">
-                  Next Article <ChevronRight className="w-3 h-3 ml-1" />
-                </Link>
-              )}
-            </motion.div>
-
-            {/* Meta Data */}
-            <motion.div variants={itemVariants} className="flex items-center justify-center gap-2 mb-6">
-              <span className="px-3 py-1 bg-[var(--brand-blue-50)] text-[#4041d1] rounded-full text-[10px] font-bold uppercase tracking-wider">
-                {post.type?.[0] || "Medical Insight"}
+            ) : (
+              <span className="text-[10px] md:text-xs font-semibold text-slate-600 flex items-center uppercase tracking-widest cursor-default">
+                Latest Insight <span className="w-3 h-3 ml-2 block rounded-full bg-slate-700/50"></span>
               </span>
-              <Dot className="text-slate-300" />
-              <span className="text-xs font-inter font-medium text-slate-500">{formatDate(post.date)}</span>
-            </motion.div>
+            )}
+          </motion.div>
+        </div>
 
-            {/* Title - FONT FIX: Reduced from 5xl to 3xl/4xl */}
-            <motion.h1 variants={itemVariants} className="text-2xl md:text-4xl font-raleway font-bold text-slate-900 mb-6 leading-tight">
+        {/* --- EDITORIAL TYPOGRAPHY & TRUST BAR --- */}
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 text-center">
+          <motion.div variants={containerVariants} initial="hidden" animate="visible">
+
+            {/* Title: Smart Scaling */}
+            <motion.h1 variants={itemVariants} className={`${getTitleSizeClasses(post.title)} font-serif font-normal text-white mb-6 leading-[1.2] mx-auto max-w-4xl transition-all duration-300`}>
               {post.title}
             </motion.h1>
 
-            {post.excerpt && (
-              // FONT FIX: Reduced excerpt size
-              <motion.p variants={itemVariants} className="text-sm md:text-base text-slate-600 font-inter leading-relaxed max-w-2xl mx-auto italic">
-                {post.excerpt}
-              </motion.p>
-            )}
+            {/* Author & Date */}
+            <motion.div variants={itemVariants} className="mb-10">
+              <span className="text-sm md:text-base font-inter text-slate-300">
+                Dr. Syed Abdi, {formatDate(post.date)}
+              </span>
+            </motion.div>
+
+            {/* --- TRUST BAR --- */}
+            <motion.div variants={itemVariants} className="max-w-4xl mx-auto bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-5 shadow-2xl">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-2 divide-y md:divide-y-0 md:divide-x divide-white/10">
+                
+                <div className="flex justify-center items-center group cursor-pointer px-2 pt-2 md:pt-0">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#4285F4] shadow-md shrink-0">
+                      <FaGoogle className="w-4 h-4" />
+                    </div>
+                    <div className="flex flex-col items-start">
+                      <div className="flex text-amber-400 text-[10px] mb-0.5">
+                        <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                      </div>
+                      <span className="text-white text-[9px] font-bold tracking-widest uppercase font-inter">5.0 Patient Rating</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-center items-center px-2 pt-4 md:pt-0">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 bg-[#4041d1] rounded-full flex items-center justify-center text-white font-bold text-[12px] shadow-md border border-white/10 shrink-0">
+                      10+
+                    </div>
+                    <div className="flex flex-col items-start">
+                      <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Years</span>
+                      <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Experience</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-center items-center px-2 pt-4 md:pt-0">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 bg-[#1f3a68] rounded-full flex items-center justify-center text-white font-bold text-[11px] shadow-md border border-white/10 shrink-0">
+                      GMC
+                    </div>
+                    <div className="flex flex-col items-start">
+                      <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Registered</span>
+                      <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Doctor</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-center items-center px-2 pt-4 md:pt-0">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center text-slate-300 shadow-md border border-white/10 shrink-0">
+                      <FaLock className="w-3.5 h-3.5" />
+                    </div>
+                    <div className="flex flex-col items-start">
+                      <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Strictly 1:1</span>
+                      <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Discreet Care</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </motion.div>
+
           </motion.div>
         </div>
       </header>
 
-      {post.coverImage && (
-        <section className="pb-12">
-          <div className="max-w-4xl mx-auto px-4">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-100 aspect-video md:aspect-[21/9]"
-            >
-              {/* IMAGE FIX: Standard img tag guarantees display */}
+      {/* --- MAIN ARTICLE BODY --- */}
+      {/* Notice the container is now w-full instead of max-w-3xl! */}
+      <article className="flex-grow w-full py-12 md:py-20">
+        
+        {/* Lead Cover Image (If present) */}
+        {post.coverImage && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+            className="max-w-5xl mx-auto mb-16 px-4 sm:px-6"
+          >
+            <div className="rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 shadow-md">
               <img 
                 src={getImageUrl(post.coverImage.url)} 
-                alt={post.coverImage.title || "Blog Cover"} 
-                className="w-full h-full object-cover"
+                alt={post.coverImage.title || "Cover"} 
+                className="w-full h-auto object-cover"
               />
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-      <section className="pb-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <motion.article variants={containerVariants} initial="hidden" animate="visible">
-            <motion.div variants={itemVariants} className="prose prose-slate max-w-none">
-              {renderRichText(post.content)}
-            </motion.div>
-          </motion.article>
-          
-          <motion.div variants={itemVariants} className="mt-12 pt-8 border-t border-slate-100 text-center">
-            <p className="text-slate-600 font-inter mb-6 font-medium text-sm">Want to discuss this treatment with a specialist?</p>
-            <Link 
-                href="/contact" 
-                className="inline-flex px-8 py-3 bg-[#4041d1] text-white rounded-lg font-inter font-bold hover:bg-[#2a2bb8] transition-all shadow-md text-sm"
-                onClick={(e) => {
-                   // Optional: Open drawer
-                   // window.dispatchEvent(new CustomEvent("open-contact-drawer"));
-                }}
-            >
-              Book a Consultation
-            </Link>
+            </div>
           </motion.div>
+        )}
+
+        {/* Excerpt Lead Paragraph */}
+        {post.excerpt && (
+          <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <p className="text-xl md:text-2xl text-slate-800 font-raleway leading-relaxed mb-12 border-l-2 border-[#4041d1] pl-6">
+              {post.excerpt}
+            </p>
+          </div>
+        )}
+
+        {/* Contentful Rich Text (Sections) */}
+        <div className="w-full">
+           {renderRichText(post.content as unknown as RichTextDocument)}
         </div>
-      </section>
+      </article>
+
+      {/* --- TRUST INDEX WIDGET --- */}
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 mb-16 mt-8">
+         <TrustReviews widgetUrl="https://cdn.trustindex.io/loader.js?eb147a565c3c36945f26281e586" />
+      </div>
+
+      <div className="bg-slate-50 border-t border-slate-100">
+        <ContactCTASection />
+      </div>
 
       <Footer />
-    </motion.div>
+
+    </div>
   );
 }
