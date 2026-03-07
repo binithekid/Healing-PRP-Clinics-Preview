@@ -158,11 +158,11 @@ export default function BlogPostClient({ post, navigation }: { post: BlogPost; n
           {/* Removed max-w-7xl and padding to allow edge-to-edge stretching */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 items-center">
             
-            {/* IMAGE COLUMN (Full Bleed, No Margins) */}
-            <div className={`w-full h-full ${isEven ? "md:order-2" : "md:order-1"}`}>
-              {/* Removed rounded corners, shadows, and borders */}
-              <div className="w-full h-full min-h-[400px] md:min-h-[600px] bg-slate-50 flex">
-                {imgUrl && <img src={imgUrl} alt={title} className="w-full h-full object-cover" />}
+            {/* IMAGE COLUMN (Controlled Editorial Sizing) */}
+            <div className={`w-full ${isEven ? "md:order-2" : "md:order-1"}`}>
+              {/* Locks the image into a beautiful, consistent 4:3 magazine proportion */}
+              <div className="w-full aspect-square md:aspect-[4/3] bg-slate-50 overflow-hidden flex items-center justify-center">
+                {imgUrl && <img src={imgUrl} alt={title} className="w-full h-full object-cover object-center" />}
               </div>
             </div>
 
