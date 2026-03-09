@@ -4,7 +4,8 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Erectile Dysfunction Treatment St Albans | Healing-PRP Clinics",
+    // Added "Doctor-Led" for medical authority and higher Click-Through Rate
+    absolute: "Doctor-Led Erectile Dysfunction Treatment St Albans | Healing-PRP Clinics",
   },
 
   description:
@@ -128,10 +129,10 @@ export default function Page() {
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
+      "name": faq.question,
+      "acceptedAnswer": {
         "@type": "Answer",
-        text: faq.answer,
+        "text": faq.answer,
       },
     })),
   };
