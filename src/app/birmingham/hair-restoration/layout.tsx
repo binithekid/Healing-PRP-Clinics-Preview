@@ -8,7 +8,7 @@ import React from "react";
 export const metadata: Metadata = {
   title: {
     // Default title for the folder
-    default: "PRP Hair Restoration & Regrowth | Birmingham Clinic",
+    default: "Doctor-Led PRP Hair Restoration & Regrowth | Birmingham Clinic",
     
     // Automatically appends location to child page titles
     // Result: "Treatment Plans | Birmingham Clinic"
