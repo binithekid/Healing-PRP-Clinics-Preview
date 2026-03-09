@@ -3,12 +3,13 @@ import OShotClient from "@/components/pages/OShotClient";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: {
-    // Strong, location-first title for Google ranking
-    absolute: "O-Shot Birmingham | Doctor-Led PRP (Orgasm Shot®) | Healing-PRP Clinics",
-  },
+  // 1. Perfectly compatible with your layout.tsx template!
+  // Next.js will output: "O-Shot® (Orgasm Shot) Treatment | Birmingham Clinic"
+  title: "O-Shot® (Orgasm Shot) Treatment",
+  
   description:
     "Official O-Shot® (Orgasm Shot) clinic in Birmingham. GMC-registered doctor offering PRP & Exo-O therapy for female intimate rejuvenation. Private clinic in Edgbaston.",
+  
   keywords: [
     // Core Service Keywords
     "O-Shot Birmingham",
@@ -37,10 +38,11 @@ export const metadata: Metadata = {
     "GMC registered O-Shot doctor",
     "Non-surgical female rejuvenation"
   ],
+  
   alternates: {
-    // NOTE: Ensure this matches your actual live domain
     canonical: "https://www.healing-prp.co.uk/birmingham/o-shot",
   },
+  
   openGraph: {
     title: "O-Shot Treatment (Orgasm Shot) | Birmingham",
     description: "Doctor-led O-Shot & Exo-O clinic in Birmingham. Advanced PRP therapy for female intimate wellness and rejuvenation.",
@@ -91,38 +93,44 @@ const faqs = [
   },
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
-const oShotSchemaBirmingham = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics Birmingham",
-    "description": "Doctor-led clinic in Edgbaston, Birmingham providing the official O-Shot® (Orgasm Shot) and advanced Exo-O female rejuvenation therapies.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Birmingham",
-      "addressRegion": "West Midlands",
-      "addressCountry": "UK"
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy using @graph ---
+const oShotSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Doctor-led clinic in Edgbaston, Birmingham providing the official O-Shot® (Orgasm Shot) and advanced Exo-O female rejuvenation therapies.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      "medicalSpecialty": ["Women's Health", "Gynecology", "Aesthetic Medicine"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Birmingham Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
     },
-    // The "Power Move" for Local SEO:
-    "areaServed": {
-      "@type": "City",
-      "name": "Birmingham"
-    },
-    "medicalSpecialty": ["Women's Health", "Gynecology", "Aesthetic Medicine"]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalTherapy",
-    "name": "O-Shot® (Orgasm Shot) & Exo-O Shot",
-    "alternateName": ["Platelet-Rich Plasma (PRP) Female Rejuvenation", "Exosome Vaginal Therapy", "Vaginal PRP Injection"],
-    "description": "Advanced autologous Platelet-Rich Plasma (PRP) and Exosome injection therapies designed to improve female intimate health, natural lubrication, urinary control, and sexual sensitivity in Birmingham.",
-    "relevantSpecialty": {
-      "@type": "MedicalSpecialty",
-      "name": "Women's Health"
+    {
+      "@type": "MedicalTherapy",
+      "name": "O-Shot® (Orgasm Shot) & Exo-O Shot",
+      "alternateName": ["Platelet-Rich Plasma (PRP) Female Rejuvenation", "Exosome Vaginal Therapy", "Vaginal PRP Injection"],
+      "description": "Advanced autologous Platelet-Rich Plasma (PRP) and Exosome injection therapies designed to improve female intimate health, natural lubrication, urinary control, and sexual sensitivity in Birmingham.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Women's Health"
+      }
     }
-  }
-];
+  ]
+};
 
 export default function BirminghamOShotPage() {
   // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
@@ -159,7 +167,7 @@ export default function BirminghamOShotPage() {
       <OShotClient
         locationName="Birmingham"
         servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
-        faqs={faqs} // <--- Pass the local FAQs here!
+        faqs={faqs}
       />
     </main>
   );
