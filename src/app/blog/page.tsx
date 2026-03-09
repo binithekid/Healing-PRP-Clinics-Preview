@@ -5,7 +5,7 @@ import Script from "next/script";
 
 // This helps Google index your blog main page correctly
 export const metadata: Metadata = {
-  title: "Latest Insights on PRP & Regenerative Medicine | Healing-PRP Clinics",
+  title: "Doctor-Led Medical & PRP Blog | Healing-PRP Clinics",
   description: "Stay informed about the latest developments in PRP treatments, joint health, and aesthetic medicine from our medical experts.",
   alternates: {
     canonical: "https://www.healing-prp.co.uk/blog",
