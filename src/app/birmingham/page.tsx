@@ -33,43 +33,25 @@ export const metadata: Metadata = {
   },
   
   description:
-    "Private, doctor-led clinic in Birmingham for sexual rejuvenation and P-Shot® (PRP), plus PRP hair restoration and PRP joint injections. Discreet consultations.",
+    "Private, doctor-led clinic in Birmingham for sexual rejuvenation and P-Shot® (PRP), plus PRP hair restoration and PRP joint injections. Discreet consultations in Edgbaston.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham",
   },
   
   keywords: [
-    // --- CORE CLINIC KEYWORDS ---
     "PRP Clinic Birmingham",
     "Private Doctor Birmingham",
     "Regenerative Medicine Birmingham",
     "Private medical clinic Edgbaston",
-    
-    // --- MEN'S HEALTH & ED ---
     "Erectile Dysfunction treatment Birmingham", 
     "ED clinic West Midlands",                    
     "P-Shot Birmingham",
-    "Mens health clinic Solihull",
-    
-    // --- WOMEN'S HEALTH ---
     "O-Shot Birmingham",
-    "Womens sexual wellness clinic West Midlands",
-    
-    // --- HAIR RESTORATION ---
     "Hair Loss Treatment Birmingham",
-    "Hair restoration Wolverhampton",            
-    "PRP hair therapy Sutton Coldfield",
-    
-    // --- JOINT PAIN ---
     "Joint Pain Clinic Birmingham",
-    "Joint injections Sutton Coldfield",        
-    "PRP for joint pain West Midlands",
-    
-    // --- SKIN & AESTHETICS ---
-    "Vampire Facial Dudley",                    
     "Polynucleotides Birmingham",
-    "Exosome therapy West Midlands"
+    "Edgbaston Medical Quarter clinic"
   ],
   
   openGraph: {
@@ -83,44 +65,45 @@ export const metadata: Metadata = {
   },
 };
 
-// --- JSON-LD SCHEMA: Master Medical Clinic (Birmingham) ---
+// --- UPGRADED JSON-LD SCHEMA: Master Medical Clinic (Birmingham) ---
 const birminghamHomeSchema = {
   "@context": "https://schema.org",
-  "@type": "MedicalClinic",
-  "name": "Healing-PRP Clinics Birmingham",
-  "description": "Leading private doctor-led clinic in Birmingham specialising in regenerative medicine, PRP, Erectile Dysfunction, Joint Injections, and Hair Restoration.",
-  "url": "https://www.healing-prp.co.uk/birmingham",
-  "logo": "https://www.healing-prp.co.uk/Logo2.png",
-  "image": "https://www.healing-prp.co.uk/Logo2.png",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Birmingham",
-    "addressRegion": "West Midlands",
-    "addressCountry": "UK"
-  },
-  // The "Power Move" for Local SEO:
-  "areaServed": {
-    "@type": "City",
-    "name": "Birmingham"
-  },
-  // Broad medical specialties to capture wide local search intent
-  "medicalSpecialty": [
-    "Urology", 
-    "Men's Health", 
-    "Women's Health", 
-    "Dermatology", 
-    "Rheumatology"
-  ],
-  // --- E-E-A-T UPGRADE: Connecting the Doctor to the Birmingham clinic ---
-  "medicalDirector": {
-    "@type": "Physician",
-    "name": "Dr Syed Abdi",
-    "url": "https://www.healing-prp.co.uk/our-doctor"
-  }
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Leading private doctor-led clinic in Birmingham specialising in regenerative medicine, PRP, Erectile Dysfunction, Joint Injections, and Hair Restoration.",
+      "url": "https://www.healing-prp.co.uk/birmingham",
+      "logo": "https://www.healing-prp.co.uk/Logo2.png",
+      "image": "https://www.healing-prp.co.uk/Logo2.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Birmingham" },
+        { "@type": "AdministrativeArea", "name": "West Midlands" },
+        { "@type": "Neighborhood", "name": "Edgbaston" }
+      ],
+      "medicalSpecialty": [
+        "Urology", 
+        "Men's Health", 
+        "Women's Health", 
+        "Dermatology", 
+        "Rheumatology"
+      ],
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    }
+  ]
 };
 
 export default function BirminghamPage() {
-  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -147,7 +130,6 @@ export default function BirminghamPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
-      {/* Passing the FAQs down as a prop so DynamicFAQ can render them inside the client */}
       <BirminghamHomeClient faqs={birminghamFaqs} />
     </>
   );
