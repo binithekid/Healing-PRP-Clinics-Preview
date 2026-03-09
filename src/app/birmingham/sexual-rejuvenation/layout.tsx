@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: {
     // Broad category name with fallback branding
-    default: "Sexual Rejuvenation & Wellness | Birmingham Clinic",
+    default: "Doctor-Led Sexual Rejuvenation & Wellness | Birmingham Clinic",
     
     // Result example: "P-Shot Treatment | Birmingham Clinic"
     template: "%s | Birmingham Clinic",
