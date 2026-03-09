@@ -5,11 +5,11 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: {
     // Strong, location-first title for Google ranking
-    absolute: "Premature Ejaculation (PE) Treatment Birmingham | Healing-PRP Clinics",
+    absolute: "Doctor-Led Premature Ejaculation Treatment | Birmingham",
   },
   
   description:
-    "Private Premature Ejaculation (PE) treatment in Birmingham (Edgbaston). Expert doctor-led care offering bespoke medication, behavioural therapies, and secure online consultations.",
+    "Doctor-led Premature Ejaculation (PE) treatment in Birmingham (Edgbaston). Expert doctor-led care offering bespoke medication, behavioural therapies, and secure online consultations.",
 
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/premature-ejaculation",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "Premature Ejaculation Treatment | Birmingham (Edgbaston)",
+    title: "Doctor-Led Premature Ejaculation Treatment | Birmingham",
     description:
       "Confidential medical treatment for Premature Ejaculation in Birmingham. Doctor-led clinic offering proven solutions and secure online consultations.",
     url: "https://www.healing-prp.co.uk/birmingham/premature-ejaculation",
