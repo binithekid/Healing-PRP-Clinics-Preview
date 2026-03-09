@@ -1,4 +1,4 @@
-imimport type { Metadata } from "next";
+import type { Metadata } from "next";
 import PShotClient from "@/components/pages/PShotClient";
 import Script from "next/script";
 
