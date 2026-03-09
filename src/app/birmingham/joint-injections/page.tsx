@@ -5,7 +5,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   // 1. Optimized Title: Clean and ready for the Layout Template
   // Final Result: "PRP & Steroid Joint Injections | Birmingham Clinic"
-  title: "PRP & Steroid Joint Injections",
+  title: "Doctor-Led PRP & Steroid Joint Injections",
   
   description:
     "Doctor-led joint injections in Birmingham Edgbaston. Specialist PRP therapy and Corticosteroid injections for arthritis, sports injuries, and joint pain. Serving Solihull & West Midlands.",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   ],
   
   openGraph: {
-    title: "Joint Pain Relief Clinic | Birmingham",
+    title: "Doctor-Led Joint Pain Relief Clinic | Birmingham",
     description:
       "Doctor-led PRP and Steroid injections for arthritis and sports injuries. Serving patients in Birmingham, Solihull, and across the West Midlands.",
     url: "https://www.healing-prp.co.uk/birmingham/joint-injections",
