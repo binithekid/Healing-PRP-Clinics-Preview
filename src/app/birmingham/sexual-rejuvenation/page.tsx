@@ -4,7 +4,7 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Short Clean Title: Template will add "| Birmingham Clinic"
-  title: "Erectile Dysfunction, P-Shot & O-Shot Birmingham",
+  title: "Doctor-Led Erectile Dysfunction, P-Shot & O-Shot Birmingham",
   
   description:
     "Confidential, doctor-led sexual rejuvenation, personalised medication & ED treatments in Birmingham. Specialist P-Shot® & O-Shot® serving Solihull & West Midlands.",
