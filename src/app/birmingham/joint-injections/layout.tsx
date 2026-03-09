@@ -8,7 +8,7 @@ import React from "react";
 export const metadata: Metadata = {
   title: {
     // Fallback if the page title is missing
-    default: "PRP & Steroid Joint Injections",
+    default: "PRP & Steroid Joint Injections | Birmingham Clinic",
     
     // Automatically appends location to child page titles
     // Result: "Knee Pain Treatments | Birmingham Clinic"
@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   },
   description:
     "Doctor-led joint injections in Birmingham Edgbaston. Specialist PRP therapy and steroid injections for arthritis, sports injuries, and joint pain.",
-  alternates: {
-    canonical: "https://www.healing-prp.co.uk/birmingham/joint-injections",
-  },
 };
 
 export default function BirminghamJointInjectionsLayout({
