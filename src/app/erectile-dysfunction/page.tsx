@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "Erectile Dysfunction Treatment | Luton & St Albans",
+    title: "Doctor-Led Erectile Dysfunction Treatment St Albans | Healing-PRP Clinics",
     description:
       "Restore spontaneity and confidence. Doctor-led Shockwave & PRP therapy for ED. Conveniently serving Luton, St Albans, and Hertfordshire.",
     url: "https://www.healing-prp.co.uk/erectile-dysfunction",
