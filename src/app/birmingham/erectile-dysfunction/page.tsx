@@ -3,16 +3,14 @@ import ErectileDysfunctionClient from "@/components/pages/ErectileDysfunctionCli
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: {
-    // FIX: Focused on Birmingham & Midlands for browser tab
-    absolute: "Erectile Dysfunction Treatment Birmingham | Healing-PRP Clinics",
-  },
+  // FIX: Perfectly compatible with your layout.tsx template!
+  // Next.js will output: "Erectile Dysfunction (ED) Treatment | Birmingham Clinic"
+  title: "Erectile Dysfunction (ED) Treatment",
 
   description:
     "Specialist erectile dysfunction clinic in Birmingham. GMC-registered doctor offering non-surgical Shockwave Therapy & P-Shot (PRP). Confidential ED treatment in Edgbaston.",
 
   alternates: {
-    // NOTE: Ensures Google knows this is the Birmingham specific page
     canonical: "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
   },
 
