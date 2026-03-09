@@ -8,7 +8,7 @@ import React from "react";
 export const metadata: Metadata = {
   title: {
     // Fallback if the page title is missing
-    default: "Treatment Prices & Packages",
+    default: "Treatment Prices & Packages | Birmingham Clinic",
     
     // Automatically appends location to child page titles
     // Result: "PRP & Aesthetics Prices | Birmingham Clinic"
@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   },
   description: 
     "Transparent pricing for PRP Hair Restoration, Joint Injections, and Sexual Rejuvenation in Birmingham Edgbaston. View our latest treatment costs and packages.",
-  alternates: {
-    canonical: "https://www.healing-prp.co.uk/birmingham/prices",
-  },
 };
 
 export default function BirminghamPricesLayout({
