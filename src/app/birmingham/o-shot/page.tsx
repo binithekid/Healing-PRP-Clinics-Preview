@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   
   openGraph: {
-    title: "O-Shot Treatment (Orgasm Shot) | Birmingham",
+    title: "Doctor-Led O-Shot (Orgasm Shot) Treatment | Birmingham",
     description: "Doctor-led O-Shot & Exo-O clinic in Birmingham. Advanced PRP therapy for female intimate wellness and rejuvenation.",
     url: "https://www.healing-prp.co.uk/birmingham/o-shot",
     siteName: "Healing-PRP Clinics",
