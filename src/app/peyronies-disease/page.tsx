@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import PeyroniesClient from "@/components/pages/PeyroniesClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
-  // 1. Optimized Title: The layout adds " | St Albans Clinic"
-  title: "Peyronie's Disease Treatment & Correction",
+  // 1. Optimized Title: Added "Doctor-Led" for medical authority. The layout adds " | St Albans Clinic"
+  title: "Doctor-Led Peyronie's Disease Treatment & Correction",
 
   description:
     "Doctor-led Peyronie's disease treatment in St Albans. Non-surgical correction using P-Shot® (PRP) and Shockwave Therapy to reduce curvature and pain. Serving Hertfordshire & London.",
@@ -45,6 +46,51 @@ export const metadata: Metadata = {
   },
 };
 
+// --- E-E-A-T SCHEMA UPGRADE: Medical Clinic & Urology Therapy ---
+const peyroniesSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "St Albans",
+        "addressRegion": "Hertfordshire",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "St Albans"
+      },
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    },
+    {
+      "@type": "MedicalTherapy",
+      "name": "Peyronie's Disease Treatment",
+      "alternateName": ["Non-Surgical Penile Curvature Correction", "P-Shot for Peyronie's", "Shockwave Therapy"],
+      "description": "Doctor-led, non-surgical treatment for Peyronie's disease utilizing Platelet-Rich Plasma (P-Shot) and Shockwave Therapy to break down plaque and reduce penile curvature.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Urology"
+      }
+    }
+  ]
+};
+
 export default function Page() {
-  return <PeyroniesClient />;
+  return (
+    <>
+      <Script
+        id="peyronies-schema-stalbans"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(peyroniesSchema) }}
+      />
+      <PeyroniesClient />
+    </>
+  );
 }
