@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import FacialAestheticsClient from "@/components/pages/FacialAestheticsClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
-  // 1. Optimized Title: Result will be "Vampire Facial & Polynucleotides | Birmingham Clinic"
-  title: "Vampire Facial & Polynucleotides", 
+  // 1. Upgraded Title: Captures the broad category AND the specific high-ticket treatments.
+  title: {
+    absolute: "Facial Aesthetics Birmingham | PRP & Polynucleotides | Healing-PRP",
+  },
   
   description:
     "Doctor-led facial aesthetics in Birmingham Edgbaston. Specialist treatments including Vampire Facials, Polynucleotides, and HA Skin Boosters. Serving Solihull, Sutton Coldfield & Harborne.",
@@ -12,7 +15,6 @@ export const metadata: Metadata = {
     canonical: "https://www.healing-prp.co.uk/birmingham/facial-aesthetics",
   },
   
-  // 2. Expanded Satellite Town & Treatment Keywords
   keywords: [
     "Facial Aesthetics Birmingham",
     "Vampire Facial Birmingham",
@@ -25,7 +27,8 @@ export const metadata: Metadata = {
     "Exosomes treatment Dudley",
     "Skin rejuvenation Walsall",
     "Microneedling with PRP Birmingham",
-    "Anti-ageing injections Halesowen"
+    "Anti-ageing injections Halesowen",
+    "Doctor led skin clinic Birmingham"
   ],
   
   openGraph: {
@@ -39,8 +42,56 @@ export const metadata: Metadata = {
   },
 };
 
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
+const aestheticsSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Doctor-led facial aesthetics clinic in Edgbaston offering Polynucleotides, PRP Facials, and Skin Boosters.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      "medicalSpecialty": ["Dermatology", "Aesthetic Medicine"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Aesthetics Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    },
+    {
+      "@type": "MedicalTherapy",
+      "name": "Facial Aesthetics & Skin Rejuvenation",
+      "alternateName": ["Vampire Facial", "Polynucleotides", "PRP Skin Rejuvenation", "HA Skin Boosters"],
+      "description": "Advanced regenerative facial treatments using autologous Platelet-Rich Plasma (PRP) and Polynucleotides to stimulate collagen, improve skin texture, and reduce signs of aging.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Aesthetic Medicine"
+      }
+    }
+  ]
+};
+
 export default function BirminghamFacialPage() {
   return (
-    <FacialAestheticsClient locationName="Birmingham" />
+    <main>
+      {/* Inject Medical Entity Schema */}
+      <Script
+        id="aesthetics-schema-birmingham"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aestheticsSchemaBirmingham) }}
+      />
+      
+      <FacialAestheticsClient locationName="Birmingham" />
+    </main>
   );
 }
