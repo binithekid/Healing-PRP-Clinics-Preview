@@ -4,7 +4,7 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Polynucleotides Birmingham | DNA Glow Skin Treatment | Healing-PRP",
+    absolute: "Doctor-Led Polynucleotides Birmingham | Healing-PRP",
   },
   
   // TRIMMED: Exactly 143 characters to guarantee no cut-offs on Google search results
