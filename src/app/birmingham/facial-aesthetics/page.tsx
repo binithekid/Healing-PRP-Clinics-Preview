@@ -5,7 +5,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   // 1. Upgraded Title: Captures the broad category AND the specific high-ticket treatments.
   title: {
-    absolute: "Facial Aesthetics Birmingham | Polynucleotides | Healing-PRP Clinics",
+    absolute: "Doctor-Led Facial Aesthetics Birmingham | Polynucleotides | Healing-PRP Clinics",
   },
   
   description:
