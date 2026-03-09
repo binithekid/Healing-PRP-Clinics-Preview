@@ -79,48 +79,54 @@ const faqs = [
   },
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
-const peSchemaBirmingham = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics Birmingham",
-    "description": "Doctor-led private clinic in Edgbaston, Birmingham specialising in male sexual health and the treatment of Premature Ejaculation (PE).",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Birmingham",
-      "addressRegion": "West Midlands",
-      "addressCountry": "UK"
-    },
-    // The "Power Move" for Local SEO: Utilizing an array to capture the wider metro area
-    "areaServed": [
-      {
-        "@type": "City",
-        "name": "Birmingham"
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy using @graph ---
+const peSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Doctor-led private clinic in Edgbaston, Birmingham specialising in male sexual health and the treatment of Premature Ejaculation (PE).",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
       },
-      {
-        "@type": "AdministrativeArea",
-        "name": "West Midlands"
-      },
-      {
-        "@type": "Neighborhood",
-        "name": "Edgbaston"
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Birmingham"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "West Midlands"
+        },
+        {
+          "@type": "Neighborhood",
+          "name": "Edgbaston"
+        }
+      ],
+      "medicalSpecialty": ["Urology", "Men's Health"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
       }
-    ],
-    "medicalSpecialty": ["Urology", "Men's Health"]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalTherapy",
-    "name": "Premature Ejaculation (PE) Treatment",
-    "alternateName": ["PE Medical Therapy", "Ejaculatory Control Programme", "Delay Medication for Men"],
-    "description": "A comprehensive treatment programme for premature ejaculation in Birmingham combining custom topical formulations, oral medications, and behavioural coaching.",
-    "relevantSpecialty": {
-      "@type": "MedicalSpecialty",
-      "name": "Urology"
+    },
+    {
+      "@type": "MedicalTherapy",
+      "name": "Premature Ejaculation (PE) Treatment",
+      "alternateName": ["PE Medical Therapy", "Ejaculatory Control Programme", "Delay Medication for Men"],
+      "description": "A comprehensive treatment programme for premature ejaculation in Birmingham combining custom topical formulations, oral medications, and behavioural coaching.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Urology"
+      }
     }
-  }
-];
+  ]
+};
 
 export default function BirminghamPEPage() {
   // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
@@ -129,10 +135,10 @@ export default function BirminghamPEPage() {
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
+      name: faq.question,
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": faq.answer,
+        text: faq.answer,
       },
     })),
   };
