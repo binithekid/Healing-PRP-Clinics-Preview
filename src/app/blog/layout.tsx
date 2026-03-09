@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog - Healing-PRP Clinics | St Albans",
+  title: {
+    // Fallback title for the main blog index
+    default: "Medical & PRP Blog | Healing-PRP Clinics",
+    
+    // This allows child blog posts to have their own titles + branding
+    // Result: "Everything You Need to Know About PRP | Healing-PRP Blog"
+    template: "%s | Healing-PRP Blog",
+  },
   description:
-    "Read our latest articles about PRP treatments, sexual rejuvenation, joint injections, facial aesthetics, and regenerative medicine. Expert insights from a GMC-registered doctor in St Albans.",
+    "Expert insights on PRP therapy, sexual rejuvenation, and regenerative medicine. Latest medical articles and health advice from our GMC-registered doctors.",
 };
 
 export default function BlogLayout({
