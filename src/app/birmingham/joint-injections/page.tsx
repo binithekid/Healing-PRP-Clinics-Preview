@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import JointInjectionsClient from "@/components/pages/JointInjectionsClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Optimized Title: Clean and ready for the Layout Template
@@ -40,6 +41,56 @@ export const metadata: Metadata = {
   },
 };
 
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
+const jointSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Doctor-led clinic in Edgbaston offering PRP and Corticosteroid joint injections for pain relief and arthritis.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      "medicalSpecialty": ["Orthopedics", "Sports Medicine", "Rheumatology"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    },
+    {
+      "@type": "MedicalTherapy",
+      "name": "PRP & Steroid Joint Injections",
+      "alternateName": ["Platelet-Rich Plasma Joint Therapy", "Corticosteroid Injections", "Orthobiologics"],
+      "description": "Targeted joint injections using autologous PRP or Corticosteroids to reduce inflammation, manage osteoarthritis, and accelerate healing of sports injuries in Birmingham.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Orthopedics"
+      }
+    }
+  ]
+};
+
 export default function BirminghamJointInjectionsPage() {
-  return <JointInjectionsClient locationName="Birmingham" />;
+  return (
+    <main>
+      {/* Inject Medical Entity Schema */}
+      <Script
+        id="joint-schema-birmingham"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jointSchemaBirmingham) }}
+      />
+      
+      <JointInjectionsClient locationName="Birmingham" />
+    </main>
+  );
 }
