@@ -3,7 +3,7 @@ import ContactClient from "@/components/pages/ContactClient";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Doctor-Led ED & P-Shot Clinic | St Albans & Luton",
+  title: "Contact Our Doctor-Led ED Clinic | St Albans & Luton",
   description: "Private medical treatment for Erectile Dysfunction (ED) and P-Shot® in St Albans. Expert regenerative care serving patients from Luton, Dunstable, and Hertfordshire.",
   keywords: [
     "Erectile Dysfunction treatment Luton",
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     canonical: "https://www.healing-prp.co.uk/contact", 
   },
   openGraph: {
-    title: "Doctor-Led ED & P-Shot Clinic | St Albans & Luton",
-    description: "Private medical treatment for Erectile Dysfunction (ED) and P-Shot® in St Albans. Expert regenerative care serving patients from Luton, Dunstable, and Hertfordshire.",
+    title: "Contact Our Doctor-Led ED Clinic | St Albans & Luton",
+    description: "Doctor-led medical treatment for Erectile Dysfunction (ED) and P-Shot® in St Albans. Expert regenerative care serving patients from Luton, Dunstable, and Hertfordshire.",
     url: "https://www.healing-prp.co.uk/contact",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
