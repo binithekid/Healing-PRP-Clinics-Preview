@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    // Fallback title if the page title fails to load
-    default: "PRP & Regenerative Treatment FAQs",
+    // A more authoritative fallback title
+    default: "PRP & Regenerative Treatment FAQs | Expert Medical Advice",
     
-    // This appends the location branding to the page title
-    // Result: "Treatment & Clinic FAQs | St Albans Clinic"
+    // Result: "Sexual Rejuvenation FAQs | St Albans Clinic"
     template: "%s | St Albans Clinic",
   },
-  description: "Expert answers on PRP Hair Restoration, Joint Injections, and Sexual Rejuvenation in St Albans. Detailed information on recovery, safety, and clinic location.",
-  alternates: {
-    canonical: "https://www.healing-prp.co.uk/faq",
-  },
+  description:
+    "Common questions about PRP Hair Restoration, Joint Injections, and Sexual Rejuvenation. Expert answers on safety, recovery, and results from our GMC-registered doctors.",
+  /* Removing canonical from layout to prevent it from overwriting 
+     specific FAQ sub-categories if you add them later. 
+  */
 };
 
 export default function FaqLayout({
@@ -22,8 +22,8 @@ export default function FaqLayout({
 }) {
   return (
     <div className="faq-section-wrapper">
-      {/* This layout isolates the FAQ section, allowing for specific 
-          schema or styling if needed later. 
+      {/* This layout acts as a clean container for the FAQ module.
+          Ensures a consistent structure for search engine crawlers.
       */}
       {children}
     </div>
