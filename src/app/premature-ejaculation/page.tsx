@@ -82,38 +82,44 @@ const faqs = [
   }
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy ---
-const peSchema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics St Albans",
-    "description": "Doctor-led private clinic specialising in male sexual health and the treatment of Premature Ejaculation (PE).",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "St Albans",
-      "addressRegion": "Hertfordshire",
-      "addressCountry": "UK"
+// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Fixed to use @graph) ---
+const peSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "description": "Doctor-led private clinic specialising in male sexual health and the treatment of Premature Ejaculation (PE).",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "St Albans",
+        "addressRegion": "Hertfordshire",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "St Albans"
+      },
+      // Added E-E-A-T Doctor Link
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      },
+      "medicalSpecialty": ["Urology", "Men's Health"]
     },
-    // The "Power Move" for Local SEO:
-    "areaServed": {
-      "@type": "City",
-      "name": "St Albans"
-    },
-    "medicalSpecialty": ["Urology", "Men's Health"]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalTherapy",
-    "name": "Premature Ejaculation (PE) Treatment",
-    "alternateName": ["PE Medical Therapy", "Ejaculatory Control Programme"],
-    "description": "A comprehensive treatment programme for premature ejaculation combining custom topical formulations, oral medications, and behavioural coaching.",
-    "relevantSpecialty": {
-      "@type": "MedicalSpecialty",
-      "name": "Urology"
+    {
+      "@type": "MedicalTherapy",
+      "name": "Premature Ejaculation (PE) Treatment",
+      "alternateName": ["PE Medical Therapy", "Ejaculatory Control Programme"],
+      "description": "A comprehensive treatment programme for premature ejaculation combining custom topical formulations, oral medications, and behavioural coaching.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Urology"
+      }
     }
-  }
-];
+  ]
+};
 
 export default function Page() {
   // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
@@ -122,10 +128,10 @@ export default function Page() {
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
+      "name": faq.question,
+      "acceptedAnswer": {
         "@type": "Answer",
-        text: faq.answer,
+        "text": faq.answer,
       },
     })),
   };
