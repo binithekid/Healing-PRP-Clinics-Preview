@@ -1,5 +1,6 @@
+import type { Metadata } from "next";
 import ContactClient from "@/components/pages/ContactClient";
-import { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Erectile Dysfunction (ED) & P-Shot Clinic St Albans | Near Luton",
@@ -17,10 +18,48 @@ export const metadata: Metadata = {
     "P-Shot Luton"
   ],
   alternates: {
-    canonical: "https://healing-prp.co.uk/contact", 
+    canonical: "https://www.healing-prp.co.uk/contact", 
   },
 };
 
+// --- CONTACT PAGE SCHEMA: Medical Clinic & Trust signals for St Albans ---
+const contactSchemaStAlbans = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "url": "https://www.healing-prp.co.uk/contact",
+      "image": "https://www.healing-prp.co.uk/Logo2.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "St Albans",
+        "addressRegion": "Hertfordshire",
+        "addressCountry": "UK"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "51.7527",
+        "longitude": "-0.3394"
+      },
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    }
+  ]
+};
+
 export default function Page() {
-  return <ContactClient />;
+  return (
+    <>
+      <Script
+        id="contact-schema-stalbans"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchemaStAlbans) }}
+      />
+      <ContactClient />
+    </>
+  );
 }
