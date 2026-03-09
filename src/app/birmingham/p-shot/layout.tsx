@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     template: "%s | Birmingham Clinic",
     default: "Doctor-Led P-Shot Male Rejuvenation | Birmingham Clinic",
   },
-  description: "P-Shot (Priapus Shot) provider serving Edgbaston, Solihull & the West Midlands.",
+  description: "Doctor-led P-Shot (Priapus Shot) provider serving Edgbaston, Solihull & the West Midlands.",
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
