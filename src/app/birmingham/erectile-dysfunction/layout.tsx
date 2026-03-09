@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { ReactNode } from "react"; // <--- This import is required!
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | St Albans Clinic",
-    default: "Erectile Dysfunction Treatment | St Albans Clinic",
+    template: "%s | Birmingham Clinic",
+    default: "Erectile Dysfunction Treatment | Birmingham Clinic",
   },
-  description: "Non-surgical Erectile Dysfunction treatment serving Luton, St Albans & Hertfordshire.",
+  description: "Non-surgical Erectile Dysfunction treatment serving Edgbaston, Solihull & the West Midlands.",
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
