@@ -5,10 +5,10 @@ import Script from "next/script";
 export const metadata: Metadata = {
   // FIX: Perfectly compatible with your layout.tsx template!
   // Next.js will output: "P-Shot® (Priapus Shot) Treatment | Birmingham Clinic"
-  title: "P-Shot® (Priapus Shot) Treatment",
+  title: "Doctor-Led P-Shot (Priapus Shot) Treatment",
 
   description:
-    "Official P-Shot® (Priapus Shot) clinic in Birmingham. GMC-registered doctor offering PRP & Exo-P therapy for erectile rejuvenation. Private clinic in Edgbaston.",
+    "Doctor-led P-Shot (Priapus Shot) clinic in Birmingham. GMC-registered doctor offering PRP & Exo-P therapy for erectile rejuvenation. Private clinic in Edgbaston.",
   keywords: [
     // Core Service Keywords
     "P-Shot Birmingham",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     canonical: "https://www.healing-prp.co.uk/birmingham/p-shot",
   },
   openGraph: {
-    title: "P-Shot Treatment (Priapus Shot) | Birmingham",
+    title: "Doctor-Led P-Shot Treatment (Priapus Shot) | Birmingham",
     description: "Doctor-led P-Shot & Exo-P clinic in Birmingham. Advanced PRP therapy for performance and rejuvenation.",
     url: "https://www.healing-prp.co.uk/birmingham/p-shot",
     siteName: "Healing-PRP Clinics",
