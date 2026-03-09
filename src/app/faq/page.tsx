@@ -82,18 +82,33 @@ export default function MainFaqPage() {
     }
   ];
 
-  const faqSchema = {
+  // --- UPDATED: Medical Authority & FAQ Schema ---
+  const enhancedSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": mainFaqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        // This regex perfectly strips out the markdown links, feeding Google pure, clean text
-        "text": faq.answer.replace(/\[(.*?)\]\((.*?)\)/g, '$1'),
+    "@graph": [
+      {
+        "@type": "FAQPage",
+        "mainEntity": mainFaqs.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer.replace(/\[(.*?)\]\((.*?)\)/g, '$1'),
+          },
+        })),
       },
-    })),
+      {
+        "@type": "MedicalClinic",
+        "name": "Healing-PRP Clinics",
+        "url": "https://www.healing-prp.co.uk",
+        "medicalDirector": {
+          "@type": "Physician",
+          "name": "Dr Syed Abdi",
+          "jobTitle": "GMC Registered Doctor",
+          "knowsAbout": ["PRP Therapy", "Regenerative Medicine", "Sexual Health"]
+        }
+      }
+    ]
   };
 
   return (
@@ -101,7 +116,7 @@ export default function MainFaqPage() {
       <Script
         id="faq-schema-main"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(enhancedSchema) }}
       />
       
       <FaqClient 
