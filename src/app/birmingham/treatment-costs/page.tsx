@@ -1,5 +1,6 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import TreatmentCostsClient from "@/components/pages/TreatmentCostsClient";
+import Script from "next/script";
 
 // 1. Define the FAQs here on the server so we can use them for both UI and SEO Schema
 const pricingFaqs = [
@@ -48,53 +49,52 @@ export const metadata: Metadata = {
     locale: "en_GB",
     type: "website",
     url: "https://www.healing-prp.co.uk/birmingham/treatment-costs", 
+    siteName: "Healing-PRP Clinics",
   },
+};
+
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic E-E-A-T (Birmingham & North) ---
+const medicalSchemaBirminghamNorth = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics",
+      "medicalSpecialty": ["Urology", "Men's Health"],
+      "description": "Online medical clinic specialising in bespoke Erectile Dysfunction and Premature Ejaculation treatments, serving Birmingham, the Midlands, and the North of England.",
+      "areaServed": [
+        { "@type": "City", "name": "Birmingham" },
+        { "@type": "AdministrativeArea", "name": "West Midlands" },
+        { "@type": "AdministrativeArea", "name": "North West England" }
+      ],
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      },
+      "knowsAbout": ["Erectile Dysfunction", "Premature Ejaculation", "Sexual Rejuvenation"],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "MedicalTherapy",
+            "name": "Bespoke Erectile Dysfunction (ED) Treatment"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "MedicalTherapy",
+            "name": "Premature Ejaculation (PE) Treatment"
+          }
+        }
+      ]
+    }
+  ]
 };
 
 export default function BirminghamTreatmentCostsPage() {
   
-  // 2. Localized Medical Clinic Schema
-  const medicalSchema = {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics",
-    "medicalSpecialty": ["Urology", "Men's Health"],
-    "description": "Online medical clinic specialising in bespoke Erectile Dysfunction and Premature Ejaculation treatments, serving Birmingham, the Midlands, and the North of England.",
-    
-    // Explicitly telling Google exactly which regions this specific page targets
-    "areaServed": [
-      {
-        "@type": "City",
-        "name": "Birmingham"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "West Midlands"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "North West England"
-      }
-    ],
-    "knowsAbout": ["Erectile Dysfunction", "Premature Ejaculation", "Sexual Rejuvenation"],
-    "makesOffer": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "MedicalTherapy",
-          "name": "Bespoke Erectile Dysfunction (ED) Treatment"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "MedicalTherapy",
-          "name": "Premature Ejaculation (PE) Treatment"
-        }
-      }
-    ]
-  };
-
   // 3. Generate FAQ Schema dynamically
   const faqSchema = {
     "@context": "https://schema.org",
@@ -111,17 +111,20 @@ export default function BirminghamTreatmentCostsPage() {
 
   return (
     <>
-      {/* Injecting Localized JSON-LD directly into the DOM */}
-      <script
+      {/* Clinic & Therapy Schema */}
+      <Script
+        id="medical-costs-schema-birmingham"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalSchemaBirminghamNorth) }}
       />
-      <script
+      
+      {/* FAQ Schema */}
+      <Script
+        id="faq-costs-schema-birmingham"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
-      {/* Reusing the exact same visual client component */}
       <TreatmentCostsClient faqs={pricingFaqs} />
     </>
   );
