@@ -1,9 +1,7 @@
-// src/app/blog/[slug]/page.tsx
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import BlogPostClient from "@/components/pages/BlogPostClient";
-// FIXED: Using your exact function name "getAllBlogPosts"
 import { getBlogPostBySlug, getAllBlogPosts } from "@/lib/contentful"; 
 
 // --- 1. DYNAMIC METADATA GENERATION ---
@@ -20,7 +18,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   
   const imageUrl = post.coverImage?.url 
     ? (post.coverImage.url.startsWith("//") ? `https:${post.coverImage.url}` : post.coverImage.url)
-    : "https://www.healing-prp.co.uk/default-og-image.jpg";
+    : "https://www.healing-prp.co.uk/Logo2.png";
 
   return {
     title: seoTitle,
@@ -63,10 +61,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  // FIXED: Calling "getAllBlogPosts()" instead of "getAllPosts()"
   const allPosts = await getAllBlogPosts();
   
-  // FIXED TYPINGS: Replaced 'any' with the specific expected type
   const currentIndex = allPosts.findIndex((p: { slug: string }) => p.slug === params.slug);
   
   let nextArticle = undefined;
@@ -81,33 +77,37 @@ export default async function Page({ params }: { params: { slug: string } }) {
     next: nextArticle
   };
 
-  // --- 3. DYNAMIC JSON-LD SCHEMA ---
+  // --- 3. DYNAMIC JSON-LD SCHEMA (Medical BlogPosting) ---
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
-    "headline": post.title,
-    "description": post.excerpt || "Medical insight from Healing-PRP Clinics.",
-    "image": post.coverImage?.url ? `https:${post.coverImage.url}` : "",
-    "author": {
-      "@type": "Person",
-      "name": "Dr. Syed Abdi",
-      "jobTitle": "GMC Registered Doctor",
-      "url": "https://www.healing-prp.co.uk" 
-    },
-    "publisher": {
-      "@type": "MedicalClinic",
-      "name": "Healing-PRP Clinics",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.healing-prp.co.uk/logo.png"
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": post.excerpt || "Medical insight from Healing-PRP Clinics.",
+        "image": post.coverImage?.url ? (post.coverImage.url.startsWith("//") ? `https:${post.coverImage.url}` : post.coverImage.url) : "https://www.healing-prp.co.uk/Logo2.png",
+        "datePublished": post.date,
+        "dateModified": post.date,
+        "author": {
+          "@type": "Person",
+          "name": "Dr. Syed Abdi",
+          "jobTitle": "Medical Director",
+          "url": "https://www.healing-prp.co.uk/our-doctor" 
+        },
+        "publisher": {
+          "@type": "MedicalClinic",
+          "name": "Healing-PRP Clinics",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.healing-prp.co.uk/Logo2.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": `https://www.healing-prp.co.uk/blog/${params.slug}`
+        }
       }
-    },
-    "datePublished": post.date,
-    "dateModified": post.date,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://www.healing-prp.co.uk/blog/${params.slug}`
-    }
+    ]
   };
 
   return (
