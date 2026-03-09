@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Erectile Dysfunction, P-Shot & O-Shot Birmingham",
   
   description:
-    "Confidential, doctor-led sexual rejuvenation & ED treatments in Birmingham. Specialist P-Shot® & O-Shot® PRP therapy serving Solihull & West Midlands.",
+    "Confidential, doctor-led sexual rejuvenation, personalised medication & ED treatments in Birmingham. Specialist P-Shot® & O-Shot® serving Solihull & West Midlands.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/sexual-rejuvenation",
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     "O-Shot West Midlands",
     "Private ED doctor Edgbaston",
     "Help for erectile dysfunction Solihull",
+    "Personalised ED medication Birmingham",
     "PRP for ED Birmingham",
     "Priapus Shot Sutton Coldfield",
     "Male enhancement clinic Harborne",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Erectile Dysfunction & P-Shot Clinic | Birmingham",
     description:
-      "Confidential, doctor-led PRP treatments for ED and sexual wellness. Serving patients in Birmingham, Solihull, and the West Midlands.",
+      "Confidential, doctor-led PRP & medical treatments for ED and sexual wellness. Serving patients in Birmingham, Solihull, and the West Midlands.",
     url: "https://www.healing-prp.co.uk/birmingham/sexual-rejuvenation",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -122,7 +123,7 @@ const srSchemaBirmingham = {
     {
       "@type": "MedicalClinic",
       "name": "Healing-PRP Clinics Birmingham",
-      "description": "Doctor-led sexual rejuvenation clinic in Birmingham offering P-Shot, O-Shot, and ED treatments.",
+      "description": "Doctor-led sexual rejuvenation clinic in Birmingham offering P-Shot, O-Shot, and personalised medical ED treatments.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Birmingham",
@@ -134,7 +135,6 @@ const srSchemaBirmingham = {
         "name": "Birmingham"
       },
       "medicalSpecialty": ["Urology", "Men's Health", "Women's Health"],
-      // --- E-E-A-T UPGRADE ---
       "medicalDirector": {
         "@type": "Physician",
         "name": "Dr Syed Abdi",
@@ -144,8 +144,8 @@ const srSchemaBirmingham = {
     {
       "@type": "MedicalTherapy",
       "name": "Sexual Rejuvenation & ED Treatment",
-      "alternateName": ["P-Shot®", "O-Shot®", "Shockwave Therapy", "PRP Sexual Wellness"],
-      "description": "Advanced autologous Platelet-Rich Plasma (PRP) and shockwave therapies designed to improve sexual wellness, tissue regeneration, blood flow, and treat ED and Peyronie's disease in Birmingham.",
+      "alternateName": ["P-Shot®", "O-Shot®", "Shockwave Therapy", "Bespoke ED Medication"],
+      "description": "Comprehensive sexual wellness protocols in Birmingham combining PRP, shockwave therapy, and personalised pharmacological treatments to improve tissue health, blood flow, and sexual function.",
       "relevantSpecialty": {
         "@type": "MedicalSpecialty",
         "name": "Urology"
@@ -155,7 +155,6 @@ const srSchemaBirmingham = {
 };
 
 export default function BirminghamSexualRejuvenationPage() {
-  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -171,21 +170,18 @@ export default function BirminghamSexualRejuvenationPage() {
 
   return (
     <main>
-      {/* 1. Inject Medical Entity Schema */}
       <Script
         id="sr-schema-birmingham"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(srSchemaBirmingham) }}
       />
       
-      {/* 2. Inject FAQ Schema */}
       <Script
         id="sr-faq-schema-birmingham"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
-      {/* 3. Pass the faqs array as a prop to the client component */}
       <SexualRejuvenationClient locationName="Birmingham" faqs={faqs} />
     </main>
   );
