@@ -4,7 +4,7 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "P-Shot® (Priapus Shot) Male Rejuvenation St Albans | Healing-PRP",
+    absolute: "P-Shot® (Priapus Shot) Male Rejuvenation St Albans | Healing-PRP Clinics",
   },
 
   description:
@@ -81,38 +81,44 @@ const faqs = [
   },
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy ---
-const pShotSchema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics St Albans",
-    "description": "Doctor-led clinic providing the official P-Shot® (Priapus Shot) and male rejuvenation therapies.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "St Albans",
-      "addressRegion": "Hertfordshire",
-      "addressCountry": "UK"
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy using @graph ---
+const pShotSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "description": "Doctor-led clinic providing the official P-Shot® (Priapus Shot) and male rejuvenation therapies.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "St Albans",
+        "addressRegion": "Hertfordshire",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "St Albans"
+      },
+      "medicalSpecialty": ["Urology", "Men's Health"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Treatment ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
     },
-    // The "Power Move" for Local SEO:
-    "areaServed": {
-      "@type": "City",
-      "name": "St Albans"
-    },
-    "medicalSpecialty": ["Urology", "Men's Health"]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalTherapy",
-    "name": "P-Shot® (Priapus Shot)",
-    "alternateName": ["Platelet-Rich Plasma (PRP) Male Rejuvenation", "PRP Penile Injection"],
-    "description": "An autologous Platelet-Rich Plasma (PRP) injection therapy designed to improve penile health, tissue regeneration, blood flow, and sensitivity.",
-    "relevantSpecialty": {
-      "@type": "MedicalSpecialty",
-      "name": "Urology"
+    {
+      "@type": "MedicalTherapy",
+      "name": "P-Shot® (Priapus Shot)",
+      "alternateName": ["Platelet-Rich Plasma (PRP) Male Rejuvenation", "PRP Penile Injection"],
+      "description": "An autologous Platelet-Rich Plasma (PRP) injection therapy designed to improve penile health, tissue regeneration, blood flow, and sensitivity.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Urology"
+      }
     }
-  }
-];
+  ]
+};
 
 export default function Page() {
   // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
@@ -149,7 +155,7 @@ export default function Page() {
       <PShotClient 
         locationName="St Albans"
         servingAreas="Harpenden • Luton • Watford • Hertfordshire"
-        faqs={faqs} // <--- Pass the FAQs here!
+        faqs={faqs}
       />
     </main>
   );
