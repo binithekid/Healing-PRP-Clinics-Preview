@@ -3,17 +3,14 @@ import React from "react";
 
 export const metadata: Metadata = {
   title: {
-    // Fallback if the page title is missing
-    default: "PRP Hair Restoration & Regrowth",
+    // Fallback: More descriptive to capture "Doctor-led" searches
+    default: "Doctor-Led PRP Hair Restoration & Regrowth | St Albans",
     
-    // This appends the location branding to the page title
-    // Result: "PRP Hair Loss & Regrowth | St Albans Clinic"
+    // Result example: "Hair Loss Treatments | St Albans Clinic"
     template: "%s | St Albans Clinic",
   },
-  description: "Doctor-led hair restoration in St Albans using PRP and Exosome therapy. Advanced non-surgical treatments for hair thinning and regrowth.",
-  alternates: {
-    canonical: "https://www.healing-prp.co.uk/hair-restoration",
-  },
+  description: "Advanced non-surgical hair restoration in St Albans using PRP and Exosome therapy. Doctor-led treatments for hair thinning and natural regrowth.",
+  /* Canonical removed here to be defined specifically in the page.tsx */
 };
 
 export default function HairRestorationLayout({
@@ -23,8 +20,8 @@ export default function HairRestorationLayout({
 }) {
   return (
     <div className="hair-restoration-wrapper">
-      {/* This wrapper is perfect for hair-specific CSS or 
-          adding a "Results Gallery" link that shows on all hair pages.
+      {/* This wrapper remains visually identical. 
+          Zero impact on your existing CSS or layout.
       */}
       {children}
     </div>
