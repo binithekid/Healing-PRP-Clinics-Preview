@@ -8,7 +8,7 @@ import React from "react";
 export const metadata: Metadata = {
   title: {
     // Default title for the folder
-    default: "PRP Hair Restoration & Regrowth",
+    default: "PRP Hair Restoration & Regrowth | Birmingham Clinic",
     
     // Automatically appends location to child page titles
     // Result: "Treatment Plans | Birmingham Clinic"
@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   },
   description:
     "Specialist doctor-led hair restoration in Birmingham Edgbaston. Advanced PRP and Exosome therapy for hair loss, serving Solihull, Sutton Coldfield and the West Midlands.",
-  alternates: {
-    canonical: "https://www.healing-prp.co.uk/birmingham/hair-restoration",
-  },
 };
 
 export default function BirminghamHairRestorationLayout({
