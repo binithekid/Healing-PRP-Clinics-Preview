@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import JointInjectionsClient from "@/components/pages/JointInjectionsClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
-  // 1. Optimized Title: The layout will append "| St Albans Clinic" automatically
-  title: "PRP & Steroid Joint Injections",
+  // 1. Optimized Title: Added "Doctor-Led" for medical authority. The layout appends "| St Albans Clinic"
+  title: "Doctor-Led PRP & Steroid Joint Injections",
   
   description:
     "Doctor-led joint injections in St Albans. Specialist PRP therapy and Corticosteroid injections for arthritis, sports injuries, and joint pain. Serving Harpenden, Radlett & Watford.",
@@ -38,6 +39,57 @@ export const metadata: Metadata = {
   },
 };
 
+// --- E-E-A-T SCHEMA UPGRADE: Medical Clinic & Therapy ---
+const jointSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "St Albans",
+        "addressRegion": "Hertfordshire",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "St Albans"
+      },
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    },
+    {
+      "@type": "MedicalTherapy",
+      "name": "PRP & Steroid Joint Injections",
+      "alternateName": ["Corticosteroid Injections", "Platelet-Rich Plasma Joint Therapy"],
+      "description": "Doctor-led joint injections utilizing Corticosteroids and Platelet-Rich Plasma (PRP) to treat arthritis, sports injuries, and chronic joint pain.",
+      "relevantSpecialty": [
+        {
+          "@type": "MedicalSpecialty",
+          "name": "Rheumatology"
+        },
+        {
+          "@type": "MedicalSpecialty",
+          "name": "Orthopedics"
+        }
+      ]
+    }
+  ]
+};
+
 export default function JointInjectionsPage() {
-  return <JointInjectionsClient locationName="St Albans" />;
+  return (
+    <>
+      <Script
+        id="joint-schema-stalbans"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jointSchema) }}
+      />
+      <JointInjectionsClient locationName="St Albans" />
+    </>
+  );
 }
