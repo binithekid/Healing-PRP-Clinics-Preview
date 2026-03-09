@@ -5,7 +5,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   // FIX: Perfectly compatible with your layout.tsx template!
   // Next.js will output: "Erectile Dysfunction (ED) Treatment | Birmingham Clinic"
-  title: "Doctor Led Erectile Dysfunction (ED) Treatment",
+  title: "Doctor-Led Erectile Dysfunction (ED) Treatment",
 
   description:
     "Specialist erectile dysfunction clinic in Birmingham. GMC-registered doctor offering non-surgical Shockwave Therapy & P-Shot (PRP). Confidential ED treatment in Edgbaston.",
