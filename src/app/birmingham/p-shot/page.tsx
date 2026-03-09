@@ -90,38 +90,44 @@ const faqs = [
   },
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
-const pShotSchemaBirmingham = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics Birmingham",
-    "description": "Doctor-led clinic in Edgbaston, Birmingham providing the official P-Shot® (Priapus Shot) and advanced Exo-P male rejuvenation therapies.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Birmingham",
-      "addressRegion": "West Midlands",
-      "addressCountry": "UK"
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
+const pShotSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Doctor-led clinic in Edgbaston, Birmingham providing the official P-Shot® (Priapus Shot) and advanced Exo-P male rejuvenation therapies.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      "medicalSpecialty": ["Urology", "Men's Health"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Birmingham Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
     },
-    // The "Power Move" for Local SEO:
-    "areaServed": {
-      "@type": "City",
-      "name": "Birmingham"
-    },
-    "medicalSpecialty": ["Urology", "Men's Health"]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalTherapy",
-    "name": "P-Shot® (Priapus Shot) & Exo-P Shot",
-    "alternateName": ["Platelet-Rich Plasma (PRP) Male Rejuvenation", "Exosome Penile Therapy", "Peyronie's Disease PRP Treatment"],
-    "description": "Advanced autologous Platelet-Rich Plasma (PRP) and Exosome injection therapies designed to improve penile health, tissue regeneration, blood flow, and treat conditions like Peyronie's disease and Erectile Dysfunction in Birmingham.",
-    "relevantSpecialty": {
-      "@type": "MedicalSpecialty",
-      "name": "Urology"
+    {
+      "@type": "MedicalTherapy",
+      "name": "P-Shot® (Priapus Shot) & Exo-P Shot",
+      "alternateName": ["Platelet-Rich Plasma (PRP) Male Rejuvenation", "Exosome Penile Therapy", "Peyronie's Disease PRP Treatment"],
+      "description": "Advanced autologous Platelet-Rich Plasma (PRP) and Exosome injection therapies designed to improve penile health, tissue regeneration, blood flow, and treat conditions like Peyronie's disease and Erectile Dysfunction in Birmingham.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Urology"
+      }
     }
-  }
-];
+  ]
+};
 
 export default function BirminghamPShotPage() {
   // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
@@ -158,7 +164,7 @@ export default function BirminghamPShotPage() {
       <PShotClient
         locationName="Birmingham"
         servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
-        faqs={faqs} // <--- Pass the FAQs here!
+        faqs={faqs}
       />
     </main>
   );
