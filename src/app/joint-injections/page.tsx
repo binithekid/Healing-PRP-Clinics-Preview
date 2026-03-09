@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   ],
   
   openGraph: {
-    title: "Joint Pain Relief Clinic | St Albans",
+    title: "Doctor-Led PRP & Steroid Joint Injections",
     description:
       "Doctor-led PRP and Steroid injections for arthritis and pain relief. Serving patients in St Albans, Harpenden, and across Hertfordshire.",
     url: "https://www.healing-prp.co.uk/joint-injections",
