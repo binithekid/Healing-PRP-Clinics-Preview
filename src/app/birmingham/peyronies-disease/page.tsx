@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import PeyroniesClient from "@/components/pages/PeyroniesClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Optimized Title: The layout adds " | Birmingham Clinic"
+  // Final Result: "Peyronie's Disease Treatment & Correction | Birmingham Clinic"
   title: "Peyronie's Disease Treatment & Correction",
 
   description:
@@ -43,6 +45,57 @@ export const metadata: Metadata = {
   },
 };
 
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
+const peyroniesSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Doctor-led clinic in Edgbaston, Birmingham providing specialist non-surgical treatments for Peyronie's disease, including Shockwave Therapy and PRP.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      "medicalSpecialty": ["Urology", "Men's Health"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    },
+    {
+      "@type": "MedicalTherapy",
+      "name": "Peyronie's Disease Treatment (Non-Surgical)",
+      "alternateName": ["Shockwave Therapy for Peyronie's", "P-Shot for Peyronie's", "Penile Curvature Treatment"],
+      "description": "Advanced non-surgical therapies, including autologous PRP and low-intensity extracorporeal shockwave therapy (Li-ESWT), designed to break down plaque, reduce curvature, and relieve pain associated with Peyronie's disease.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Urology"
+      }
+    }
+  ]
+};
+
 export default function Page() {
-  return <PeyroniesClient />;
+  return (
+    <main>
+      {/* Inject Medical Entity Schema */}
+      <Script
+        id="peyronies-schema-birmingham"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(peyroniesSchemaBirmingham) }}
+      />
+      
+      {/* Passing the location prop to keep components highly localized */}
+      <PeyroniesClient locationName="Birmingham" />
+    </main>
+  );
 }
