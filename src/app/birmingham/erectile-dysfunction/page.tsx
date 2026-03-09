@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "Erectile Dysfunction Treatment | Birmingham & Midlands",
+    title: "Doctor-Led Erectile Dysfunction Treatment | Birmingham & Midlands",
     description:
       "Confidential, doctor-led ED treatments in Birmingham. Shockwave & PRP therapy. Conveniently serving Edgbaston, Solihull & Sutton Coldfield.",
     url: "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
