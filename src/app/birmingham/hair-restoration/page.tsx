@@ -3,7 +3,7 @@ import HairRestorationClient from "@/components/pages/HairRestorationClient";
 
 export const metadata: Metadata = {
   // 1. Optimized Title: The layout template will append "| Birmingham Clinic" automatically
-  title: "PRP Hair Loss & Regrowth", 
+  title: "PRP Hair Loss Treatment", 
   
   description:
     "Doctor-led PRP and Exosome hair restoration in Birmingham. Advanced non-surgical treatments for hair thinning. Serving Solihull, Sutton Coldfield, and the West Midlands.",
