@@ -122,33 +122,44 @@ const faqs = [
   }
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (St Albans) ---
-const medicalSchemaStAlbans = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics St Albans",
-    "description": "Specialist sexual rejuvenation clinic in St Albans offering P-Shot, O-Shot, and Shockwave Therapy.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "St Albans",
-      "addressRegion": "Hertfordshire",
-      "addressCountry": "UK"
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy (St Albans) ---
+const medicalSchemaStAlbans = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "description": "Specialist sexual rejuvenation clinic in St Albans offering P-Shot, O-Shot, and Shockwave Therapy.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "St Albans",
+        "addressRegion": "Hertfordshire",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "St Albans"
+      },
+      "medicalSpecialty": ["Urology", "Gynecology"],
+      // --- E-E-A-T UPGRADE ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
     },
-    "medicalSpecialty": ["Urology", "Gynecology"] // Covers both P-Shot and O-Shot demographics
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalTherapy",
-    "name": "Sexual Rejuvenation Treatment",
-    "alternateName": ["P-Shot®", "O-Shot®", "PRP for ED", "Shockwave Therapy"],
-    "description": "Non-surgical, regenerative treatments for male and female sexual health including Platelet-Rich Plasma (P-Shot, O-Shot) and Shockwave Therapy in St Albans.",
-    "relevantSpecialty": {
-      "@type": "MedicalSpecialty",
-      "name": "Urology"
+    {
+      "@type": "MedicalTherapy",
+      "name": "Sexual Rejuvenation Treatment",
+      "alternateName": ["P-Shot®", "O-Shot®", "PRP for ED", "Shockwave Therapy"],
+      "description": "Non-surgical, regenerative treatments for male and female sexual health including Platelet-Rich Plasma (P-Shot, O-Shot) and Shockwave Therapy in St Albans.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Urology"
+      }
     }
-  }
-];
+  ]
+};
 
 export default function SexualRejuvenationPage() {
   // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
