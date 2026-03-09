@@ -5,10 +5,10 @@ import Script from "next/script";
 export const metadata: Metadata = {
   // 1. Perfectly compatible with your layout.tsx template!
   // Next.js will output: "O-Shot® (Orgasm Shot) Treatment | Birmingham Clinic"
-  title: "O-Shot® (Orgasm Shot) Treatment",
+  title: "Doctor-Led O-Shot (Orgasm Shot) Treatment",
   
   description:
-    "Official O-Shot® (Orgasm Shot) clinic in Birmingham. GMC-registered doctor offering PRP & Exo-O therapy for female intimate rejuvenation. Private clinic in Edgbaston.",
+    "Doctor-led O-Shot clinic in Birmingham. GMC-registered doctor offering PRP & Exo-O therapy for female intimate rejuvenation. Private clinic in Edgbaston.",
   
   keywords: [
     // Core Service Keywords
