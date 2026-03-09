@@ -131,38 +131,44 @@ const faqs = [
   }
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
-const polynucleotidesSchemaBirmingham = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics Birmingham",
-    "description": "Specialist clinic in Edgbaston, Birmingham providing regenerative aesthetic medicine, including Polynucleotide skin treatments.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Birmingham",
-      "addressRegion": "West Midlands",
-      "addressCountry": "UK"
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy using @graph ---
+const polynucleotidesSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Specialist clinic in Edgbaston, Birmingham providing regenerative aesthetic medicine, including Polynucleotide skin treatments.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      "medicalSpecialty": ["Dermatology", "Aesthetic Medicine"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Aesthetics Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
     },
-    // The "Power Move" for Local SEO:
-    "areaServed": {
-      "@type": "City",
-      "name": "Birmingham"
-    },
-    "medicalSpecialty": ["Dermatology", "Aesthetic Medicine"]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalTherapy",
-    "name": "Polynucleotide Treatment (DNA Glow)",
-    "alternateName": ["Ameela", "Nucleofill", "PhilArt", "Plinest", "Neauvia", "Salmon DNA Facial", "Biostimulator Therapy"],
-    "description": "An advanced regenerative biostimulator treatment in Birmingham using polymerized polynucleotides to stimulate fibroblasts, increase collagen production, and naturally rejuvenate skin, particularly around the tear troughs and eyes.",
-    "relevantSpecialty": {
-      "@type": "MedicalSpecialty",
-      "name": "Dermatology"
+    {
+      "@type": "MedicalTherapy",
+      "name": "Polynucleotide Treatment (DNA Glow)",
+      "alternateName": ["Ameela", "Nucleofill", "PhilArt", "Plinest", "Neauvia", "Salmon DNA Facial", "Biostimulator Therapy"],
+      "description": "An advanced regenerative biostimulator treatment in Birmingham using polymerized polynucleotides to stimulate fibroblasts, increase collagen production, and naturally rejuvenate skin, particularly around the tear troughs and eyes.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Dermatology"
+      }
     }
-  }
-];
+  ]
+};
 
 export default function BirminghamPolynucleotidesPage() {
   // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
