@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+imimport type { Metadata } from "next";
 import PShotClient from "@/components/pages/PShotClient";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: {
-    // Strong, location-first title for Google ranking
-    absolute: "P-Shot Birmingham | Doctor-Led PRP (Priapus Shot®) | Healing-PRP Clinics",
-  },
+  // FIX: Perfectly compatible with your layout.tsx template!
+  // Next.js will output: "P-Shot® (Priapus Shot) Treatment | Birmingham Clinic"
+  title: "P-Shot® (Priapus Shot) Treatment",
+
   description:
     "Official P-Shot® (Priapus Shot) clinic in Birmingham. GMC-registered doctor offering PRP & Exo-P therapy for erectile rejuvenation. Private clinic in Edgbaston.",
   keywords: [
