@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: {
     // Fallback title for the main blog index
-    default: "Medical & PRP Blog | Healing-PRP Clinics",
+    default: "Doctor-Led Medical & PRP Blog | Healing-PRP Clinics",
     
     // This allows child blog posts to have their own titles + branding
     // Result: "Everything You Need to Know About PRP | Healing-PRP Blog"
