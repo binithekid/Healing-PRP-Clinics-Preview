@@ -5,7 +5,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: {
     // Added "Male Performance" to the Title tag for higher search volume
-    absolute: "Personalised ED Medication & Male Performance Birmingham | Healing-PRP Clinics",
+    absolute: "Doctor-Led Personalise ED Medication Clinic | Birmingham",
   },
   description:
     "Doctor-led male performance and personalised erectile dysfunction medication clinic in Birmingham. Bespoke ED prescriptions and private, tailored online treatments serving Edgbaston.",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "Tailored ED dosage treatment"
   ],
   openGraph: {
-    title: "Personalised ED Medication & Male Performance | Birmingham",
+    title: "Doctor-Led Personalised ED Medication Clinic | Birmingham",
     description:
       "Advanced, doctor-led formulation for male performance. Bespoke ED prescriptions tailored to your profile. Serving Birmingham, Edgbaston, and the West Midlands.",
     url: "https://www.healing-prp.co.uk/birmingham/personalised-ed-medication",
