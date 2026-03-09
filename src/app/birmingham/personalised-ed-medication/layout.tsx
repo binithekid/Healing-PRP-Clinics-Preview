@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 export const metadata: Metadata = {
   title: {
     template: "%s | Birmingham Clinic",
-    default: "Personalised ED Medication | Birmingham Clinic",
+    default: "Doctor-Led Personalised ED Medication | Birmingham Clinic",
   },
   description: "Doctor-prescribed, personalised Erectile Dysfunction medication in Birmingham Edgbaston. Tailored treatment plans for men in the West Midlands.",
 };
