@@ -5,7 +5,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   // 1. Optimized Title: The layout adds " | Birmingham Clinic"
   // Final Result: "Peyronie's Disease Treatment & Correction | Birmingham Clinic"
-  title: "Peyronie's Disease Treatment & Correction",
+  title: "Doctor-Led Peyronie's Disease Treatment Birmingham",
 
   description:
     "Expert Peyronie's disease treatment in Birmingham (Edgbaston). Non-surgical P-Shot® and Shockwave therapy to improve curvature, pain, and function. Private doctor-led care.",
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "Peyronie's Disease Treatment | Birmingham (Edgbaston)",
+    title: "Doctor-Led Peyronie's Disease Treatment | Birmingham",
     description:
-      "Specialist non-surgical care for Peyronie's disease. PRP and Shockwave therapy at our private Birmingham clinic.",
+      "Doctor-led non-surgical care for Peyronie's disease. PRP and Shockwave therapy at our private Birmingham clinic.",
     url: "https://www.healing-prp.co.uk/birmingham/peyronies-disease",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
