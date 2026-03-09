@@ -8,7 +8,7 @@ import React from "react";
 export const metadata: Metadata = {
   title: {
     // Fallback if the page title is missing
-    default: "Treatment & Clinic FAQs",
+    default: "Treatment & Clinic FAQs | Birmingham Clinic",
     
     // Automatically appends location to child page titles
     // Result: "PRP Treatment FAQs | Birmingham Clinic"
@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   },
   description:
     "Common questions about PRP Hair Restoration, Joint Injections, and Sexual Rejuvenation at our Birmingham clinic in Edgbaston. Information on parking and doctor-led care.",
-  alternates: {
-    canonical: "https://www.healing-prp.co.uk/birmingham/faq",
-  },
 };
 
 export default function BirminghamFaqLayout({
