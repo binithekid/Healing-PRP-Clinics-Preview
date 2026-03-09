@@ -10,11 +10,12 @@ export const metadata: Metadata = {
   description: "Patient FAQs for our Birmingham Edgbaston clinic. Specialist answers on PRP for joint pain, hair loss, and sexual health. Expert doctor-led care in the West Midlands.",
   
   alternates: {
+    // Correctly placed Canonical URL!
     canonical: "https://www.healing-prp.co.uk/birmingham/faq",
   },
 
   // 2. Added Regional Keywords
- keywords: [
+  keywords: [
     // Your strong original local & trust keywords
     "PRP treatment FAQ Birmingham",
     "Edgbaston medical quarter PRP clinic",
@@ -94,18 +95,42 @@ export default function BirminghamFaqPage() {
     }
   ];
 
-  const faqSchema = {
+  // --- UPGRADED JSON-LD SCHEMA: Combining Clinic Authority with FAQ Data ---
+  const faqPageSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": birminghamFaqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        // The crucial regex fix to strip markdown links for Google's schema parser!
-        "text": faq.answer.replace(/\[(.*?)\]\((.*?)\)/g, '$1'),
+    "@graph": [
+      {
+        "@type": "MedicalClinic",
+        "name": "Healing-PRP Clinics Birmingham",
+        "description": "Doctor-led regenerative medicine clinic in Edgbaston, Birmingham.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Birmingham",
+          "addressRegion": "West Midlands",
+          "addressCountry": "UK"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Birmingham"
+        },
+        "medicalDirector": {
+          "@type": "Physician",
+          "name": "Dr Syed Abdi",
+          "url": "https://www.healing-prp.co.uk/our-doctor"
+        }
       },
-    })),
+      {
+        "@type": "FAQPage",
+        "mainEntity": birminghamFaqs.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer.replace(/\[(.*?)\]\((.*?)\)/g, '$1'),
+          },
+        }))
+      }
+    ]
   };
 
   return (
@@ -113,7 +138,7 @@ export default function BirminghamFaqPage() {
       <Script
         id="faq-schema-birmingham"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
       />
       
       <FaqClient 
