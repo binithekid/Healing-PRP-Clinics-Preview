@@ -8,14 +8,14 @@ import React from "react";
 export const metadata: Metadata = {
   title: {
     // Fallback if the page title is missing
-    default: "Treatment & Clinic FAQs | Birmingham Clinic",
+    default: "Doctor-Led Treatment & Clinic FAQs | Birmingham Clinic",
     
     // Automatically appends location to child page titles
     // Result: "PRP Treatment FAQs | Birmingham Clinic"
     template: "%s | Birmingham Clinic",
   },
   description:
-    "Common questions about PRP Hair Restoration, Joint Injections, and Sexual Rejuvenation at our Birmingham clinic in Edgbaston. Information on parking and doctor-led care.",
+    "Doctor-led common questions about PRP Hair Restoration, Joint Injections, and Sexual Rejuvenation at our Birmingham clinic in Edgbaston. Information on parking and doctor-led care.",
 };
 
 export default function BirminghamFaqLayout({
