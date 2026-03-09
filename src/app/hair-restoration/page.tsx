@@ -4,7 +4,7 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Optimized Title: Added "Doctor-Led" to establish immediate medical authority
-  title: "Doctor-Led PRP Hair Loss & Regrowth | St Albans Clinic", 
+  title: "Doctor-Led PRP Hair Loss Treatment | St Albans Clinic", 
   
   description:
     "Doctor-led PRP and Exosome hair restoration in St Albans. Non-surgical treatment for hair thinning and regrowth. Serving Harpenden, Radlett, and Hertfordshire.",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   
   openGraph: {
-    title: "PRP Hair Restoration Clinic | St Albans",
+    title: "Doctor-Led PRP Hair Loss Treatment | St Albans Clinic",
     description:
       "Effective, non-surgical hair regrowth treatments using PRP and Exosomes. Doctor-led clinic in St Albans.",
     url: "https://www.healing-prp.co.uk/hair-restoration",
