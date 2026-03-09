@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import HairRestorationClient from "@/components/pages/HairRestorationClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Optimized Title: The layout template will append "| Birmingham Clinic" automatically
@@ -37,8 +38,56 @@ export const metadata: Metadata = {
   },
 };
 
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
+const hairSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Doctor-led hair restoration clinic in Edgbaston offering PRP and Exosome therapies for hair loss.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      "medicalSpecialty": ["Dermatology", "Aesthetic Medicine"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Hair Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    },
+    {
+      "@type": "MedicalTherapy",
+      "name": "Hair Restoration & Regrowth",
+      "alternateName": ["PRP Hair Treatment", "Exosome Hair Therapy", "Non-Surgical Hair Restoration"],
+      "description": "Advanced regenerative treatments using autologous Platelet-Rich Plasma (PRP) and Exosomes to stimulate hair follicles, reduce thinning, and promote hair regrowth in Birmingham.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Dermatology"
+      }
+    }
+  ]
+};
+
 export default function BirminghamHairRestorationPage() {
   return (
-    <HairRestorationClient locationName="Birmingham" />
+    <main>
+      {/* Inject Medical Entity Schema */}
+      <Script
+        id="hair-schema-birmingham"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(hairSchemaBirmingham) }}
+      />
+      
+      <HairRestorationClient locationName="Birmingham" />
+    </main>
   );
 }
