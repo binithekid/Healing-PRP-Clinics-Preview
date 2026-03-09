@@ -8,7 +8,7 @@ import React from "react";
 export const metadata: Metadata = {
   title: {
     // Fallback if the page title isn't defined
-    default: "Facial Aesthetics & PRP Skin Boosters",
+    default: "Facial Aesthetics & PRP Skin Boosters | Birmingham Clinic",
     
     // Automatically appends location to child page titles
     // Result: "Polynucleotides | Birmingham Clinic"
@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   },
   description:
     "Doctor-led facial aesthetics in Birmingham. Specialist treatments including Polynucleotides, Vampire Facials, and HA Skin Boosters in Edgbaston.",
-  alternates: {
-    canonical: "https://www.healing-prp.co.uk/birmingham/facial-aesthetics",
-  },
 };
 
 export default function BirminghamFacialAestheticsLayout({
