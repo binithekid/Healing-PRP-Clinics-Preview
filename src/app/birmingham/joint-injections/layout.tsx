@@ -8,7 +8,7 @@ import React from "react";
 export const metadata: Metadata = {
   title: {
     // Fallback if the page title is missing
-    default: "PRP & Steroid Joint Injections | Birmingham Clinic",
+    default: "Doctor-Led PRP & Steroid Joint Injections | Birmingham Clinic",
     
     // Automatically appends location to child page titles
     // Result: "Knee Pain Treatments | Birmingham Clinic"
