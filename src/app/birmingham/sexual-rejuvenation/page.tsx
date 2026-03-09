@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import SexualRejuvenationClient from "@/components/pages/SexualRejuvenationClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Short Clean Title: Template will add "| Birmingham Clinic"
-  title: "Erectile Dysfunction, P-Shot & O-Shot",
+  title: "Erectile Dysfunction, P-Shot & O-Shot Birmingham",
   
   description:
     "Confidential, doctor-led sexual rejuvenation & ED treatments in Birmingham. Specialist P-Shot® & O-Shot® PRP therapy serving Solihull & West Midlands.",
@@ -114,8 +115,47 @@ const faqs = [
   }
 ];
 
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
+const srSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Doctor-led sexual rejuvenation clinic in Birmingham offering P-Shot, O-Shot, and ED treatments.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      "medicalSpecialty": ["Urology", "Men's Health", "Women's Health"],
+      // --- E-E-A-T UPGRADE ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    },
+    {
+      "@type": "MedicalTherapy",
+      "name": "Sexual Rejuvenation & ED Treatment",
+      "alternateName": ["P-Shot®", "O-Shot®", "Shockwave Therapy", "PRP Sexual Wellness"],
+      "description": "Advanced autologous Platelet-Rich Plasma (PRP) and shockwave therapies designed to improve sexual wellness, tissue regeneration, blood flow, and treat ED and Peyronie's disease in Birmingham.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Urology"
+      }
+    }
+  ]
+};
+
 export default function BirminghamSexualRejuvenationPage() {
-  // --- GENERATE JSON-LD SCHEMA ---
+  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -130,13 +170,23 @@ export default function BirminghamSexualRejuvenationPage() {
   };
 
   return (
-    <>
-      <script
+    <main>
+      {/* 1. Inject Medical Entity Schema */}
+      <Script
+        id="sr-schema-birmingham"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(srSchemaBirmingham) }}
+      />
+      
+      {/* 2. Inject FAQ Schema */}
+      <Script
+        id="sr-faq-schema-birmingham"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      {/* Pass the faqs array as a prop to the client component */}
+      
+      {/* 3. Pass the faqs array as a prop to the client component */}
       <SexualRejuvenationClient locationName="Birmingham" faqs={faqs} />
-    </>
+    </main>
   );
 }
