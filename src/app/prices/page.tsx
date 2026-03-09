@@ -3,8 +3,8 @@ import PricesClient from "@/components/pages/PricesClient";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  // 1. Optimized Title: Clean and ready for the Layout Template
-  title: "Treatment Prices & Packages",
+  // 1. Optimized Title: Added "Doctor-Led" for medical authority. Clean and ready for the Layout Template
+  title: "Doctor-Led Treatment Prices & Packages",
   
   description: "Transparent, doctor-led pricing for PRP Hair Restoration, Joint Pain Injections, and Sexual Rejuvenation in St Albans. No hidden costs. Serving Hertfordshire.",
   
@@ -52,20 +52,33 @@ export const metadata: Metadata = {
   },
 };
 
-// 3. The Local SEO Schema (Moved from Client to Server Component)
+// 3. --- E-E-A-T SCHEMA UPGRADE: Medical Clinic & Local Pricing ---
 const priceSchema = {
   "@context": "https://schema.org",
-  "@type": "MedicalClinic",
-  "name": "Healing-PRP Clinics St Albans",
-  "priceRange": "£120 - £1800",
-  "image": "https://www.healing-prp.co.uk/Logo2.png",
-  "description": "Doctor-led regenerative medicine prices for St Albans and Hertfordshire.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "St Albans",
-    "addressRegion": "Hertfordshire",
-    "addressCountry": "UK"
-  }
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "priceRange": "£120 - £1800",
+      "image": "https://www.healing-prp.co.uk/Logo2.png",
+      "description": "Doctor-led regenerative medicine prices for St Albans and Hertfordshire.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "St Albans",
+        "addressRegion": "Hertfordshire",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "St Albans"
+      },
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    }
+  ]
 };
 
 export default function PricesPage() {
