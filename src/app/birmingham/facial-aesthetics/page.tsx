@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   ],
   
   openGraph: {
-    title: "Facial Aesthetics & Skin Rejuvenation | Birmingham",
+    title: "Doctor-Led Facial Aesthetics & Skin Rejuvenation | Birmingham",
     description:
       "Restore youthful skin with doctor-led aesthetics in Birmingham. Specialist in Polynucleotides and PRP. Serving Solihull & Sutton Coldfield.",
     url: "https://www.healing-prp.co.uk/birmingham/facial-aesthetics",
