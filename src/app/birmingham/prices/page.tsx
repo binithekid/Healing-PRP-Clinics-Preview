@@ -51,20 +51,34 @@ export const metadata: Metadata = {
   },
 };
 
-// 3. The Local SEO Schema for Birmingham
-const priceSchema = {
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic E-E-A-T (Birmingham) ---
+const priceSchemaBirmingham = {
   "@context": "https://schema.org",
-  "@type": "MedicalClinic",
-  "name": "Healing-PRP Clinics Birmingham",
-  "priceRange": "£120 - £1800",
-  "image": "https://www.healing-prp.co.uk/Logo2.png",
-  "description": "Doctor-led regenerative medicine prices for Birmingham, Edgbaston, and the West Midlands.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Birmingham",
-    "addressRegion": "West Midlands",
-    "addressCountry": "UK"
-  }
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "priceRange": "£120 - £1800",
+      "image": "https://www.healing-prp.co.uk/Logo2.png",
+      "description": "Doctor-led regenerative medicine prices for Birmingham, Edgbaston, and the West Midlands.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      // --- E-E-A-T UPGRADE: Connecting You to the Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
+    }
+  ]
 };
 
 export default function BirminghamPricesPage() {
@@ -73,7 +87,7 @@ export default function BirminghamPricesPage() {
       <Script
         id="price-schema-birmingham"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(priceSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(priceSchemaBirmingham) }}
       />
       <PricesClient isBirmingham={true} />
     </>
