@@ -73,38 +73,44 @@ const faqs = [
   },
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) ---
-const customMedSchemaBirmingham = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics Birmingham",
-    "description": "Doctor-led clinic in Edgbaston, Birmingham providing bespoke, personalised erectile dysfunction (ED) medication and advanced male performance treatments.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Birmingham",
-      "addressRegion": "West Midlands",
-      "addressCountry": "UK"
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy using @graph ---
+const customMedSchemaBirmingham = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics Birmingham",
+      "description": "Doctor-led clinic in Edgbaston, Birmingham providing bespoke, personalised erectile dysfunction (ED) medication and advanced male performance treatments.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Birmingham",
+        "addressRegion": "West Midlands",
+        "addressCountry": "UK"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Birmingham"
+      },
+      "medicalSpecialty": ["Urology", "Men's Health"],
+      // --- E-E-A-T UPGRADE: Connecting You to the Prescribing Clinic ---
+      "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
+      }
     },
-    // The "Power Move" for Local SEO:
-    "areaServed": {
-      "@type": "City",
-      "name": "Birmingham"
-    },
-    "medicalSpecialty": ["Urology", "Men's Health"]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalTherapy",
-    "name": "Personalised Erectile Dysfunction Medication & Male Performance",
-    "alternateName": ["Bespoke ED Prescription", "Custom Compounded ED Treatment", "Tailored ED Medication", "Male Performance Medication"],
-    "description": "Custom-formulated prescription medication for erectile dysfunction and male performance, tailored to individual patient profiles following a comprehensive clinical assessment in Birmingham.",
-    "relevantSpecialty": {
-      "@type": "MedicalSpecialty",
-      "name": "Urology"
+    {
+      "@type": "MedicalTherapy",
+      "name": "Personalised Erectile Dysfunction Medication & Male Performance",
+      "alternateName": ["Bespoke ED Prescription", "Custom Compounded ED Treatment", "Tailored ED Medication", "Male Performance Medication"],
+      "description": "Custom-formulated prescription medication for erectile dysfunction and male performance, tailored to individual patient profiles following a comprehensive clinical assessment in Birmingham.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Urology"
+      }
     }
-  }
-];
+  ]
+};
 
 export default function Page() {
   // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
@@ -113,10 +119,10 @@ export default function Page() {
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
+      name: faq.question,
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": faq.answer,
+        text: faq.answer,
       },
     })),
   };
@@ -141,7 +147,7 @@ export default function Page() {
       <PersonalisedEDMedicationClient 
         locationName="Birmingham"
         servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
-        faqs={faqs} // <--- Pass the FAQs here!
+        faqs={faqs} 
       />
     </main>
   );
