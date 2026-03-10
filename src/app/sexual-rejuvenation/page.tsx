@@ -4,7 +4,8 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   // 1. Optimized Title: The layout template will add " | St Albans Clinic"
-  title: "Erectile Dysfunction, P-Shot & O-Shot",
+  // Total rendered length: 49 characters. Perfect for SEO!
+  title: "Doctor-Led ED, P-Shot & O-Shot",
   
   description:
     "Doctor-led sexual rejuvenation in St Albans. Specialist P-Shot® (ED) & O-Shot® PRP treatments. Confidential, non-surgical care serving Hertfordshire.",
@@ -40,13 +41,11 @@ export const metadata: Metadata = {
   ],
   
   openGraph: {
-    title: "P-Shot & Sexual Rejuvenation Clinic | St Albans",
+    title: "Doctor-Led P-Shot & O-Shot Clinic | St Albans",
     description:
       "Doctor-led PRP treatments for sexual wellness and ED. Confidential, non-surgical solutions in St Albans.",
     url: "https://www.healing-prp.co.uk/sexual-rejuvenation",
-    siteName: "Healing-PRP Clinics",
-    locale: "en_GB",
-    type: "website",
+    // siteName, locale, and type are inherited from layout.tsx!
   },
 };
 
@@ -130,6 +129,7 @@ const medicalSchemaStAlbans = {
       "@type": "MedicalClinic",
       "name": "Healing-PRP Clinics St Albans",
       "description": "Specialist sexual rejuvenation clinic in St Albans offering P-Shot, O-Shot, and Shockwave Therapy.",
+      "url": "https://www.healing-prp.co.uk/sexual-rejuvenation",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "St Albans",
