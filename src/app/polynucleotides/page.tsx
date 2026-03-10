@@ -4,25 +4,21 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Polynucleotides St Albans | DNA Glow Skin Treatment | Healing-PRP Clinics",
+    // Length: 58 characters - Perfectly optimized for all devices
+    absolute: "Doctor-Led Polynucleotides St Albans | DNA Glow Skin Treatment",
   },
   description:
     "Polynucleotides in St Albans. Doctor-led regenerative DNA Glow therapy for under-eye rejuvenation and skin quality improvement in Hertfordshire.",
   keywords: [
-    // Core Service
     "Polynucleotides St Albans",
     "DNA Glow treatment Hertfordshire",
     "Salmon DNA facial",
     "Under eye rejuvenation St Albans",
-    
-    // Brand Names (High Intent)
     "Ameela eyes St Albans",
     "Nucleofill treatment Luton",
     "PhilArt eyes Hertfordshire",
     "Plinest polynucleotides St Albans", 
     "Neauvia skin rejuvenation UK",      
-    
-    // Problem/Solution (Long Tail)
     "Tear trough treatment without filler",
     "Dark circle treatment Hertfordshire",
     "Skin boosters St Albans",
@@ -33,8 +29,8 @@ export const metadata: Metadata = {
     canonical: "https://www.healing-prp.co.uk/polynucleotides",
   },
   openGraph: {
-    title: "Polynucleotides 'DNA Glow' | St Albans Clinic",
-    description: "Doctor-led regenerative skin treatment. Restore elasticity and hydration naturally without dermal fillers.",
+    title: "Doctor-Led Polynucleotides St Albans | DNA Glow Skin Treatment",
+    description: "Advanced regenerative skin treatment. Restore elasticity and hydration naturally without dermal fillers.",
     url: "https://www.healing-prp.co.uk/polynucleotides",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -126,23 +122,28 @@ const faqs = [
   }
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Polynucleotides) ---
+// --- JSON-LD SCHEMA ---
 const polynucleotidesSchema = [
   {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
     "name": "Healing-PRP Clinics St Albans",
     "description": "Specialist clinic in St Albans providing regenerative aesthetic medicine, including Polynucleotide skin treatments.",
+    "url": "https://www.healing-prp.co.uk/polynucleotides",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "St Albans",
       "addressRegion": "Hertfordshire",
       "addressCountry": "UK"
     },
-    // The "Power Move" for Local SEO:
     "areaServed": {
       "@type": "City",
       "name": "St Albans"
+    },
+    "medicalDirector": {
+        "@type": "Physician",
+        "name": "Dr Syed Abdi",
+        "url": "https://www.healing-prp.co.uk/our-doctor"
     },
     "medicalSpecialty": ["Dermatology", "Aesthetic Medicine"]
   },
@@ -150,9 +151,8 @@ const polynucleotidesSchema = [
     "@context": "https://schema.org",
     "@type": "MedicalTherapy",
     "name": "Polynucleotide Treatment (DNA Glow)",
-    // Added Plinest and Neauvia right into the schema array!
     "alternateName": ["Ameela", "Nucleofill", "PhilArt", "Plinest", "Neauvia", "Salmon DNA Facial", "Biostimulator Therapy"],
-    "description": "An advanced regenerative biostimulator treatment using polymerized polynucleotides to stimulate fibroblasts, increase collagen production, and naturally rejuvenate skin, particularly around the tear troughs and eyes.",
+    "description": "An advanced regenerative biostimulator treatment using polymerized polynucleotides to stimulate fibroblasts and increase collagen production.",
     "relevantSpecialty": {
       "@type": "MedicalSpecialty",
       "name": "Dermatology"
@@ -161,37 +161,33 @@ const polynucleotidesSchema = [
 ];
 
 export default function PolynucleotidesPage() {
-  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
+      "name": faq.question,
+      "acceptedAnswer": {
         "@type": "Answer",
-        text: faq.answer,
+        "text": faq.answer,
       },
     })),
   };
 
   return (
     <main>
-      {/* Clinic & Therapy Schema */}
       <Script
         id="polynucleotides-schema-stalbans"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(polynucleotidesSchema) }}
       />
       
-      {/* FAQ Schema */}
       <Script
         id="polynucleotides-faq-stalbans"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* Client Component with props */}
       <PolynucleotidesClient 
         locationName="St Albans"
         servingAreas="Harpenden • Luton • Watford • Hertfordshire"
