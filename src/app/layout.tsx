@@ -9,10 +9,12 @@ const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway" });
 
 // --- GLOBAL SEO DEFAULTS ---
 export const metadata: Metadata = {
+  // Required for Next.js to auto-generate correct URLs for all child pages
   metadataBase: new URL("https://www.healing-prp.co.uk"),
   title: {
-    // This is the default title if a page doesn't have one
-    default: "Healing-PRP Clinics | Doctor-Led Regenerative Medicine",
+    // Moved "Doctor-Led" to the front for maximum impact
+    // Length: 58 characters (Perfect sweet spot)
+    default: "Doctor-Led Regenerative Medicine | Healing-PRP Clinics",
     // General brand template for top-level pages (Home, About, Contact)
     template: "%s | Healing-PRP Clinics", 
   },
@@ -32,12 +34,11 @@ export const metadata: Metadata = {
     apple: "/Logo2.png", 
   },
   openGraph: {
+    // Universal site-wide tags ONLY. 
+    // Title, description, and URL are intentionally left out so child pages can define them!
     type: "website",
     locale: "en_GB",
-    url: "https://www.healing-prp.co.uk",
     siteName: "Healing-PRP Clinics",
-    title: "Healing-PRP Clinics | Specialist Regenerative Medicine",
-    description: "Doctor-led PRP treatments in St Albans and Birmingham for hair, joints, and sexual wellness.",
   },
 };
 
@@ -60,7 +61,8 @@ export default function RootLayout({
         {/* Footer is typically called within page.tsx to allow for 
             location-specific footer details, but can be added here 
             if you want a universal one. */}
-        {/* NEW: The Global Sticky Buttons */}
+            
+        {/* The Global Sticky Buttons */}
         <GlobalStickyCTAs />
       </body>
     </html>
