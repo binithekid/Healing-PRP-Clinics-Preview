@@ -2,18 +2,20 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    // Fallback title
-    default: "Sexual Rejuvenation & PRP Wellness",
+    // Lead with "Doctor-Led" for maximum trust
+    default: "Doctor-Led Sexual Rejuvenation & ED Treatment | St Albans Clinic",
     
-    // Automatically appends the location branding
-    // Result: "P-Shot & O-Shot Treatments | St Albans Clinic"
+    // Automatically appends the location branding to child pages
+    // Result: "[Child Title] | St Albans Clinic"
     template: "%s | St Albans Clinic",
   },
   description:
     "Confidential sexual rejuvenation treatments with PRP (P-Shot & O-Shot) by a GMC-registered doctor in St Albans. Serving Harpenden, Radlett, and Hertfordshire.",
-  alternates: {
-    // Canonical points to the top-level St Albans path
-    canonical: "https://www.healing-prp.co.uk/sexual-rejuvenation",
+  // Canonical REMOVED so child pages can define their own!
+  openGraph: {
+    siteName: "Healing-PRP Clinics",
+    locale: "en_GB",
+    type: "website",
   },
 };
 
