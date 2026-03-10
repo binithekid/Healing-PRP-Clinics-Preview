@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "Doctor-Led P-Shot® Male Rejuvenation | St Albans Clinic"
+    title: "Doctor-Led P-Shot® Male Rejuvenation | St Albans Clinic",
     description:
       "Enhance sensitivity and performance with the P-Shot®. Doctor-led PRP therapy serving patients from Luton and St Albans.",
     url: "https://www.healing-prp.co.uk/p-shot",
