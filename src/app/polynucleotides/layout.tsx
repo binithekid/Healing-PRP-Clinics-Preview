@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import { ReactNode } from "react";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | St Albans & Birmingham",
+    // Hits the sweet spot at 56 characters
+    default: "Doctor-Led Polynucleotides DNA Glow | Healing-PRP Clinics",
+  },
+  description: "Advanced DNA Glow Polynucleotide treatments for skin rejuvenation. Doctor-led regenerative care in St Albans and Birmingham for face, eyes, and hair.",
+};
 
 export default function PolynucleotidesLayout({
   children,
@@ -7,9 +17,6 @@ export default function PolynucleotidesLayout({
 }) {
   return (
     <div className="polynucleotides-layout-wrapper">
-      {/* Any shared UI for this specific route could go here. 
-        Otherwise, it just seamlessly renders your PolynucleotidesPage! 
-      */}
       {children}
     </div>
   );
