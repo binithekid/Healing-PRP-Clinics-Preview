@@ -11,14 +11,13 @@ import Footer from "@/components/Footer";
 
 // --- SEO OPTIMISATION ---
 export const metadata: Metadata = {
-  // FIXED TITLE: Absolute ensures the layout doesn't append extra text, maximizing CTR
+  // Title reduced to 57 characters to prevent truncation!
   title: {
-    absolute: "Doctor-Led PRP, P-Shot® & ED Clinic St Albans | Healing-PRP Clinics",
+    absolute: "Doctor-Led PRP, P-Shot & ED Clinic St Albans | Healing-PRP",
   },
-  // OPTIMIZED DESCRIPTION: Punchier, front-loading high-ticket treatments
   description:
-    "Top-rated private medical clinic in St Albans. Expert doctor-led treatments for Erectile Dysfunction (ED), P-Shot®, Joint Injections, and PRP Hair Restoration. Serving Hertfordshire.",
- keywords: [
+    "Doctor-led private medical clinic in St Albans. Expert doctor-led treatments for Erectile Dysfunction (ED), P-Shot®, Joint Injections, and PRP Hair Restoration.",
+  keywords: [
     // --- CORE CLINIC & REGENERATIVE MEDICINE ---
     "PRP Clinic St Albans",
     "Private Doctor Hertfordshire",
@@ -62,13 +61,11 @@ export const metadata: Metadata = {
     "Exosome therapy London"
   ],
   openGraph: {
-    title: "Healing-PRP Clinics | St Albans",
+    title: "Doctor-Led PRP, P-Shot & ED Clinic St Albans | Healing-PRP",
     description:
-      "Doctor-led private care for Hair Restoration, Sexual Wellness & Pain Relief. Specialists in P-Shot and PRP therapy.",
+      "Expert private care for Hair Restoration, Sexual Wellness & Pain Relief. Specialists in P-Shot and PRP therapy.",
     url: "https://www.healing-prp.co.uk",
-    siteName: "Healing-PRP Clinics",
-    locale: "en_GB",
-    type: "website",
+    // Type, locale, and siteName are automatically inherited from layout.tsx
     images: [
       {
         url: "/hero_img.png",
@@ -108,7 +105,6 @@ const faqs = [
 ];
 
 export default function Home() {
-  // Enhanced JSON-LD Schema (MedicalClinic)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
@@ -129,13 +125,11 @@ export default function Home() {
       "latitude": 51.7527, 
       "longitude": -0.3394
     },
-    // --- NEW "POWER MOVE" AREA SERVED ADDED HERE ---
     "areaServed": {
       "@type": "City",
       "name": "St Albans"
     },
     "medicalSpecialty": ["RegenerativeMedicine", "Urology", "Orthopaedic", "Dermatology"],
-    // --- E-E-A-T UPGRADE: Connecting the Doctor to the Clinic ---
     "medicalDirector": {
       "@type": "Physician",
       "name": "Dr Syed Abdi",
@@ -152,7 +146,6 @@ export default function Home() {
     ]
   };
 
-  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -168,14 +161,12 @@ export default function Home() {
 
   return (
     <>
-      {/* 1. Inject Medical Entity Schema */}
       <Script
         id="local-business-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 2. Inject FAQ Schema */}
       <Script
         id="home-faq-schema-stalbans"
         type="application/ld+json"
@@ -187,11 +178,9 @@ export default function Home() {
         <ServiceOverview />
         <PRPExplanationSection />
 
-        {/* --- ST ALBANS CTA BAR --- */}
         <section className="py-12 bg-white border-t border-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-center items-center gap-4">
             
-            {/* NEW: Meet the Doctor Link (Dark Elite Aesthetic) */}
             <Link
               href="/our-doctor"
               className="px-8 py-3.5 w-full md:w-max flex items-center justify-center text-sm bg-[#0A1128] hover:bg-slate-800 text-white rounded-xl font-bold transition-all shadow-lg active:scale-95 gap-2"
@@ -199,7 +188,6 @@ export default function Home() {
               Meet Your Doctor
             </Link>
 
-            {/* Prices Link */}
             <Link
               href="/prices"
               className="px-8 py-3.5 w-full md:w-max flex items-center justify-center text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg active:scale-95 gap-2"
@@ -207,7 +195,6 @@ export default function Home() {
               View Treatment Prices
             </Link>
             
-            {/* FAQ Link */}
             <Link
               href="/faq"
               className="px-8 py-3.5 w-full md:w-max flex items-center justify-center text-sm border-2 border-blue-600 text-blue-600 hover:bg-blue-50 bg-white rounded-xl font-bold transition-all active:scale-95 gap-2"
@@ -217,7 +204,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. Render Dynamic FAQ Component */}
         <DynamicFAQ faqs={faqs} locationName="St Albans" />
         
         <ContactCTASection />
