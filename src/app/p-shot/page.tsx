@@ -4,11 +4,11 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "P-Shot® (Priapus Shot) Male Rejuvenation St Albans | Healing-PRP Clinics",
+    absolute: "Doctor-Led P-Shot® Male Rejuvenation | St Albans Clinic",
   },
 
   description:
-    "Official P-Shot® provider serving Luton, St Albans & Hertfordshire. Advanced PRP therapy to enhance sensitivity, erection quality, and performance. Book your private consultation.",
+    "Doctor-Led P-Shot® provider serving Luton, St Albans & Hertfordshire. Advanced PRP therapy to enhance sensitivity, erection quality, and performance. Book your private consultation.",
 
   alternates: {
     canonical: "https://www.healing-prp.co.uk/p-shot",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "P-Shot® Male Rejuvenation | Luton & St Albans",
+    title: "Doctor-Led P-Shot® Male Rejuvenation | St Albans Clinic"
     description:
       "Enhance sensitivity and performance with the P-Shot®. Doctor-led PRP therapy serving patients from Luton and St Albans.",
     url: "https://www.healing-prp.co.uk/p-shot",
