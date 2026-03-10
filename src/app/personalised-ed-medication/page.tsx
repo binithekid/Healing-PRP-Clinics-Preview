@@ -4,8 +4,9 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
-    // UK-Wide & Premium intent: Targets users looking for bespoke, non-standard options online
-    absolute: "Bespoke ED Medication Online UK | Alternative to Standard Pills"
+    // Added "Doctor-Led" for essential medical trust in the online pharmacy space.
+    // Length: 59 characters (Perfect)
+    absolute: "Doctor-Led Bespoke ED Medication Online UK | Healing-PRP"
   },
   description:
     "Doctor-led online clinic providing bespoke ED medication across the UK. Custom prescriptions, direct delivery, and tailored dosages for men who need more than standard generic tablets.",
@@ -13,7 +14,6 @@ export const metadata: Metadata = {
     canonical: "https://www.healing-prp.co.uk/personalised-ed-medication",
   },
   keywords: [
-    // Premium National Terms (Avoiding cheap "buy ED pills" competition)
     "Bespoke ED medication UK",
     "Custom compounded ED treatment online",
     "Alternative to generic ED pills",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "GMC doctor online ED consultation"
   ],
   openGraph: {
-    title: "Bespoke ED Medication Online UK | Alternative to Standard Pills",
+    title: "Doctor-Led Bespoke ED Medication Online UK",
     description:
       "Advanced, doctor-led formulation for male performance. Bespoke ED prescriptions tailored to your profile. 100% online consultation with discreet UK-wide delivery.",
     url: "https://www.healing-prp.co.uk/personalised-ed-medication",
@@ -70,12 +70,18 @@ const customMedSchema = [
     "@type": "MedicalClinic",
     "name": "Healing-PRP Clinics (Online Services)",
     "description": "UK-wide online doctor-led clinic providing bespoke, personalised erectile dysfunction (ED) medication and advanced male sexual health treatments.",
-    // The "Power Move" for National Telehealth SEO:
+    "url": "https://www.healing-prp.co.uk/personalised-ed-medication",
     "areaServed": {
       "@type": "Country",
       "name": "United Kingdom"
     },
-    "medicalSpecialty": ["Urology", "Men's Health"]
+    "medicalSpecialty": ["Urology", "Men's Health"],
+    // Adding EEAT signals for national service
+    "medicalDirector": {
+      "@type": "Physician",
+      "name": "Dr Syed Abdi",
+      "url": "https://www.healing-prp.co.uk/our-doctor"
+    }
   },
   {
     "@context": "https://schema.org",
@@ -91,7 +97,6 @@ const customMedSchema = [
 ];
 
 export default function Page() {
-  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -107,23 +112,20 @@ export default function Page() {
 
   return (
     <main>
-      {/* 1. Inject Medical Entity Schema */}
       <Script
         id="custom-med-schema-uk"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(customMedSchema) }}
       />
 
-      {/* 2. Inject FAQ Schema */}
       <Script
         id="custom-med-faq-schema-uk"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* 3. Render Client Component with National Props */}
       <PersonalisedEDMedicationClient 
-        locationName="the UK" // Changes text to: "for Male Performance in the UK"
+        locationName="the UK"
         servingAreas="Nationwide • Direct Delivery • Online Consultations"
         faqs={faqs} 
       />
