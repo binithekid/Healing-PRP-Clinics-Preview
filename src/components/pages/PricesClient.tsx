@@ -16,9 +16,9 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
       id: "facial",
       title: "Facial Aesthetics",
       items: [
-        { name: "DNA Glow Plus™", price: "£500", sessions: "Course of 3: £1400", details: "Premium: Poly + HA + PRP Microneedling" },
-        { name: "DNA Glow Concept™", price: "£375", sessions: "Course of 3: £1100", details: "Signature: Poly + HA + Microneedling" },
-        { name: "Exosome-Enhanced Skin Regeneration", price: "£375", sessions: "Course of 3: £1100", details: "Advanced cellular repair & skin revitalisation" },
+        { name: "DNA Glow Plus™", price: "£600", sessions: "Course of 3: £1600", details: "Premium: Poly + HA + PRP Microneedling" },
+        { name: "DNA Glow Concept™", price: "£500", sessions: "Course of 3: £1400", details: "Signature: Poly + HA + Microneedling" },
+        { name: "Exosome-Enhanced Skin Regeneration", price: "£475", sessions: "Course of 3: £1200", details: "Advanced cellular repair & skin revitalisation" },
         { name: "Polynucleotides", price: "From £150", sessions: "1-3 sessions", details: "Advanced skin repair & hydration" },
         { name: "HA Skin Boosters", price: "£250", sessions: "2-3 sessions", details: "Deep hydration & glow" },
         { name: "PRP Microneedling", price: "£150", sessions: "2-3 sessions", details: "Texture & acne scar support" },
