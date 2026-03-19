@@ -38,7 +38,7 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
       id: "hair",
       title: "Hair Restoration",
       items: [
-        { name: "PRP Hair Treatment", price: "£200", sessions: "Course of 3: £500", details: "Natural follicle stimulation" },
+        { name: "PRP Hair Treatment", price: "£275", sessions: "Course of 3: £750", details: "Natural follicle stimulation" },
         { name: "Hair Exosomes", price: "From £400", sessions: "Tailored plan", details: "Advanced scalp regeneration" },
       ]
     },
