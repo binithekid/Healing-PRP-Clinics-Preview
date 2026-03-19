@@ -53,7 +53,6 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
         { name: "Personalised Medication", price: "Upon consultation", sessions: "Custom treatment plan", details: "Tailored support for ED and PE" },
         { name: "Shockwave Therapy", price: "£375", sessions: "Course of 6: £2000", details: "Low-intensity acoustic wave therapy" }
       ]
-      ]
     }
   ];
 
