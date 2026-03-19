@@ -46,11 +46,13 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
       id: "sexual",
       title: "Sexual Rejuvenation",
       items: [
-        { name: "P-Shot (PRP)", price: "£995", sessions: "Course of 3: £2700", details: "Premium double-spin PRP" },
-        { name: "Peyronie's Disease Protocol", price: "£995", sessions: "Course of 3: £2700", details: "Targeted plaque breakdown" },
-        { name: "EXO P-Shot", price: "£1500", sessions: "Enhanced", details: "Advanced exosome protocol" },
-        { name: "O-Shot", price: "£995", sessions: "1-3 sessions", details: "Female health & sensitivity" },
-        { name: "Personalised Medication", price: "Upon Consultation", sessions: "Custom formulations", details: "Bespoke ED & PE management" },
+        { name: "P-Shot PRP", price: "£995", sessions: "Course of 3: £2700", details: "Doctor-led premium PRP treatment" },
+        { name: "Peyronie’s Disease Protocol", price: "£995", sessions: "Course of 3: £2700", details: "Targeted doctor-led regenerative protocol" },
+        { name: "EXO P-Shot", price: "£1500", sessions: "Single session", details: "Advanced exosome-enhanced treatment" },
+        { name: "O-Shot", price: "£995", sessions: "1–3 sessions", details: "Doctor-led treatment for intimate wellbeing" },
+        { name: "Personalised Medication", price: "Upon consultation", sessions: "Custom treatment plan", details: "Tailored support for ED and PE" },
+        { name: "Shockwave Therapy", price: "£375", sessions: "Course of 6: £2000", details: "Low-intensity acoustic wave therapy" }
+      ]
       ]
     }
   ];
