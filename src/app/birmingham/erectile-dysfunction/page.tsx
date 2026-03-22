@@ -92,41 +92,91 @@ const faqs = [
   },
 ];
 
-// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy (Birmingham) using @graph ---
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic, Condition & Interconnected Therapies ---
 const edSchemaBirmingham = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "MedicalClinic",
-      "name": "Healing-PRP Clinics Birmingham",
+      "@id": "https://www.healing-prp.co.uk/birmingham/#clinic",
+      "name": "Healing-PRP Clinics",
       "description": "Specialist erectile dysfunction clinic in Birmingham offering Shockwave Therapy, PRP, and personalised medication for ED treatment.",
+      "telephone": "+44 7990 364147",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "38 Harborne Rd",
         "addressLocality": "Birmingham",
         "addressRegion": "West Midlands",
+        "postalCode": "B15 3EB",
         "addressCountry": "UK"
       },
-      "areaServed": {
-        "@type": "City",
-        "name": "Birmingham"
-      },
-      "medicalSpecialty": "Urology",
-      // --- E-E-A-T UPGRADE ---
+      "medicalSpecialty": ["Urology", "RegenerativeMedicine"],
       "medicalDirector": {
         "@type": "Physician",
         "name": "Dr Syed Abdi",
-        "url": "https://www.healing-prp.co.uk/our-doctor"
-      }
+        "jobTitle": "Medical Director",
+        "telephone": "+44 7990 364147",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "GMC Reference Number",
+          "value": "6083294"
+        },
+        "url": "https://www.healing-prp.co.uk/our-doctor",
+        "sameAs": [
+          "https://www.gmc-uk.org/registrants/6083294"
+        ]
+      },
+      "availableService": [
+        {
+          "@type": "MedicalTherapy",
+          "name": "Erectile Dysfunction Treatment",
+          "url": "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
+          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+        }
+      ]
     },
     {
-      "@type": "MedicalTherapy",
-      "name": "Erectile Dysfunction Treatment",
-      "alternateName": ["Shockwave Therapy for ED", "P-Shot®", "PRP for ED", "Personalised ED Medication"],
-      "description": "Non-surgical, restorative treatments for erectile dysfunction including Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT), Platelet-Rich Plasma (P-Shot), and bespoke medication protocols in Birmingham.",
-      "relevantSpecialty": {
-        "@type": "MedicalSpecialty",
-        "name": "Urology"
-      }
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction/#condition",
+      "name": "Erectile Dysfunction",
+      "alternateName": ["ED", "Impotence"],
+      "associatedAnatomy": {
+        "@type": "AnatomicalStructure",
+        "name": "Penis"
+      },
+      "possibleTreatment": [
+        {
+          "@type": "MedicalTherapy",
+          "name": "Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT)",
+          "url": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction",
+          "description": "Non-surgical acoustic wave therapy to improve blood flow and vascular health.",
+          "relevantSpecialty": {
+            "@type": "MedicalSpecialty",
+            "name": "Urology"
+          }
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "P-Shot® (Priapus Shot)",
+          "alternateName": "Platelet-Rich Plasma (PRP) for ED",
+          "url": "https://www.healing-prp.co.uk/birmingham/p-shot",
+          "description": "Regenerative injection therapy using the patient's own platelet-rich plasma to stimulate tissue repair.",
+          "relevantSpecialty": {
+            "@type": "MedicalSpecialty",
+            "name": "Urology"
+          }
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "Personalised ED Medication",
+          "url": "https://www.healing-prp.co.uk/birmingham/personalised-ed-medication",
+          "description": "Bespoke pharmacological treatment plans tailored to the patient's specific cardiovascular and metabolic profile.",
+          "relevantSpecialty": {
+            "@type": "MedicalSpecialty",
+            "name": "Urology"
+          }
+        }
+      ]
     }
   ]
 };
@@ -138,10 +188,10 @@ export default function BirminghamEDPage() {
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
+      "name": faq.question,
+      "acceptedAnswer": {
         "@type": "Answer",
-        text: faq.answer,
+        "text": faq.answer,
       },
     })),
   };
