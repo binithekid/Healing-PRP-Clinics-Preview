@@ -29,7 +29,7 @@ const birminghamFaqs = [
 export const metadata: Metadata = {
   // FIXED TITLE: Using absolute ensures the layout doesn't override it.
   title: {
-   absolute: "Doctor-Led PRP & ED Clinic Birmingham | Healing-PRP Clinics",
+    absolute: "Doctor-Led PRP & ED Clinic Birmingham | Healing-PRP Clinics",
   },
   
   description:
@@ -71,16 +71,24 @@ const birminghamHomeSchema = {
   "@graph": [
     {
       "@type": "MedicalClinic",
-      "name": "Healing-PRP Clinics Birmingham",
+      "name": "Healing-PRP Clinics",
       "description": "Leading private doctor-led clinic in Birmingham specialising in regenerative medicine, PRP, Erectile Dysfunction, Joint Injections, and Hair Restoration.",
       "url": "https://www.healing-prp.co.uk/birmingham",
       "logo": "https://www.healing-prp.co.uk/Logo2.png",
       "image": "https://www.healing-prp.co.uk/Logo2.png",
+      "telephone": "+44 7990 364147", 
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "38 Harborne Rd",
         "addressLocality": "Birmingham",
+        "postalCode": "B15 3EB",
         "addressRegion": "West Midlands",
         "addressCountry": "UK"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.4674,
+        "longitude": -1.9275
       },
       "areaServed": [
         { "@type": "City", "name": "Birmingham" },
@@ -97,7 +105,17 @@ const birminghamHomeSchema = {
       "medicalDirector": {
         "@type": "Physician",
         "name": "Dr Syed Abdi",
-        "url": "https://www.healing-prp.co.uk/our-doctor"
+        "jobTitle": "Medical Director",
+        "telephone": "+44 7990 364147",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "GMC Reference Number",
+          "value": "6083294"
+        },
+        "url": "https://www.healing-prp.co.uk/our-doctor",
+        "sameAs": [
+          "https://www.gmc-uk.org/registrants/6083294"
+        ]
       }
     }
   ]
