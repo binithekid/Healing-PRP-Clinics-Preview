@@ -83,41 +83,91 @@ const faqs = [
   },
 ];
 
-// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy using @graph ---
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic, Condition & Interconnected Therapies ---
 const edSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "MedicalClinic",
-      "name": "Healing-PRP Clinics St Albans & Luton",
+      "@id": "https://www.healing-prp.co.uk/#clinic",
+      "name": "Healing-PRP Clinics",
       "description": "Doctor-led Erectile Dysfunction (ED) clinic offering Shockwave Therapy, PRP, and personalised medication for ED treatment.",
+      "telephone": "+44 7990 364147",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "21 Victoria St",
         "addressLocality": "St Albans",
         "addressRegion": "Hertfordshire",
+        "postalCode": "AL1 3JJ",
         "addressCountry": "UK"
       },
-      "areaServed": {
-        "@type": "City",
-        "name": "St Albans"
-      },
-      "medicalSpecialty": "Urology",
-      // --- E-E-A-T UPGRADE ---
+      "medicalSpecialty": ["Urology", "RegenerativeMedicine"],
       "medicalDirector": {
         "@type": "Physician",
         "name": "Dr Syed Abdi",
-        "url": "https://www.healing-prp.co.uk/our-doctor"
-      }
+        "jobTitle": "Medical Director",
+        "telephone": "+44 7990 364147",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "GMC Reference Number",
+          "value": "6083294"
+        },
+        "url": "https://www.healing-prp.co.uk/our-doctor",
+        "sameAs": [
+          "https://www.gmc-uk.org/registrants/6083294"
+        ]
+      },
+      "availableService": [
+        {
+          "@type": "MedicalTherapy",
+          "name": "Erectile Dysfunction Treatment",
+          "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
+          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+        }
+      ]
     },
     {
-      "@type": "MedicalTherapy",
-      "name": "Erectile Dysfunction Treatment",
-      "alternateName": ["Shockwave Therapy for ED", "P-Shot®", "PRP for ED", "Personalised ED Medication"],
-      "description": "Non-surgical, restorative treatments for erectile dysfunction including Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT), Platelet-Rich Plasma (P-Shot), and bespoke medication protocols.",
-      "relevantSpecialty": {
-        "@type": "MedicalSpecialty",
-        "name": "Urology"
-      }
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/erectile-dysfunction/#condition",
+      "name": "Erectile Dysfunction",
+      "alternateName": ["ED", "Impotence"],
+      "associatedAnatomy": {
+        "@type": "AnatomicalStructure",
+        "name": "Penis"
+      },
+      "possibleTreatment": [
+        {
+          "@type": "MedicalTherapy",
+          "name": "Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT)",
+          "url": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
+          "description": "Non-surgical acoustic wave therapy to improve blood flow and vascular health.",
+          "relevantSpecialty": {
+            "@type": "MedicalSpecialty",
+            "name": "Urology"
+          }
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "P-Shot® (Priapus Shot)",
+          "alternateName": "Platelet-Rich Plasma (PRP) for ED",
+          "url": "https://www.healing-prp.co.uk/p-shot",
+          "description": "Regenerative injection therapy using the patient's own platelet-rich plasma to stimulate tissue repair.",
+          "relevantSpecialty": {
+            "@type": "MedicalSpecialty",
+            "name": "Urology"
+          }
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "Personalised ED Medication",
+          "url": "https://www.healing-prp.co.uk/personalised-ed-medication",
+          "description": "Bespoke pharmacological treatment plans tailored to the patient's specific cardiovascular and metabolic profile.",
+          "relevantSpecialty": {
+            "@type": "MedicalSpecialty",
+            "name": "Urology"
+          }
+        }
+      ]
     }
   ]
 };
