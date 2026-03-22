@@ -4,11 +4,11 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Doctor-Led P-Shot® Male Rejuvenation | St Albans Clinic",
+    absolute: "Doctor-Led P-Shot Male Rejuvenation | St Albans Clinic",
   },
 
   description:
-    "Doctor-Led P-Shot® provider serving Luton, St Albans & Hertfordshire. Advanced PRP therapy to enhance sensitivity, erection quality, and performance. Book your private consultation.",
+    "Doctor-Led P-Shot provider serving Luton, St Albans & Hertfordshire. Advanced PRP therapy to enhance sensitivity, erection quality, and performance. Book your private consultation.",
 
   alternates: {
     canonical: "https://www.healing-prp.co.uk/p-shot",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "Doctor-Led P-Shot® Male Rejuvenation | St Albans Clinic",
+    title: "Doctor-Led P-Shot Male Rejuvenation | St Albans Clinic",
     description:
-      "Enhance sensitivity and performance with the P-Shot®. Doctor-led PRP therapy serving patients from Luton and St Albans.",
+      "Enhance sensitivity and performance with the P-Shot. Doctor-led PRP therapy serving patients from Luton and St Albans.",
     url: "https://www.healing-prp.co.uk/p-shot",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -87,35 +87,72 @@ const pShotSchema = {
   "@graph": [
     {
       "@type": "MedicalClinic",
-      "name": "Healing-PRP Clinics St Albans",
-      "description": "Doctor-led clinic providing the official P-Shot® (Priapus Shot) and male rejuvenation therapies.",
+      "@id": "https://www.healing-prp.co.uk/#clinic",
+      "name": "Healing-PRP Clinics",
+      "description": "Doctor-led clinic providing the official P-Shot (Priapus Shot) and male rejuvenation therapies.",
+      "telephone": "+44 7990 364147",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "21 Victoria St",
         "addressLocality": "St Albans",
         "addressRegion": "Hertfordshire",
+        "postalCode": "AL1 3JJ",
         "addressCountry": "UK"
       },
-      "areaServed": {
-        "@type": "City",
-        "name": "St Albans"
-      },
-      "medicalSpecialty": ["Urology", "Men's Health"],
-      // --- E-E-A-T UPGRADE: Connecting You to the Treatment ---
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "St Albans"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Hertfordshire"
+        }
+      ],
+      "medicalSpecialty": ["Urology", "RegenerativeMedicine"],
       "medicalDirector": {
         "@type": "Physician",
         "name": "Dr Syed Abdi",
-        "url": "https://www.healing-prp.co.uk/our-doctor"
-      }
+        "jobTitle": "Medical Director",
+        "telephone": "+44 7990 364147",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "GMC Reference Number",
+          "value": "6083294"
+        },
+        "url": "https://www.healing-prp.co.uk/our-doctor",
+        "sameAs": [
+          "https://www.gmc-uk.org/registrants/6083294"
+        ]
+      },
+      "availableService": [
+        {
+          "@id": "https://www.healing-prp.co.uk/p-shot/#therapy"
+        }
+      ]
     },
     {
       "@type": "MedicalTherapy",
-      "name": "P-Shot® (Priapus Shot)",
+      "@id": "https://www.healing-prp.co.uk/p-shot/#therapy",
+      "name": "P-Shot (Priapus Shot)",
       "alternateName": ["Platelet-Rich Plasma (PRP) Male Rejuvenation", "PRP Penile Injection"],
       "description": "An autologous Platelet-Rich Plasma (PRP) injection therapy designed to improve penile health, tissue regeneration, blood flow, and sensitivity.",
       "relevantSpecialty": {
         "@type": "MedicalSpecialty",
         "name": "Urology"
-      }
+      },
+      "indication": [
+        {
+          "@type": "MedicalCondition",
+          "name": "Erectile Dysfunction",
+          "url": "https://www.healing-prp.co.uk/erectile-dysfunction"
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Peyronie's Disease",
+          "url": "https://www.healing-prp.co.uk/peyronies-disease"
+        }
+      ]
     }
   ]
 };
@@ -127,10 +164,10 @@ export default function Page() {
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
+      "name": faq.question,
+      "acceptedAnswer": {
         "@type": "Answer",
-        text: faq.answer,
+        "text": faq.answer,
       },
     })),
   };
