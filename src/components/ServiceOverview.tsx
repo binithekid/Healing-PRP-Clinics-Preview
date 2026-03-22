@@ -12,14 +12,18 @@ export default function ServiceOverview() {
   // We define services inside the component now so they can access the 'prefix' variable dynamically
   const services = [
     {
-      title: "Facial Aesthetics",
-      description: "Natural skin rejuvenation using Polynucleotides, Vampire Facials, and Botox.",
-      icon: FaSmile,
-      link: `${prefix}/facial-aesthetics`,
-      color: "bg-rose-50 text-rose-600",
+     title: "Sexual Rejuvenation",
+      description: "Specialist P-Shot and O-Shot treatments to restore intimacy, sensitivity, and function.",
+      icon: FaVenusMars, 
+      link: `${prefix}/sexual-rejuvenation`,
+      color: "bg-blue-50 text-[#4041d1]",
+      // THE SEO GOLDMINE: Direct links to specific YMYL pages
       subLinks: [
-        { name: "Polynucleotides", href: `${prefix}/facial-aesthetics` },
-        { name: "Vampire Facials", href: `${prefix}/facial-aesthetics` }
+        { name: "ED", href: `${prefix}/erectile-dysfunction` },
+        { name: "P-Shot", href: `${prefix}/p-shot` },
+        { name: "O-Shot", href: `${prefix}/o-shot` },
+        { name: "Peyronie's", href: `${prefix}/peyronies-disease` },
+        { name: "PE", href: `${prefix}/premature-ejaculation` }
       ]
     },
     {
@@ -45,18 +49,14 @@ export default function ServiceOverview() {
       ]
     },
     {
-      title: "Sexual Rejuvenation",
-      description: "Specialist P-Shot and O-Shot treatments to restore intimacy, sensitivity, and function.",
-      icon: FaVenusMars, 
-      link: `${prefix}/sexual-rejuvenation`,
-      color: "bg-blue-50 text-[#4041d1]",
-      // THE SEO GOLDMINE: Direct links to specific YMYL pages
+      title: "Facial Aesthetics",
+      description: "Natural skin rejuvenation using Polynucleotides, Vampire Facials, and Botox.",
+      icon: FaSmile,
+      link: `${prefix}/facial-aesthetics`,
+      color: "bg-rose-50 text-rose-600",
       subLinks: [
-        { name: "ED", href: `${prefix}/erectile-dysfunction` },
-        { name: "P-Shot", href: `${prefix}/p-shot` },
-        { name: "O-Shot", href: `${prefix}/o-shot` },
-        { name: "Peyronie's", href: `${prefix}/peyronies-disease` },
-        { name: "PE", href: `${prefix}/premature-ejaculation` }
+        { name: "Polynucleotides", href: `${prefix}/facial-aesthetics` },
+        { name: "Vampire Facials", href: `${prefix}/facial-aesthetics` }
       ]
     },
   ];
