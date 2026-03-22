@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { 
   FaEnvelope, 
   FaMapMarkerAlt, 
@@ -12,6 +14,9 @@ import {
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const pathname = usePathname();
+  const isBirmingham = pathname?.startsWith("/birmingham");
+  const prefix = isBirmingham ? "/birmingham" : "";
 
   useEffect(() => {
     setIsLoaded(true);
@@ -90,7 +95,7 @@ export default function Hero() {
           Doctor-led. Patient-focused. Regenerative care
         </motion.h2>
 
-        {/* Description - Inter */}
+        {/* Description - Inter (NOW WITH SUBTLE SEO LINKS) */}
         <motion.p 
           custom={4}
           initial="hidden"
@@ -98,8 +103,23 @@ export default function Hero() {
           variants={fadeUpVariants}
           className="mt-3 text-sm md:text-base text-white/80 font-inter leading-relaxed max-w-2xl mx-auto mb-8"
         >
-          Evidence-based, non-surgical treatments for facial aesthetics,
-          joint pain relief, hair restoration, and sexual wellness.
+          Evidence-based, non-surgical treatments for{" "}
+          <Link href={`${prefix}/sexual-rejuvenation`} className="text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
+            sexual wellness
+          </Link>
+          {", "}
+          <Link href={`${prefix}/joint-injections`} className="text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
+            joint pain relief
+          </Link>
+          {", "}
+          <Link href={`${prefix}/facial-aesthetics`} className="text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
+            facial aesthetics
+          </Link>
+          {", and "}
+          <Link href={`${prefix}/hair-restoration`} className="text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
+            hair restoration
+          </Link>
+          .
         </motion.p>
 
         {/* Repurposed CTA Buttons */}
