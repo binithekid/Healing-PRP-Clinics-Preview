@@ -110,6 +110,16 @@ const edSchemaBirmingham = {
         "postalCode": "B15 3EB",
         "addressCountry": "UK"
       },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Birmingham"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "West Midlands"
+        }
+      ],
       "medicalSpecialty": ["Urology", "RegenerativeMedicine"],
       "medicalDirector": {
         "@type": "Physician",
@@ -157,7 +167,7 @@ const edSchemaBirmingham = {
         },
         {
           "@type": "MedicalTherapy",
-          "name": "P-Shot® (Priapus Shot)",
+          "name": "P-Shot (Priapus Shot)",
           "alternateName": "Platelet-Rich Plasma (PRP) for ED",
           "url": "https://www.healing-prp.co.uk/birmingham/p-shot",
           "description": "Regenerative injection therapy using the patient's own platelet-rich plasma to stimulate tissue repair.",
