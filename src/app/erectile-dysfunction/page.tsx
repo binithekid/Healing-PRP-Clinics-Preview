@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Doctor-led Erectile Dysfunction (ED) clinic serving Luton & St Albans. We restore natural function using Shockwave Therapy and PRP (P-Shot®). Private, non-pharmaceutical ED solutions.",
+    "Doctor-led Erectile Dysfunction (ED) clinic serving Luton & St Albans. We restore natural function using Shockwave Therapy and PRP (P-Shot). Private, non-pharmaceutical ED solutions.",
 
   alternates: {
     canonical: "https://www.healing-prp.co.uk/erectile-dysfunction",
@@ -101,6 +101,16 @@ const edSchema = {
         "postalCode": "AL1 3JJ",
         "addressCountry": "UK"
       },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "St Albans"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Hertfordshire"
+        }
+      ],
       "medicalSpecialty": ["Urology", "RegenerativeMedicine"],
       "medicalDirector": {
         "@type": "Physician",
@@ -148,7 +158,7 @@ const edSchema = {
         },
         {
           "@type": "MedicalTherapy",
-          "name": "P-Shot® (Priapus Shot)",
+          "name": "P-Shot (Priapus Shot)",
           "alternateName": "Platelet-Rich Plasma (PRP) for ED",
           "url": "https://www.healing-prp.co.uk/p-shot",
           "description": "Regenerative injection therapy using the patient's own platelet-rich plasma to stimulate tissue repair.",
