@@ -112,12 +112,13 @@ export default function Home() {
     "alternateName": "Healing-PRP St Albans",
     "image": "https://www.healing-prp.co.uk/hero_img.png",
     "url": "https://www.healing-prp.co.uk",
-    "telephone": "+447990364147",
+    "telephone": "+44 7990 364147",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "21 Victoria St",
       "addressLocality": "St Albans",
       "addressRegion": "Hertfordshire",
-      "postalCode": "AL1", 
+      "postalCode": "AL1 3JJ", 
       "addressCountry": "GB"
     },
     "geo": {
@@ -125,15 +126,31 @@ export default function Home() {
       "latitude": 51.7527, 
       "longitude": -0.3394
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "St Albans"
-    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "St Albans"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Hertfordshire"
+      }
+    ],
     "medicalSpecialty": ["RegenerativeMedicine", "Urology", "Orthopaedic", "Dermatology"],
     "medicalDirector": {
       "@type": "Physician",
       "name": "Dr Syed Abdi",
-      "url": "https://www.healing-prp.co.uk/our-doctor"
+      "jobTitle": "Medical Director",
+      "telephone": "+44 7990 364147",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "GMC Reference Number",
+        "value": "6083294"
+      },
+      "url": "https://www.healing-prp.co.uk/our-doctor",
+      "sameAs": [
+        "https://www.gmc-uk.org/registrants/6083294"
+      ]
     },
     "priceRange": "££",
     "openingHoursSpecification": [
