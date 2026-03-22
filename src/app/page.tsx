@@ -8,6 +8,7 @@ import DynamicFAQ from "@/components/DynamicFAQ";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
 import Footer from "@/components/Footer";
+import TrustReviews from "@/components/TrustReviews"; // <-- Imported TrustReviews widget
 
 // --- SEO OPTIMISATION ---
 export const metadata: Metadata = {
@@ -223,6 +224,11 @@ export default function Home() {
 
         <DynamicFAQ faqs={faqs} locationName="St Albans" />
         
+        {/* --- GOOGLE REVIEWS SECTION ADDED HERE --- */}
+        <div id="reviews-section" className="bg-white">
+          <TrustReviews widgetUrl="https://cdn.trustindex.io/loader.js?eb147a565c3c36945f26281e586" />
+        </div>
+
         <ContactCTASection />
         <LocationSection />
       </main>
