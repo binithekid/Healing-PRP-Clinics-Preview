@@ -1,19 +1,20 @@
 "use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaArrowRight, FaVenusMars, FaSyringe, FaRunning, FaSmile } from "react-icons/fa";
+import { FaVenusMars, FaSyringe, FaRunning, FaSmile } from "react-icons/fa";
 
 export default function ServiceOverview() {
   const pathname = usePathname();
   const isBirmingham = pathname?.startsWith("/birmingham");
   const prefix = isBirmingham ? "/birmingham" : "";
 
-  // We define services inside the component now so they can access the 'prefix' variable dynamically
+  // REORDERED SERVICES: Intimate Health is now #1 (Far Left)
   const services = [
     {
-     title: "Sexual Rejuvenation",
-      description: "Specialist P-Shot and O-Shot treatments to restore intimacy, sensitivity, and function.",
+      title: "Men's & Women's Intimate Health",
+      description: "Doctor-led treatment options for erectile dysfunction, Peyronie’s disease, premature ejaculation, and selected women’s sexual wellness concerns.",
       icon: FaVenusMars, 
       link: `${prefix}/sexual-rejuvenation`,
       color: "bg-blue-50 text-[#4041d1]",
@@ -58,7 +59,7 @@ export default function ServiceOverview() {
         { name: "Polynucleotides", href: `${prefix}/facial-aesthetics` },
         { name: "Vampire Facials", href: `${prefix}/facial-aesthetics` }
       ]
-    },
+    }
   ];
 
   return (
@@ -103,7 +104,6 @@ export default function ServiceOverview() {
                   <service.icon />
                 </div>
                 
-                {/* Title is now a link */}
                 <Link href={service.link}>
                   <h3 className="text-xl font-raleway font-bold text-slate-900 mb-3 hover:text-[#4041d1] transition-colors cursor-pointer">
                     {service.title}
@@ -114,31 +114,24 @@ export default function ServiceOverview() {
                   {service.description}
                 </p>
 
-                {/* NEW SEO SUB-LINKS (The "Pills") */}
-                <div className="flex flex-wrap gap-2 mb-8 flex-grow">
+                {/* PREMIUM SEO SUB-LINKS (Interactive Pills) */}
+                <div className="flex flex-wrap gap-2 mb-8 mt-auto pt-4">
                   {service.subLinks.map((subLink, idx) => (
                     <Link 
                       key={idx} 
                       href={subLink.href}
-                      className="inline-flex items-center justify-center text-[10px] font-bold uppercase tracking-wider bg-slate-50 text-slate-500 px-3 py-1.5 rounded-md hover:bg-[#4041d1] hover:text-white transition-colors"
+                      className="inline-flex items-center justify-center text-[11px] font-bold uppercase tracking-wider bg-blue-50/50 border border-blue-100 text-[#4041d1] px-4 py-2 rounded-lg hover:bg-[#4041d1] hover:border-[#4041d1] hover:text-white hover:shadow-md transition-all duration-300"
                     >
                       {subLink.name}
                     </Link>
                   ))}
                 </div>
                 
-                {/* View Treatments Button */}
-                <Link href={service.link} className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-[#4041d1] group-hover:gap-3 transition-all mt-auto w-max">
-                  View Treatments <FaArrowRight className="ml-2 w-3 h-3 transition-transform" />
+                {/* View Treatments Link (Cleaned up, no arrow) */}
+                <Link href={service.link} className="inline-block text-xs font-bold uppercase tracking-widest text-[#4041d1] hover:text-[#2a2bb8] transition-colors w-max mt-auto">
+                  View Treatments
                 </Link>
               </motion.div>
-
-              {/* VISUAL ENHANCEMENT: Directional Arrows between cards (Desktop) */}
-              {index < services.length - 1 && (
-                <div className="hidden lg:flex absolute -right-6 z-10 opacity-20 group-hover:opacity-100 transition-opacity">
-                   <FaArrowRight className="text-slate-400 w-5 h-5" />
-                </div>
-              )}
             </motion.div>
           ))}
         </div>
