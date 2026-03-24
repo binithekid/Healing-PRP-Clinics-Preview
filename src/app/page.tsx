@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Link from "next/link";
 import Hero from "@/components/Hero";
+import EDFeatureBlock from "@/components/EDFeatureBlock";
 import ServiceOverview from "@/components/ServiceOverview";
 import PRPExplanationSection from "@/components/PRPExplanationSection";
 import DynamicFAQ from "@/components/DynamicFAQ";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
 import Footer from "@/components/Footer";
-import TrustReviews from "@/components/TrustReviews"; // <-- Imported TrustReviews widget
+import TrustReviews from "@/components/TrustReviews";
 
 // --- SEO OPTIMISATION ---
 export const metadata: Metadata = {
-  // Title reduced to 57 characters to prevent truncation!
   title: {
     absolute: "Doctor-Led PRP, P-Shot & ED Clinic St Albans | Healing-PRP",
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "Private medical clinic St Albans",
     "Regenerative Medicine UK",
     
-    // --- MEN'S HEALTH, ED, PE & PEYRONIE'S (Primary Focus) ---
+    // --- MEN'S HEALTH, ED, PE & PEYRONIE'S ---
     "Erectile Dysfunction Treatment St Albans",
     "ED clinic Hertfordshire",
     "Erectile dysfunction help Harpenden",
@@ -55,6 +55,8 @@ export const metadata: Metadata = {
     "Arthritis injections Berkhamsted",
     "Sports injury clinic Watford",
     "PRP for joint pain St Albans",
+    "HA joint injections Hertfordshire",
+    "Ostenil injections St Albans",
     
     // --- SKIN & AESTHETICS ---
     "Vampire Facial Hertfordshire",
@@ -66,7 +68,6 @@ export const metadata: Metadata = {
     description:
       "Expert private care for Hair Restoration, Sexual Wellness & Pain Relief. Specialists in P-Shot and PRP therapy.",
     url: "https://www.healing-prp.co.uk",
-    // Type, locale, and siteName are automatically inherited from layout.tsx
     images: [
       {
         url: "/hero_img.png",
@@ -84,24 +85,24 @@ export const metadata: Metadata = {
 // --- SEO RICH FAQS (St Albans Focus) ---
 const faqs = [
   {
-    question: "Do I need a GP referral for treatment at your St Albans clinic?",
-    answer: "No, a GP referral is not required. You can book a private, confidential consultation directly with Dr Syed Abdi at our St Albans clinic for any of our regenerative treatments."
+    question: "Do I need a GP referral before booking treatment?",
+    answer: "No. You can book a private, confidential consultation directly with Healing-PRP Clinics without a GP referral for erectile dysfunction treatment, intimate health concerns, PRP treatments, and other doctor-led services."
   },
   {
-    question: "Who will perform my consultation and treatment?",
-    answer: "All consultations and treatments are performed exclusively by Dr Syed Abdi, our GMC-registered Medical Director with over 10 years of clinical experience, including NHS practice at the Royal Free Hospital and advanced orthopaedic fellowships."
+    question: "Who carries out the consultation and treatment at Healing-PRP Clinics?",
+    answer: "All consultations and treatments at Healing-PRP Clinics are doctor-led and carried out by Dr Syed Abdi, GMC-registered Medical Director of the clinic."
   },
   {
-    question: "Is the P-Shot® available at the St Albans location?",
-    answer: "Yes, Dr Abdi is an officially licensed and CMA-certified provider of the P-Shot® and O-Shot®, having successfully performed over 200 of these specific regenerative procedures."
+    question: "Do you offer treatment for erectile dysfunction and men’s intimate health concerns?",
+    answer: "Yes. We provide doctor-led assessment and treatment for erectile dysfunction, Peyronie’s disease, premature ejaculation, and other men’s intimate health concerns, depending on individual suitability."
   },
   {
-    question: "How long does a PRP procedure take?",
-    answer: "Most PRP treatments, including the P-Shot and joint injections, take between 45 to 60 minutes in our St Albans clinic. This includes a thorough medical review, blood draw, premium double-spin centrifugation, and the treatment itself."
+    question: "What happens during the first consultation for erectile dysfunction or intimate health treatment?",
+    answer: "Your first consultation includes a confidential discussion about your symptoms, medical history, goals, and possible contributing factors. Where appropriate, treatment options such as PRP-based treatment, shockwave therapy, or personalised medical care will be explained."
   },
   {
-    question: "What conditions do you treat at Healing-PRP St Albans?",
-    answer: "As a strictly doctor-led clinic, we specialise in regenerative medicine. This includes erectile dysfunction (ED), Peyronie's disease, joint pain, sports injuries, and advanced facial and hair aesthetics using Platelet-Rich Plasma (PRP)."
+    question: "Is treatment at Healing-PRP Clinics confidential?",
+    answer: "Yes. Healing-PRP Clinics provides discreet, private, doctor-led care for sensitive concerns including erectile dysfunction, intimate health, PRP treatment, and related regenerative medicine services."
   }
 ];
 
@@ -153,6 +154,56 @@ export default function Home() {
         "https://www.gmc-uk.org/registrants/6083294"
       ]
     },
+    // --- THE NEW MASTER HUB SERVICES ARRAY ---
+    "availableService": [
+      {
+        "@type": "MedicalTherapy",
+        "name": "Erectile Dysfunction Treatment",
+        "alternateName": "P-Shot & Shockwave Therapy",
+        "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
+        "description": "Doctor-led restorative treatments for ED including Li-ESWT and PRP (P-Shot).",
+        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Shockwave Therapy for ED",
+        "alternateName": "Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT)",
+        "url": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
+        "description": "Non-surgical acoustic wave therapy to improve blood flow, vascular health, and natural erectile function.",
+        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Women's Sexual Wellness",
+        "alternateName": "O-Shot",
+        "url": "https://www.healing-prp.co.uk/o-shot",
+        "description": "Regenerative PRP treatments for female sexual health and rejuvenation.",
+        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "PRP & HA Joint Injections",
+        "alternateName": "Hyaluronic Acid & Ostenil Injections",
+        "url": "https://www.healing-prp.co.uk/joint-injections",
+        "description": "Non-surgical PRP, Hyaluronic Acid (HA), and steroid injections for arthritis and sports injuries.",
+        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Orthopaedic" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "PRP Hair Restoration",
+        "url": "https://www.healing-prp.co.uk/hair-restoration",
+        "description": "Advanced PRP and Exosome therapy to stimulate natural hair regrowth.",
+        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Dermatology" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Facial Aesthetics",
+        "alternateName": "Vampire Facial & Polynucleotides",
+        "url": "https://www.healing-prp.co.uk/facial-aesthetics",
+        "description": "Natural skin rejuvenation using Platelet-Rich Plasma, Polynucleotides, and Botox.",
+        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Dermatology" }
+      }
+    ],
     "priceRange": "££",
     "openingHoursSpecification": [
       {
@@ -191,19 +242,28 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <main>
+      <main className="flex flex-col w-full">
         <Hero />
-        <ServiceOverview />
+        
+        {/* --- INJECTED ED FEATURE BLOCK --- */}
+        <EDFeatureBlock />
+
+        {/* Adding an ID here so the button below can anchor to it smoothly */}
+        <div id="treatments">
+          <ServiceOverview />
+        </div>
+        
         <PRPExplanationSection />
 
         <section className="py-12 bg-white border-t border-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-center items-center gap-4">
             
+            {/* Swapped "Meet Your Doctor" for "Explore All Treatments" */}
             <Link
-              href="/our-doctor"
+              href="#treatments"
               className="px-8 py-3.5 w-full md:w-max flex items-center justify-center text-sm bg-[#0A1128] hover:bg-slate-800 text-white rounded-xl font-bold transition-all shadow-lg active:scale-95 gap-2"
             >
-              Meet Your Doctor
+              Explore All Treatments
             </Link>
 
             <Link
