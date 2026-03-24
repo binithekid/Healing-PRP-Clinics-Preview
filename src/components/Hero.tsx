@@ -9,11 +9,14 @@ import {
   FaMapMarkerAlt, 
   FaGoogle, 
   FaStar, 
-  FaLock 
+  FaLock
 } from "react-icons/fa";
+import OnlineAssessmentModal from "./OnlineAssessmentModal"; 
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isAssessmentOpen, setIsAssessmentOpen] = useState(false); 
+
   const pathname = usePathname();
   const isBirmingham = pathname?.startsWith("/birmingham");
   const prefix = isBirmingham ? "/birmingham" : "";
@@ -22,13 +25,10 @@ export default function Hero() {
     setIsLoaded(true);
   }, []);
 
-  // Unified Action Function: Opens Drawer + Smooth Scroll
   const handleAction = (e: React.MouseEvent) => {
     e.preventDefault();
-    // 1. Signal the consultation drawer to open
     window.dispatchEvent(new CustomEvent("open-contact-drawer"));
     
-    // 2. Smooth scroll to the form section
     const section = document.getElementById("contact-form-section");
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
@@ -49,103 +49,101 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative md:h-[calc(100vh-4rem)] pb-5 md:pb-0 lg:h-[calc(100vh-5rem)] overflow-hidden flex items-center justify-center">
-      {/* Background Section */}
+    <div className="relative w-full mt-0 pt-0 h-[85vh] lg:h-[72vh] min-h-[600px] overflow-hidden flex flex-col items-center justify-end bg-[#0A1128]">
+      
+      {/* Background Section - bg-[center_15%] reveals the doctors' heads */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat sm:hidden" style={{ backgroundImage: "url('/mobilehero.webp')" }}></div>
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden sm:block" style={{ backgroundImage: "url('/herobg.webp')" }}></div>
+        <div className="absolute inset-0 bg-cover bg-[center_15%] bg-no-repeat sm:hidden" style={{ backgroundImage: "url('/mobilehero.webp')" }}></div>
+        <div className="absolute inset-0 bg-cover bg-[center_15%] bg-no-repeat hidden sm:block" style={{ backgroundImage: "url('/herobg.webp')" }}></div>
         <div className="absolute inset-0 bg-black/60"></div>
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-[-4vh]">
+      {/* Main Content - pb-32 md:pb-40 pushes content lower, creating a cinematic feel */}
+      <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-32 md:pb-40">
         
-        {/* Aligned Location Tag */}
         <motion.div 
           custom={1}
           initial="hidden"
           animate={isLoaded ? "visible" : "hidden"}
           variants={fadeUpVariants}
-          // BRAND COLOR LOCK: bg-[#4041d1]
           className="inline-block px-4 py-1.5 bg-[#4041d1] text-white rounded-full text-[10px] mb-6 font-bold uppercase tracking-[0.2em] font-inter"
         >
           <FaMapMarkerAlt className="inline-block mr-2 mb-0.5 text-white/70" />
-          St Albans • Harpenden • Luton • London
+          {isBirmingham 
+            ? "Birmingham • Edgbaston • Solihull • Midlands" 
+            : "St Albans • Harpenden • Luton • London"}
         </motion.div>
 
-        {/* Headline - Raleway Bold */}
         <motion.h1 
           custom={2}
           initial="hidden"
           animate={isLoaded ? "visible" : "hidden"}
           variants={fadeUpVariants}
-          className="md:text-5xl text-3xl font-bold font-raleway text-white leading-tight mb-3 tracking-tight"
+          className="md:text-5xl text-3xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
         >
-          Natural Regeneration Treatments <br /> Healing-PRP Clinics
+          Doctor-Led Intimate Health & <br /> Regenerative Treatments
         </motion.h1>
 
-        {/* Sub-headline - Raleway Medium */}
         <motion.h2 
           custom={3}
           initial="hidden"
           animate={isLoaded ? "visible" : "hidden"}
           variants={fadeUpVariants}
-          className="mt-1 md:text-lg text-base text-blue-100 font-medium font-raleway leading-relaxed"
+          className="mt-2 text-lg md:text-xl font-medium font-raleway text-blue-100 leading-relaxed max-w-4xl mx-auto mb-10"
         >
-          Doctor-led. Patient-focused. Regenerative care
+          Discreet, private care and evidence-based treatment plans for <br className="hidden md:block" />
+          <Link href={`${prefix}/erectile-dysfunction`} className="font-bold text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
+            Erectile dysfunction
+          </Link>
+          {", "}
+          <Link href={`${prefix}/sexual-rejuvenation`} className="font-bold text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
+            Sexual wellness
+          </Link>
+          {", "}
+          <Link href={`${prefix}/joint-injections`} className="font-bold text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
+            Joint injections
+          </Link>
+          {", "}
+          <Link href={`${prefix}/hair-restoration`} className="font-bold text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
+            Hair restoration
+          </Link>
+          {", and "}
+          <Link href={`${prefix}/facial-aesthetics`} className="font-bold text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
+            Facial aesthetics
+          </Link>
+          .
         </motion.h2>
-
-        {/* Description - Inter (NOW WITH SUBTLE SEO LINKS) */}
-        <motion.p 
+        
+        {/* The Exact Two Buttons: Assessment (White) + Book (Blue) */}
+        <motion.div 
           custom={4}
           initial="hidden"
           animate={isLoaded ? "visible" : "hidden"}
           variants={fadeUpVariants}
-          className="mt-3 text-sm md:text-base text-white/80 font-inter leading-relaxed max-w-2xl mx-auto mb-8"
-        >
-          Evidence-based, non-surgical treatments for{" "}
-          <Link href={`${prefix}/sexual-rejuvenation`} className="text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
-            sexual wellness
-          </Link>
-          {", "}
-          <Link href={`${prefix}/joint-injections`} className="text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
-            joint pain relief
-          </Link>
-          {", "}
-          <Link href={`${prefix}/facial-aesthetics`} className="text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
-            facial aesthetics
-          </Link>
-          {", and "}
-          <Link href={`${prefix}/hair-restoration`} className="text-white border-b border-white/30 hover:text-[#4041d1] hover:border-[#4041d1] transition-colors duration-300">
-            hair restoration
-          </Link>
-          .
-        </motion.p>
-
-        {/* Repurposed CTA Buttons */}
-        <motion.div 
-          custom={5}
-          initial="hidden"
-          animate={isLoaded ? "visible" : "hidden"}
-          variants={fadeUpVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center" 
         >
           <button 
+            onClick={() => setIsAssessmentOpen(true)}
+            className="w-full sm:w-auto px-8 py-3.5 flex items-center justify-center text-sm cursor-pointer bg-white text-[#4041d1] hover:bg-blue-50 rounded-xl font-bold transition-all duration-300 gap-2 shadow-xl shadow-white/10 active:scale-95 font-inter border-2 border-white"
+          >
+             Take Free Online Assessment
+          </button>
+
+          <button 
             onClick={handleAction}
-            // BRAND COLOR LOCK: bg-[#4041d1] with hover #2a2bb8
-            className="px-10 py-3.5 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-xl shadow-[#4041d1]/20 active:scale-95 font-inter"
+            className="w-full sm:w-auto px-10 py-3.5 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-xl shadow-[#4041d1]/20 active:scale-95 font-inter"
           >
             <FaEnvelope className="w-4 h-4" /> Book Consultation
           </button>
         </motion.div>
+
       </div>
 
-      {/* --- HERO TRUST BADGES (LOWER BORDER) --- */}
-      <div className={`md:block absolute hidden bottom-0 left-0 right-0 bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+      {/* --- HERO TRUST BADGES --- */}
+      <div className={`md:block absolute hidden bottom-0 left-0 right-0 bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} z-30`}>
         <div className="px-2 py-4 max-w-7xl mx-auto">
           <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
             
-            {/* 1. Google 5-Star Link */}
             <a href="#reviews" onClick={(e) => {
               e.preventDefault();
               document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -165,7 +163,6 @@ export default function Hero() {
               </div>
             </a>
 
-            {/* 2. Experience Badge */}
             <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 bg-[#4041d1] rounded-full flex items-center justify-center text-white font-bold text-[12px] shadow-md border border-white/10">
@@ -178,7 +175,6 @@ export default function Hero() {
               </div>
             </div>
             
-            {/* 3. GMC Badge */}
             <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 bg-[#1f3a68] rounded-full flex items-center justify-center text-white font-bold text-[11px] shadow-md border border-white/10">
@@ -191,7 +187,6 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* 4. Privacy & Discreet Care */}
             <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center text-slate-300 shadow-md border border-white/10">
@@ -207,6 +202,12 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      <OnlineAssessmentModal 
+        isOpen={isAssessmentOpen} 
+        onClose={() => setIsAssessmentOpen(false)} 
+      />
+
     </div>
   );
 }
