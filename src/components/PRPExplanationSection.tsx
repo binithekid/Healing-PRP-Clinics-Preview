@@ -7,10 +7,12 @@ import { usePathname } from "next/navigation";
 import { FaSyringe, FaSync, FaGem, FaStar, FaCheckCircle, FaArrowRight } from "react-icons/fa";
 
 export default function PRPExplanationSection() {
-  const [activeStep, setActiveStep] = useState(0);
+  // DYNAMIC ROUTING LOGIC
   const pathname = usePathname();
   const isBirmingham = pathname?.startsWith("/birmingham");
   const prefix = isBirmingham ? "/birmingham" : "";
+
+  const [activeStep, setActiveStep] = useState(0);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -36,63 +38,12 @@ export default function PRPExplanationSection() {
     { number: 4, icon: FaStar, title: "Injection & Healing", description: "PRP is injected into the target area to stimulate natural repair and regeneration." },
   ];
 
+  // REORDERED & RENAMED APPLICATION CARDS
   const applications = [
-    { 
-      title: "Sexual Wellness", 
-      desc: "Restoring function and sensitivity.",
-      conditions: [
-        { name: "Erectile Dysfunction", href: `${prefix}/erectile-dysfunction` },
-        { name: "Peyronie's Disease", href: `${prefix}/peyronies-disease` },
-        { name: "Premature Ejaculation", href: `${prefix}/premature-ejaculation` },
-      ],
-      treatments: [
-        { name: "P-Shot", href: `${prefix}/p-shot` },
-        { name: "O-Shot", href: `${prefix}/o-shot` },
-        { name: "Shockwave Therapy", href: `${prefix}/shockwave-therapy-erectile-dysfunction` }
-      ]
-    },
-    { 
-      title: "Hair Restoration", 
-      desc: "Targeting follicle health.",
-      conditions: [
-        { name: "Male Pattern Baldness", href: `${prefix}/hair-restoration` },
-        { name: "Thinning Hair", href: `${prefix}/hair-restoration` },
-        { name: "Scalp Inflammation", href: `${prefix}/hair-restoration` }
-      ],
-      treatments: [
-        { name: "PRP Hair Therapy", href: `${prefix}/hair-restoration` },
-        { name: "Exosome Therapy", href: `${prefix}/hair-restoration` },
-        { name: "Mesotherapy", href: `${prefix}/hair-restoration` }
-      ]
-    },
-    { 
-      title: "Joint & Soft Tissue", 
-      desc: "Managing pain and recovery.",
-      conditions: [
-        { name: "Osteoarthritis", href: `${prefix}/joint-injections` },
-        { name: "Tennis/Golfer's Elbow", href: `${prefix}/joint-injections` },
-        { name: "Sports Injuries", href: `${prefix}/joint-injections` }
-      ],
-      treatments: [
-        { name: "Joint PRP Injections", href: `${prefix}/joint-injections` },
-        { name: "Steroid Therapy", href: `${prefix}/joint-injections` },
-        { name: "Ostenil Injections", href: `${prefix}/joint-injections` }
-      ]
-    },
-    { 
-      title: "Facial Aesthetics", 
-      desc: "Natural skin rejuvenation.",
-      conditions: [
-        { name: "Fine Lines & Wrinkles", href: `${prefix}/facial-aesthetics` },
-        { name: "Acne Scarring", href: `${prefix}/facial-aesthetics` },
-        { name: "Skin Laxity", href: `${prefix}/facial-aesthetics` }
-      ],
-      treatments: [
-        { name: "Vampire Facial", href: `${prefix}/facial-aesthetics` },
-        { name: "Polynucleotides", href: `${prefix}/polynucleotides` },
-        { name: "Botox & Fillers", href: `${prefix}/facial-aesthetics` }
-      ]
-    },
+    { title: "Men's Health", desc: "Supports tissue health and optimized blood flow.", href: `${prefix}/erectile-dysfunction` },
+    { title: "Women's Health", desc: "Enhances sensitivity and natural tissue regeneration.", href: `${prefix}/o-shot` },
+    { title: "Joint Injections", desc: "Aids recovery and reduces joint discomfort.", href: `${prefix}/joint-injections` },
+    { title: "Hair Restoration", desc: "Supports scalp health and follicle density.", href: `${prefix}/hair-restoration` },
   ];
 
   return (
@@ -103,7 +54,7 @@ export default function PRPExplanationSection() {
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -123,62 +74,48 @@ export default function PRPExplanationSection() {
             What is Platelet-Rich Plasma?
           </motion.h2>
 
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-4xl mx-auto space-y-8">
             <motion.p
-              className="text-base text-slate-200 leading-relaxed font-medium font-inter mb-12"
+              className="text-base text-slate-200 leading-relaxed font-medium font-inter"
               variants={itemVariants}
             >
-              PRP is prepared using a small sample of your own blood, carefully processed to concentrate platelets and growth factors to support natural tissue repair.
+              Platelet-Rich Plasma (PRP) is prepared using a small sample of your own blood, 
+              carefully processed to concentrate platelets, growth factors, and healing proteins. 
+              These components play a key role in supporting tissue repair and collagen production.
             </motion.p>
 
+            {/* INTERACTIVE APPLICATION CARDS */}
             <motion.div 
-              className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-left"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left"
               variants={itemVariants}
             >
               {applications.map((app, i) => (
-                <div key={i} className="flex flex-col p-6 bg-white/[0.03] rounded-[2rem] border border-white/10 hover:border-[#4041d1]/40 transition-all duration-300">
-                  <div className="flex items-start gap-3 mb-6">
-                    <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0 w-4 h-4" />
-                    <div>
-                      <span className="text-white font-bold block text-lg font-raleway">{app.title}</span>
-                      <span className="text-slate-400 text-xs font-inter">{app.desc}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-4 border-t border-white/5 pt-5">
-                    {/* COLUMN 1: CONDITIONS */}
-                    <div>
-                      <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-3">Conditions</p>
-                      <div className="space-y-2">
-                        {app.conditions.map((c, idx) => (
-                          <Link key={idx} href={c.href} className="text-[11px] text-[#8ea3ff] hover:text-white flex items-center gap-2 group/link transition-colors leading-tight">
-                            <FaArrowRight className="w-1.5 h-1.5 text-[#4041d1]/60 group-hover/link:translate-x-1 transition-transform" />
-                            {c.name}
-                          </Link>
-                        ))}
+                <Link href={app.href} key={i}>
+                  <div className="group flex items-center justify-between p-5 bg-white/[0.03] rounded-2xl border border-white/10 hover:border-[#4041d1]/60 hover:bg-[#4041d1]/10 hover:shadow-[0_0_20px_rgba(64,65,209,0.15)] transition-all duration-300 cursor-pointer overflow-hidden h-full">
+                    <div className="flex items-start gap-3">
+                      <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0 w-3.5 h-3.5" />
+                      <div>
+                        <span className="text-white font-bold block text-sm font-raleway group-hover:text-[#8ea3ff] transition-colors">{app.title}</span>
+                        <span className="text-slate-400 text-xs font-inter">{app.desc}</span>
                       </div>
                     </div>
-
-                    {/* COLUMN 2: TREATMENTS */}
-                    <div>
-                      <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-3">Treatments</p>
-                      <div className="space-y-2">
-                        {app.treatments.map((t, idx) => (
-                          <Link key={idx} href={t.href} className="text-[11px] text-slate-300 hover:text-white flex items-center gap-2 group/link transition-colors leading-tight">
-                            <FaArrowRight className="w-1.5 h-1.5 text-[#4041d1]/60 group-hover/link:translate-x-1 transition-transform" />
-                            {t.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
+                    {/* Sliding Arrow for Interaction Cue */}
+                    <FaArrowRight className="text-[#8ea3ff] w-4 h-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shrink-0 ml-4" />
                   </div>
-                </div>
+                </Link>
               ))}
             </motion.div>
+
+            <motion.p
+              className="text-xs text-slate-400 italic font-inter"
+              variants={itemVariants}
+            >
+              Because PRP is derived from your own blood, it is biocompatible and tailored to your body’s natural healing processes.
+            </motion.p>
           </div>
         </motion.div>
 
-        {/* Process Steps Section (Kept for the visual flow) */}
+        {/* Process Steps */}
         <div className="max-w-6xl mx-auto mt-16 relative">
           <div className="text-center mb-10">
             <AnimatePresence mode="wait">
