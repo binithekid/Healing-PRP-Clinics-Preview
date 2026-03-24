@@ -22,7 +22,7 @@ const birminghamFaqs = [
   },
   {
     question: "What areas does the Birmingham clinic serve?",
-    answer: "Our Birmingham clinic is conveniently located to serve patients across the West Midlands, including Solihull, Sutton Coldfield, Wolverhampton, and Dudley."
+    answer: "Our Birmingham clinic is conveniently located in Edgbaston to serve patients across the West Midlands, including Solihull, Sutton Coldfield, Wolverhampton, and Dudley."
   }
 ];
 
@@ -71,7 +71,9 @@ const birminghamHomeSchema = {
   "@graph": [
     {
       "@type": "MedicalClinic",
+      "@id": "https://www.healing-prp.co.uk/birmingham/#clinic",
       "name": "Healing-PRP Clinics",
+      "alternateName": "Healing-PRP Birmingham",
       "description": "Leading private doctor-led clinic in Birmingham specialising in regenerative medicine, PRP, Erectile Dysfunction, Joint Injections, and Hair Restoration.",
       "url": "https://www.healing-prp.co.uk/birmingham",
       "logo": "https://www.healing-prp.co.uk/Logo2.png",
@@ -100,7 +102,7 @@ const birminghamHomeSchema = {
         "Men's Health", 
         "Women's Health", 
         "Dermatology", 
-        "Rheumatology"
+        "Orthopaedic"
       ],
       "medicalDirector": {
         "@type": "Physician",
@@ -116,7 +118,49 @@ const birminghamHomeSchema = {
         "sameAs": [
           "https://www.gmc-uk.org/registrants/6083294"
         ]
-      }
+      },
+      // --- THE NEW MASTER HUB SERVICES ARRAY (BIRMINGHAM ROUTES) ---
+      "availableService": [
+        {
+          "@type": "MedicalTherapy",
+          "name": "Erectile Dysfunction Treatment",
+          "alternateName": "P-Shot & Shockwave Therapy",
+          "url": "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
+          "description": "Doctor-led restorative treatments for ED including Li-ESWT and PRP (P-Shot) in Birmingham.",
+          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "Women's Sexual Wellness",
+          "alternateName": "O-Shot",
+          "url": "https://www.healing-prp.co.uk/birmingham/o-shot",
+          "description": "Regenerative PRP treatments for female sexual health and rejuvenation in Birmingham.",
+          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "PRP & HA Joint Injections",
+          "alternateName": "Hyaluronic Acid & Ostenil Injections",
+          "url": "https://www.healing-prp.co.uk/birmingham/joint-injections",
+          "description": "Non-surgical PRP, Hyaluronic Acid (HA), and steroid injections for arthritis and sports injuries in Birmingham.",
+          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Orthopaedic" }
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "PRP Hair Restoration",
+          "url": "https://www.healing-prp.co.uk/birmingham/hair-restoration",
+          "description": "Advanced PRP and Exosome therapy to stimulate natural hair regrowth in Birmingham.",
+          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Dermatology" }
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "Facial Aesthetics",
+          "alternateName": "Vampire Facial & Polynucleotides",
+          "url": "https://www.healing-prp.co.uk/birmingham/facial-aesthetics",
+          "description": "Natural skin rejuvenation using Platelet-Rich Plasma, Polynucleotides, and Botox in Birmingham.",
+          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Dermatology" }
+        }
+      ]
     }
   ]
 };
