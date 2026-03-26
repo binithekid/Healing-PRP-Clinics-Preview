@@ -139,6 +139,22 @@ const birminghamHomeSchema = {
         },
         {
           "@type": "MedicalTherapy",
+          "name": "Shockwave Therapy for ED",
+          "alternateName": "Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT)",
+          "url": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction",
+          "description": "Non-surgical acoustic wave therapy to improve blood flow, vascular health, and natural erectile function in Birmingham.",
+          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "P-Shot (Priapus Shot)",
+          "alternateName": ["P-Shot", "PRP for ED", "Male PRP Injection"],
+          "url": "https://www.healing-prp.co.uk/birmingham/p-shot",
+          "description": "Doctor-led P-Shot (Platelet-Rich Plasma) treatment for erectile dysfunction and male enhancement in Birmingham.",
+          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+        },
+        {
+          "@type": "MedicalTherapy",
           "name": "PRP & HA Joint Injections",
           "alternateName": "Hyaluronic Acid & Ostenil Injections",
           "url": "https://www.healing-prp.co.uk/birmingham/joint-injections",
