@@ -56,7 +56,7 @@ export default function Hero() {
       
       {/* Background Section - bg-[center_15%] reveals the doctors' heads */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-cover bg-[center_15%] bg-no-repeat sm:hidden" style={{ backgroundImage: "url('/mobilehero.webp')" }}></div>
+        <div className="absolute inset-0 bg-cover bg-top bg-no-repeat sm:hidden" style={{ backgroundImage: "url('/mobilehero.webp')" }}></div>
         <div className="absolute inset-0 bg-cover bg-[center_15%] bg-no-repeat hidden sm:block" style={{ backgroundImage: "url('/herobg.webp')" }}></div>
         <div className="absolute inset-0 bg-black/60"></div>
       </div>
