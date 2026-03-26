@@ -13,8 +13,8 @@ const birminghamFaqs = [
     answer: "All consultations and treatments are performed exclusively by Dr Syed Abdi, our GMC-registered Medical Director who brings over 10 years of NHS and private clinical experience."
   },
   {
-    question: "Is the P-Shot® available at the Birmingham location?",
-    answer: "Yes, Dr Abdi is an officially licensed and CMA-certified provider of the P-Shot® and O-Shot®, and regularly performs these regenerative procedures at our Birmingham clinic."
+    question: "Is the P-Shot available at the Birmingham location?",
+    answer: "Yes, the P-Shot and O-Shot are fully available at our Birmingham clinic. These advanced regenerative procedures are performed exclusively by Dr Abdi, our GMC-registered Medical Director, ensuring the highest standards of private clinical care."
   },
   {
     question: "How long does a PRP procedure take?",
