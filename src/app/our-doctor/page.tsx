@@ -28,7 +28,7 @@ export default function OurDoctorComingSoon() {
 
           {/* Main Headings */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-raleway font-bold text-white tracking-tight">
-            Comming Soon
+            Coming Soon
           </h1>
           
           <div className="w-16 h-1 bg-[#4041d1] mx-auto rounded-full"></div>
