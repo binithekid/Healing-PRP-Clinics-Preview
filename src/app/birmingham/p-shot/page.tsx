@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "P-Shot Edgbaston",
     "PRP for erectile dysfunction Birmingham",
     "Penile rejuvenation Birmingham",
-    "P-Shot cost Birmingham"
+    "P-Shot cost Birmingham",
     
     // User Intent (Cost/Doctor)
     "P-Shot cost Birmingham",
