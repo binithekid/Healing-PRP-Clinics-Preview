@@ -5,32 +5,21 @@ import Script from "next/script";
 export const metadata: Metadata = {
   // FIX: Perfectly compatible with your layout.tsx template!
   // Next.js will output: "P-Shot (Priapus Shot) Treatment | Birmingham Clinic"
-  title: "Doctor-Led P-Shot (Priapus Shot) Treatment",
-
+  title: {
+    absolute: "P-Shot Birmingham | Doctor-Led Priapus Shot Treatment",
+  },
+  
   description:
-    "Doctor-led P-Shot (Priapus Shot) clinic in Birmingham. GMC-registered doctor offering PRP & Exo-P therapy for erectile rejuvenation. Private clinic in Edgbaston.",
+    "Private doctor-led P-Shot (Priapus Shot) treatment in Birmingham. PRP-based erectile dysfunction and penile rejuvenation care at our Edgbaston clinic.",
   keywords: [
     // Core Service Keywords
     "P-Shot Birmingham",
     "Priapus Shot Birmingham",
-    "PRP injection for ED Birmingham",
-    "Male enhancement Birmingham",
-    
-    // Advanced/New Options (Matches your new Exo-P section)
-    "Exo-P Shot Birmingham",
-    "Exosome therapy for ED West Midlands",
-
-    // Specific Conditions
-    "Peyronies disease treatment Birmingham",
+    "P-Shot Edgbaston",
+    "PRP for erectile dysfunction Birmingham",
     "Penile rejuvenation Birmingham",
-
-    // Hyper-Local & Regional Locations
-    "P-Shot clinic Edgbaston",
-    "Private PRP clinic Solihull",
-    "Mens health Sutton Coldfield",
-    "Priapus Shot West Midlands",
-    "P-Shot Wolverhampton",
-
+    "P-Shot cost Birmingham"
+    
     // User Intent (Cost/Doctor)
     "P-Shot cost Birmingham",
     "GMC registered P-Shot doctor",
@@ -61,32 +50,40 @@ export const metadata: Metadata = {
 // --- SEO RICH FAQS (Birmingham & West Midlands Focus) ---
 const faqs = [
   {
-    question: "What is the P-Shot and is it available at your Birmingham clinic?",
-    answer: "Yes, the official P-Shot (Priapus Shot) is available at our private Edgbaston clinic. It is a doctor-led regenerative treatment that uses your own Platelet-Rich Plasma (PRP) to stimulate tissue repair, increase blood flow, and support enhanced sensitivity and erectile function.",
+    question: "What is the P-Shot and is it available in Birmingham?",
+    answer: "Yes, the P-Shot (Priapus Shot) is available at our private Birmingham clinic. It is a doctor-led treatment using platelet-rich plasma (PRP), discussed during consultation for suitable men seeking support for erectile dysfunction, reduced firmness, or penile rejuvenation.",
   },
   {
-    question: "Is the Priapus Shot painful?",
-    answer: "We prioritise patient comfort at our West Midlands clinic. A potent local anaesthetic cream is applied before the procedure, meaning most men find the P-Shot virtually painless and highly tolerable.",
+    question: "Where can I get the P-Shot in Birmingham?",
+    answer: "We offer private doctor-led P-Shot treatment in Birmingham, with consultation and treatment carried out in a discreet clinical setting. Our clinic welcomes patients from Edgbaston, Solihull, Sutton Coldfield, and the wider West Midlands.",
   },
   {
-    question: "How long does the P-Shot procedure take?",
-    answer: "The entire appointment takes approximately 45 to 60 minutes. This includes a discreet medical consultation, blood draw, PRP preparation, and the treatment itself. You can return to your normal daily activities in Solihull, Sutton Coldfield, or central Birmingham immediately.",
+    question: "Is the P-Shot painful?",
+    answer: "A local anaesthetic cream is applied before treatment to improve comfort. Most patients find the P-Shot well tolerated, although individual experience can vary.",
   },
   {
-    question: "What is the Exo-P Shot?",
-    answer: "The Exo-P Shot is an advanced option available at our Birmingham clinic. It combines your autologous PRP with exosome-derived regenerative signalling to further support tissue repair, cellular communication, and blood flow associated with erectile performance.",
+    question: "How long does the P-Shot appointment take?",
+    answer: "A P-Shot appointment usually takes around 45 to 60 minutes. This includes the consultation, blood draw, PRP preparation, and treatment.",
   },
   {
-    question: "Can the P-Shot treat Peyronie’s disease?",
-    answer: "Yes, the regenerative properties of PRP can support tissue quality in certain cases of Peyronie’s disease. Our GMC-registered doctors provide comprehensive assessments in Edgbaston to determine if the P-Shot is the most appropriate approach for your specific symptoms.",
+    question: "Is there any downtime after the P-Shot?",
+    answer: "Most men can return to normal daily activities shortly after their P-Shot appointment. You will be given personalised aftercare advice based on your treatment plan.",
+  },
+  {
+    question: "Can the P-Shot be used for erectile dysfunction?",
+    answer: "The P-Shot may be considered for some men with erectile dysfunction, depending on the underlying cause, severity of symptoms, and overall health. A private consultation is important to assess suitability and discuss whether PRP treatment is appropriate for you.",
+  },
+  {
+    question: "Can the P-Shot help with Peyronie’s disease?",
+    answer: "Some men ask about the P-Shot as part of treatment planning for Peyronie’s disease. Suitability depends on your symptoms, examination findings, and overall goals, so this is assessed individually during consultation.",
   },
   {
     question: "How long do P-Shot results last?",
-    answer: "Results vary depending on your age, baseline vascular health, and lifestyle. Many men experience sustained improvements for 12 to 18 months. We often discuss maintenance protocols with our Birmingham patients to help maximise the longevity of the results.",
+    answer: "Results vary from person to person. Duration can depend on baseline vascular health, underlying medical conditions, lifestyle factors, and whether additional treatment sessions are recommended.",
   },
   {
-    question: "Is a consultation required before getting the P-Shot in Birmingham?",
-    answer: "Yes. We require a thorough, strictly 1:1 private medical consultation at our Edgbaston clinic to review your medical history, discuss your goals, and ensure the P-Shot or Exo-P Shot is perfectly suited to your needs.",
+    question: "Do I need a consultation before getting the P-Shot in Birmingham?",
+    answer: "Yes. A private doctor-led consultation is required before P-Shot treatment in Birmingham to review your medical history, symptoms, and goals, and to assess whether the treatment is suitable for you.",
   },
 ];
 
@@ -143,9 +140,9 @@ const pShotSchemaBirmingham = {
     {
       "@type": "MedicalTherapy",
       "@id": "https://www.healing-prp.co.uk/birmingham/p-shot/#therapy",
-      "name": "P-Shot (Priapus Shot) & Exo-P Shot",
-      "alternateName": ["Platelet-Rich Plasma (PRP) Male Rejuvenation", "Exosome Penile Therapy", "Peyronie's Disease PRP Treatment"],
-      "description": "Advanced autologous Platelet-Rich Plasma (PRP) and Exosome injection therapies designed to improve penile health, tissue regeneration, blood flow, and treat conditions like Peyronie's disease and Erectile Dysfunction in Birmingham.",
+      "name": "P-Shot (Priapus Shot)",
+      "alternateName": ["Priapus Shot", "P-Shot", "Platelet-Rich Plasma P-Shot"],
+      "description": "Private doctor-led P-Shot treatment in Birmingham using platelet-rich plasma (PRP). Consultation includes assessment of suitability for concerns such as erectile dysfunction, reduced firmness, or penile tissue support.",
       "relevantSpecialty": {
         "@type": "MedicalSpecialty",
         "name": "Urology"
