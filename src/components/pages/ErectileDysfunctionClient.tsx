@@ -179,7 +179,7 @@ export default function ErectileDysfunctionClient({
     {
       number: 2,
       icon: FaSyringe,
-      title: "PRP Treatment (P-Shot)",
+      title: "P-Shot (PRP Treatment)",
       description: "PRP uses platelet-rich plasma prepared from your own blood and may support tissue repair and vascular responsiveness.",
     },
     {
