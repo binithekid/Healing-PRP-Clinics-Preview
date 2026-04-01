@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Private doctor-led erectile dysfunction treatment in Birmingham. Consultation for Shockwave Therapy, P-Shot and personalised ED treatment options in Edgbaston. Assessment required."
+    "Private doctor-led erectile dysfunction treatment in Birmingham. Consultation for Shockwave Therapy, P-Shot and personalised ED treatment options in Edgbaston. Assessment required.",
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
   },
