@@ -11,6 +11,7 @@ const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway" });
 export const metadata: Metadata = {
   // Required for Next.js to auto-generate correct URLs for all child pages
   metadataBase: new URL("https://www.healing-prp.co.uk"),
+  
   title: {
     // Moved "Doctor-Led" to the front for maximum impact
     // Length: 58 characters (Perfect sweet spot)
@@ -18,27 +19,26 @@ export const metadata: Metadata = {
     // General brand template for top-level pages (Home, About, Contact)
     template: "%s | Healing-PRP Clinics", 
   },
+  
   description: "Specialist private clinic in St Albans & Birmingham. PRP Hair Restoration, Joint Injections, P-Shot & O-Shot treatments by GMC-registered doctors.",
-  keywords: [
-    "PRP Clinic UK",
-    "Private Doctor St Albans",
-    "Private Doctor Birmingham",
-    "Regenerative Medicine",
-    "Erectile Dysfunction Treatment",
-    "Hair Loss Clinic",
-    "Joint Pain Injections"
-  ],
+  
   icons: {
     icon: "/Logo2.png", 
     shortcut: "/Logo2.png",
     apple: "/Logo2.png", 
   },
+  
   openGraph: {
     // Universal site-wide tags ONLY. 
     // Title, description, and URL are intentionally left out so child pages can define them!
     type: "website",
     locale: "en_GB",
     siteName: "Healing-PRP Clinics",
+  },
+
+  // Added base Twitter formatting for site-wide social sharing reliability
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
@@ -48,7 +48,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    // Updated lang to "en-GB" for stronger local UK SEO targeting
+    <html lang="en-GB" className="scroll-smooth">
       <body className={`${inter.variable} ${raleway.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
         {/* Header appears on ALL pages */}
         <Header /> 
@@ -57,10 +58,6 @@ export default function RootLayout({
         <main>
           {children}
         </main>
-        
-        {/* Footer is typically called within page.tsx to allow for 
-            location-specific footer details, but can be added here 
-            if you want a universal one. */}
             
         {/* The Global Sticky Buttons */}
         <GlobalStickyCTAs />
