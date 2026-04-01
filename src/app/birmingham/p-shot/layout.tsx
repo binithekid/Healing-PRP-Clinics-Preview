@@ -4,9 +4,10 @@ import { ReactNode } from "react";
 export const metadata: Metadata = {
   title: {
     template: "%s | Birmingham Clinic",
-    default: "Doctor-Led P-Shot Male Rejuvenation | Birmingham Clinic",
+    default: "Birmingham Clinic",
   },
-  description: "Doctor-led P-Shot (Priapus Shot) provider serving Edgbaston, Solihull & the West Midlands.",
+  description:
+    "Doctor-led private clinic in Edgbaston, Birmingham serving patients across the West Midlands.",
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
