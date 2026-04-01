@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import ErectileDysfunctionClient from "@/components/pages/ErectileDysfunctionClient";
-import Script from "next/script";
+
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+// Next.js recommends replacing "<" with "\u003c".
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
   title: {
     // Added "Doctor-Led" for medical authority and higher Click-Through Rate
-    absolute: "Doctor-Led Erectile Dysfunction Treatment St Albans | Healing-PRP Clinics",
+    absolute: "Doctor-Led Erectile Dysfunction Treatment St Albans | Healing-PRP",
   },
 
   description:
@@ -15,31 +18,6 @@ export const metadata: Metadata = {
     canonical: "https://www.healing-prp.co.uk/erectile-dysfunction",
   },
 
-  keywords: [
-    // --- HIGH PRIORITY LOCAL TERMS (Luton Focus) ---
-    "Erectile dysfunction treatment Luton",
-    "Private ED clinic Luton",
-    "Men's health clinic near Luton",
-    "Impotence treatment Bedfordshire",
-    
-    // --- CORE CLINICAL TERMS (St Albans/Herts Focus) ---
-    "Erectile dysfunction treatment St Albans",
-    "Shockwave therapy Hertfordshire",
-    "Vascular ED treatment St Albans",
-    "Non-surgical impotence cure",
-    
-    // --- SPECIFIC TREATMENTS & COMPARISONS ---
-    "P-Shot for erectile dysfunction",
-    "Viagra alternative Luton",
-    "Low intensity shockwave therapy London",
-    "Restorative sexual medicine",
-    
-    // --- HIGH-INTENT / COST QUERIES ---
-    "Private ED doctor Harpenden",
-    "Male performance clinic Watford",
-    "Erectile dysfunction clinic consultation cost"
-  ],
-
   openGraph: {
     title: "Doctor-Led Erectile Dysfunction Treatment St Albans | Healing-PRP Clinics",
     description:
@@ -48,6 +26,21 @@ export const metadata: Metadata = {
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
+    images: [
+      {
+        url: "/ed-doctor-consultation.webp",
+        width: 1200,
+        height: 630,
+        alt: "Private ED Consultation St Albans",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Doctor-Led Erectile Dysfunction Treatment St Albans",
+    description: "Restore spontaneity and confidence. Doctor-led Shockwave & PRP therapy for ED in St Albans.",
+    images: ["/ed-doctor-consultation.webp"],
   },
 };
 
@@ -89,8 +82,8 @@ const edSchema = {
   "@graph": [
     {
       "@type": "MedicalClinic",
-      "@id": "https://www.healing-prp.co.uk/#clinic",
-      "name": "Healing-PRP Clinics",
+      "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#clinic",
+      "name": "Healing-PRP Clinics St Albans",
       "description": "Doctor-led Erectile Dysfunction (ED) clinic offering Shockwave Therapy, PRP, and personalised medication for ED treatment.",
       "telephone": "+44 7990 364147",
       "address": {
@@ -99,7 +92,7 @@ const edSchema = {
         "addressLocality": "St Albans",
         "addressRegion": "Hertfordshire",
         "postalCode": "AL1 3JJ",
-        "addressCountry": "UK"
+        "addressCountry": "GB"
       },
       "areaServed": [
         {
@@ -107,38 +100,55 @@ const edSchema = {
           "name": "St Albans"
         },
         {
+          "@type": "City",
+          "name": "Luton"
+        },
+        {
           "@type": "AdministrativeArea",
           "name": "Hertfordshire"
         }
       ],
-      "medicalSpecialty": ["Urology", "RegenerativeMedicine"],
-      "medicalDirector": {
-        "@type": "Physician",
-        "name": "Dr Syed Abdi",
-        "jobTitle": "Medical Director",
-        "telephone": "+44 7990 364147",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "GMC Reference Number",
-          "value": "6083294"
-        },
-        "url": "https://www.healing-prp.co.uk/our-doctor",
-        "sameAs": [
-          "https://www.gmc-uk.org/registrants/6083294"
-        ]
-      },
+      "medicalSpecialty": "Urologic",
       "availableService": [
         {
-          "@type": "MedicalTherapy",
-          "name": "Erectile Dysfunction Treatment",
-          "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
-          "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+          "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#therapy"
+        }
+      ],
+      "employee": [
+        {
+          "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#dr"
         }
       ]
     },
     {
+      "@type": "Person",
+      "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#dr",
+      "name": "Dr Syed Abdi",
+      "jobTitle": "Medical Director",
+      "telephone": "+44 7990 364147",
+      "url": "https://www.healing-prp.co.uk/our-doctor",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "GMC Reference Number",
+        "value": "6083294"
+      },
+      "sameAs": [
+        "https://www.gmc-uk.org/registrants/6083294"
+      ],
+      "worksFor": {
+        "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#clinic"
+      }
+    },
+    {
+      "@type": "MedicalTherapy",
+      "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#therapy",
+      "name": "Erectile Dysfunction Treatment",
+      "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
+      "relevantSpecialty": "Urologic"
+    },
+    {
       "@type": "MedicalCondition",
-      "@id": "https://www.healing-prp.co.uk/erectile-dysfunction/#condition",
+      "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#condition",
       "name": "Erectile Dysfunction",
       "alternateName": ["ED", "Impotence"],
       "associatedAnatomy": {
@@ -151,10 +161,7 @@ const edSchema = {
           "name": "Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT)",
           "url": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
           "description": "Non-surgical acoustic wave therapy to improve blood flow and vascular health.",
-          "relevantSpecialty": {
-            "@type": "MedicalSpecialty",
-            "name": "Urology"
-          }
+          "relevantSpecialty": "Urologic"
         },
         {
           "@type": "MedicalTherapy",
@@ -162,22 +169,36 @@ const edSchema = {
           "alternateName": "Platelet-Rich Plasma (PRP) for ED",
           "url": "https://www.healing-prp.co.uk/p-shot",
           "description": "Regenerative injection therapy using the patient's own platelet-rich plasma to stimulate tissue repair.",
-          "relevantSpecialty": {
-            "@type": "MedicalSpecialty",
-            "name": "Urology"
-          }
+          "relevantSpecialty": "Urologic"
         },
         {
           "@type": "MedicalTherapy",
           "name": "Personalised ED Medication",
           "url": "https://www.healing-prp.co.uk/personalised-ed-medication",
           "description": "Bespoke pharmacological treatment plans tailored to the patient's specific cardiovascular and metabolic profile.",
-          "relevantSpecialty": {
-            "@type": "MedicalSpecialty",
-            "name": "Urology"
-          }
+          "relevantSpecialty": "Urologic"
         }
       ]
+    }
+  ]
+};
+
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Erectile Dysfunction Treatment",
+      "item": "https://www.healing-prp.co.uk/erectile-dysfunction"
     }
   ]
 };
@@ -199,21 +220,25 @@ export default function Page() {
 
   return (
     <main>
-      {/* 1. Inject Medical Entity Schema */}
-      <Script
-        id="ed-schema-stalbans"
+      {/* 1. Inject Medical Entity Schema safely via plain script */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(edSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(edSchema) }}
       />
 
-      {/* 2. Inject FAQ Schema */}
-      <Script
-        id="ed-faq-schema-stalbans"
+      {/* 2. Inject Breadcrumb Schema safely */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+
+      {/* 3. Inject FAQ Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
       
-      {/* 3. Render Client Component */}
+      {/* 4. Render Client Component */}
       <ErectileDysfunctionClient 
         // HEADLINE: "Healing-PRP Clinics, St Albans"
         locationName="St Albans"
