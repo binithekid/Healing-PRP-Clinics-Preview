@@ -1,51 +1,45 @@
 import type { Metadata } from "next";
 import PShotClient from "@/components/pages/PShotClient";
-import Script from "next/script";
+
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+// Next.js recommends replacing "<" with "\u003c".
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Doctor-Led P-Shot Male Rejuvenation | St Albans Clinic",
+    absolute: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
   },
-
+  
   description:
-    "Doctor-Led P-Shot provider serving Luton, St Albans & Hertfordshire. Advanced PRP therapy to enhance sensitivity, erection quality, and performance. Book your private consultation.",
-
+    "Doctor-led P-Shot (Priapus Shot) PRP treatment in St Albans, serving Hertfordshire & Luton. Discreet consultation, realistic expectations, clear pricing. Book today.",
+  
   alternates: {
     canonical: "https://www.healing-prp.co.uk/p-shot",
   },
-
-  keywords: [
-    // High-Priority Location Terms (Luton Focus)
-    "P-Shot treatment Luton",
-    "Male sexual rejuvenation Luton",
-    "PRP injection for penis Luton",
-    "Male enhancement clinic Luton",
-    "Priapus Shot Bedfordshire",
-
-    // Core Clinical Terms (St Albans/Herts Base)
-    "P-Shot treatment St Albans",
-    "Priapus Shot Hertfordshire",
-    "Penile sensitivity treatment",
-    "Male enhancement St Albans",
-    "Sexual performance therapy Watford",
-    
-    // Specific Conditions & Cost
-    "P-Shot cost UK",
-    "P-Shot consultation Hertfordshire", 
-    "Lichen Sclerosus male treatment",
-    "Natural male enhancement Harpenden",
-    "Sexual wellness clinic North London", 
-    "St Albans aesthetic medicine"
-  ],
-
+  
   openGraph: {
-    title: "Doctor-Led P-Shot Male Rejuvenation | St Albans Clinic",
-    description:
-      "Enhance sensitivity and performance with the P-Shot. Doctor-led PRP therapy serving patients from Luton and St Albans.",
+    title: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
+    description: "Doctor-led consultation for P-Shot options in St Albans. Suitability is assessed individually and outcomes vary.",
     url: "https://www.healing-prp.co.uk/p-shot",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
+    images: [
+      {
+        // Relying on metadataBase in root layout to resolve this to an absolute URL
+        url: "/p-shot-consultation.webp",
+        width: 1200,
+        height: 630,
+        alt: "P-Shot Treatment Consultation St Albans",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
+    description: "Doctor-led consultation for P-Shot options in St Albans. Suitability assessed; outcomes vary.",
+    images: ["/p-shot-consultation.webp"],
   },
 };
 
@@ -81,23 +75,24 @@ const faqs = [
   },
 ];
 
-// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy using @graph ---
+// --- UPGRADED JSON-LD SCHEMA: Compliant & Corrected ---
 const pShotSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "MedicalClinic",
-      "@id": "https://www.healing-prp.co.uk/#clinic",
-      "name": "Healing-PRP Clinics",
-      "description": "Doctor-led clinic providing the official P-Shot (Priapus Shot) and male rejuvenation therapies.",
-      "telephone": "+44 7990 364147",
+      "@id": "https://www.healing-prp.co.uk/p-shot#clinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "url": "https://www.healing-prp.co.uk/p-shot",
+      "description": "Doctor-led private clinic in St Albans providing PRP-based P-Shot consultation and related services.",
+      "telephone": "+447990364147",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "21 Victoria St",
         "addressLocality": "St Albans",
         "addressRegion": "Hertfordshire",
         "postalCode": "AL1 3JJ",
-        "addressCountry": "UK"
+        "addressCountry": "GB"
       },
       "areaServed": [
         {
@@ -105,54 +100,102 @@ const pShotSchema = {
           "name": "St Albans"
         },
         {
+          "@type": "City",
+          "name": "Luton"
+        },
+        {
           "@type": "AdministrativeArea",
           "name": "Hertfordshire"
         }
       ],
-      "medicalSpecialty": ["Urology", "RegenerativeMedicine"],
-      "medicalDirector": {
-        "@type": "Physician",
-        "name": "Dr Syed Abdi",
-        "jobTitle": "Medical Director",
-        "telephone": "+44 7990 364147",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "GMC Reference Number",
-          "value": "6083294"
-        },
-        "url": "https://www.healing-prp.co.uk/our-doctor",
-        "sameAs": [
-          "https://www.gmc-uk.org/registrants/6083294"
-        ]
-      },
+      "medicalSpecialty": "Urologic",
       "availableService": [
         {
-          "@id": "https://www.healing-prp.co.uk/p-shot/#therapy"
+          "@id": "https://www.healing-prp.co.uk/p-shot#therapy"
+        }
+      ],
+      "employee": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/p-shot#dr" 
         }
       ]
     },
     {
-      "@type": "MedicalTherapy",
-      "@id": "https://www.healing-prp.co.uk/p-shot/#therapy",
-      "name": "P-Shot (Priapus Shot)",
-      "alternateName": ["Platelet-Rich Plasma (PRP) Male Rejuvenation", "PRP Penile Injection"],
-      "description": "An autologous Platelet-Rich Plasma (PRP) injection therapy designed to improve penile health, tissue regeneration, blood flow, and sensitivity.",
-      "relevantSpecialty": {
-        "@type": "MedicalSpecialty",
-        "name": "Urology"
+      "@type": "Person",
+      "@id": "https://www.healing-prp.co.uk/p-shot#dr",
+      "name": "Dr Syed Abdi",
+      "jobTitle": "Medical Director",
+      "telephone": "+447990364147",
+      "url": "https://www.healing-prp.co.uk/our-doctor",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "GMC Reference Number",
+        "value": "6083294"
       },
-      "indication": [
-        {
-          "@type": "MedicalCondition",
-          "name": "Erectile Dysfunction",
-          "url": "https://www.healing-prp.co.uk/erectile-dysfunction"
-        },
-        {
-          "@type": "MedicalCondition",
-          "name": "Peyronie's Disease",
-          "url": "https://www.healing-prp.co.uk/peyronies-disease"
+      "sameAs": [
+        "https://www.gmc-uk.org/registrants/6083294"
+      ],
+      "worksFor": { 
+        "@id": "https://www.healing-prp.co.uk/p-shot#clinic" 
+      }
+    },
+    {
+      "@type": "MedicalTherapy",
+      "@id": "https://www.healing-prp.co.uk/p-shot#therapy",
+      "name": "P-Shot (Priapus Shot)",
+      "alternateName": ["Priapus Shot", "P-Shot", "Platelet Rich Plasma P-Shot"],
+      "url": "https://www.healing-prp.co.uk/p-shot",
+      "description": "Doctor-led consultation and PRP-based P-Shot procedure option in St Albans. Suitability is assessed individually and outcomes vary.",
+      "relevantSpecialty": "Urologic",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "GBP",
+        "price": "995",
+        "url": "https://www.healing-prp.co.uk/prices",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#condition",
+      "name": "Erectile Dysfunction",
+      "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/p-shot#therapy" 
         }
       ]
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/peyronies-disease#condition",
+      "name": "Peyronie's Disease",
+      "url": "https://www.healing-prp.co.uk/peyronies-disease",
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/p-shot#therapy" 
+        }
+      ]
+    }
+  ]
+};
+
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "P-Shot Treatment",
+      "item": "https://www.healing-prp.co.uk/p-shot"
     }
   ]
 };
@@ -174,21 +217,25 @@ export default function Page() {
 
   return (
     <main>
-      {/* 1. Inject Medical Entity Schema */}
-      <Script
-        id="pshot-schema-stalbans"
+      {/* 1. Inject Medical Entity Schema safely via plain script per Next.js best practices */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pShotSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(pShotSchema) }}
       />
 
-      {/* 2. Inject FAQ Schema */}
-      <Script
-        id="pshot-faq-schema-stalbans"
+      {/* 2. Inject Breadcrumb Schema safely */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+
+      {/* 3. Inject FAQ Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
       
-      {/* 3. Render Client Component */}
+      {/* 4. Render Client Component */}
       <PShotClient 
         locationName="St Albans"
         servingAreas="Harpenden • Luton • Watford • Hertfordshire"
