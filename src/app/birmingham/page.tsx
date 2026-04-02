@@ -5,12 +5,8 @@ import BirminghamHomeClient from "@/components/pages/BirminghamHomeClient";
 // Next.js recommends replacing "<" with "\u003c".
 const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
-// --- SEO RICH FAQS (Birmingham Focus) ---
+// --- SEO RICH FAQS (Birmingham Focus & Parking) ---
 const birminghamFaqs = [
-  {
-    question: "Where exactly is your Birmingham clinic located, and is there parking?",
-    answer: "Our clinic is located at 38 Harborne Rd in Edgbaston (B15 3EB). We offer a highly discreet, private setting with free patient parking available on-site, ensuring your visit from anywhere in the West Midlands is completely stress-free and confidential."
-  }
   {
     question: "Do I need a GP referral for treatment at your Birmingham clinic?",
     answer: "No, a GP referral is not required. You can book a private, confidential consultation directly with Dr Syed Abdi at our Birmingham clinic for any of our regenerative treatments."
@@ -28,8 +24,8 @@ const birminghamFaqs = [
     answer: "Most PRP treatments, including the P-Shot and joint injections, take between 45 to 60 minutes. This includes a thorough medical review, blood draw, premium double-spin centrifugation, and the treatment itself."
   },
   {
-    question: "What areas does the Birmingham clinic serve?",
-    answer: "Our Birmingham clinic is conveniently located in Edgbaston to serve patients across the West Midlands, including Solihull, Sutton Coldfield, Wolverhampton, and Dudley."
+    question: "Where exactly is your Birmingham clinic located, and is there parking?",
+    answer: "Our clinic is located at 38 Harborne Rd in Edgbaston (B15 3EB). We offer a highly discreet, private setting with free patient parking available on-site, ensuring your visit from anywhere in the West Midlands is completely stress-free and confidential."
   }
 ];
 
@@ -158,6 +154,26 @@ const birminghamHomeSchema = {
   ]
 };
 
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Birmingham Clinic",
+      "item": "https://www.healing-prp.co.uk/birmingham"
+    }
+  ]
+};
+
 export default function BirminghamPage() {
   const faqSchema = {
     "@context": "https://schema.org",
@@ -184,6 +200,12 @@ export default function BirminghamPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
+      />
+
+      {/* 3. Inject Breadcrumb Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
       />
       
       <BirminghamHomeClient faqs={birminghamFaqs} />
