@@ -17,14 +17,14 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 // --- SEO OPTIMISATION ---
 export const metadata: Metadata = {
   title: {
-    absolute: "Doctor-Led PRP, P-Shot & ED Clinic St Albans | Healing-PRP",
+    absolute: "Doctor-Led Men’s & Women’s Intimate Health Clinic in St Albans",
   },
   description:
-    "Doctor-led private medical clinic in St Albans. Expert doctor-led treatments for Erectile Dysfunction (ED), P-Shot, Joint Injections, and PRP Hair Restoration.",
+    "Doctor-led private clinic in St Albans offering men’s and women’s intimate health treatments, including erectile dysfunction care, P-Shot, O-Shot, shockwave therapy, and personalised non-surgical treatment options.",
   openGraph: {
-    title: "Doctor-Led PRP, P-Shot & ED Clinic St Albans | Healing-PRP",
+    title: "Doctor-Led Men’s & Women’s Intimate Health Clinic in St Albans",
     description:
-      "Expert private care for Hair Restoration, Sexual Wellness & Pain Relief. Specialists in P-Shot and PRP therapy.",
+      "Private doctor-led intimate health clinic in St Albans for men’s and women’s sexual wellness, including ED treatment, P-Shot, O-Shot, and non-surgical regenerative care.",
     url: "https://www.healing-prp.co.uk",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -34,14 +34,15 @@ export const metadata: Metadata = {
         url: "/hero_img.png",
         width: 1200,
         height: 630,
-        alt: "Healing-PRP Clinics - Regenerative Medicine Specialists",
+        alt: "Healing-PRP Clinics intimate health clinic in St Albans",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Doctor-Led PRP, P-Shot & ED Clinic St Albans | Healing-PRP",
-    description: "Expert private care for Hair Restoration, Sexual Wellness & Pain Relief. Specialists in P-Shot and PRP therapy.",
+    title: "Doctor-Led Men’s & Women’s Intimate Health Clinic in St Albans",
+    description:
+      "Private doctor-led intimate health clinic in St Albans for men’s and women’s sexual wellness, including ED treatment, P-Shot, O-Shot, and non-surgical regenerative care.",
     images: ["/hero_img.png"],
   },
   alternates: {
@@ -49,28 +50,32 @@ export const metadata: Metadata = {
   },
 };
 
-// --- SEO RICH FAQS (St Albans Focus) ---
+// --- SEO RICH FAQS (St Albans Focus: Men’s & Women’s Intimate Health) ---
 const faqs = [
   {
     question: "Do I need a GP referral before booking at your St Albans clinic?",
-    answer: "No. You can book a private, confidential consultation directly with Healing-PRP Clinics in St Albans without a GP referral. We offer doctor-led assessment and treatment for erectile dysfunction, intimate health concerns, PRP treatments, and other non-surgical services."
+    answer: "No. You can book a private, confidential consultation directly with Healing-PRP Clinics in St Albans without a GP referral. We provide doctor-led assessment for men’s and women’s intimate health concerns, with treatment options discussed according to individual suitability.",
   },
   {
     question: "Who carries out the consultation and treatment at Healing-PRP Clinics?",
-    answer: "All consultations and treatments are carried out by Dr Syed Abdi, GMC-registered doctor and Medical Director of Healing-PRP Clinics."
+    answer: "All consultations and treatments are carried out by Dr Syed Abdi, GMC-registered doctor and Medical Director of Healing-PRP Clinics, providing discreet and personalised care in St Albans.",
   },
   {
-    question: "Do you offer treatment for erectile dysfunction and men’s intimate health concerns in St Albans?",
-    answer: "Yes. We provide doctor-led assessment and treatment for erectile dysfunction, premature ejaculation, Peyronie’s disease, and other men’s intimate health concerns at our St Albans clinic, depending on individual suitability."
+    question: "Do you offer men’s intimate health treatment in St Albans?",
+    answer: "Yes. We provide doctor-led assessment and treatment for men’s intimate health concerns in St Albans, including erectile dysfunction, premature ejaculation, Peyronie’s disease, and other related concerns, depending on individual suitability.",
   },
   {
-    question: "What happens during the first consultation for erectile dysfunction or intimate health treatment?",
-    answer: "Your first consultation includes a private discussion about your symptoms, medical history, goals, and possible contributing factors. Where appropriate, suitable treatment options such as PRP-based treatment, shockwave therapy, personalised medication, or other doctor-led care will be explained."
+    question: "Do you offer women’s intimate health treatment in St Albans?",
+    answer: "Yes. We offer doctor-led women’s intimate health consultations in St Albans for concerns such as vaginal dryness, reduced sensitivity, sexual wellness concerns, and other intimate health issues. Suitable non-surgical treatment options are discussed during consultation.",
+  },
+  {
+    question: "What happens during the first intimate health consultation?",
+    answer: "Your first consultation includes a private discussion about your symptoms, medical history, goals, and possible contributing factors. Where appropriate, suitable treatment options such as shockwave therapy, PRP-based treatments, personalised medication, or other doctor-led non-surgical care will be explained.",
   },
   {
     question: "Is treatment at Healing-PRP Clinics confidential?",
-    answer: "Yes. Healing-PRP Clinics provides discreet, private, and confidential doctor-led care for sensitive concerns including erectile dysfunction, intimate health issues, PRP treatments, and related regenerative medicine services."
-  }
+    answer: "Yes. Healing-PRP Clinics provides discreet, private, and confidential doctor-led care for sensitive men’s and women’s intimate health concerns in a professional and respectful clinical setting.",
+  },
 ];
 
 export default function Home() {
@@ -121,6 +126,7 @@ export default function Home() {
         "https://www.gmc-uk.org/registrants/6083294"
       ]
     },
+    
     // --- THE NEW MASTER HUB SERVICES ARRAY ---
     "availableService": [
       {
