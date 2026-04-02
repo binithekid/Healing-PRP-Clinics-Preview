@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import EDFeatureBlock from "@/components/EDFeatureBlock";
 import ServiceOverview from "@/components/ServiceOverview";
@@ -8,7 +9,11 @@ import DynamicFAQ from "@/components/DynamicFAQ";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
 import Footer from "@/components/Footer";
-import TrustReviews from "@/components/TrustReviews";
+
+// Lazy-load the third-party review widget to protect Core Web Vitals (CWV)
+const TrustReviews = dynamic(() => import("@/components/TrustReviews"), {
+  ssr: false,
+});
 
 // Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
 // Next.js recommends replacing "<" with "\u003c".
@@ -81,109 +86,122 @@ const faqs = [
 export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics",
-    "alternateName": "Healing-PRP St Albans",
-    "image": "https://www.healing-prp.co.uk/hero_img.png",
-    "url": "https://www.healing-prp.co.uk",
-    "telephone": "+44 7990 364147",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "21 Victoria St",
-      "addressLocality": "St Albans",
-      "addressRegion": "Hertfordshire",
-      "postalCode": "AL1 3JJ", 
-      "addressCountry": "GB"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 51.7527, 
-      "longitude": -0.3394
-    },
-    "areaServed": [
+    "@graph": [
       {
-        "@type": "City",
-        "name": "St Albans"
+        "@type": "MedicalClinic",
+        "@id": "https://www.healing-prp.co.uk/#clinic",
+        "name": "Healing-PRP Clinics",
+        "alternateName": "Healing-PRP St Albans",
+        "image": "https://www.healing-prp.co.uk/hero_img.png",
+        "url": "https://www.healing-prp.co.uk",
+        "telephone": "+44 7990 364147",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "21 Victoria St",
+          "addressLocality": "St Albans",
+          "addressRegion": "Hertfordshire",
+          "postalCode": "AL1 3JJ", 
+          "addressCountry": "GB"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 51.7527, 
+          "longitude": -0.3394
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "St Albans"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Hertfordshire"
+          }
+        ],
+        "medicalSpecialty": ["Urologic", "Orthopedic", "Dermatologic"],
+        "employee": [
+          {
+            "@id": "https://www.healing-prp.co.uk/#dr"
+          }
+        ],
+        // --- THE MASTER HUB SERVICES ARRAY ---
+        "availableService": [
+          {
+            "@type": "MedicalTherapy",
+            "name": "Erectile Dysfunction Treatment",
+            "alternateName": "P-Shot & Shockwave Therapy",
+            "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
+            "description": "Doctor-led restorative treatments for ED including Li-ESWT and PRP (P-Shot).",
+            "relevantSpecialty": "Urologic"
+          },
+          {
+            "@type": "MedicalTherapy",
+            "name": "Shockwave Therapy for ED",
+            "alternateName": "Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT)",
+            "url": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
+            "description": "Non-surgical acoustic wave therapy to improve blood flow, vascular health, and natural erectile function.",
+            "relevantSpecialty": "Urologic"
+          },
+          {
+            "@type": "MedicalTherapy",
+            "name": "Women's Sexual Wellness",
+            "alternateName": "O-Shot",
+            "url": "https://www.healing-prp.co.uk/o-shot",
+            "description": "Regenerative PRP treatments for female sexual health and rejuvenation.",
+            "relevantSpecialty": "Urologic"
+          },
+          {
+            "@type": "MedicalTherapy",
+            "name": "PRP & HA Joint Injections",
+            "alternateName": "Hyaluronic Acid & Ostenil Injections",
+            "url": "https://www.healing-prp.co.uk/joint-injections",
+            "description": "Non-surgical PRP, Hyaluronic Acid (HA), and steroid injections for arthritis and sports injuries.",
+            "relevantSpecialty": "Orthopedic"
+          },
+          {
+            "@type": "MedicalTherapy",
+            "name": "PRP Hair Restoration",
+            "url": "https://www.healing-prp.co.uk/hair-restoration",
+            "description": "Advanced PRP and Exosome therapy to stimulate natural hair regrowth.",
+            "relevantSpecialty": "Dermatologic"
+          },
+          {
+            "@type": "MedicalTherapy",
+            "name": "Facial Aesthetics",
+            "alternateName": "Vampire Facial & Polynucleotides",
+            "url": "https://www.healing-prp.co.uk/facial-aesthetics",
+            "description": "Natural skin rejuvenation using Platelet-Rich Plasma, Polynucleotides, and Botox.",
+            "relevantSpecialty": "Dermatologic"
+          }
+        ],
+        "priceRange": "££",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "19:00"
+          }
+        ]
       },
       {
-        "@type": "AdministrativeArea",
-        "name": "Hertfordshire"
-      }
-    ],
-    "medicalSpecialty": ["RegenerativeMedicine", "Urologic", "Orthopedic", "Dermatologic"],
-    "medicalDirector": {
-      "@type": "Physician",
-      "name": "Dr Syed Abdi",
-      "jobTitle": "Medical Director",
-      "telephone": "+44 7990 364147",
-      "identifier": {
-        "@type": "PropertyValue",
-        "propertyID": "GMC Reference Number",
-        "value": "6083294"
-      },
-      "url": "https://www.healing-prp.co.uk/our-doctor",
-      "sameAs": [
-        "https://www.gmc-uk.org/registrants/6083294"
-      ]
-    },
-    
-    // --- THE NEW MASTER HUB SERVICES ARRAY ---
-    "availableService": [
-      {
-        "@type": "MedicalTherapy",
-        "name": "Erectile Dysfunction Treatment",
-        "alternateName": "P-Shot & Shockwave Therapy",
-        "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
-        "description": "Doctor-led restorative treatments for ED including Li-ESWT and PRP (P-Shot).",
-        "relevantSpecialty": "Urologic"
-      },
-      {
-        "@type": "MedicalTherapy",
-        "name": "Shockwave Therapy for ED",
-        "alternateName": "Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT)",
-        "url": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
-        "description": "Non-surgical acoustic wave therapy to improve blood flow, vascular health, and natural erectile function.",
-        "relevantSpecialty": "Urologic"
-      },
-      {
-        "@type": "MedicalTherapy",
-        "name": "Women's Sexual Wellness",
-        "alternateName": "O-Shot",
-        "url": "https://www.healing-prp.co.uk/o-shot",
-        "description": "Regenerative PRP treatments for female sexual health and rejuvenation.",
-        "relevantSpecialty": "Urologic"
-      },
-      {
-        "@type": "MedicalTherapy",
-        "name": "PRP & HA Joint Injections",
-        "alternateName": "Hyaluronic Acid & Ostenil Injections",
-        "url": "https://www.healing-prp.co.uk/joint-injections",
-        "description": "Non-surgical PRP, Hyaluronic Acid (HA), and steroid injections for arthritis and sports injuries.",
-        "relevantSpecialty": "Orthopedic"
-      },
-      {
-        "@type": "MedicalTherapy",
-        "name": "PRP Hair Restoration",
-        "url": "https://www.healing-prp.co.uk/hair-restoration",
-        "description": "Advanced PRP and Exosome therapy to stimulate natural hair regrowth.",
-        "relevantSpecialty": "Dermatologic"
-      },
-      {
-        "@type": "MedicalTherapy",
-        "name": "Facial Aesthetics",
-        "alternateName": "Vampire Facial & Polynucleotides",
-        "url": "https://www.healing-prp.co.uk/facial-aesthetics",
-        "description": "Natural skin rejuvenation using Platelet-Rich Plasma, Polynucleotides, and Botox.",
-        "relevantSpecialty": "Dermatologic"
-      }
-    ],
-    "priceRange": "££",
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "19:00"
+        "@type": "Person",
+        "@id": "https://www.healing-prp.co.uk/#dr",
+        "name": "Dr Syed Abdi",
+        "jobTitle": "Medical Director",
+        "telephone": "+44 7990 364147",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "GMC Reference Number",
+          "value": "6083294"
+        },
+        "url": "https://www.healing-prp.co.uk/our-doctor",
+        "sameAs": [
+          "https://www.gmc-uk.org/registrants/6083294"
+        ],
+        "worksFor": {
+          "@id": "https://www.healing-prp.co.uk/#clinic"
+        }
       }
     ]
   };
@@ -201,6 +219,20 @@ export default function Home() {
     })),
   };
 
+  // --- BREADCRUMB SCHEMA (Root / Home) ---
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.healing-prp.co.uk/"
+      }
+    ]
+  };
+
   return (
     <>
       {/* 1. Inject Medical Entity Schema safely */}
@@ -213,6 +245,12 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
+      />
+
+      {/* 3. Inject Breadcrumb Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
       />
 
       <main className="flex flex-col w-full">
