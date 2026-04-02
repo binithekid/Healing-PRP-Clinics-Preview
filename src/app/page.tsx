@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import EDFeatureBlock from "@/components/EDFeatureBlock";
 import ServiceOverview from "@/components/ServiceOverview";
@@ -9,11 +8,7 @@ import DynamicFAQ from "@/components/DynamicFAQ";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
 import Footer from "@/components/Footer";
-
-// Lazy-load the third-party review widget to protect Core Web Vitals (CWV)
-const TrustReviews = dynamic(() => import("@/components/TrustReviews"), {
-  ssr: false,
-});
+import TrustReviews from "@/components/TrustReviews";
 
 // Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
 // Next.js recommends replacing "<" with "\u003c".
