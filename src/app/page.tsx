@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import EDFeatureBlock from "@/components/EDFeatureBlock";
@@ -11,63 +10,25 @@ import LocationSection from "@/components/LocationSection";
 import Footer from "@/components/Footer";
 import TrustReviews from "@/components/TrustReviews";
 
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+// Next.js recommends replacing "<" with "\u003c".
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
+
 // --- SEO OPTIMISATION ---
 export const metadata: Metadata = {
   title: {
     absolute: "Doctor-Led PRP, P-Shot & ED Clinic St Albans | Healing-PRP",
   },
   description:
-    "Doctor-led private medical clinic in St Albans. Expert doctor-led treatments for Erectile Dysfunction (ED), P-Shot®, Joint Injections, and PRP Hair Restoration.",
-  keywords: [
-    // --- CORE CLINIC & REGENERATIVE MEDICINE ---
-    "PRP Clinic St Albans",
-    "Private Doctor Hertfordshire",
-    "Regenerative Medicine Hertfordshire",
-    "Private medical clinic St Albans",
-    "Regenerative Medicine UK",
-    
-    // --- MEN'S HEALTH, ED, PE & PEYRONIE'S ---
-    "Erectile Dysfunction Treatment St Albans",
-    "ED clinic Hertfordshire",
-    "Erectile dysfunction help Harpenden",
-    "Premature ejaculation treatment Hertfordshire",
-    "PE treatment clinic St Albans",
-    "Peyronies disease treatment London",
-    "Curved penis treatment St Albans",
-    "P-Shot London",
-    "P-Shot Watford",
-    "Shockwave therapy for ED Hertfordshire",
-    "Sexual health clinic St Albans",
-    "Mens health clinic Watford",
-    
-    // --- WOMEN'S HEALTH ---
-    "O-Shot treatment Radlett",
-    "O-Shot St Albans",
-    "Womens sexual wellness clinic Hertfordshire",
-    
-    // --- HAIR RESTORATION ---
-    "Hair Loss Treatment St Albans",
-    "PRP hair therapy Hertfordshire",
-    "Hair restoration clinic Watford",
-    
-    // --- JOINT PAIN & ORTHOPAEDICS ---
-    "Joint Injection Clinic Hemel Hempstead",
-    "Arthritis injections Berkhamsted",
-    "Sports injury clinic Watford",
-    "PRP for joint pain St Albans",
-    "HA joint injections Hertfordshire",
-    "Ostenil injections St Albans",
-    
-    // --- SKIN & AESTHETICS ---
-    "Vampire Facial Hertfordshire",
-    "Polynucleotides St Albans",
-    "Exosome therapy London"
-  ],
+    "Doctor-led private medical clinic in St Albans. Expert doctor-led treatments for Erectile Dysfunction (ED), P-Shot, Joint Injections, and PRP Hair Restoration.",
   openGraph: {
     title: "Doctor-Led PRP, P-Shot & ED Clinic St Albans | Healing-PRP",
     description:
       "Expert private care for Hair Restoration, Sexual Wellness & Pain Relief. Specialists in P-Shot and PRP therapy.",
     url: "https://www.healing-prp.co.uk",
+    siteName: "Healing-PRP Clinics",
+    locale: "en_GB",
+    type: "website",
     images: [
       {
         url: "/hero_img.png",
@@ -77,6 +38,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Doctor-Led PRP, P-Shot & ED Clinic St Albans | Healing-PRP",
+    description: "Expert private care for Hair Restoration, Sexual Wellness & Pain Relief. Specialists in P-Shot and PRP therapy.",
+    images: ["/hero_img.png"],
+  },
   alternates: {
     canonical: "https://www.healing-prp.co.uk",
   },
@@ -85,24 +52,24 @@ export const metadata: Metadata = {
 // --- SEO RICH FAQS (St Albans Focus) ---
 const faqs = [
   {
-    question: "Do I need a GP referral before booking treatment?",
-    answer: "No. You can book a private, confidential consultation directly with Healing-PRP Clinics without a GP referral for erectile dysfunction treatment, intimate health concerns, PRP treatments, and other doctor-led services."
+    question: "Do I need a GP referral before booking at your St Albans clinic?",
+    answer: "No. You can book a private, confidential consultation directly with Healing-PRP Clinics in St Albans without a GP referral. We offer doctor-led assessment and treatment for erectile dysfunction, intimate health concerns, PRP treatments, and other non-surgical services."
   },
   {
     question: "Who carries out the consultation and treatment at Healing-PRP Clinics?",
-    answer: "All consultations and treatments at Healing-PRP Clinics are doctor-led and carried out by Dr Syed Abdi, GMC-registered Medical Director of the clinic."
+    answer: "All consultations and treatments are carried out by Dr Syed Abdi, GMC-registered doctor and Medical Director of Healing-PRP Clinics."
   },
   {
-    question: "Do you offer treatment for erectile dysfunction and men’s intimate health concerns?",
-    answer: "Yes. We provide doctor-led assessment and treatment for erectile dysfunction, Peyronie’s disease, premature ejaculation, and other men’s intimate health concerns, depending on individual suitability."
+    question: "Do you offer treatment for erectile dysfunction and men’s intimate health concerns in St Albans?",
+    answer: "Yes. We provide doctor-led assessment and treatment for erectile dysfunction, premature ejaculation, Peyronie’s disease, and other men’s intimate health concerns at our St Albans clinic, depending on individual suitability."
   },
   {
     question: "What happens during the first consultation for erectile dysfunction or intimate health treatment?",
-    answer: "Your first consultation includes a confidential discussion about your symptoms, medical history, goals, and possible contributing factors. Where appropriate, treatment options such as PRP-based treatment, shockwave therapy, or personalised medical care will be explained."
+    answer: "Your first consultation includes a private discussion about your symptoms, medical history, goals, and possible contributing factors. Where appropriate, suitable treatment options such as PRP-based treatment, shockwave therapy, personalised medication, or other doctor-led care will be explained."
   },
   {
     question: "Is treatment at Healing-PRP Clinics confidential?",
-    answer: "Yes. Healing-PRP Clinics provides discreet, private, doctor-led care for sensitive concerns including erectile dysfunction, intimate health, PRP treatment, and related regenerative medicine services."
+    answer: "Yes. Healing-PRP Clinics provides discreet, private, and confidential doctor-led care for sensitive concerns including erectile dysfunction, intimate health issues, PRP treatments, and related regenerative medicine services."
   }
 ];
 
@@ -138,7 +105,7 @@ export default function Home() {
         "name": "Hertfordshire"
       }
     ],
-    "medicalSpecialty": ["RegenerativeMedicine", "Urology", "Orthopaedic", "Dermatology"],
+    "medicalSpecialty": ["RegenerativeMedicine", "Urologic", "Orthopedic", "Dermatologic"],
     "medicalDirector": {
       "@type": "Physician",
       "name": "Dr Syed Abdi",
@@ -162,7 +129,7 @@ export default function Home() {
         "alternateName": "P-Shot & Shockwave Therapy",
         "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
         "description": "Doctor-led restorative treatments for ED including Li-ESWT and PRP (P-Shot).",
-        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+        "relevantSpecialty": "Urologic"
       },
       {
         "@type": "MedicalTherapy",
@@ -170,7 +137,7 @@ export default function Home() {
         "alternateName": "Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT)",
         "url": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
         "description": "Non-surgical acoustic wave therapy to improve blood flow, vascular health, and natural erectile function.",
-        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+        "relevantSpecialty": "Urologic"
       },
       {
         "@type": "MedicalTherapy",
@@ -178,7 +145,7 @@ export default function Home() {
         "alternateName": "O-Shot",
         "url": "https://www.healing-prp.co.uk/o-shot",
         "description": "Regenerative PRP treatments for female sexual health and rejuvenation.",
-        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Urology" }
+        "relevantSpecialty": "Urologic"
       },
       {
         "@type": "MedicalTherapy",
@@ -186,14 +153,14 @@ export default function Home() {
         "alternateName": "Hyaluronic Acid & Ostenil Injections",
         "url": "https://www.healing-prp.co.uk/joint-injections",
         "description": "Non-surgical PRP, Hyaluronic Acid (HA), and steroid injections for arthritis and sports injuries.",
-        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Orthopaedic" }
+        "relevantSpecialty": "Orthopedic"
       },
       {
         "@type": "MedicalTherapy",
         "name": "PRP Hair Restoration",
         "url": "https://www.healing-prp.co.uk/hair-restoration",
         "description": "Advanced PRP and Exosome therapy to stimulate natural hair regrowth.",
-        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Dermatology" }
+        "relevantSpecialty": "Dermatologic"
       },
       {
         "@type": "MedicalTherapy",
@@ -201,7 +168,7 @@ export default function Home() {
         "alternateName": "Vampire Facial & Polynucleotides",
         "url": "https://www.healing-prp.co.uk/facial-aesthetics",
         "description": "Natural skin rejuvenation using Platelet-Rich Plasma, Polynucleotides, and Botox.",
-        "relevantSpecialty": { "@type": "MedicalSpecialty", "name": "Dermatology" }
+        "relevantSpecialty": "Dermatologic"
       }
     ],
     "priceRange": "££",
@@ -230,16 +197,16 @@ export default function Home() {
 
   return (
     <>
-      <Script
-        id="local-business-schema"
+      {/* 1. Inject Medical Entity Schema safely */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
 
-      <Script
-        id="home-faq-schema-stalbans"
+      {/* 2. Inject FAQ Schema safely */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
 
       <main className="flex flex-col w-full">
