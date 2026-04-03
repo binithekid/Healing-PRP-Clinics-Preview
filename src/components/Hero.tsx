@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image"; // <-- ADDED: Next.js Image component
 import { usePathname } from "next/navigation";
 import { 
   FaEnvelope, 
@@ -54,11 +55,26 @@ export default function Hero() {
   return (
     <div className="relative w-full mt-0 pt-0 h-[85vh] lg:h-[72vh] min-h-[600px] overflow-hidden flex flex-col items-center justify-end bg-[#0A1128]">
       
-      {/* Background Section - bg-[center_15%] reveals the doctors' heads */}
+      {/* --- UPGRADED BACKGROUND SECTION --- */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-cover bg-top bg-no-repeat sm:hidden" style={{ backgroundImage: "url('/mobilehero.webp')" }}></div>
-        <div className="absolute inset-0 bg-cover bg-[center_15%] bg-no-repeat hidden sm:block" style={{ backgroundImage: "url('/herobg.webp')" }}></div>
-        <div className="absolute inset-0 bg-black/60"></div>
+        {/* Mobile Image */}
+        <Image 
+          src="/mobilehero.webp" 
+          alt="Healing-PRP Clinics Mobile" 
+          fill 
+          priority // Forces instant download for Googlebot & CWV
+          className="object-cover object-top sm:hidden" 
+        />
+        {/* Desktop Image */}
+        <Image 
+          src="/herobg.webp" 
+          alt="Healing-PRP Clinics" 
+          fill 
+          priority // Forces instant download for Googlebot & CWV
+          className="object-cover object-[center_15%] hidden sm:block" 
+        />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
       </div>
 
       {/* Main Content - pb-32 md:pb-40 pushes content lower, creating a cinematic feel */}
