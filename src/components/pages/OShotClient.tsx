@@ -203,7 +203,7 @@ export default function OShotClient({
             variants={fadeUpVariants}
             className="text-3xl md:text-4xl lg:text-5xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
           >
-            The O-Shot® (Orgasm Shot) <br />
+            The O-Shot (Orgasm Shot) <br />
             <span className="text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2 inline-block">in {locationName}</span>
           </motion.h1>
           
