@@ -8,19 +8,19 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 export const metadata: Metadata = {
   // Absolute ignores parent layout templates to ensure precise local matching
   title: {
-    absolute: "P-Shot Birmingham | Doctor-Led Priapus Shot in Edgbaston",
+    absolute: "P-Shot Birmingham | Priapus Shot & ED Treatment in Edgbaston",
   },
   
   description:
-     "Private doctor-led P-Shot consultation in Edgbaston, Birmingham. PRP-based treatment options discussed for suitable men. Consultation required. Outcomes vary.",
+     "Private doctor-led P-Shot (Priapus Shot) consultation in Edgbaston, Birmingham. PRP-based treatment to support Erectile Dysfunction (ED) and sexual performance. Outcomes vary.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/p-shot",
   },
   
   openGraph: {
-    title: "Doctor-Led P-Shot Treatment (Priapus Shot) | Birmingham",
-    description: "Doctor-led consultation for P-Shot options in Birmingham. Suitability is assessed individually and outcomes vary.",
+    title: "P-Shot Treatment Birmingham | ED Clinic Edgbaston",
+    description: "Doctor-led consultation for P-Shot options in Birmingham. Autologous PRP therapy for Erectile Dysfunction (ED) and sexual performance.",
     url: "https://www.healing-prp.co.uk/birmingham/p-shot",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Doctor-Led P-Shot Treatment (Priapus Shot) | Birmingham",
-    description: "Private, doctor-led consultation for PRP-based P-Shot options in Edgbaston, Birmingham. Suitability assessed; outcomes vary.",
+    title: "P-Shot Treatment Birmingham | ED Clinic Edgbaston",
+    description: "Private, doctor-led consultation for PRP-based P-Shot options in Edgbaston, Birmingham to support Erectile Dysfunction (ED).",
     images: ["/p-shot-consultation.webp"],
   },
 };
@@ -74,7 +74,7 @@ const pShotSchemaBirmingham = {
       "@id": "https://www.healing-prp.co.uk/birmingham/p-shot#clinic",
       "name": "Healing-PRP Clinics",
       "url": "https://www.healing-prp.co.uk/birmingham/p-shot",
-      "description": "Doctor-led private clinic in Edgbaston, Birmingham providing PRP-based P-Shot consultation and related services.",
+      "description": "Doctor-led private clinic in Edgbaston, Birmingham providing PRP-based P-Shot consultation and related services for Erectile Dysfunction.",
       "telephone": "+447990364147",
       "address": {
         "@type": "PostalAddress",
@@ -130,12 +130,12 @@ const pShotSchemaBirmingham = {
       }
     },
     {
-      "@type": "MedicalTherapy",
+      "@type": ["MedicalTherapy", "MedicalProcedure"],
       "@id": "https://www.healing-prp.co.uk/birmingham/p-shot#therapy",
       "name": "P-Shot (Priapus Shot)",
-      "alternateName": ["Priapus Shot", "P-Shot", "Platelet Rich Plasma P-Shot"],
+      "alternateName": ["Priapus Shot", "P-Shot", "Platelet Rich Plasma P-Shot", "ED Injection"],
       "url": "https://www.healing-prp.co.uk/birmingham/p-shot",
-      "description": "Doctor-led consultation and PRP-based P-Shot procedure option in Birmingham. Suitability is assessed individually and outcomes vary.",
+      "description": "Doctor-led consultation and PRP-based P-Shot procedure option in Birmingham to support Erectile Dysfunction (ED) and tissue health.",
       "relevantSpecialty": "Urologic",
       "offers": {
         "@type": "Offer",
@@ -149,6 +149,7 @@ const pShotSchemaBirmingham = {
       "@type": "MedicalCondition",
       "@id": "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction#condition",
       "name": "Erectile Dysfunction",
+      "alternateName": ["ED", "Impotence"],
       "url": "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
       "possibleTreatment": [
         { 
