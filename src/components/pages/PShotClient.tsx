@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import {
@@ -15,8 +16,7 @@ import {
   FaExpandArrowsAlt,
   FaShieldAlt,
   FaArrowRight,
-  FaRegClock, 
-  FaLeaf,     
+  FaRegClock,     
   FaWalking,  
   FaUserMd,   
   FaMicroscope, 
@@ -24,7 +24,8 @@ import {
   FaGoogle,
   FaStar,
   FaLock,
-  FaChevronDown // <--- Added for FAQ Dropdown
+  FaChevronDown,
+  FaExclamationTriangle
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
@@ -40,7 +41,7 @@ type FaqType = {
 interface PShotProps {
   locationName?: string;
   servingAreas?: string;
-  faqs: FaqType[]; // <--- Added faqs array to props for SEO
+  faqs: FaqType[];
 }
 
 export default function PShotClient({
@@ -52,7 +53,7 @@ export default function PShotClient({
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [activeStep, setActiveStep] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showAllFaqs, setShowAllFaqs] = useState(false); // <--- Added FAQ toggle state
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   const isBirmingham = locationName === "Birmingham";
 
@@ -162,7 +163,6 @@ export default function PShotClient({
     },
   ];
 
-  // Slice FAQs based on state
   const displayedFaqs = showAllFaqs ? faqs : faqs.slice(0, 5);
 
   return (
@@ -174,11 +174,13 @@ export default function PShotClient({
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/60 z-10" /> 
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80 z-10" />
-          <img 
+          <Image 
             src="/ed-doctor-consultation.webp" 
             alt="P-Shot treatment consultation" 
-            className="absolute inset-0 w-full h-full object-cover"
-            onError={(e) => (e.currentTarget.src = "/ed-doctor-consultation.webp")}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
           />
         </div>
 
@@ -213,8 +215,10 @@ export default function PShotClient({
             variants={fadeUpVariants}
             className="mt-4 text-sm md:text-base text-blue-50/90 font-inter leading-relaxed max-w-2xl mx-auto mb-8 font-medium"
           >
-            A natural, non-surgical treatment designed to rejuvenate tissue, 
-            enhance performance, and improve vascular health using your body’s own healing factors.
+            {isBirmingham 
+              ? "The P-Shot (Priapus Shot) is a clinician-delivered PRP procedure offered at our Edgbaston clinic in Birmingham. It uses platelet-rich plasma prepared from your own blood and is designed to support tissue health and blood flow in selected patients. A consultation is required to assess suitability and discuss alternatives."
+              : "A doctor-led PRP-based procedure using your own platelet-rich plasma. It is discussed during consultation for suitable patients seeking non-surgical treatment options. A clinical consultation is required to assess suitability and discuss alternatives."
+            }
           </motion.p>
 
           <motion.div 
@@ -226,9 +230,10 @@ export default function PShotClient({
           >
             <button 
               onClick={handleAction}
+              aria-label="Book Consultation"
               className="px-6 py-3 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-xl shadow-[#4041d1]/20 active:scale-95 font-inter"
             >
-              <FaEnvelope className="w-4 h-4" /> Book Consultation
+              <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Book Consultation
             </button>
           </motion.div>
 
@@ -239,27 +244,32 @@ export default function PShotClient({
             variants={fadeUpVariants}
             className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-[#4041d1]/10 text-white rounded-full text-[10px] md:text-xs mt-8 font-bold uppercase tracking-widest font-inter shadow-lg border border-white/10 backdrop-blur-sm"
           >
-             <FaMapMarkerAlt className="text-white/80 mb-0.5" /> 
+             <FaMapMarkerAlt className="text-white/80 mb-0.5" aria-hidden="true" /> 
              <span>Serving: {servingAreas}</span>
           </motion.div>
         </div>
 
-        {/* 3. Hero Trust Badges (LOWER BORDER) */}
+        {/* 3. Hero Trust Badges */}
         <div className={`md:block absolute hidden bottom-0 left-0 right-0 bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="px-2 py-4 max-w-7xl mx-auto">
             <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
               
-              <a href="#reviews" onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
-              }} className="flex justify-center items-center group cursor-pointer px-2">
+              <a 
+                href="#reviews" 
+                aria-label="Scroll to 5 Star Google Reviews"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
+                }} 
+                className="flex justify-center items-center group cursor-pointer px-2"
+              >
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-[#4285F4] group-hover:scale-110 transition-transform shadow-md">
-                    <FaGoogle className="w-4 h-4" />
+                    <FaGoogle className="w-4 h-4" aria-hidden="true" />
                   </div>
                   <div className="flex flex-col items-start">
                     <div className="flex text-amber-400 text-[10px] mb-0.5">
-                      <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                      <FaStar aria-hidden="true" /><FaStar aria-hidden="true" /><FaStar aria-hidden="true" /><FaStar aria-hidden="true" /><FaStar aria-hidden="true" />
                     </div>
                     <span className="text-white text-[9px] font-bold tracking-widest uppercase opacity-90 group-hover:opacity-100 font-inter">
                       5.0 Patient Rating
@@ -295,7 +305,7 @@ export default function PShotClient({
               <div className="flex justify-center items-center px-2 opacity-90 hover:opacity-100 transition-opacity">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center text-slate-300 shadow-md border border-white/10">
-                    <FaLock className="w-3.5 h-3.5" />
+                    <FaLock className="w-3.5 h-3.5" aria-hidden="true" />
                   </div>
                   <div className="flex flex-col items-start">
                     <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Strictly 1:1</span>
@@ -346,7 +356,7 @@ export default function PShotClient({
                 <div
                   className={`w-14 h-14 rounded-2xl ${benefit.color} flex items-center justify-center mb-6 text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}
                 >
-                  <benefit.icon />
+                  <benefit.icon aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-raleway font-bold text-slate-900 mb-3 group-hover:text-[#4041d1] transition-colors">
                   {benefit.title}
@@ -360,7 +370,7 @@ export default function PShotClient({
         </div>
       </section>
 
-      {/* --- PROTOCOL SECTION (Updated with Quick Facts) --- */}
+      {/* --- PROTOCOL SECTION --- */}
       <section
         className="relative py-20 lg:py-28 bg-[#0A1128] overflow-hidden font-inter"
         style={{
@@ -397,7 +407,6 @@ export default function PShotClient({
           </motion.div>
 
           <div className="max-w-6xl mx-auto mt-12 relative">
-            {/* Steps Visualizer */}
             <div className="text-center mb-12">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -449,7 +458,7 @@ export default function PShotClient({
                             : "bg-white/10 text-slate-300 group-hover:text-[#4041d1] group-hover:scale-105"
                         }`}
                       >
-                        <IconComponent className="w-6 h-6" />
+                        <IconComponent className="w-6 h-6" aria-hidden="true" />
                       </div>
                       <h3
                         className={`font-raleway font-bold mb-3 text-lg transition-colors ${
@@ -471,7 +480,6 @@ export default function PShotClient({
               })}
             </motion.div>
 
-            {/* Quick Facts Grid */}
             <motion.div 
                initial={{ opacity: 0, y: 20 }}
                whileInView={{ opacity: 1, y: 0 }}
@@ -479,47 +487,38 @@ export default function PShotClient({
                transition={{ delay: 0.4 }}
                className="grid grid-cols-2 md:grid-cols-4 gap-4"
             >
-              {/* Card 1: Time */}
               <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors">
-                   <FaRegClock className="text-[#4041d1] text-xl mb-2" />
+                   <FaRegClock className="text-[#4041d1] text-xl mb-2" aria-hidden="true" />
                    <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Time</div>
                    <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">Approx. 60 Mins</div>
                    <div className="text-slate-500 text-[10px] font-medium">Includes consultation & prep</div>
               </div>
-
-              {/* Card 2: Comfort */}
               <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors">
-                   <FaShieldAlt className="text-[#4041d1] text-xl mb-2" />
+                   <FaShieldAlt className="text-[#4041d1] text-xl mb-2" aria-hidden="true" />
                    <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Comfort</div>
                    <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">Local Anaesthetic</div>
                    <div className="text-slate-500 text-[10px] font-medium">Well tolerated</div>
               </div>
-
-              {/* Card 3: Downtime */}
               <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors">
-                   <FaWalking className="text-[#4041d1] text-xl mb-2" />
+                   <FaWalking className="text-[#4041d1] text-xl mb-2" aria-hidden="true" />
                    <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Downtime</div>
                    <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">Little to None</div>
                    <div className="text-slate-500 text-[10px] font-medium">Resume daily activities</div>
               </div>
-
-              {/* Card 4: Method */}
               <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/[0.06] transition-colors">
-                   <FaUserMd className="text-[#4041d1] text-xl mb-2" />
+                   <FaUserMd className="text-[#4041d1] text-xl mb-2" aria-hidden="true" />
                    <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Treatment</div>
                    <div className="text-white font-raleway font-bold text-sm md:text-base mb-0.5">Autologous PRP</div>
                    <div className="text-slate-500 text-[10px] font-medium">Your own growth factors</div>
               </div>
             </motion.div>
-
           </div>
         </div>
       </section>
 
-      {/* --- NEW SECTION: EXO-P SHOT (ADVANCED OPTION) --- */}
+      {/* --- EXO-P SHOT SECTION --- */}
       <section className="py-24 bg-gradient-to-br from-[#f8f9ff] to-white relative overflow-hidden font-inter border-t border-slate-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-1.5 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-[#4041d1]/20">
               Advanced Option
@@ -533,20 +532,18 @@ export default function PShotClient({
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
-            {/* Left Column: Description */}
             <div className="space-y-8">
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 relative overflow-hidden group hover:border-[#4041d1]/20 transition-colors">
                 <div className="absolute top-0 left-0 w-1 h-full bg-[#4041d1]"></div>
                 <h3 className="text-2xl font-raleway font-bold text-slate-900 mb-4 flex items-center gap-3">
-                  <FaMicroscope className="text-[#4041d1] text-2xl" />
+                  <FaMicroscope className="text-[#4041d1] text-2xl" aria-hidden="true" />
                   Regenerative Signalling
                 </h3>
                 <p className="text-slate-600 text-base leading-relaxed">
                   This approach uses your own platelet-rich plasma (PRP), enhanced with exosome-derived regenerative signalling, and is designed to support tissue repair and blood flow.
                 </p>
                 <div className="mt-6 flex items-center gap-2 text-xs font-bold text-[#4041d1] uppercase tracking-widest">
-                  <FaMapMarkerAlt /> Available in St Albans & Birmingham
+                  <FaMapMarkerAlt aria-hidden="true" /> Available in St Albans & Birmingham
                 </div>
               </div>
 
@@ -560,7 +557,7 @@ export default function PShotClient({
                     "Not a stem cell treatment"
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm text-slate-700 font-medium bg-slate-50 px-4 py-3 rounded-xl border border-slate-100">
-                      <FaCheckCircle className="text-[#4041d1] shrink-0" /> {item}
+                      <FaCheckCircle className="text-[#4041d1] shrink-0" aria-hidden="true" /> {item}
                     </div>
                   ))}
                 </div>
@@ -570,16 +567,13 @@ export default function PShotClient({
               </div>
             </div>
 
-            {/* Right Column: How it Works (Visual) */}
             <div className="bg-slate-900 text-white p-8 md:p-10 rounded-[2.5rem] relative overflow-hidden">
-              {/* Background Glow */}
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#4041d1]/30 rounded-full blur-3xl"></div>
               <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-slate-900 to-transparent z-10"></div>
 
               <h3 className="text-2xl font-raleway font-bold mb-8 relative z-20">How Does it Work?</h3>
               
               <div className="space-y-8 relative z-20">
-                {/* Step 1 */}
                 <div className="flex gap-5">
                   <div className="flex flex-col items-center">
                     <div className="w-10 h-10 rounded-full bg-[#4041d1] flex items-center justify-center shrink-0 shadow-lg shadow-[#4041d1]/30">
@@ -595,7 +589,6 @@ export default function PShotClient({
                   </div>
                 </div>
 
-                {/* Step 2 */}
                 <div className="flex gap-5">
                   <div className="flex flex-col items-center">
                     <div className="w-10 h-10 rounded-full bg-[#5a5bfa] flex items-center justify-center shrink-0 shadow-lg shadow-[#5a5bfa]/30">
@@ -611,11 +604,10 @@ export default function PShotClient({
                   </div>
                 </div>
 
-                {/* Step 3 */}
                 <div className="flex gap-5">
                   <div className="flex flex-col items-center">
                     <div className="w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center shrink-0 shadow-lg">
-                      <FaVial className="text-sm" />
+                      <FaVial className="text-sm" aria-hidden="true" />
                     </div>
                   </div>
                   <div>
@@ -627,33 +619,30 @@ export default function PShotClient({
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* --- WHAT P-SHOT CAN DO (Reality Check) --- */}
+      {/* --- REALISTIC EXPECTATIONS & MEDICAL TRANSPARENCY (UPDATED) --- */}
       <section className="py-24 bg-white font-inter">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h3 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
+            <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
               The P-Shot: Realistic Expectations
-            </h3>
+            </h2>
             <p className="text-slate-600 text-lg leading-relaxed mb-6">
-              Platelet-Rich Plasma (PRP) therapy is a powerful regenerative tool, 
-              but it is important to understand what it can achieve. We believe in 
-              honest, medical-led advice so you can make an informed decision.
+              Platelet-Rich Plasma (PRP) therapy is a regenerative tool, but it is important to understand what it can achieve. We believe in honest, medical-led advice so you can make an informed decision.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {/* COLUMN 1: Benefits */}
             <div className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100">
-              <h4 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
+              <h3 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
                 <span className="w-2 h-8 bg-[#4041d1] rounded-full block"></span>
                 What the P-Shot aims to deliver
-              </h4>
+              </h3>
               <ul className="space-y-4">
                 {[
                   "Enhanced sensitivity and nerve responsiveness",
@@ -662,7 +651,7 @@ export default function PShotClient({
                   "Support for straightening (Peyronie’s Disease)",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0" />
+                    <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0" aria-hidden="true" />
                     <span className="text-slate-700 text-sm md:text-base font-medium leading-relaxed">
                       {item}
                     </span>
@@ -678,20 +667,20 @@ export default function PShotClient({
 
             {/* COLUMN 2: Limitations */}
             <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200">
-              <h4 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
+              <h3 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
                 <span className="w-2 h-8 bg-slate-400 rounded-full block"></span>
                 Important limitations
-              </h4>
+              </h3>
               <ul className="space-y-4">
                 {[
-                   "It is not a surgical enlargement procedure (length gains are variable)",
-                   "Results depend on age, health, and hormone levels",
+                   "It is not a surgical enlargement procedure",
+                   "Results depend heavily on age, health, and hormone levels",
                    "It cannot fix severe structural damage instantly",
-                   "A medical consultation is required to assess suitability",
+                   "A medical consultation is strictly required to assess suitability",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="mt-1 shrink-0 text-slate-400">
-                       <FaCheckCircle className="text-slate-400" /> 
+                       <FaCheckCircle className="text-slate-400" aria-hidden="true" /> 
                     </div>
                     <span className="text-slate-700 text-sm md:text-base font-medium leading-relaxed">
                       {item}
@@ -706,90 +695,129 @@ export default function PShotClient({
               </div>
             </div>
           </div>
+
+          {/* Evidence & Limitations Block (YMYL / E-E-A-T) */}
+          <div className="bg-amber-50/50 p-8 rounded-3xl border border-amber-100">
+            <h3 className="text-xl font-raleway font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <FaExclamationTriangle className="text-amber-500" aria-hidden="true" />
+              Clinical Evidence & Safety Transparency
+            </h3>
+            <div className="space-y-4">
+              <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+                <strong>Evidence and limitations:</strong> While PRP is widely used in other medical contexts, clinical evidence for PRP injections specifically for erectile dysfunction and &quot;P-Shot&quot; outcomes is currently limited, and it is considered by many professional bodies to be an experimental treatment. Results can vary significantly between patients.
+              </p>
+              <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+                <strong>Safety profile:</strong> The procedure uses your own blood (autologous PRP) and is performed with strict sterile techniques. While downtime is minimal, short-term side effects can include temporary bruising, swelling, and localized discomfort. Results are not guaranteed. We will discuss what is known, what is uncertain, and realistic outcomes during your comprehensive consultation.
+              </p>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* --- DOCTOR & PRIVACY SECTION (Text-Only + Buttons) --- */}
-      <section className="py-24 bg-slate-50 font-inter">
+      {/* --- DOCTOR & PRIVACY SECTION (UPDATED) --- */}
+      <section className="py-24 bg-slate-50 font-inter border-t border-slate-200">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           
           <div className="inline-block px-4 py-1.5 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-bold uppercase tracking-wider mb-6">
             Patient Privacy Priority
           </div>
-          <h3 className="text-3xl md:text-5xl font-raleway font-bold text-slate-900 mb-8 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-raleway font-bold text-slate-900 mb-8 leading-tight">
             Discreet, Private & Professional
-          </h3>
+          </h2>
 
-          <div className="prose prose-lg prose-slate mx-auto mb-12">
+          <div className="prose prose-lg prose-slate mx-auto mb-16">
             <p className="text-slate-600 font-inter text-lg leading-relaxed mb-6">
               We understand that discussing sexual health can feel uncomfortable. 
               Our clinics provide a discreet, confidential, and judgement-free 
               medical environment, where concerns are addressed professionally 
               and with respect.
             </p>
-            <p className="text-slate-600 font-inter text-lg leading-relaxed">
-              Whether you are seeking performance enhancement or restoration, 
-              seeking assessment allows you to explore your options with clarity 
-              and medical guidance — without pressure to proceed unless it feels 
-              right for you.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-left">
-            {[
-              "Direct access to GMC-Registered Doctors",
-              "No GP referral required",
-              "Same-day appointments may be available",
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center md:items-start md:text-left hover:border-[#4041d1]/30 transition-colors"
-              >
-                <FaCheckCircle className="text-[#4041d1] text-2xl mb-3" /> 
-                <span className="text-slate-800 font-bold font-inter text-sm md:text-base">
-                  {item}
-                </span>
-              </div>
-            ))}
+          {/* What Happens at Your Consultation */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-raleway font-bold text-slate-900 mb-8">What Happens At Your Consultation?</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#4041d1]/30 transition-colors">
+                  <div className="w-10 h-10 bg-blue-50 text-[#4041d1] rounded-full flex items-center justify-center font-bold mb-4">1</div>
+                  <h4 className="font-bold text-slate-900 mb-2">Medical History Review</h4>
+                  <p className="text-sm text-slate-600">A confidential discussion with our GMC-registered doctor about your symptoms, lifestyle, and previous treatments.</p>
+               </div>
+               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#4041d1]/30 transition-colors">
+                  <div className="w-10 h-10 bg-blue-50 text-[#4041d1] rounded-full flex items-center justify-center font-bold mb-4">2</div>
+                  <h4 className="font-bold text-slate-900 mb-2">Suitability Assessment</h4>
+                  <p className="text-sm text-slate-600">We evaluate if PRP is the right pathway, or if alternatives like Shockwave Therapy or medication would be more effective.</p>
+               </div>
+               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#4041d1]/30 transition-colors">
+                  <div className="w-10 h-10 bg-blue-50 text-[#4041d1] rounded-full flex items-center justify-center font-bold mb-4">3</div>
+                  <h4 className="font-bold text-slate-900 mb-2">Personalised Plan</h4>
+                  <p className="text-sm text-slate-600">If suitable, we map out a transparent treatment timeline, expected outcomes, and exact costs before proceeding.</p>
+               </div>
+            </div>
           </div>
 
-          <div className="max-w-3xl mx-auto p-6 bg-white rounded-2xl border border-slate-200 mb-10 shadow-sm">
-            <p className="text-slate-600 text-sm leading-relaxed font-medium">
-              Our pricing is intentionally kept accessible compared with many
-              London clinics, while maintaining the same medical-grade
-              equipment, evidence-based protocols, and experienced doctor-led care.
-            </p>
-          </div>
+          {/* Localised Location Block */}
+          {isBirmingham && (
+            <div className="max-w-3xl mx-auto mb-16 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-left flex items-start gap-4">
+               <FaMapMarkerAlt className="text-[#4041d1] text-3xl shrink-0 mt-1" aria-hidden="true" />
+               <div>
+                 <h3 className="font-bold font-raleway text-slate-900 mb-2 text-lg">Visiting our Edgbaston Clinic</h3>
+                 <p className="text-slate-600 text-sm leading-relaxed">
+                   Located at 38 Harborne Rd, Edgbaston, our Birmingham clinic offers a highly discreet environment with private consultation rooms. We provide clear directions and parking instructions prior to your appointment to ensure your arrival is stress-free and entirely confidential.
+                 </p>
+               </div>
+            </div>
+          )}
 
-          {/* --- ACTION BUTTONS ROW --- */}
+          {/* Action Buttons */}
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 w-full">
-            
-            {/* 1. Book Consultation (Main Action) */}
             <button
               onClick={handleAction}
+              aria-label="Speak To A Specialist"
               className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg shadow-[#4041d1]/20 active:scale-95"
             >
-              <FaEnvelope className="w-4 h-4" /> Speak To A Specialist
+              <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Speak To A Specialist
             </button>
-
-            {/* 2. Prices Link */}
-            <Link
-              href={isBirmingham ? "/birmingham/prices" : "/prices"}
-              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg"
-            >
-              View Treatment Prices
-            </Link>
-            
-            {/* 3. FAQ Link */}
             <Link
               href={isBirmingham ? "/birmingham/faq" : "/faq"}
-              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-blue-50 bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2"
+              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-slate-200 text-slate-700 hover:border-[#4041d1] hover:text-[#4041d1] bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2"
             >
               View Clinic FAQs
             </Link>
-            
           </div>
 
+        </div>
+      </section>
+
+      {/* --- PRICING PREVIEW --- */}
+      <section className="py-12 bg-slate-50 font-inter border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="bg-white rounded-3xl border border-[#4041d1]/20 p-8 md:p-12 shadow-lg shadow-[#4041d1]/5 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -z-10"></div>
+            <h2 className="text-2xl md:text-3xl font-raleway font-bold text-slate-900 mb-4 relative z-10">Transparent Pricing</h2>
+            <p className="text-slate-600 mb-8 max-w-2xl mx-auto relative z-10">Clear, premium pricing aligned to clinician time, safety, and aftercare. Exact plans are confirmed at consultation.</p>
+            
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-8 relative z-10">
+               <div className="bg-slate-50 px-8 py-6 rounded-2xl border border-slate-100 w-full md:w-auto hover:border-[#4041d1]/30 transition-colors">
+                  <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-2">Standard P-Shot</div>
+                  <div className="text-3xl font-bold text-[#4041d1] mb-2">From £995</div>
+                  <div className="text-sm text-slate-500 font-medium bg-white px-3 py-1.5 rounded-lg border border-slate-100 inline-block">
+                    Course of 3: £2,700
+                  </div>
+               </div>
+               <div className="bg-slate-50 px-8 py-6 rounded-2xl border border-slate-100 w-full md:w-auto hover:border-[#4041d1]/30 transition-colors">
+                  <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-2">EXO P-Shot</div>
+                  <div className="text-3xl font-bold text-[#4041d1] mb-2">From £1,500</div>
+                  <div className="text-sm text-slate-500 font-medium bg-white px-3 py-1.5 rounded-lg border border-slate-100 inline-block">
+                    Advanced regenerative protocol
+                  </div>
+               </div>
+            </div>
+            <Link aria-label="View Full Price List" href={isBirmingham ? "/birmingham/prices" : "/prices"} className="text-sm font-bold text-[#4041d1] hover:text-[#2a2bb8] inline-flex items-center gap-2 transition-colors relative z-10 group">
+              View Full Price List <FaArrowRight className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -797,6 +825,9 @@ export default function PShotClient({
       <section id="faqs" className="py-24 bg-white font-inter">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-inter font-bold uppercase tracking-wider mb-4">
+              Frequently Asked Questions
+            </div>
             <h2 className="text-3xl md:text-5xl font-raleway font-bold text-slate-900 mb-6">
               Common Questions
             </h2>
@@ -807,24 +838,29 @@ export default function PShotClient({
                 key={index}
                 className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
               >
-                <button
-                  className="w-full p-6 md:p-8 text-left flex items-center justify-between hover:bg-slate-50 transition-colors duration-300"
-                  onClick={() => toggleFAQ(index)}
-                >
-                  <h3 className="font-raleway font-bold text-slate-900 pr-8 text-base md:text-lg">
-                    {faq.question}
-                  </h3>
-                  <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${openFAQIndex === index ? 'bg-[#4041d1] text-white' : 'bg-[#4041d1]/10 text-[#4041d1]'}`}>
-                    {openFAQIndex === index ? (
-                      <FaMinus className="w-4 h-4" />
-                    ) : (
-                      <FaPlus className="w-4 h-4" />
-                    )}
-                  </div>
-                </button>
+                <h3 className="w-full">
+                  <button
+                    className="w-full p-6 md:p-8 text-left flex items-center justify-between hover:bg-slate-50 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#4041d1] focus:ring-inset"
+                    onClick={() => toggleFAQ(index)}
+                    aria-expanded={openFAQIndex === index}
+                    aria-controls={`faq-answer-${index}`}
+                  >
+                    <span className="font-raleway font-bold text-slate-900 pr-8 text-base md:text-lg">
+                      {faq.question}
+                    </span>
+                    <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${openFAQIndex === index ? 'bg-[#4041d1] text-white' : 'bg-[#4041d1]/10 text-[#4041d1]'}`}>
+                      {openFAQIndex === index ? (
+                        <FaMinus className="w-4 h-4" aria-hidden="true" />
+                      ) : (
+                        <FaPlus className="w-4 h-4" aria-hidden="true" />
+                      )}
+                    </div>
+                  </button>
+                </h3>
                 <AnimatePresence>
                   {openFAQIndex === index && (
                     <motion.div
+                      id={`faq-answer-${index}`}
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
@@ -842,15 +878,15 @@ export default function PShotClient({
             ))}
           </div>
 
-          {/* --- ADDED: TOGGLE ALL FAQS BUTTON --- */}
           {faqs.length > 5 && (
             <div className="mt-8 text-center">
               <button
                 onClick={() => setShowAllFaqs(!showAllFaqs)}
+                aria-label={showAllFaqs ? "Show Less FAQs" : "View All FAQs"}
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm cursor-pointer border-2 border-[#4041d1] text-[#4041d1] hover:bg-[#4041d1]/5 rounded-xl font-inter font-bold transition-all duration-300"
               >
                 {showAllFaqs ? "Show Less FAQs" : "View All FAQs"}
-                <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${showAllFaqs ? "rotate-180" : ""}`} />
+                <FaChevronDown className={`w-3 h-3 transition-transform duration-300 ${showAllFaqs ? "rotate-180" : ""}`} aria-hidden="true" />
               </button>
             </div>
           )}
@@ -871,7 +907,6 @@ export default function PShotClient({
 
       <ContactCTASection />
       
-      {/* Location Section Added Here */}
       <LocationSection />
 
       <Footer />
