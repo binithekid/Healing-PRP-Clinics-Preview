@@ -7,39 +7,31 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
+    absolute: "P-Shot St Albans | Priapus Shot & ED Treatment in Hertfordshire",
   },
   
   description:
-    "Doctor-led P-Shot (Priapus Shot) PRP treatment in St Albans, serving Hertfordshire & Luton. Discreet consultation, realistic expectations, clear pricing. Book today.",
+    "Private doctor-led P-Shot (Priapus Shot) consultation in St Albans. PRP-based treatment to support Erectile Dysfunction (ED) and sexual performance. Serving Hertfordshire & Luton.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/p-shot",
   },
   
   openGraph: {
-    title: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
-    description: "Doctor-led consultation for P-Shot options in St Albans. Suitability is assessed individually and outcomes vary.",
+    title: "P-Shot St Albans | Priapus Shot & ED Treatment in Hertfordshire",
+    description: "Doctor-led consultation for P-Shot options in St Albans. Autologous PRP therapy to support Erectile Dysfunction (ED) and sexual performance.",
     url: "https://www.healing-prp.co.uk/p-shot",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
-    images: [
-      {
-        // Relying on metadataBase in root layout to resolve this to an absolute URL
-        url: "/p-shot-consultation.webp",
-        width: 1200,
-        height: 630,
-        alt: "P-Shot Treatment Consultation St Albans",
-      },
-    ],
+    images:,
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
-    description: "Doctor-led consultation for P-Shot options in St Albans. Suitability assessed; outcomes vary.",
-    images: ["/p-shot-consultation.webp"],
+    title: "P-Shot St Albans | Priapus Shot & ED Treatment in Hertfordshire",
+    description: "Private, doctor-led consultation for PRP-based P-Shot options in St Albans to support Erectile Dysfunction (ED). Outcomes vary.",
+    images:,
   },
 };
 
@@ -84,7 +76,7 @@ const pShotSchema = {
       "@id": "https://www.healing-prp.co.uk/p-shot#clinic",
       "name": "Healing-PRP Clinics St Albans",
       "url": "https://www.healing-prp.co.uk/p-shot",
-      "description": "Doctor-led private clinic in St Albans providing PRP-based P-Shot consultation and related services.",
+      "description": "Doctor-led private clinic in St Albans providing PRP-based P-Shot consultation and related services for Erectile Dysfunction.",
       "telephone": "+447990364147",
       "address": {
         "@type": "PostalAddress",
@@ -109,16 +101,8 @@ const pShotSchema = {
         }
       ],
       "medicalSpecialty": "Urologic",
-      "availableService": [
-        {
-          "@id": "https://www.healing-prp.co.uk/p-shot#therapy"
-        }
-      ],
-      "employee": [
-        { 
-          "@id": "https://www.healing-prp.co.uk/p-shot#dr" 
-        }
-      ]
+      "availableService":,
+      "employee":
     },
     {
       "@type": "Person",
@@ -132,20 +116,18 @@ const pShotSchema = {
         "propertyID": "GMC Reference Number",
         "value": "6083294"
       },
-      "sameAs": [
-        "https://www.gmc-uk.org/registrants/6083294"
-      ],
+      "sameAs":,
       "worksFor": { 
         "@id": "https://www.healing-prp.co.uk/p-shot#clinic" 
       }
     },
     {
-      "@type": "MedicalTherapy",
+      "@type":,
       "@id": "https://www.healing-prp.co.uk/p-shot#therapy",
       "name": "P-Shot (Priapus Shot)",
-      "alternateName": ["Priapus Shot", "P-Shot", "Platelet Rich Plasma P-Shot"],
+      "alternateName":,
       "url": "https://www.healing-prp.co.uk/p-shot",
-      "description": "Doctor-led consultation and PRP-based P-Shot procedure option in St Albans. Suitability is assessed individually and outcomes vary.",
+      "description": "Doctor-led consultation and PRP-based P-Shot procedure option in St Albans to support Erectile Dysfunction (ED) and tissue health.",
       "relevantSpecialty": "Urologic",
       "offers": {
         "@type": "Offer",
@@ -159,23 +141,16 @@ const pShotSchema = {
       "@type": "MedicalCondition",
       "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#condition",
       "name": "Erectile Dysfunction",
+      "alternateName":,
       "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
-      "possibleTreatment": [
-        { 
-          "@id": "https://www.healing-prp.co.uk/p-shot#therapy" 
-        }
-      ]
+      "possibleTreatment":
     },
     {
       "@type": "MedicalCondition",
       "@id": "https://www.healing-prp.co.uk/peyronies-disease#condition",
       "name": "Peyronie's Disease",
       "url": "https://www.healing-prp.co.uk/peyronies-disease",
-      "possibleTreatment": [
-        { 
-          "@id": "https://www.healing-prp.co.uk/p-shot#therapy" 
-        }
-      ]
+      "possibleTreatment":
     }
   ]
 };
