@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 // Add a prop so we can pass different URLs to this component based on the clinic location
@@ -10,19 +10,40 @@ interface TrustReviewsProps {
 
 export default function TrustReviews({ widgetUrl }: TrustReviewsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
-    // Clear the container first to prevent duplicate widgets if React renders twice
-    if (containerRef.current) {
-      containerRef.current.innerHTML = ""; 
-      
-      const script = document.createElement("script");
-      script.src = widgetUrl; // Uses the dynamic URL passed from the page
-      script.defer = true;
-      script.async = true;
-      containerRef.current.appendChild(script);
-    }
-  }, [widgetUrl]);
+    // If we don't have the ref, or we've already loaded the script, do nothing.
+    if (!containerRef.current || hasLoaded) return;
+
+    // Create an observer to watch when the user scrolls near this section
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          // The user is near the reviews! Inject the script now.
+          if (containerRef.current) {
+            containerRef.current.innerHTML = ""; 
+            
+            const script = document.createElement("script");
+            script.src = widgetUrl;
+            script.defer = true;
+            script.async = true;
+            containerRef.current.appendChild(script);
+          }
+          
+          setHasLoaded(true); // Mark as loaded so it doesn't run again
+          observer.disconnect(); // Stop observing to save memory
+        }
+      },
+      { rootMargin: "300px" } // Start loading 300px BEFORE it comes into view so it's ready when they scroll
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [widgetUrl, hasLoaded]);
 
   return (
     <section className="py-20 bg-white border-t border-slate-100 font-inter">
