@@ -7,31 +7,39 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "P-Shot St Albans | Priapus Shot & ED Treatment in Hertfordshire",
+    absolute: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
   },
   
   description:
-    "Private doctor-led P-Shot (Priapus Shot) consultation in St Albans. PRP-based treatment to support Erectile Dysfunction (ED) and sexual performance. Serving Hertfordshire & Luton.",
+    "Doctor-led P-Shot (Priapus Shot) PRP treatment in St Albans, serving Hertfordshire & Luton. Discreet consultation, realistic expectations, clear pricing. Book today.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/p-shot",
   },
   
   openGraph: {
-    title: "P-Shot St Albans | Priapus Shot & ED Treatment in Hertfordshire",
-    description: "Doctor-led consultation for P-Shot options in St Albans. Autologous PRP therapy to support Erectile Dysfunction (ED) and sexual performance.",
+    title: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
+    description: "Doctor-led consultation for P-Shot options in St Albans. Suitability is assessed individually and outcomes vary.",
     url: "https://www.healing-prp.co.uk/p-shot",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
-    images:,
+    images: [
+      {
+        // Relying on metadataBase in root layout to resolve this to an absolute URL
+        url: "/p-shot-consultation.webp",
+        width: 1200,
+        height: 630,
+        alt: "P-Shot Treatment Consultation St Albans",
+      },
+    ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "P-Shot St Albans | Priapus Shot & ED Treatment in Hertfordshire",
-    description: "Private, doctor-led consultation for PRP-based P-Shot options in St Albans to support Erectile Dysfunction (ED). Outcomes vary.",
-    images:,
+    title: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
+    description: "Doctor-led consultation for P-Shot options in St Albans. Suitability assessed; outcomes vary.",
+    images: ["/p-shot-consultation.webp"],
   },
 };
 
@@ -76,7 +84,7 @@ const pShotSchema = {
       "@id": "https://www.healing-prp.co.uk/p-shot#clinic",
       "name": "Healing-PRP Clinics St Albans",
       "url": "https://www.healing-prp.co.uk/p-shot",
-      "description": "Doctor-led private clinic in St Albans providing PRP-based P-Shot consultation and related services for Erectile Dysfunction.",
+      "description": "Doctor-led private clinic in St Albans providing PRP-based P-Shot consultation and related services.",
       "telephone": "+447990364147",
       "address": {
         "@type": "PostalAddress",
@@ -86,10 +94,31 @@ const pShotSchema = {
         "postalCode": "AL1 3JJ",
         "addressCountry": "GB"
       },
-      "areaServed":,
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "St Albans"
+        },
+        {
+          "@type": "City",
+          "name": "Luton"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Hertfordshire"
+        }
+      ],
       "medicalSpecialty": "Urologic",
-      "availableService":,
-      "employee":
+      "availableService": [
+        {
+          "@id": "https://www.healing-prp.co.uk/p-shot#therapy"
+        }
+      ],
+      "employee": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/p-shot#dr" 
+        }
+      ]
     },
     {
       "@type": "Person",
@@ -103,18 +132,20 @@ const pShotSchema = {
         "propertyID": "GMC Reference Number",
         "value": "6083294"
       },
-      "sameAs":,
+      "sameAs": [
+        "https://www.gmc-uk.org/registrants/6083294"
+      ],
       "worksFor": { 
         "@id": "https://www.healing-prp.co.uk/p-shot#clinic" 
       }
     },
     {
-      "@type":,
+      "@type": "MedicalTherapy",
       "@id": "https://www.healing-prp.co.uk/p-shot#therapy",
       "name": "P-Shot (Priapus Shot)",
-      "alternateName":,
+      "alternateName": ["Priapus Shot", "P-Shot", "Platelet Rich Plasma P-Shot"],
       "url": "https://www.healing-prp.co.uk/p-shot",
-      "description": "Doctor-led consultation and PRP-based P-Shot procedure option in St Albans to support Erectile Dysfunction (ED) and tissue health.",
+      "description": "Doctor-led consultation and PRP-based P-Shot procedure option in St Albans. Suitability is assessed individually and outcomes vary.",
       "relevantSpecialty": "Urologic",
       "offers": {
         "@type": "Offer",
@@ -128,16 +159,23 @@ const pShotSchema = {
       "@type": "MedicalCondition",
       "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#condition",
       "name": "Erectile Dysfunction",
-      "alternateName":,
       "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
-      "possibleTreatment":
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/p-shot#therapy" 
+        }
+      ]
     },
     {
       "@type": "MedicalCondition",
       "@id": "https://www.healing-prp.co.uk/peyronies-disease#condition",
       "name": "Peyronie's Disease",
       "url": "https://www.healing-prp.co.uk/peyronies-disease",
-      "possibleTreatment":
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/p-shot#therapy" 
+        }
+      ]
     }
   ]
 };
