@@ -7,11 +7,11 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "P-Shot (PRP) in St Albans | Doctor-Led Priapus Shot",
+    absolute: "P-Shot St Albans | Priapus Shot & ED Treatment in Hertfordshire",
   },
   
   description:
-    "Doctor-led P-Shot (Priapus Shot) PRP treatment in St Albans, serving Hertfordshire & Luton. Discreet consultation, realistic expectations, clear pricing. Book today.",
+    "Private doctor-led P-Shot (Priapus Shot) consultation in St Albans. PRP-based treatment to support Erectile Dysfunction (ED) and sexual performance. Serving Hertfordshire & Luton.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/p-shot",
