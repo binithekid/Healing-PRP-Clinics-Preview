@@ -31,6 +31,7 @@ import Footer from "@/components/Footer";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
 import TrustReviews from "@/components/TrustReviews";
+import OnlineAssessmentModal from "@/components/OnlineAssessmentModal";
 
 // --- INTERFACE FOR DYNAMIC PROPS ---
 type FaqType = {
@@ -54,6 +55,7 @@ export default function PShotClient({
   const [activeStep, setActiveStep] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
+  const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
 
   const isBirmingham = locationName === "Birmingham";
 
@@ -181,6 +183,7 @@ export default function PShotClient({
             sizes="100vw"
             className="object-cover"
             priority
+            fetchPriority="high"
           />
         </div>
 
@@ -216,8 +219,8 @@ export default function PShotClient({
             className="mt-4 text-sm md:text-base text-blue-50/90 font-inter leading-relaxed max-w-2xl mx-auto mb-8 font-medium"
           >
             {isBirmingham 
-              ? "The P-Shot (Priapus Shot) is a clinician-delivered PRP procedure offered at our Edgbaston clinic in Birmingham. It uses platelet-rich plasma prepared from your own blood and is designed to support tissue health and blood flow in selected patients. A consultation is required to assess suitability and discuss alternatives."
-              : "A doctor-led PRP-based procedure using your own platelet-rich plasma. It is discussed during consultation for suitable patients seeking non-surgical treatment options. A clinical consultation is required to assess suitability and discuss alternatives."
+              ? "The P-Shot (Priapus Shot) is a clinician-delivered PRP procedure offered at our Edgbaston clinic in Birmingham. Designed as an advanced Erectile Dysfunction (ED) treatment, it uses platelet-rich plasma prepared from your own blood to support sexual performance, tissue health, and penile blood flow. A consultation is required to assess suitability and discuss alternatives."
+              : "A doctor-led PRP-based procedure using your own platelet-rich plasma. Designed as an advanced Erectile Dysfunction (ED) option, it is discussed during consultation for suitable patients seeking non-surgical treatments to support sexual performance. A clinical consultation is required to assess suitability and discuss alternatives."
             }
           </motion.p>
 
@@ -226,12 +229,19 @@ export default function PShotClient({
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
+            <button 
+              onClick={() => setIsAssessmentOpen(true)}
+              className="px-8 py-4 w-full sm:w-auto flex items-center justify-center text-sm cursor-pointer bg-white text-[#4041d1] hover:bg-slate-50 rounded-xl font-bold transition-all duration-300 gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] active:scale-95 font-inter"
+            >
+              Free Confidential Online Assessment
+            </button>
+
             <button 
               onClick={handleAction}
               aria-label="Book Consultation"
-              className="px-6 py-3 flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-xl shadow-[#4041d1]/20 active:scale-95 font-inter"
+              className="px-8 py-4 w-full sm:w-auto flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-[0_0_20px_rgba(64,65,209,0.3)] hover:shadow-[0_0_25px_rgba(64,65,209,0.5)] active:scale-95 font-inter"
             >
               <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Book Consultation
             </button>
@@ -317,7 +327,6 @@ export default function PShotClient({
             </div>
           </div>
         </div>
-        
       </div>
 
       {/* --- BENEFITS SECTION --- */}
@@ -370,9 +379,101 @@ export default function PShotClient({
         </div>
       </section>
 
+      {/* --- REALISTIC EXPECTATIONS & MEDICAL TRANSPARENCY --- */}
+      <section className="py-24 bg-white font-inter border-t border-slate-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
+              The P-Shot: Realistic Expectations
+            </h2>
+            <p className="text-slate-600 text-lg leading-relaxed mb-6">
+              Platelet-Rich Plasma (PRP) therapy is a regenerative tool, but it is important to understand what it can achieve. We believe in honest, medical-led advice so you can make an informed decision.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            {/* COLUMN 1: Benefits Detail */}
+            <div className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100">
+              <h3 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
+                <span className="w-2 h-8 bg-[#4041d1] rounded-full block"></span>
+                What the P-Shot aims to deliver
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  "Enhanced sensitivity and nerve responsiveness",
+                  "Firmer, more sustainable erections",
+                  "Potential improvement in girth and blood flow",
+                  "Support for straightening (Peyronie’s Disease)",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0" aria-hidden="true" />
+                    <span className="text-slate-700 text-sm md:text-base font-medium leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 pt-6 border-t border-blue-100/50">
+                 <p className="text-xs text-slate-500 italic">
+                   * Results are based on tissue regeneration, which is a gradual process. Best results are typically seen 8-12 weeks after treatment.
+                 </p>
+              </div>
+            </div>
+
+            {/* COLUMN 2: Limitations */}
+            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200">
+              <h3 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
+                <span className="w-2 h-8 bg-slate-400 rounded-full block"></span>
+                Important limitations
+              </h3>
+              <ul className="space-y-4">
+                {[
+                   "It is not a surgical enlargement procedure",
+                   "Results depend heavily on age, health, and hormone levels",
+                   "It cannot fix severe structural damage instantly",
+                   "A medical consultation is strictly required to assess suitability",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="mt-1 shrink-0 text-slate-400">
+                       <FaCheckCircle className="text-slate-400" aria-hidden="true" /> 
+                    </div>
+                    <span className="text-slate-700 text-sm md:text-base font-medium leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 pt-6 border-t border-slate-200">
+                 <p className="text-xs text-slate-500 italic">
+                   The P-Shot is often most effective when combined with a healthy lifestyle or other therapies like Shockwave.
+                 </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Evidence & Limitations Block */}
+          <div className="bg-amber-50/50 p-8 rounded-3xl border border-amber-100">
+            <h3 className="text-xl font-raleway font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <FaExclamationTriangle className="text-amber-500" aria-hidden="true" />
+              Clinical Evidence & Safety Transparency
+            </h3>
+            <div className="space-y-4">
+              <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+                <strong>Evidence and limitations:</strong> While PRP is widely used in other medical contexts, clinical evidence for PRP injections specifically for erectile dysfunction and &quot;P-Shot&quot; outcomes is currently limited, and it is considered by many professional bodies to be an experimental treatment. Results can vary significantly between patients.
+              </p>
+              <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+                <strong>Safety profile:</strong> The procedure uses your own blood (autologous PRP) and is performed with strict sterile techniques. While downtime is minimal, short-term side effects can include temporary bruising, swelling, and localized discomfort. Results are not guaranteed. We will discuss what is known, what is uncertain, and realistic outcomes during your comprehensive consultation.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       {/* --- PROTOCOL SECTION --- */}
       <section
-        className="relative py-20 lg:py-28 bg-[#0A1128] overflow-hidden font-inter"
+        className="relative py-20 lg:py-28 bg-[#0A1128] overflow-hidden font-inter border-y border-[#1a2342]"
         style={{
           backgroundImage:
             "radial-gradient(circle at 10% 10%, rgba(64, 65, 209, 0.15) 0%, transparent 40%)",
@@ -516,8 +617,83 @@ export default function PShotClient({
         </div>
       </section>
 
+      {/* --- DOCTOR & PRIVACY SECTION --- */}
+      <section className="py-24 bg-slate-50 font-inter">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          
+          <div className="inline-block px-4 py-1.5 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+            Patient Privacy Priority
+          </div>
+          <h2 className="text-3xl md:text-5xl font-raleway font-bold text-slate-900 mb-8 leading-tight">
+            Discreet, Private & Professional
+          </h2>
+
+          <div className="prose prose-lg prose-slate mx-auto mb-16">
+            <p className="text-slate-600 font-inter text-lg leading-relaxed mb-6">
+              We understand that discussing sexual health can feel uncomfortable. 
+              Our clinics provide a discreet, confidential, and judgement-free 
+              medical environment, where concerns are addressed professionally 
+              and with respect.
+            </p>
+          </div>
+
+          {/* What Happens at Your Consultation */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-raleway font-bold text-slate-900 mb-8">What Happens At Your Consultation?</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#4041d1]/30 transition-colors">
+                  <div className="w-10 h-10 bg-blue-50 text-[#4041d1] rounded-full flex items-center justify-center font-bold mb-4">1</div>
+                  <h4 className="font-bold text-slate-900 mb-2">Medical History Review</h4>
+                  <p className="text-sm text-slate-600">A confidential discussion with our GMC-registered doctor about your symptoms, lifestyle, and previous treatments.</p>
+               </div>
+               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#4041d1]/30 transition-colors">
+                  <div className="w-10 h-10 bg-blue-50 text-[#4041d1] rounded-full flex items-center justify-center font-bold mb-4">2</div>
+                  <h4 className="font-bold text-slate-900 mb-2">Suitability Assessment</h4>
+                  <p className="text-sm text-slate-600">We evaluate if PRP is the right pathway, or if alternatives like Shockwave Therapy or medication would be more effective.</p>
+               </div>
+               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#4041d1]/30 transition-colors">
+                  <div className="w-10 h-10 bg-blue-50 text-[#4041d1] rounded-full flex items-center justify-center font-bold mb-4">3</div>
+                  <h4 className="font-bold text-slate-900 mb-2">Personalised Plan</h4>
+                  <p className="text-sm text-slate-600">If suitable, we map out a transparent treatment timeline, expected outcomes, and exact costs before proceeding.</p>
+               </div>
+            </div>
+          </div>
+
+          {/* Localised Location Block */}
+          {isBirmingham && (
+            <div className="max-w-3xl mx-auto mb-16 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-left flex items-start gap-4">
+               <FaMapMarkerAlt className="text-[#4041d1] text-3xl shrink-0 mt-1" aria-hidden="true" />
+               <div>
+                 <h3 className="font-bold font-raleway text-slate-900 mb-2 text-lg">Visiting our Edgbaston Clinic</h3>
+                 <p className="text-slate-600 text-sm leading-relaxed">
+                   Located at 38 Harborne Rd, Edgbaston, our Birmingham clinic offers a highly discreet environment with private consultation rooms. We provide clear directions and parking instructions prior to your appointment to ensure your arrival is stress-free and entirely confidential.
+                 </p>
+               </div>
+            </div>
+          )}
+
+          {/* Action Buttons */}
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4 w-full">
+            <button
+              onClick={handleAction}
+              aria-label="Speak To A Specialist"
+              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg shadow-[#4041d1]/20 active:scale-95"
+            >
+              <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Speak To A Specialist
+            </button>
+            <Link
+              href={isBirmingham ? "/birmingham/faq" : "/faq"}
+              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-slate-200 text-slate-700 hover:border-[#4041d1] hover:text-[#4041d1] bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2"
+            >
+              View Clinic FAQs
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
       {/* --- EXO-P SHOT SECTION --- */}
-      <section className="py-24 bg-gradient-to-br from-[#f8f9ff] to-white relative overflow-hidden font-inter border-t border-slate-100">
+      <section className="py-24 bg-gradient-to-br from-[#f8f9ff] to-white relative overflow-hidden font-inter border-y border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-1.5 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-[#4041d1]/20">
@@ -623,173 +799,6 @@ export default function PShotClient({
         </div>
       </section>
 
-      {/* --- REALISTIC EXPECTATIONS & MEDICAL TRANSPARENCY (UPDATED) --- */}
-      <section className="py-24 bg-white font-inter">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
-              The P-Shot: Realistic Expectations
-            </h2>
-            <p className="text-slate-600 text-lg leading-relaxed mb-6">
-              Platelet-Rich Plasma (PRP) therapy is a regenerative tool, but it is important to understand what it can achieve. We believe in honest, medical-led advice so you can make an informed decision.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            {/* COLUMN 1: Benefits */}
-            <div className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100">
-              <h3 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
-                <span className="w-2 h-8 bg-[#4041d1] rounded-full block"></span>
-                What the P-Shot aims to deliver
-              </h3>
-              <ul className="space-y-4">
-                {[
-                  "Enhanced sensitivity and nerve responsiveness",
-                  "Firmer, more sustainable erections",
-                  "Potential improvement in girth and blood flow",
-                  "Support for straightening (Peyronie’s Disease)",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0" aria-hidden="true" />
-                    <span className="text-slate-700 text-sm md:text-base font-medium leading-relaxed">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 pt-6 border-t border-blue-100/50">
-                 <p className="text-xs text-slate-500 italic">
-                   * Results are based on tissue regeneration, which is a gradual process. Best results are typically seen 8-12 weeks after treatment.
-                 </p>
-              </div>
-            </div>
-
-            {/* COLUMN 2: Limitations */}
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200">
-              <h3 className="text-xl font-raleway font-bold text-slate-900 mb-6 flex items-center gap-2">
-                <span className="w-2 h-8 bg-slate-400 rounded-full block"></span>
-                Important limitations
-              </h3>
-              <ul className="space-y-4">
-                {[
-                   "It is not a surgical enlargement procedure",
-                   "Results depend heavily on age, health, and hormone levels",
-                   "It cannot fix severe structural damage instantly",
-                   "A medical consultation is strictly required to assess suitability",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="mt-1 shrink-0 text-slate-400">
-                       <FaCheckCircle className="text-slate-400" aria-hidden="true" /> 
-                    </div>
-                    <span className="text-slate-700 text-sm md:text-base font-medium leading-relaxed">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 pt-6 border-t border-slate-200">
-                 <p className="text-xs text-slate-500 italic">
-                   The P-Shot is often most effective when combined with a healthy lifestyle or other therapies like Shockwave.
-                 </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Evidence & Limitations Block (YMYL / E-E-A-T) */}
-          <div className="bg-amber-50/50 p-8 rounded-3xl border border-amber-100">
-            <h3 className="text-xl font-raleway font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <FaExclamationTriangle className="text-amber-500" aria-hidden="true" />
-              Clinical Evidence & Safety Transparency
-            </h3>
-            <div className="space-y-4">
-              <p className="text-slate-700 text-sm md:text-base leading-relaxed">
-                <strong>Evidence and limitations:</strong> While PRP is widely used in other medical contexts, clinical evidence for PRP injections specifically for erectile dysfunction and &quot;P-Shot&quot; outcomes is currently limited, and it is considered by many professional bodies to be an experimental treatment. Results can vary significantly between patients.
-              </p>
-              <p className="text-slate-700 text-sm md:text-base leading-relaxed">
-                <strong>Safety profile:</strong> The procedure uses your own blood (autologous PRP) and is performed with strict sterile techniques. While downtime is minimal, short-term side effects can include temporary bruising, swelling, and localized discomfort. Results are not guaranteed. We will discuss what is known, what is uncertain, and realistic outcomes during your comprehensive consultation.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* --- DOCTOR & PRIVACY SECTION (UPDATED) --- */}
-      <section className="py-24 bg-slate-50 font-inter border-t border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          
-          <div className="inline-block px-4 py-1.5 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-bold uppercase tracking-wider mb-6">
-            Patient Privacy Priority
-          </div>
-          <h2 className="text-3xl md:text-5xl font-raleway font-bold text-slate-900 mb-8 leading-tight">
-            Discreet, Private & Professional
-          </h2>
-
-          <div className="prose prose-lg prose-slate mx-auto mb-16">
-            <p className="text-slate-600 font-inter text-lg leading-relaxed mb-6">
-              We understand that discussing sexual health can feel uncomfortable. 
-              Our clinics provide a discreet, confidential, and judgement-free 
-              medical environment, where concerns are addressed professionally 
-              and with respect.
-            </p>
-          </div>
-
-          {/* What Happens at Your Consultation */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-raleway font-bold text-slate-900 mb-8">What Happens At Your Consultation?</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#4041d1]/30 transition-colors">
-                  <div className="w-10 h-10 bg-blue-50 text-[#4041d1] rounded-full flex items-center justify-center font-bold mb-4">1</div>
-                  <h4 className="font-bold text-slate-900 mb-2">Medical History Review</h4>
-                  <p className="text-sm text-slate-600">A confidential discussion with our GMC-registered doctor about your symptoms, lifestyle, and previous treatments.</p>
-               </div>
-               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#4041d1]/30 transition-colors">
-                  <div className="w-10 h-10 bg-blue-50 text-[#4041d1] rounded-full flex items-center justify-center font-bold mb-4">2</div>
-                  <h4 className="font-bold text-slate-900 mb-2">Suitability Assessment</h4>
-                  <p className="text-sm text-slate-600">We evaluate if PRP is the right pathway, or if alternatives like Shockwave Therapy or medication would be more effective.</p>
-               </div>
-               <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#4041d1]/30 transition-colors">
-                  <div className="w-10 h-10 bg-blue-50 text-[#4041d1] rounded-full flex items-center justify-center font-bold mb-4">3</div>
-                  <h4 className="font-bold text-slate-900 mb-2">Personalised Plan</h4>
-                  <p className="text-sm text-slate-600">If suitable, we map out a transparent treatment timeline, expected outcomes, and exact costs before proceeding.</p>
-               </div>
-            </div>
-          </div>
-
-          {/* Localised Location Block */}
-          {isBirmingham && (
-            <div className="max-w-3xl mx-auto mb-16 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-left flex items-start gap-4">
-               <FaMapMarkerAlt className="text-[#4041d1] text-3xl shrink-0 mt-1" aria-hidden="true" />
-               <div>
-                 <h3 className="font-bold font-raleway text-slate-900 mb-2 text-lg">Visiting our Edgbaston Clinic</h3>
-                 <p className="text-slate-600 text-sm leading-relaxed">
-                   Located at 38 Harborne Rd, Edgbaston, our Birmingham clinic offers a highly discreet environment with private consultation rooms. We provide clear directions and parking instructions prior to your appointment to ensure your arrival is stress-free and entirely confidential.
-                 </p>
-               </div>
-            </div>
-          )}
-
-          {/* Action Buttons */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4 w-full">
-            <button
-              onClick={handleAction}
-              aria-label="Speak To A Specialist"
-              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg shadow-[#4041d1]/20 active:scale-95"
-            >
-              <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Speak To A Specialist
-            </button>
-            <Link
-              href={isBirmingham ? "/birmingham/faq" : "/faq"}
-              className="px-6 py-3 w-full md:w-max md:text-sm text-xs items-center justify-center cursor-pointer border-2 border-slate-200 text-slate-700 hover:border-[#4041d1] hover:text-[#4041d1] bg-white rounded-lg font-inter font-bold transition-all duration-300 inline-flex gap-2"
-            >
-              View Clinic FAQs
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
       {/* --- PRICING PREVIEW --- */}
       <section className="py-12 bg-slate-50 font-inter border-t border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -822,7 +831,7 @@ export default function PShotClient({
       </section>
 
       {/* --- FAQs --- */}
-      <section id="faqs" className="py-24 bg-white font-inter">
+      <section id="faqs" className="py-24 bg-white font-inter border-t border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-2 bg-[#4041d1]/10 text-[#4041d1] rounded-full text-xs font-inter font-bold uppercase tracking-wider mb-4">
@@ -910,6 +919,12 @@ export default function PShotClient({
       <LocationSection />
 
       <Footer />
+
+      {/* --- ASSESSMENT MODAL --- */}
+      <OnlineAssessmentModal 
+        isOpen={isAssessmentOpen} 
+        onClose={() => setIsAssessmentOpen(false)} 
+      />
     </>
   );
 }
