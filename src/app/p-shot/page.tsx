@@ -86,20 +86,7 @@ const pShotSchema = {
         "postalCode": "AL1 3JJ",
         "addressCountry": "GB"
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "St Albans"
-        },
-        {
-          "@type": "City",
-          "name": "Luton"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Hertfordshire"
-        }
-      ],
+      "areaServed":,
       "medicalSpecialty": "Urologic",
       "availableService":,
       "employee":
