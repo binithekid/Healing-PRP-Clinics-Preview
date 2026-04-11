@@ -108,7 +108,7 @@ const oShotSchemaBirmingham = {
           "name": "West Midlands"
         }
       ],
-      "medicalSpecialty": ["Women's Health"],
+      "medicalSpecialty": ["Gynecologic"],
       "availableService": [
         {
           "@id": "https://www.healing-prp.co.uk/birmingham/o-shot#therapy"
@@ -148,7 +148,7 @@ const oShotSchemaBirmingham = {
       "description": "Doctor-led consultation and PRP-based O-Shot procedure option in Birmingham to support female intimate health, natural lubrication, urinary control, and sexual sensitivity.",
       "relevantSpecialty": {
         "@type": "MedicalSpecialty",
-        "name": "Women's Health"
+        "name": "Gynecologic"
       },
       "offers": {
         "@type": "Offer",
