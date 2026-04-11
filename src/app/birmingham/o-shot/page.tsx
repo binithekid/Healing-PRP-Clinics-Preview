@@ -1,51 +1,26 @@
 import type { Metadata } from "next";
 import OShotClient from "@/components/pages/OShotClient";
-import Script from "next/script";
+
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+// Next.js recommends replacing "<" with "\u003c".
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
-  // 1. Perfectly compatible with your layout.tsx template!
-  // Next.js will output: "O-Shot® (Orgasm Shot) Treatment | Birmingham Clinic"
-  title: "Doctor-Led O-Shot (Orgasm Shot) Treatment",
+  // Absolute ignores parent layout templates to ensure precise local matching
+  title: {
+    absolute: "O-Shot Birmingham | Doctor-Led Orgasm Shot Clinic Edgbaston",
+  },
   
   description:
-    "Doctor-led O-Shot clinic in Birmingham. GMC-registered doctor offering PRP & Exo-O therapy for female intimate rejuvenation. Private clinic in Edgbaston.",
-  
-  keywords: [
-    // Core Service Keywords
-    "O-Shot Birmingham",
-    "Orgasm Shot Birmingham",
-    "Vaginal PRP injection Birmingham",
-    "Female intimate wellness Birmingham",
-    
-    // Advanced/New Options (Matches your new Exo-O section)
-    "Exo-O Shot Birmingham",
-    "Exosome vaginal therapy West Midlands",
-
-    // Specific Conditions
-    "Stress urinary incontinence treatment Birmingham",
-    "Female rejuvenation Birmingham",
-    "Natural vaginal dryness treatment Birmingham",
-
-    // Hyper-Local & Regional Locations
-    "O-Shot clinic Edgbaston",
-    "Private women's PRP clinic Solihull",
-    "Female sexual health Sutton Coldfield",
-    "Orgasm Shot West Midlands",
-    "O-Shot Wolverhampton",
-
-    // User Intent (Cost/Doctor)
-    "O-Shot cost Birmingham",
-    "GMC registered O-Shot doctor",
-    "Non-surgical female rejuvenation"
-  ],
+    "Doctor-led O-Shot (Orgasm Shot) clinic in Birmingham. GMC-registered doctor offering O-Shot therapy for female intimate rejuvenation and wellness.",
   
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/o-shot",
   },
   
   openGraph: {
-    title: "Doctor-Led O-Shot (Orgasm Shot) Treatment | Birmingham",
-    description: "Doctor-led O-Shot & Exo-O clinic in Birmingham. Advanced PRP therapy for female intimate wellness and rejuvenation.",
+    title: "O-Shot Treatment Birmingham | Orgasm Shot Clinic Edgbaston",
+    description: "Doctor-led O-Shot clinic in Birmingham. Advanced PRP therapy for female intimate wellness, urinary control, and rejuvenation.",
     url: "https://www.healing-prp.co.uk/birmingham/o-shot",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -59,25 +34,32 @@ export const metadata: Metadata = {
       },
     ],
   },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "O-Shot Treatment Birmingham | Orgasm Shot Clinic Edgbaston",
+    description: "Private, doctor-led consultation for PRP-based O-Shot therapy in Edgbaston, Birmingham.",
+    images: ["/o-shot-consultation.webp"],
+  },
 };
 
-// --- SEO RICH FAQS (Birmingham & West Midlands Focus) ---
+// --- UNIQUE SEO RICH FAQS (Birmingham & West Midlands Focus) ---
 const faqs = [
   {
     question: "What is the O-Shot and is it available at your Birmingham clinic?",
-    answer: "Yes, the official O-Shot (Orgasm Shot) is available at our private Edgbaston clinic. It is a doctor-led regenerative treatment for women that uses your own Platelet-Rich Plasma (PRP) to stimulate tissue repair, increase blood flow, and support enhanced sensitivity and natural lubrication.",
+    answer: "Yes, O-Shot treatment is available at our private Edgbaston clinic. It is a doctor-led regenerative treatment for women that uses your own Platelet-Rich Plasma (PRP) to stimulate tissue repair, increase blood flow, and support enhanced sensitivity and natural lubrication.",
   },
   {
     question: "Is the Orgasm Shot painful?",
-    answer: "We prioritise patient comfort at our West Midlands clinic. A highly effective local anaesthetic cream is applied to the intimate area before the procedure, meaning most women find the O-Shot virtually painless and highly tolerable.",
+    answer: "Patient comfort is a priority at Healing-PRP Clinics. A local anaesthetic cream is applied before treatment, and most women find the procedure very manageable and well tolerated, with only minimal discomfort.",
   },
   {
     question: "How long does the O-Shot procedure take?",
-    answer: "The entire appointment takes approximately 45 to 60 minutes. This includes a discreet medical consultation, blood draw, PRP preparation, and the treatment itself. You can return to your normal daily activities in Solihull, Sutton Coldfield, or central Birmingham immediately.",
+    answer: "The entire appointment takes approximately 45 to 60 minutes. This includes a blood draw, PRP preparation, and the treatment itself. You can return to your normal daily activities in Solihull, Sutton Coldfield, or central Birmingham immediately.",
   },
   {
     question: "What is the Exo-O Shot?",
-    answer: "The Exo-O Shot is an advanced option available at our Birmingham clinic. It combines your autologous PRP with exosome-derived regenerative signalling to further support cellular communication, tissue repair, and intimate wellness.",
+    answer: "The Exo-O Shot is an advanced option available at our Birmingham clinic. It uses PRP prepared from your own blood, including activated platelets, and is designed to offer a more enhanced regenerative approach to support tissue repair, sensitivity, and intimate wellness."
   },
   {
     question: "Can the O-Shot help with urinary incontinence?",
@@ -85,7 +67,7 @@ const faqs = [
   },
   {
     question: "How long do O-Shot results last?",
-    answer: "Results vary depending on your age, baseline hormonal health, and lifestyle. Many women experience sustained improvements in sensation and urinary control for 12 to 18 months. We often discuss maintenance protocols with our Birmingham patients to help maximise longevity.",
+    answer: "Results vary from person to person depending on factors such as age, hormonal health, baseline symptoms, and lifestyle. Many women report improvements in sensitivity, sexual function, or urinary symptoms lasting around 12 to 18 months. Some women may benefit from a course of up to three sessions for optimal results. We can also discuss maintenance treatment where appropriate to help support longevity."
   },
   {
     question: "Is a consultation required before getting the O-Shot in Birmingham?",
@@ -93,41 +75,136 @@ const faqs = [
   },
 ];
 
-// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Medical Therapy using @graph ---
+// --- UPGRADED JSON-LD SCHEMA: Compliant & Corrected ---
 const oShotSchemaBirmingham = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "MedicalClinic",
-      "name": "Healing-PRP Clinics Birmingham",
-      "description": "Doctor-led clinic in Edgbaston, Birmingham providing the official O-Shot® (Orgasm Shot) and advanced Exo-O female rejuvenation therapies.",
+      "@id": "https://www.healing-prp.co.uk/birmingham/o-shot#clinic",
+      "name": "Healing-PRP Clinics",
+      "url": "https://www.healing-prp.co.uk/birmingham/o-shot",
+      "description": "Doctor-led private clinic in Edgbaston, Birmingham providing O-Shot treatment.",
+      "telephone": "+447990364147",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "38 Harborne Rd",
         "addressLocality": "Birmingham",
         "addressRegion": "West Midlands",
-        "addressCountry": "UK"
+        "postalCode": "B15 3EB",
+        "addressCountry": "GB"
       },
-      "areaServed": {
-        "@type": "City",
-        "name": "Birmingham"
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Birmingham"
+        },
+        {
+          "@type": "City",
+          "name": "Edgbaston"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "West Midlands"
+        }
+      ],
+      "medicalSpecialty": ["Women's Health"],
+      "availableService": [
+        {
+          "@id": "https://www.healing-prp.co.uk/birmingham/o-shot#therapy"
+        }
+      ],
+      "employee": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/birmingham/o-shot#dr" 
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.healing-prp.co.uk/birmingham/o-shot#dr",
+      "name": "Dr Syed Abdi",
+      "jobTitle": "Medical Director",
+      "telephone": "+447990364147",
+      "url": "https://www.healing-prp.co.uk/our-doctor",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "GMC Reference Number",
+        "value": "6083294"
       },
-      "medicalSpecialty": ["Women's Health", "Gynecology", "Aesthetic Medicine"],
-      // --- E-E-A-T UPGRADE: Connecting You to the Birmingham Clinic ---
-      "medicalDirector": {
-        "@type": "Physician",
-        "name": "Dr Syed Abdi",
-        "url": "https://www.healing-prp.co.uk/our-doctor"
+      "sameAs": [
+        "https://www.gmc-uk.org/registrants/6083294"
+      ],
+      "worksFor": { 
+        "@id": "https://www.healing-prp.co.uk/birmingham/o-shot#clinic" 
       }
     },
     {
-      "@type": "MedicalTherapy",
-      "name": "O-Shot® (Orgasm Shot) & Exo-O Shot",
-      "alternateName": ["Platelet-Rich Plasma (PRP) Female Rejuvenation", "Exosome Vaginal Therapy", "Vaginal PRP Injection"],
-      "description": "Advanced autologous Platelet-Rich Plasma (PRP) and Exosome injection therapies designed to improve female intimate health, natural lubrication, urinary control, and sexual sensitivity in Birmingham.",
+      "@type": ["MedicalTherapy", "MedicalProcedure"],
+      "@id": "https://www.healing-prp.co.uk/birmingham/o-shot#therapy",
+      "name": "O-Shot (Orgasm Shot)",
+      "alternateName": ["Orgasm Shot", "O-Shot®", "Exo-O Shot", "Vaginal PRP Injection", "Platelet-Rich Plasma Female Rejuvenation"],
+      "url": "https://www.healing-prp.co.uk/birmingham/o-shot",
+      "description": "Doctor-led consultation and PRP-based O-Shot procedure option in Birmingham to support female intimate health, natural lubrication, urinary control, and sexual sensitivity.",
       "relevantSpecialty": {
         "@type": "MedicalSpecialty",
         "name": "Women's Health"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "GBP",
+        "price": "995",
+        "url": "https://www.healing-prp.co.uk/birmingham/prices",
+        "availability": "https://schema.org/InStock"
       }
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/birmingham/stress-urinary-incontinence#condition",
+      "name": "Stress Urinary Incontinence",
+      "alternateName": ["SUI", "Bladder Leakage"],
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/birmingham/o-shot#therapy" 
+        }
+      ]
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/birmingham/female-sexual-dysfunction#condition",
+      "name": "Female Sexual Dysfunction",
+      "alternateName": ["Vaginal Dryness", "Decreased Libido", "Dyspareunia"],
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/birmingham/o-shot#therapy" 
+        }
+      ]
+    }
+  ]
+};
+
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Birmingham Clinic",
+      "item": "https://www.healing-prp.co.uk/birmingham"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "O-Shot Treatment",
+      "item": "https://www.healing-prp.co.uk/birmingham/o-shot"
     }
   ]
 };
@@ -139,31 +216,35 @@ export default function BirminghamOShotPage() {
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
+      "name": faq.question,
+      "acceptedAnswer": {
         "@type": "Answer",
-        text: faq.answer,
+        "text": faq.answer,
       },
     })),
   };
 
   return (
     <main>
-      {/* 1. Inject Medical Entity Schema */}
-      <Script
-        id="oshot-schema-birmingham"
+      {/* 1. Inject Medical Entity Schema safely via plain script per Next.js best practices */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(oShotSchemaBirmingham) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(oShotSchemaBirmingham) }}
       />
       
-      {/* 2. Inject FAQ Schema */}
-      <Script
-        id="oshot-faq-schema-birmingham"
+      {/* 2. Inject Breadcrumb Schema safely */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
       />
 
-      {/* 3. Render Client Component */}
+      {/* 3. Inject FAQ Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
+      />
+
+      {/* 4. Render Client Component */}
       <OShotClient
         locationName="Birmingham"
         servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
