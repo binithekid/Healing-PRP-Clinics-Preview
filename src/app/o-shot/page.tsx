@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import OShotClient from "@/components/pages/OShotClient";
-import Script from "next/script";
+
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+// Next.js recommends replacing "<" with "\u003c".
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
+  // Absolute ignores parent layout templates to ensure precise local matching
   title: {
-      absolute: "Doctor-Led O-Shot & Female Rejuvenation | St Albans",
+    absolute: "O-Shot St Albans | Doctor-Led Orgasm Shot Clinic Hertfordshire",
   },
 
   description:
@@ -14,38 +18,28 @@ export const metadata: Metadata = {
     canonical: "https://www.healing-prp.co.uk/o-shot",
   },
 
-  keywords: [
-    // High-Priority Location Terms (Luton Focus)
-    "O-Shot treatment Luton",
-    "Female sexual rejuvenation Luton",
-    "Vaginal PRP injection Luton",
-    "Women's intimate wellness clinic Luton",
-    "Orgasm Shot Bedfordshire",
-
-    // Core Clinical Terms (St Albans/Herts Base)
-    "O-Shot treatment St Albans",
-    "Orgasm Shot Hertfordshire",
-    "Female sensitivity treatment",
-    "Vaginal rejuvenation St Albans",
-    "Female sexual wellness Watford",
-    
-    // Specific Conditions & Cost
-    "O-Shot cost UK",
-    "O-Shot consultation Hertfordshire", 
-    "Stress urinary incontinence treatment St Albans",
-    "Natural vaginal dryness treatment Harpenden",
-    "Women's health clinic North London", 
-    "St Albans aesthetic medicine"
-  ],
-
   openGraph: {
-    title: "Doctor-Led O-Shot & Female Rejuvenation | St Albans",
-    description:
-      "Enhance intimate wellness, sensitivity, and comfort with the O-Shot®. Doctor-led PRP therapy serving patients from Luton and St Albans.",
+    title: "O-Shot Treatment St Albans | Orgasm Shot Clinic Hertfordshire",
+    description: "Enhance intimate wellness, sensitivity, and comfort with the O-Shot. Doctor-led PRP therapy serving patients from Luton and St Albans.",
     url: "https://www.healing-prp.co.uk/o-shot",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
+    images: [
+      {
+        url: "/o-shot-consultation.webp",
+        width: 1200,
+        height: 630,
+        alt: "O-Shot Treatment Consultation St Albans",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "O-Shot Treatment St Albans | Orgasm Shot Clinic Hertfordshire",
+    description: "Private, doctor-led consultation for PRP-based O-Shot therapies in St Albans and Hertfordshire.",
+    images: ["/o-shot-consultation.webp"],
   },
 };
 
@@ -72,8 +66,8 @@ const faqs = [
     answer: "Yes, the regenerative properties of PRP can provide structural support to the anterior vaginal wall, which frequently helps alleviate symptoms of mild stress urinary incontinence. Our GMC-registered doctors provide comprehensive assessments in St Albans to determine if the O-Shot is right for you.",
   },
   {
-    question: "How long do the results of the O-Shot last?",
-    answer: "Results vary depending on your age, baseline hormonal health, and lifestyle. Many women experience sustained improvements in sensation, lubrication, and urinary control for up to 12 to 18 months. We often discuss maintenance protocols during your review.",
+    question: "How long do O-Shot results last?",
+    answer: "Results vary from person to person depending on age, hormonal health, baseline symptoms, and lifestyle factors. Many women experience improvements in sensitivity, sexual wellness, or urinary symptoms for around 12 to 18 months. At our Birmingham clinic, we can also discuss maintenance treatment where appropriate to help support longevity."
   },
   {
     question: "Is a consultation required before getting the O-Shot?",
@@ -81,38 +75,133 @@ const faqs = [
   },
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy ---
-const oShotSchema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Healing-PRP Clinics St Albans",
-    "description": "Doctor-led clinic providing the official O-Shot® (Orgasm Shot) and female intimate wellness therapies.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "St Albans",
-      "addressRegion": "Hertfordshire",
-      "addressCountry": "UK"
+// --- UPGRADED JSON-LD SCHEMA: Compliant & Corrected ---
+const oShotSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "@id": "https://www.healing-prp.co.uk/o-shot#clinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "url": "https://www.healing-prp.co.uk/o-shot",
+      "description": "Doctor-led private clinic in St Albans providing the official O-Shot® (Orgasm Shot) and female intimate wellness therapies.",
+      "telephone": "+447990364147",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "21 Victoria St",
+        "addressLocality": "St Albans",
+        "addressRegion": "Hertfordshire",
+        "postalCode": "AL1 3JJ",
+        "addressCountry": "GB"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "St Albans"
+        },
+        {
+          "@type": "City",
+          "name": "Luton"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Hertfordshire"
+        }
+      ],
+      "medicalSpecialty": ["Gynecologic"],
+      "availableService": [
+        {
+          "@id": "https://www.healing-prp.co.uk/o-shot#therapy"
+        }
+      ],
+      "employee": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/o-shot#dr" 
+        }
+      ]
     },
-    // The "Power Move" for Local SEO:
-    "areaServed": {
-      "@type": "City",
-      "name": "St Albans"
+    {
+      "@type": "Person",
+      "@id": "https://www.healing-prp.co.uk/o-shot#dr",
+      "name": "Dr Syed Abdi",
+      "jobTitle": "Medical Director",
+      "telephone": "+447990364147",
+      "url": "https://www.healing-prp.co.uk/our-doctor",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "GMC Reference Number",
+        "value": "6083294"
+      },
+      "sameAs": [
+        "https://www.gmc-uk.org/registrants/6083294"
+      ],
+      "worksFor": { 
+        "@id": "https://www.healing-prp.co.uk/o-shot#clinic" 
+      }
     },
-    "medicalSpecialty": ["Women's Health", "Gynecology", "Aesthetic Medicine"]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalTherapy",
-    "name": "O-Shot® (Orgasm Shot)",
-    "alternateName": ["Platelet-Rich Plasma (PRP) Female Rejuvenation", "Vaginal PRP Injection"],
-    "description": "An autologous Platelet-Rich Plasma (PRP) injection therapy designed to improve female intimate health, natural lubrication, urinary control, and sexual sensitivity.",
-    "relevantSpecialty": {
-      "@type": "MedicalSpecialty",
-      "name": "Women's Health"
+    {
+      "@type": ["MedicalTherapy", "MedicalProcedure"],
+      "@id": "https://www.healing-prp.co.uk/o-shot#therapy",
+      "name": "O-Shot (Orgasm Shot)",
+      "alternateName": ["Orgasm Shot", "O-Shot®", "Vaginal PRP Injection", "Platelet-Rich Plasma Female Rejuvenation"],
+      "url": "https://www.healing-prp.co.uk/o-shot",
+      "description": "Doctor-led consultation and PRP-based O-Shot procedure option in St Albans to support female intimate health, natural lubrication, urinary control, and sexual sensitivity.",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Gynecologic"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "GBP",
+        "price": "995",
+        "url": "https://www.healing-prp.co.uk/prices",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/stress-urinary-incontinence#condition",
+      "name": "Stress Urinary Incontinence",
+      "alternateName": ["SUI", "Bladder Leakage"],
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/o-shot#therapy" 
+        }
+      ]
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/female-sexual-dysfunction#condition",
+      "name": "Female Sexual Dysfunction",
+      "alternateName": ["Vaginal Dryness", "Decreased Libido", "Dyspareunia"],
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/o-shot#therapy" 
+        }
+      ]
     }
-  }
-];
+  ]
+};
+
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "O-Shot Treatment",
+      "item": "https://www.healing-prp.co.uk/o-shot"
+    }
+  ]
+};
 
 export default function Page() {
   // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
@@ -121,31 +210,35 @@ export default function Page() {
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
+      "name": faq.question,
+      "acceptedAnswer": {
         "@type": "Answer",
-        text: faq.answer,
+        "text": faq.answer,
       },
     })),
   };
 
   return (
     <main>
-      {/* 1. Inject Medical Entity Schema */}
-      <Script
-        id="oshot-schema-stalbans"
+      {/* 1. Inject Medical Entity Schema safely via plain script per Next.js best practices */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(oShotSchema) }}
-      />
-
-      {/* 2. Inject FAQ Schema */}
-      <Script
-        id="oshot-faq-schema-stalbans"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(oShotSchema) }}
       />
       
-      {/* 3. Render Client Component */}
+      {/* 2. Inject Breadcrumb Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+
+      {/* 3. Inject FAQ Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
+      />
+
+      {/* 4. Render Client Component */}
       <OShotClient 
         locationName="St Albans"
         servingAreas="Harpenden • Luton • Watford • Hertfordshire"
