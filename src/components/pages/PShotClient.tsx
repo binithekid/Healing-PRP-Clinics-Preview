@@ -170,7 +170,7 @@ export default function PShotClient({
   return (
     <>
       {/* --- HERO SECTION --- */}
-      <div className="relative md:h-[calc(100vh-4rem)] pb-5 md:pb-0 lg:h-[calc(100vh-5rem)] overflow-hidden flex items-center justify-center bg-black">
+      <div className="relative min-h-[100vh] md:min-h-[calc(100vh-4rem)] overflow-hidden flex items-center justify-center bg-black">
         
         {/* 1. Background */}
         <div className="absolute inset-0 z-0">
@@ -188,7 +188,7 @@ export default function PShotClient({
         </div>
 
         {/* 2. Main Content */}
-        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 md:pb-24">
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 pb-48 md:pb-24">
           
           <motion.div 
             custom={0}
@@ -259,10 +259,10 @@ export default function PShotClient({
           </motion.div>
         </div>
 
-        {/* 3. Hero Trust Badges */}
-        <div className={`md:block absolute hidden bottom-0 left-0 right-0 bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        {/* --- HERO TRUST BADGES (Fixed for Mobile) --- */}
+        <div className={`absolute bottom-0 left-0 w-full z-30 bg-[#0A1128]/95 backdrop-blur-xl border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="px-2 py-4 max-w-7xl mx-auto">
-            <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-2 divide-none md:divide-x divide-white/10">
               
               <a 
                 href="#reviews" 
