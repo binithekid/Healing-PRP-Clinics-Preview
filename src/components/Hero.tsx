@@ -48,7 +48,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative w-full mt-0 pt-0 h-[85vh] lg:h-[72vh] min-h-[600px] overflow-hidden flex flex-col items-center justify-end bg-[#0A1128]">
+    <div className="relative w-full mt-0 pt-0 min-h-[100vh] md:min-h-[calc(100vh-4rem)] overflow-hidden flex flex-col items-center justify-end bg-[#0A1128]">
       
       {/* --- UPGRADED BACKGROUND SECTION --- */}
       <div className="absolute inset-0 z-0">
@@ -72,8 +72,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/60 z-10"></div>
       </div>
 
-      {/* Main Content - pb-32 md:pb-40 pushes content lower, creating a cinematic feel */}
-      <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-32 md:pb-40">
+      {/* Main Content - pb-48 pushes content higher on mobile so it clears the new 2x2 badge grid */}
+      <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-48 md:pb-40">
         
         <motion.div 
           custom={1}
@@ -154,16 +154,16 @@ export default function Hero() {
 
       </div>
 
-      {/* --- HERO TRUST BADGES --- */}
+      {/* --- HERO TRUST BADGES (Fixed for Mobile) --- */}
       <motion.div 
         custom={5}
         initial="hidden"
         animate="visible"
         variants={fadeUpVariants}
-        className="md:block absolute hidden bottom-0 left-0 right-0 bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 z-30"
+        className="absolute bottom-0 left-0 w-full bg-[#0f172a]/90 backdrop-blur-md border-t border-white/10 z-30"
       >
         <div className="px-2 py-4 max-w-7xl mx-auto">
-          <div className="grid grid-cols-4 gap-2 divide-x divide-white/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-2 divide-none md:divide-x divide-white/10">
             
             <a href="#reviews" onClick={(e) => {
               e.preventDefault();
