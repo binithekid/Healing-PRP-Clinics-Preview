@@ -1,123 +1,206 @@
 import type { Metadata } from "next";
-import ShockwaveTherapyClient from "@/components/pages/ShockwaveTherapyClient";
-import Script from "next/script";
+import ShockwaveClient from "@/components/pages/ShockwaveClient"; // Ensure this matches your actual client component name
+
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+// Next.js recommends replacing "<" with "\u003c".
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
-  // SEO Guideline: H1 and Title should focus on Shockwave Therapy for ED in [Location] [cite: 85]
+  // Absolute ignores parent layout templates to ensure precise local matching
   title: {
-    absolute: "Shockwave Therapy for ED St Albans | Healing-PRP Clinics",
+    absolute: "Shockwave Therapy ED Treatment St Albans | Hertfordshire",
   },
   
-  // SEO Guideline: Emphasize low-intensity shockwave therapy, what to expect, pricing, and clinician review [cite: 85]
   description:
-    "Learn how low-intensity focused shockwave therapy is used in ED care in St Albans. What to expect, pricing, and whether you may be suitable after clinician review.",
-
+    "Private doctor-led Low-Intensity Shockwave Therapy (LiSWT) for Erectile Dysfunction in St Albans. Non-invasive treatment to improve blood flow and erectile quality.",
+  
   alternates: {
     canonical: "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
   },
-
-  keywords: [
-    // High-Priority Location Terms [cite: 49]
-    "shockwave therapy erectile dysfunction St Albans",
-    "shockwave therapy for ED cost St Albans",
-    "shockwave ED price St Albans",
-    "shockwave therapy for ED St Albans",
-    
-    // Core Clinical & Differentiator Terms [cite: 59]
-    "low-intensity shockwave therapy ED",
-    "does shockwave therapy work for ED",
-    "focused vs radial shockwave ED",
-    "shockwave ED risks",
-    "shockwave ED downtime",
-    "non-surgical Peyronies treatment Hertfordshire",
-    "Li-ESWT clinic UK",
-    "acoustic wave therapy ED Hertfordshire"
-  ],
-
+  
   openGraph: {
-    title: "Shockwave Therapy for ED | St Albans Clinic",
-    description:
-      "Doctor-led, focused shockwave therapy (Li-ESWT) for ED and Peyronie's disease in St Albans. A non-surgical, evidence-based approach.",
+    title: "Shockwave Therapy for ED in St Albans | Healing-PRP Clinics",
+    description: "Doctor-led consultation for Shockwave Therapy options in St Albans. Non-surgical acoustic wave therapy to support blood flow and erectile function.",
     url: "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
-    // siteName, locale, and type are inherited from layout.tsx
+    siteName: "Healing-PRP Clinics",
+    locale: "en_GB",
+    type: "website",
+    images: [
+      {
+        url: "/hero_img.png", // Update this if you have a specific shockwave hero image (e.g., /shockwave-hero.webp)
+        width: 1200,
+        height: 630,
+        alt: "Shockwave Therapy Consultation St Albans",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Shockwave Therapy for ED in St Albans | Doctor-Led Clinic",
+    description: "Doctor-led consultation for Shockwave Therapy (LiSWT) in St Albans. Non-invasive treatment to support Erectile Dysfunction.",
+    images: ["/hero_img.png"],
   },
 };
 
-// --- SEO RICH FAQS (St Albans & Evidence-Led Focus) [cite: 59, 285] ---
+// --- UNIQUE SEO RICH FAQS (St Albans & Hertfordshire Focus) ---
 const faqs = [
   {
-    "question": "What is low-intensity shockwave therapy (Li-ESWT) for ED?",
-    "answer": "Li-ESWT is a non-invasive medical treatment that uses targeted acoustic waves to stimulate angiogenesis—the growth of new blood vessels—in the penile tissue. It aims to address the underlying vascular causes of erectile dysfunction rather than just treating the symptoms."
+    question: "What is Shockwave Therapy for Erectile Dysfunction?",
+    answer: "Low-Intensity Extracorporeal Shockwave Therapy (LiSWT) is a non-invasive, doctor-led treatment available at our St Albans clinic. It uses acoustic waves to stimulate the growth of new blood vessels (angiogenesis), improving penile blood flow and supporting natural erectile function.",
   },
   {
-    "question": "Does shockwave therapy hurt?",
-    "answer": "No, the treatment is generally painless. Most patients experience a light tapping or tingling sensation during the 15-20 minute session. No anesthesia is required, and there is zero downtime."
+    question: "Does the shockwave treatment hurt?",
+    answer: "No. Shockwave therapy is a completely non-invasive and pain-free procedure. Most men simply feel a mild tapping or vibrating sensation during their session at our Hertfordshire clinic.",
   },
   {
-    "question": "What is the difference between Focused and Radial shockwave therapy?",
-    "answer": "Radial shockwave devices act like acoustic massage guns and only penetrate superficially. At our St Albans clinic, our doctors use Medical-Grade Focused Shockwaves, which penetrate deeply into the corpus cavernosum to effectively stimulate tissue regeneration and break down plaque."
+    question: "How many shockwave sessions will I need?",
+    answer: "A standard treatment protocol typically consists of 6 sessions, usually performed once or twice a week. During your initial consultation in St Albans, Dr Abdi will recommend a tailored plan based on your specific vascular health and symptoms.",
   },
   {
-    "question": "How many shockwave sessions will I need?",
-    "answer": "A standard protocol typically involves a course of 6 sessions, delivered over 3 to 6 weeks. However, the exact number depends on your individual clinical assessment and the severity of your vascular ED or Peyronie's disease."
+    question: "Is there any downtime after the procedure?",
+    answer: "There is zero downtime. Each session takes roughly 20 to 30 minutes, and you can immediately drive home to Harpenden, Luton, or Watford and resume your normal daily activities, including exercise and intimacy.",
   },
   {
-    "question": "Can shockwave therapy help with Peyronie's Disease?",
-    "answer": "Yes. Focused shockwave therapy can be used to create micro-traumas in the hardened fibrous plaque associated with Peyronie's disease, helping to soften the scar tissue and potentially reduce painful curvature over time."
+    question: "How long do the results of Shockwave Therapy last?",
+    answer: "Because LiSWT treats the underlying vascular cause of ED rather than just masking symptoms, results can be long-lasting. Many patients maintain improved erectile function for 1 to 2 years, and maintenance sessions can be arranged to sustain these benefits.",
   },
   {
-    "question": "How is this different from taking Viagra or Cialis?",
-    "answer": "Oral medications like Viagra temporarily increase blood flow but do not fix the underlying vascular issue. Shockwave therapy aims to restore your natural erectile mechanism by growing new, healthy blood vessels, potentially reducing or eliminating the need for tablets."
-  },
-  {
-    "question": "Are there any side effects or downtime?",
-    "answer": "Side effects are extremely rare and typically limited to temporary, mild sensitivity or slight bruising. It is a walk-in, walk-out procedure, meaning you can resume normal activities—including sexual intercourse—immediately."
-  },
-  {
-    "question": "Is shockwave therapy guaranteed to work?",
-    "answer": "No medical treatment carries a 100% guarantee. Suitability depends heavily on the underlying cause of your ED. Men with mild to moderate vascular ED generally see the best results. A full doctor-led assessment is required to determine if you are a viable candidate."
+    question: "Can Shockwave Therapy be combined with the P-Shot?",
+    answer: "Yes, frequently. Many patients choose to combine the vascular benefits of Shockwave Therapy with the tissue-regenerating properties of the P-Shot (PRP) for a comprehensive, synergistic approach to ED and Peyronie's disease.",
   }
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy ---
+// --- UPGRADED JSON-LD SCHEMA: Compliant & Corrected ---
 const shockwaveSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "MedicalClinic",
+      "@id": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction#clinic",
       "name": "Healing-PRP Clinics St Albans",
-      "description": "Doctor-led private clinic specialising in focused shockwave therapy (Li-ESWT) for Erectile Dysfunction and Peyronie's disease.",
+      "url": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
+      "description": "Doctor-led private clinic in St Albans providing Low-Intensity Shockwave Therapy (LiSWT) for Erectile Dysfunction and Peyronie's Disease.",
+      "telephone": "+447990364147",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "21 Victoria St",
         "addressLocality": "St Albans",
         "addressRegion": "Hertfordshire",
-        "addressCountry": "UK"
+        "postalCode": "AL1 3JJ",
+        "addressCountry": "GB"
       },
-      "areaServed": {
-        "@type": "City",
-        "name": "St Albans"
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "St Albans"
+        },
+        {
+          "@type": "City",
+          "name": "Luton"
+        },
+        {
+          "@type": "City",
+          "name": "Harpenden"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Hertfordshire"
+        }
+      ],
+      "medicalSpecialty": "Urologic",
+      "availableService": [
+        {
+          "@id": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction#therapy"
+        }
+      ],
+      "employee": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction#dr" 
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction#dr",
+      "name": "Dr Syed Abdi",
+      "jobTitle": "Medical Director",
+      "telephone": "+447990364147",
+      "url": "https://www.healing-prp.co.uk/our-doctor",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "GMC Reference Number",
+        "value": "6083294"
       },
-      "medicalDirector": {
-        "@type": "Physician",
-        "name": "Dr Syed Abdi",
-        "url": "https://www.healing-prp.co.uk/our-doctor"
-      },
-      "medicalSpecialty": ["Urology", "Men's Health"]
+      "sameAs": [
+        "https://www.gmc-uk.org/registrants/6083294"
+      ],
+      "worksFor": { 
+        "@id": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction#clinic" 
+      }
     },
     {
       "@type": "MedicalTherapy",
-      "name": "Shockwave Therapy for Erectile Dysfunction",
-      "alternateName": ["Li-ESWT", "Focused Shockwave Therapy", "Acoustic Wave Therapy for ED"],
-      "description": "A clinician-led assessment and treatment course using low-intensity extracorporeal shockwave therapy to treat vascular erectile dysfunction and Peyronie's disease. [cite: 128]",
-      "relevantSpecialty": {
-        "@type": "MedicalSpecialty",
-        "name": "Urology"
+      "@id": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction#therapy",
+      "name": "Low-Intensity Shockwave Therapy (LiSWT)",
+      "alternateName": ["Shockwave Therapy for ED", "Acoustic Wave Therapy", "Extracorporeal Shockwave Therapy"],
+      "url": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction",
+      "description": "A non-invasive procedure using low-intensity acoustic waves to improve penile blood flow and support erectile function.",
+      "relevantSpecialty": "Urologic",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "GBP",
+        "url": "https://www.healing-prp.co.uk/prices",
+        "availability": "https://schema.org/InStock"
       }
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/erectile-dysfunction#condition",
+      "name": "Erectile Dysfunction",
+      "url": "https://www.healing-prp.co.uk/erectile-dysfunction",
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction#therapy" 
+        }
+      ]
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/peyronies-disease#condition",
+      "name": "Peyronie's Disease",
+      "url": "https://www.healing-prp.co.uk/peyronies-disease",
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction#therapy" 
+        }
+      ]
     }
   ]
 };
 
-export default function Page() {
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Shockwave Therapy",
+      "item": "https://www.healing-prp.co.uk/shockwave-therapy-erectile-dysfunction"
+    }
+  ]
+};
+
+export default function ShockwavePage() {
+  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -133,19 +216,26 @@ export default function Page() {
 
   return (
     <main>
-      <Script
-        id="shockwave-schema-stalbans"
+      {/* 1. Inject Medical Entity Schema safely via plain script per Next.js best practices */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(shockwaveSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(shockwaveSchema) }}
       />
 
-      <Script
-        id="shockwave-faq-schema-stalbans"
+      {/* 2. Inject Breadcrumb Schema safely */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+
+      {/* 3. Inject FAQ Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
       
-      <ShockwaveTherapyClient 
+      {/* 4. Render Client Component */}
+      <ShockwaveClient 
         locationName="St Albans"
         servingAreas="Harpenden • Luton • Watford • Hertfordshire"
         faqs={faqs}
