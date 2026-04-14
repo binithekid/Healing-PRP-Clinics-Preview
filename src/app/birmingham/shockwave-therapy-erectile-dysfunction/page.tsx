@@ -1,125 +1,208 @@
 import type { Metadata } from "next";
-import ShockwaveTherapyClient from "@/components/pages/ShockwaveTherapyClient";
-import Script from "next/script";
+import ShockwaveClient from "@/components/pages/ShockwaveClient"; // Ensure this matches your actual client component name
+
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+// Next.js recommends replacing "<" with "\u003c".
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
-  // SEO Guideline: H1 and Title should focus on Shockwave Therapy for ED in [Location]
+  // Absolute ignores parent layout templates to ensure precise local matching
   title: {
-    absolute: "Shockwave Therapy for ED Birmingham | Healing-PRP Clinics",
+    absolute: "Shockwave Therapy ED Treatment Birmingham | Edgbaston Clinic",
   },
   
-  // SEO Guideline: Emphasize low-intensity shockwave therapy, what to expect, pricing, and clinician review
   description:
-    "Learn how low-intensity focused shockwave therapy is used in ED care in Birmingham. What to expect, pricing, and whether you may be suitable after clinician review.",
-
+    "Private doctor-led Low-Intensity Shockwave Therapy (LiSWT) for Erectile Dysfunction in Edgbaston, Birmingham. Non-invasive treatment to improve blood flow.",
+  
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction",
   },
-
-  keywords: [
-    // High-Priority Location Terms
-    "shockwave therapy erectile dysfunction Birmingham",
-    "shockwave therapy for ED cost Birmingham",
-    "shockwave ED price Birmingham",
-    "shockwave therapy for ED Birmingham",
-    "ED clinic Solihull",
-    "ED clinic Edgbaston",
-    
-    // Core Clinical & Differentiator Terms
-    "low-intensity shockwave therapy ED",
-    "does shockwave therapy work for ED",
-    "focused vs radial shockwave ED",
-    "shockwave ED risks",
-    "shockwave ED downtime",
-    "non-surgical Peyronies treatment West Midlands",
-    "Li-ESWT clinic UK",
-    "acoustic wave therapy ED Birmingham"
-  ],
-
+  
   openGraph: {
-    title: "Shockwave Therapy for ED | Birmingham Clinic",
-    description:
-      "Doctor-led, focused shockwave therapy (Li-ESWT) for ED and Peyronie's disease in Birmingham. A non-surgical, evidence-based approach.",
+    title: "Shockwave Therapy for ED in Birmingham | Healing-PRP Clinics",
+    description: "Doctor-led consultation for Shockwave Therapy options in Edgbaston. Non-surgical acoustic wave therapy to support blood flow and erectile function.",
     url: "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction",
-    // siteName, locale, and type are inherited from layout.tsx
+    siteName: "Healing-PRP Clinics",
+    locale: "en_GB",
+    type: "website",
+    images: [
+      {
+        url: "/hero_img.png", 
+        width: 1200,
+        height: 630,
+        alt: "Shockwave Therapy Consultation Birmingham",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Shockwave Therapy for ED in Birmingham | Doctor-Led Clinic",
+    description: "Doctor-led consultation for Shockwave Therapy (LiSWT) in Edgbaston, Birmingham. Non-invasive treatment to support Erectile Dysfunction.",
+    images: ["/hero_img.png"],
   },
 };
 
-// --- SEO RICH FAQS (Birmingham & Evidence-Led Focus) ---
+// --- UNIQUE SEO RICH FAQS (Birmingham & West Midlands Focus) ---
 const faqs = [
   {
-    "question": "What is low-intensity shockwave therapy (Li-ESWT) for ED?",
-    "answer": "Li-ESWT is a non-invasive medical treatment that uses targeted acoustic waves to stimulate angiogenesis—the growth of new blood vessels—in the penile tissue. It aims to address the underlying vascular causes of erectile dysfunction rather than just treating the symptoms."
+    question: "Where is your Birmingham clinic for Shockwave Therapy located?",
+    answer: "Our private clinic is located at 38 Harborne Rd in Edgbaston, Birmingham (B15 3EB). We offer a highly discreet setting with accessible parking nearby, ensuring your visit is confidential and stress-free.",
   },
   {
-    "question": "Does shockwave therapy hurt?",
-    "answer": "No, the treatment is generally painless. Most patients experience a light tapping or tingling sensation during the 15-20 minute session. No anesthesia is required, and there is zero downtime."
+    question: "What is Shockwave Therapy (LiSWT) and how does it work?",
+    answer: "Low-Intensity Extracorporeal Shockwave Therapy (LiSWT) uses acoustic waves to stimulate the growth of new blood vessels (angiogenesis). This improves penile blood flow and supports natural erectile function, treating the underlying vascular cause of ED.",
   },
   {
-    "question": "What is the difference between Focused and Radial shockwave therapy?",
-    "answer": "Radial shockwave devices act like acoustic massage guns and only penetrate superficially. At our Birmingham clinic, our doctors use Medical-Grade Focused Shockwaves, which penetrate deeply into the corpus cavernosum to effectively stimulate tissue regeneration and break down plaque."
+    question: "Does the shockwave treatment hurt?",
+    answer: "No. Shockwave therapy is a completely non-invasive and pain-free procedure. Most men simply feel a mild tapping or vibrating sensation during their session at our Edgbaston clinic.",
   },
   {
-    "question": "How many shockwave sessions will I need?",
-    "answer": "A standard protocol typically involves a course of 6 sessions, delivered over 3 to 6 weeks. However, the exact number depends on your individual clinical assessment and the severity of your vascular ED or Peyronie's disease."
+    question: "How many shockwave sessions will I need in Birmingham?",
+    answer: "A standard treatment protocol typically consists of 6 sessions, usually performed once or twice a week. During your initial consultation, Dr Abdi will recommend a tailored plan based on your specific vascular health.",
   },
   {
-    "question": "Can shockwave therapy help with Peyronie's Disease?",
-    "answer": "Yes. Focused shockwave therapy can be used to create micro-traumas in the hardened fibrous plaque associated with Peyronie's disease, helping to soften the scar tissue and potentially reduce painful curvature over time."
+    question: "Is there any downtime after the procedure?",
+    answer: "There is zero downtime. Each session takes roughly 20 to 30 minutes, and you can immediately drive home to Solihull, Sutton Coldfield, or anywhere in the West Midlands and resume your normal daily activities.",
   },
   {
-    "question": "How is this different from taking Viagra or Cialis?",
-    "answer": "Oral medications like Viagra temporarily increase blood flow but do not fix the underlying vascular issue. Shockwave therapy aims to restore your natural erectile mechanism by growing new, healthy blood vessels, potentially reducing or eliminating the need for tablets."
-  },
-  {
-    "question": "Are there any side effects or downtime?",
-    "answer": "Side effects are extremely rare and typically limited to temporary, mild sensitivity or slight bruising. It is a walk-in, walk-out procedure, meaning you can resume normal activities—including sexual intercourse—immediately."
-  },
-  {
-    "question": "Is shockwave therapy guaranteed to work?",
-    "answer": "No medical treatment carries a 100% guarantee. Suitability depends heavily on the underlying cause of your ED. Men with mild to moderate vascular ED generally see the best results. A full doctor-led assessment is required to determine if you are a viable candidate."
+    question: "Can Shockwave Therapy be combined with the P-Shot?",
+    answer: "Yes, frequently. Many patients choose to combine the vascular benefits of Shockwave Therapy with the tissue-regenerating properties of the P-Shot (PRP) for a comprehensive approach to ED and Peyronie's disease.",
   }
 ];
 
-// --- JSON-LD SCHEMA: Medical Clinic & Medical Therapy ---
-const shockwaveSchema = {
+// --- UPGRADED JSON-LD SCHEMA: Compliant & Corrected ---
+const shockwaveSchemaBirmingham = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "MedicalClinic",
-      "name": "Healing-PRP Clinics Birmingham",
-      "description": "Doctor-led private clinic in Birmingham specialising in focused shockwave therapy (Li-ESWT) for Erectile Dysfunction and Peyronie's disease.",
+      "@id": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction#clinic",
+      "name": "Healing-PRP Clinics",
+      "url": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction",
+      "description": "Doctor-led private clinic in Edgbaston, Birmingham providing Low-Intensity Shockwave Therapy (LiSWT) for Erectile Dysfunction.",
+      "telephone": "+447990364147",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "38 Harborne Rd",
         "addressLocality": "Birmingham",
         "addressRegion": "West Midlands",
-        "addressCountry": "UK"
+        "postalCode": "B15 3EB",
+        "addressCountry": "GB"
       },
-      "areaServed": {
-        "@type": "City",
-        "name": "Birmingham"
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Birmingham"
+        },
+        {
+          "@type": "City",
+          "name": "Edgbaston"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "West Midlands"
+        }
+      ],
+      "medicalSpecialty": "Urologic",
+      "availableService": [
+        {
+          "@id": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction#therapy"
+        }
+      ],
+      "employee": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction#dr" 
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction#dr",
+      "name": "Dr Syed Abdi",
+      "jobTitle": "Medical Director",
+      "telephone": "+447990364147",
+      "url": "https://www.healing-prp.co.uk/our-doctor",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "GMC Reference Number",
+        "value": "6083294"
       },
-      "medicalDirector": {
-        "@type": "Physician",
-        "name": "Dr Syed Abdi",
-        "url": "https://www.healing-prp.co.uk/our-doctor"
-      },
-      "medicalSpecialty": ["Urology", "Men's Health"]
+      "sameAs": [
+        "https://www.gmc-uk.org/registrants/6083294"
+      ],
+      "worksFor": { 
+        "@id": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction#clinic" 
+      }
     },
     {
       "@type": "MedicalTherapy",
-      "name": "Shockwave Therapy for Erectile Dysfunction",
-      "alternateName": ["Li-ESWT", "Focused Shockwave Therapy", "Acoustic Wave Therapy for ED"],
-      "description": "A clinician-led assessment and treatment course using low-intensity extracorporeal shockwave therapy to treat vascular erectile dysfunction and Peyronie's disease.",
-      "relevantSpecialty": {
-        "@type": "MedicalSpecialty",
-        "name": "Urology"
+      "@id": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction#therapy",
+      "name": "Low-Intensity Shockwave Therapy (LiSWT)",
+      "alternateName": ["Shockwave Therapy for ED", "Acoustic Wave Therapy", "Extracorporeal Shockwave Therapy"],
+      "url": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction",
+      "description": "A non-invasive procedure using low-intensity acoustic waves to improve penile blood flow and support erectile function in Birmingham.",
+      "relevantSpecialty": "Urologic",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "GBP",
+        "url": "https://www.healing-prp.co.uk/birmingham/prices",
+        "availability": "https://schema.org/InStock"
       }
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction#condition",
+      "name": "Erectile Dysfunction",
+      "url": "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction#therapy" 
+        }
+      ]
+    },
+    {
+      "@type": "MedicalCondition",
+      "@id": "https://www.healing-prp.co.uk/birmingham/peyronies-disease#condition",
+      "name": "Peyronie's Disease",
+      "url": "https://www.healing-prp.co.uk/birmingham/peyronies-disease",
+      "possibleTreatment": [
+        { 
+          "@id": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction#therapy" 
+        }
+      ]
     }
   ]
 };
 
-export default function Page() {
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Birmingham Clinic",
+      "item": "https://www.healing-prp.co.uk/birmingham"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Shockwave Therapy",
+      "item": "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction"
+    }
+  ]
+};
+
+export default function BirminghamShockwavePage() {
+  // --- GENERATE JSON-LD SCHEMA FOR FAQS ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -135,20 +218,26 @@ export default function Page() {
 
   return (
     <main>
-      <Script
-        id="shockwave-schema-birmingham"
+      {/* 1. Inject Medical Entity Schema safely */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(shockwaveSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(shockwaveSchemaBirmingham) }}
       />
 
-      <Script
-        id="shockwave-faq-schema-birmingham"
+      {/* 2. Inject Breadcrumb Schema safely */}
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+
+      {/* 3. Inject FAQ Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
       
-      {/* Dynamic Client Component Loading Birmingham Content */}
-      <ShockwaveTherapyClient 
+      {/* 4. Render Client Component with Birmingham props */}
+      <ShockwaveClient 
         locationName="Birmingham"
         servingAreas="Edgbaston • Solihull • Sutton Coldfield • West Midlands"
         faqs={faqs}
