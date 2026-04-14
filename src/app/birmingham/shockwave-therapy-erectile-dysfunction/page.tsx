@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ShockwaveClient from "@/components/pages/ShockwaveTherapyClient.tsx"; // Ensure this matches your actual client component name
+import ShockwaveClient from "@/components/pages/ShockwaveTherapyClient"; // Ensure this matches your actual client component name
 
 // Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
 // Next.js recommends replacing "<" with "\u003c".
