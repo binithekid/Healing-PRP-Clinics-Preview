@@ -63,9 +63,9 @@ export default function PeyroniesClient() {
 
   const treatmentDetails = [
     {
-      title: "Platelet‑Rich Plasma (PRP) — P‑Shot®",
+      title: "Platelet‑Rich Plasma (PRP) — P‑Shot",
       description:
-        "Concentrated growth factors from your own blood support tissue repair and elasticity. Targeted PRP (P‑Shot®) may help soften plaques, improve curvature over time, and enhance erectile quality.",
+        "Concentrated growth factors from your own blood support tissue repair and elasticity. Targeted PRP (P‑Shot) may help soften plaques, improve curvature over time, and enhance erectile quality.",
     },
     {
       title: "Low‑Intensity Shockwave Therapy (LiSWT)",
@@ -93,7 +93,7 @@ export default function PeyroniesClient() {
     {
       question: "Is there downtime?",
       answer:
-        "PRP (P‑Shot®) and LiSWT are outpatient treatments with minimal downtime. Most people resume normal activity the same day.",
+        "PRP (P‑Shot) and LiSWT are outpatient treatments with minimal downtime. Most people resume normal activity the same day.",
     },
     {
       question: "Will it fully straighten my penis?",
