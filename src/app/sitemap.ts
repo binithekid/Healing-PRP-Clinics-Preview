@@ -18,8 +18,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ✅ CORE ST ALBANS MEN'S & WOMEN'S HEALTH (High Priority)
     { url: "/sexual-rejuvenation", priority: 0.9 },
     { url: "/p-shot", priority: 0.95 },
-    { url: "/o-shot", priority: 0.95 }, // <-- ADDED: O-Shot
+    { url: "/o-shot", priority: 0.95 }, 
+    { url: "/penis-enlargement", priority: 0.95 }, // <-- ADDED: Penis Enlargement
     { url: "/erectile-dysfunction", priority: 0.95 },
+    { url: "/shockwave-therapy-erectile-dysfunction", priority: 0.9 }, // <-- ADDED: Shockwave Therapy
     { url: "/peyronies-disease", priority: 0.9 },
     { url: "/premature-ejaculation", priority: 0.9 },
     
@@ -32,8 +34,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // 2. Birmingham Location Pages (Men's & Women's Health)
     { url: "/birmingham/sexual-rejuvenation", priority: 0.85 },
     { url: "/birmingham/p-shot", priority: 0.9 },
-    { url: "/birmingham/o-shot", priority: 0.9 }, // <-- ADDED: Birmingham O-Shot
+    { url: "/birmingham/o-shot", priority: 0.9 }, 
+    { url: "/birmingham/penis-enlargement", priority: 0.9 }, // <-- ADDED: Birmingham Penis Enlargement
     { url: "/birmingham/erectile-dysfunction", priority: 0.9 },
+    { url: "/birmingham/shockwave-therapy-erectile-dysfunction", priority: 0.85 }, // <-- ADDED: Birmingham Shockwave
     { url: "/birmingham/peyronies-disease", priority: 0.85 },
     { url: "/birmingham/premature-ejaculation", priority: 0.85 },
 
@@ -44,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/birmingham/joint-injections", priority: 0.85 },
 
     // 4. Information, Clinic & Support
-    { url: "/our-doctor", priority: 0.8 }, // <-- ADDED: Doctor Profile
+    { url: "/our-doctor", priority: 0.8 }, 
     { url: "/prices", priority: 0.8 },
     { url: "/birmingham/prices", priority: 0.8 }, 
     { url: "/faq", priority: 0.7 },
