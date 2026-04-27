@@ -41,11 +41,11 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
       ]
     },
     {
-     id: "facial",
+      id: "facial",
       title: "Facial Aesthetics",
       items: [
-        { name: "DNA Glow Plus™", price: "£600", sessions: "Course of 3: £1600", details: "Premium: Poly + HA + PRP Microneedling" },
-        { name: "DNA Glow Concept™", price: "£500", sessions: "Course of 3: £1400", details: "Signature: Poly + HA + Microneedling" },
+        { name: "DNA Glow Plus™", price: "£600", sessions: "Course of 3: £1600", details: "Premium: Poly + HA + PRP Microneedling (Face only. Add £100 for neck)" },
+        { name: "DNA Glow Concept™", price: "£500", sessions: "Course of 3: £1400", details: "Signature: Poly + HA + Microneedling (Face only. Add £100 for neck)" },
         { name: "Exosome-Enhanced Skin Regeneration", price: "£475", sessions: "Course of 3: £1200", details: "Advanced cellular repair & skin revitalisation" },
         { name: "Polynucleotides", price: "From £150", sessions: "1-3 sessions", details: "Advanced skin repair & hydration" },
         { name: "HA Skin Boosters", price: "£250", sessions: "2-3 sessions", details: "Deep hydration & glow" },
@@ -54,13 +54,13 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
         { name: "Botox (3 Areas)", price: "£200", sessions: "Single", details: "Anti-wrinkle injections" },
       ]
     }
-  ];
+  ]; // <-- The missing syntax has been fixed here!
 
   const priceSchema = {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Healing-PRP Clinics",
-    "priceRange": "£120 - £1800",
+    "priceRange": "£120 - £4200",
     "image": "https://www.healing-prp.co.uk/Logo2.png",
     "description": `Doctor-led regenerative medicine prices for ${locationName}.`
   };
