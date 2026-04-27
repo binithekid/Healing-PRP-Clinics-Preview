@@ -17,7 +17,7 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
       title: "Sexual Rejuvenation",
       items: [
         { name: "P-Shot PRP", price: "£995", sessions: "Course of 3: £2800", details: "Doctor-led premium PRP treatment" },
-        { name: "Peyronie’s Disease Protocol", price: "£995", sessions: "Course of 3: £2700", details: "Targeted doctor-led regenerative protocol" },
+        { name: "Peyronie’s Disease Protocol", price: "£995", sessions: "Course of 3: £2800", details: "Targeted doctor-led regenerative protocol" },
         { name: "EXO P-Shot", price: "£1500", sessions: "Course of 3: £4200", details: "Advanced exosome-enhanced treatment" },
         { name: "Personalised Medication", price: "Upon consultation", sessions: "Custom treatment plan", details: "Tailored support for ED and PE" },
         { name: "Shockwave Therapy", price: "£375", sessions: "Course of 6: £2000", details: "Low-intensity acoustic wave therapy" },
@@ -28,15 +28,15 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
       id: "joint",
       title: "Joint Injections",
       items: [
-        { name: "PRP Joint Injection", price: "From £250", sessions: "1-3 sessions", details: "Regenerative pain relief" },
-        { name: "Steroid Injection", price: "£120", sessions: "Single", details: "Anti-inflammatory relief" },
+        { name: "PRP Joint Injection", price: "From £350", sessions: "1-3 sessions", details: "Regenerative pain relief" },
+        { name: "Steroid Injection", price: "£150", sessions: "Single", details: "Anti-inflammatory relief" },
       ]
     },
     {
       id: "hair",
       title: "Hair Restoration",
       items: [
-        { name: "PRP Hair Treatment", price: "£275", sessions: "Course of 3: £750", details: "Natural follicle stimulation" },
+        { name: "PRP Hair Treatment", price: "£295", sessions: "Course of 3: £850", details: "Natural follicle stimulation" },
         { name: "Hair Exosomes", price: "From £400", sessions: "Tailored plan", details: "Advanced scalp regeneration" },
       ]
     },
@@ -47,9 +47,9 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
         { name: "DNA Glow Plus™", price: "£600", sessions: "Course of 3: £1600", details: "Premium: Poly + HA + PRP Microneedling (Face only. Add £100 for neck)" },
         { name: "DNA Glow Concept™", price: "£500", sessions: "Course of 3: £1400", details: "Signature: Poly + HA + Microneedling (Face only. Add £100 for neck)" },
         { name: "Exosome-Enhanced Skin Regeneration", price: "£475", sessions: "Course of 3: £1200", details: "Advanced cellular repair & skin revitalisation" },
-        { name: "Polynucleotides", price: "From £150", sessions: "1-3 sessions", details: "Advanced skin repair & hydration" },
+        { name: "Polynucleotides", price: "From £250", sessions: "1-3 sessions", details: "Advanced skin repair & hydration" },
         { name: "HA Skin Boosters", price: "£250", sessions: "2-3 sessions", details: "Deep hydration & glow" },
-        { name: "PRP Microneedling", price: "£150", sessions: "2-3 sessions", details: "Texture & acne scar support" },
+        { name: "PRP Microneedling", price: "£200", sessions: "2-3 sessions", details: "Texture & acne scar support" },
         { name: "Vampire Facial", price: "£550", sessions: "Course of 3: £1500", details: "Full face regeneration" },
         { name: "Botox (3 Areas)", price: "£200", sessions: "Single", details: "Anti-wrinkle injections" },
       ]
