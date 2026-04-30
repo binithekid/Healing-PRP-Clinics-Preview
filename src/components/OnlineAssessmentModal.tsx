@@ -145,10 +145,8 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
       if (typeof window !== "undefined") {
         const w = window as Window & { gtag?: (...args: unknown[]) => void };
         if (w.gtag) {
-          w.gtag("event", "generate_lead", {
-            event_category: "form_submission",
-            event_label: "online_assessment_completed",
-            value: 1, 
+          w.gtag('event', 'conversion', {
+            'send_to': 'AW-18130686557/hY3YCIONsKUcEN2kscVD'
           });
         }
       }
