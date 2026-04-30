@@ -77,14 +77,12 @@ export default function ContactCTASection() {
         clinic_location: activeClinic === "birmingham" ? "Birmingham (Edgbaston)" : "St Albans",
       });
 
-      // --- GOOGLE ADS CONVERSION TRACKING ---
+    // --- GOOGLE ADS CONVERSION TRACKING ---
       if (typeof window !== "undefined") {
         const w = window as Window & { gtag?: (...args: unknown[]) => void };
         if (w.gtag) {
-          w.gtag("event", "generate_lead", {
-            event_category: "form_submission",
-            event_label: "contact_drawer_form",
-            value: 1, // Optional: Add a monetary value if applicable
+          w.gtag('event', 'conversion', {
+            'send_to': 'AW-18130686557/hY3YCIONsKUcEN2kscVD'
           });
         }
       }
