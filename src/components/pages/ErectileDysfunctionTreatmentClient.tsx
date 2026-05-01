@@ -157,7 +157,7 @@ export default function ErectileDysfunctionTreatmentClient({
     },
     {
       title: "Tailored Plan Where Appropriate",
-      description: "This may include shockwave therapy, plasma therapy, Advanced Regenerative Therapy, health review, or a combined approach depending on suitability.",
+      description: "This may include shockwave therapy, advanced regenerative therapy, health review, or a combined approach depending on suitability.",
       icon: FaCheckCircle,
     },
   ];
