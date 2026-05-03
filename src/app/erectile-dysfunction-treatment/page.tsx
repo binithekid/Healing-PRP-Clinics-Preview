@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Doctor-led Erectile Dysfunction (ED) clinic serving Luton & St Albans. We focus on natural function using non-surgical options like Shockwave and Plasma Therapy.",
+    "Doctor-led Erectile Dysfunction (ED) clinic serving Luton & St Albans.",
 
   // --- CANONICAL URL DEFINED HERE ---
   alternates: {
@@ -72,7 +72,7 @@ const edSchema = {
       "@type": "MedicalClinic",
       "@id": "https://www.healing-prp.co.uk/erectile-dysfunction-treatment#clinic",
       "name": "Healing-PRP Clinics St Albans",
-      "description": "Doctor-led Erectile Dysfunction (ED) clinic offering Shockwave Therapy, Plasma Therapy, and personalised medical management.",
+      "description": "Doctor-led Erectile Dysfunction (ED) clinic offering Shockwave Therapy and personalised medical management.",
       "telephone": "+44 7990 364147",
       "address": {
         "@type": "PostalAddress",
@@ -148,12 +148,6 @@ const edSchema = {
           "@type": "MedicalTherapy",
           "name": "Low-Intensity Extracorporeal Shockwave Therapy (Li-ESWT)",
           "description": "Non-surgical acoustic wave therapy to support blood flow and vascular health.",
-          "relevantSpecialty": "Urologic"
-        },
-        {
-          "@type": "MedicalTherapy",
-          "name": "Advanced Localised Plasma Therapy",
-          "description": "Regenerative therapy using a concentrated sample from the patient to support local tissue health.",
           "relevantSpecialty": "Urologic"
         },
         {
