@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp, FaTimes, FaCheckCircle, FaPaperPlane, FaInfoCircle, FaPhoneAlt, FaChevronDown } from "react-icons/fa";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import emailjs from "@emailjs/browser";
 
 export default function ContactCTASection() {
   const pathname = usePathname();
+  const router = useRouter(); 
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false); // Used for QR Logic
   
@@ -20,7 +21,7 @@ export default function ContactCTASection() {
     name: "",
     email: "",
     phone: "",
-    treatment: "Sexual Rejuvenation (P-Shot/O-Shot)",
+    treatment: "Erectile Dysfunction",
     message: "",
   });
   
@@ -81,20 +82,22 @@ export default function ContactCTASection() {
       if (typeof window !== "undefined") {
         const w = window as Window & { gtag?: (...args: unknown[]) => void };
         if (w.gtag) {
-          w.gtag("event", "generate_lead", {
-            event_category: "form_submission",
-            event_label: "contact_drawer_form",
-            value: 1, // Optional: Add a monetary value if applicable
+          w.gtag('event', 'conversion', {
+            'send_to': 'AW-18130686557/hY3YCIONsKUcEN2kscVD'
           });
         }
       }
       // ---------------------------------------
 
-      setSubmitStatus({ 
-        type: "success", 
-        message: "Thank you! Our clinical team will get back to you within 24 hours." 
-      });
-      setFormData({ name: "", email: "", phone: "", treatment: "Sexual Rejuvenation (P-Shot/O-Shot)", message: "" });
+      // REDIRECT TO THE CORRECT THANK YOU PAGE
+      if (activeClinic === "birmingham") {
+        router.push("/birmingham/thank-you");
+      } else {
+        router.push("/thank-you");
+      }
+      
+      // Clear form in the background
+      setFormData({ name: "", email: "", phone: "", treatment: "Erectile Dysfunction", message: "" });
     } catch (error) {
       setSubmitStatus({ type: "error", message: "Failed to send. Please try WhatsApp." });
     } finally {
@@ -177,7 +180,7 @@ export default function ContactCTASection() {
                           </div>
                         </div>
 
-                        {/* Form Fields - Updated Labels for Contrast & Added Autocomplete */}
+                        {/* Form Fields */}
                         <div className="md:col-span-2 space-y-1">
                           <label className="text-[10px] font-bold uppercase text-slate-500 ml-1 tracking-widest">Full Name</label>
                           <input 
@@ -220,7 +223,7 @@ export default function ContactCTASection() {
                         <div className="md:col-span-2 space-y-1">
                           <label className="text-[10px] font-bold uppercase text-slate-500 ml-1 tracking-widest">Treatment</label>
                           <select name="treatment" value={formData.treatment} onChange={handleInputChange} className="w-full px-5 py-3 rounded-2xl border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-[#4041d1] transition-shadow bg-white text-slate-600 appearance-none text-sm">
-                            <option>Sexual Rejuvenation (P-Shot/O-Shot)</option>
+                            <option>Erectile Dysfunction</option>
                             <option>Hair Restoration</option>
                             <option>Joint Pain Relief</option>
                             <option>Facial Aesthetics</option>
@@ -245,15 +248,12 @@ export default function ContactCTASection() {
 
                     {/* RIGHT SIDE: QUICK CONTACTS */}
                     <div className="lg:col-span-5 space-y-3">
-                      
-                      {/* ✅ MOBILE SMART LOGIC: Show Button on Mobile, QR on Desktop */}
                       <div className="w-full bg-white rounded-2xl border border-slate-100 p-6 text-center shadow-sm">
                         <div className="inline-flex items-center gap-2 text-green-600 mb-4 bg-green-50 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
                           <FaWhatsapp className="w-3 h-3" /> Quick Chat
                         </div>
                         
                         {isDesktop ? (
-                          // DESKTOP: Show QR Code
                           <>
                             <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 inline-block mb-4">
                               <img src="/qrcode.png" alt="WhatsApp QR" className="w-32 h-32 mx-auto mix-blend-multiply" />
@@ -266,7 +266,6 @@ export default function ContactCTASection() {
                             </div>
                           </>
                         ) : (
-                          // MOBILE: Show Big Button
                           <div className="py-4">
                              <a 
                                href="https://wa.me/447990364147" 
@@ -283,7 +282,6 @@ export default function ContactCTASection() {
                         )}
                       </div>
 
-                      {/* Clinic Info Link */}
                       <Link href="/contact" className="w-full flex items-center gap-4 p-4 bg-white rounded-2xl border border-slate-100 hover:shadow-md transition-all">
                         <div className="w-10 h-10 bg-[var(--brand-blue-50)] text-[#4041d1] rounded-xl flex items-center justify-center text-lg"><FaInfoCircle /></div>
                         <div>
@@ -292,7 +290,6 @@ export default function ContactCTASection() {
                         </div>
                       </Link>
 
-                      {/* Standards List */}
                       <div className="p-5 bg-slate-100/50 rounded-2xl border border-slate-200/50">
                         <h4 className="text-[9px] font-bold text-[#4041d1] uppercase tracking-widest mb-3">Standards</h4>
                         <ul className="space-y-2">
