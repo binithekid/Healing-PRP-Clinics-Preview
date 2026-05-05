@@ -56,6 +56,8 @@ export default function ErectileDysfunctionTreatmentClient({
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
 
   const isBirmingham = locationName === "Birmingham";
   const basePath = isBirmingham ? "/birmingham" : "";
@@ -124,15 +126,15 @@ export default function ErectileDysfunctionTreatmentClient({
     },
     { 
       icon: FaSyringe, 
-      title: "Plasma Shot", 
-      description: "A doctor-prepared, localised treatment using a concentrated sample from your own blood to support tissue health. Suitability is assessed during consultation.",
+      title: "Advanced ED Treatment Options", 
+      description: "A doctor-prepared treatment option using a concentrated sample from your own blood. It may be considered as part of a personalised ED care plan after consultation.",
       tags: ["Minimal discomfort", "Takes ~30 mins", "No downtime"]
     },
     { 
       icon: FaTint, 
       title: "Vascular Assessment", 
       description: "Where appropriate, assessment of penile blood flow may be arranged, including Doppler ultrasound, to help identify vascular causes and guide treatment planning.",
-      tags: ["Non-invasive", "Painless ultrasound", "Immediate insights"]
+      tags: ["Non-invasive", "Ultrasound Assessment", "Immediate insights"]
     },
     { 
       icon: FaDna, 
@@ -155,7 +157,7 @@ export default function ErectileDysfunctionTreatmentClient({
     },
     {
       title: "Tailored Plan Where Appropriate",
-      description: "This may include shockwave therapy, plasma therapy, Plasma Shot, health review, or a combined approach depending on suitability.",
+      description: "This may include shockwave therapy, advanced ED treatment options, health review, or a combined approach depending on suitability.",
       icon: FaCheckCircle,
     },
   ];
@@ -382,7 +384,7 @@ export default function ErectileDysfunctionTreatmentClient({
                     "Previous treatments and response so far",
                     "Medical history and current medication",
                     "Possible contributing factors such as circulation, diabetes, hormonal changes, or stress",
-                    "Based on this, suitable treatment options such as shockwave therapy, Plasma Shot, or further assessment may be discussed where appropriate"
+                    "Based on this, suitable treatment options such as shockwave therapy, Advanced ED Treatments, or further assessment may be discussed where appropriate"
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-4">
                       <FaStethoscope className="text-[#4041d1] mt-1 shrink-0 text-lg" />
@@ -400,7 +402,7 @@ export default function ErectileDysfunctionTreatmentClient({
                 </h3>
                 <div className="text-slate-600 text-lg leading-relaxed space-y-6 mb-8">
                   <p>
-                    At Healing-PRP Clinics, consultations and treatments are carried out by <strong className="text-[#4041d1] font-bold">Dr Syed Abdi</strong>
+                    At Healing-PRP Clinics, consultations and treatments are carried out by <strong className="text-[#4041d1] font-bold">Dr Syed Abdi (GMC No: 6083294)</strong>.
                   </p>
                   <p>
                     <strong>This is not a one-size-fits-all service or an online-only approach.</strong>
@@ -695,12 +697,102 @@ export default function ErectileDysfunctionTreatmentClient({
             &copy; {new Date().getFullYear()} Healing-PRP Clinics. All rights reserved.
           </p>
           <div className="flex justify-center gap-4 mt-4 text-xs text-slate-500 font-inter">
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            
+            <button 
+              onClick={() => setIsPrivacyModalOpen(true)} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Privacy Policy
+            </button>
+            
             <span>|</span>
-            <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link>
+            
+            <button 
+              onClick={() => setIsTermsModalOpen(true)} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Terms & Conditions
+            </button>
+            
           </div>
         </div>
       </footer>
+
+      {/* --- PRIVACY POLICY MODAL --- */}
+      {isPrivacyModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={() => setIsPrivacyModalOpen(false)}>
+          <div className="bg-white rounded-2xl w-full max-w-3xl max-h-[80vh] flex flex-col relative shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="p-4 md:p-6 border-b flex justify-between items-center sticky top-0 bg-white rounded-t-2xl z-10">
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 font-raleway">Privacy Policy</h2>
+              <button onClick={() => setIsPrivacyModalOpen(false)} className="text-slate-400 hover:text-red-500 transition-colors font-bold text-2xl px-2">✕</button>
+            </div>
+            <div className="p-4 md:p-6 overflow-y-auto text-slate-600 space-y-4 font-inter text-sm leading-relaxed">
+              
+              {/* PASTE YOUR PRIVACY POLICY TEXT BELOW HERE */}
+              <div className="space-y-4">
+                <p><strong>Last updated:</strong> 29 April 2026</p>
+                <p>This Privacy Policy explains how AKY Medical Ltd (trading as Healing PRP Clinics) collects, uses, and protects your personal information across our website (healing-prp.co.uk) and clinics.</p>
+                
+                <h3 className="font-bold text-slate-800 mt-4">1. Information We Collect</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li><strong>Contact Details:</strong> Name, DOB, email, phone, address, and GP details.</li>
+                  <li><strong>Medical Information:</strong> Medical history, medications, allergies, treatment records, and clinical photographs. Intimate health data is treated as highly sensitive.</li>
+                  <li><strong>Booking & Technical Data:</strong> Enquiry forms, payment status (securely processed via 3rd parties), and basic website analytics (IP address, cookies).</li>
+                </ul>
+
+                <h3 className="font-bold text-slate-800 mt-4">2. How & Why We Use Your Data</h3>
+                <p>We process your data to respond to enquiries, provide safe healthcare and treatments, manage bookings, and meet our legal and regulatory obligations. Our lawful bases for processing include fulfilling a contract, legal obligation, legitimate interests, and your explicit consent.</p>
+
+                <h3 className="font-bold text-slate-800 mt-4">3. Sharing & Storing Your Information</h3>
+                <p>We only share data when necessary with treating clinicians, secure IT/booking systems, payment processors, or your GP (with your consent or if clinically necessary). We do not sell your personal information. Adult clinical records are legally kept for at least 8 years after your last contact.</p>
+
+                <h3 className="font-bold text-slate-800 mt-4">4. Your Data Rights</h3>
+                <p>You have the right to access, correct, or request deletion of your data, and to opt-out of marketing communications at any time. To exercise these rights, email us at <strong>info@healing-prp.co.uk</strong>.</p>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* --- TERMS & CONDITIONS MODAL --- */}
+      {isTermsModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={() => setIsTermsModalOpen(false)}>
+          <div className="bg-white rounded-2xl w-full max-w-3xl max-h-[80vh] flex flex-col relative shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="p-4 md:p-6 border-b flex justify-between items-center sticky top-0 bg-white rounded-t-2xl z-10">
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 font-raleway">Booking Terms & Conditions</h2>
+              <button onClick={() => setIsTermsModalOpen(false)} className="text-slate-400 hover:text-red-500 transition-colors font-bold text-2xl px-2">✕</button>
+            </div>
+            <div className="p-4 md:p-6 overflow-y-auto text-slate-600 space-y-4 font-inter text-sm leading-relaxed">
+              
+              {/* PASTE YOUR TERMS & CONDITIONS TEXT BELOW HERE */}
+              <div className="space-y-4">
+                <p><strong>Last updated:</strong> 29 April 2026</p>
+                <p>By booking an appointment, submitting an enquiry, or proceeding with treatment at Healing PRP Clinics, you agree to the following terms.</p>
+
+                <h3 className="font-bold text-slate-800 mt-4">1. Medical Disclaimer & Eligibility</h3>
+                <p>Website information does not replace personalised medical advice. You must be at least 18 years old and provide accurate, complete medical history. We reserve the right to decline treatment if it is deemed clinically inappropriate or unsafe.</p>
+
+                <h3 className="font-bold text-slate-800 mt-4">2. Consultations & Outcomes</h3>
+                <p>All treatments are subject to a doctor-led assessment. &quot;Free consultations&quot; refer to an initial screening and do not include diagnostic tests, treatments, or extended medical reviews. Because individual biology varies, we cannot guarantee specific treatment outcomes.</p>
+
+                <h3 className="font-bold text-slate-800 mt-4">3. Payments, Cancellations & Refunds</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li><strong>Cancellations:</strong> We require at least 48 hours’ notice to cancel or reschedule. Late cancellations or no-shows may result in the loss of your deposit or a cancellation fee.</li>
+                  <li><strong>Refunds:</strong> Completed consultations and treatments are non-refundable. If a treatment package is stopped early, refunds are calculated by deducting used sessions at the standard single-session price.</li>
+                </ul>
+
+                <h3 className="font-bold text-slate-800 mt-4">4. Patient Responsibilities & Aftercare</h3>
+                <p>You agree to follow all pre-treatment and aftercare advice provided. Failure to adhere to aftercare instructions may increase the risk of complications or poor outcomes. Please arrive on time; late arrivals may result in a shortened or cancelled appointment.</p>
+
+                <h3 className="font-bold text-slate-800 mt-4">5. Liability & Governing Law</h3>
+                <p>Healing PRP Clinics is not liable for issues arising from undisclosed medical history, failure to follow aftercare, or unrealistic expectations. These terms are governed by the laws of England and Wales. For any questions, contact <strong>info@healing-prp.co.uk</strong>.</p>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      )}
 
       <OnlineAssessmentModal isOpen={isAssessmentOpen} onClose={() => setIsAssessmentOpen(false)} />
     </>

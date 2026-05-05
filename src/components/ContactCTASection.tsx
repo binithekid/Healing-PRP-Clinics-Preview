@@ -78,7 +78,7 @@ export default function ContactCTASection() {
         clinic_location: activeClinic === "birmingham" ? "Birmingham (Edgbaston)" : "St Albans",
       });
 
-      // --- GOOGLE ADS CONVERSION TRACKING ---
+    // --- GOOGLE ADS CONVERSION TRACKING ---
       if (typeof window !== "undefined") {
         const w = window as Window & { gtag?: (...args: unknown[]) => void };
         if (w.gtag) {
