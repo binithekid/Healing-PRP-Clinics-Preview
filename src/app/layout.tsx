@@ -63,14 +63,14 @@ export default function RootLayout({
         {/* The Global Sticky Buttons */}
         <GlobalStickyCTAs />
 
-        {/* GOOGLE ADS BASE TRACKING CODE */}
+       {/* GOOGLE ADS BASE TRACKING CODE */}
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=AW-18130686557"
         />
         <Script
           id="google-ads-tag"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
