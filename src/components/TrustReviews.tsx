@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-// Add a prop so we can pass different URLs to this component based on the clinic location
 interface TrustReviewsProps {
   widgetUrl: string;
 }
@@ -13,36 +12,34 @@ export default function TrustReviews({ widgetUrl }: TrustReviewsProps) {
   const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
-    // If we don't have the ref, or we've already loaded the script, do nothing.
     if (!containerRef.current || hasLoaded) return;
 
-    // Create an observer to watch when the user scrolls near this section
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          // The user is near the reviews! Inject the script now.
-          if (containerRef.current) {
-            containerRef.current.innerHTML = ""; 
-            
-            const script = document.createElement("script");
-            script.src = widgetUrl;
-            script.defer = true;
-            script.async = true;
-            containerRef.current.appendChild(script);
-          }
+          // Defer injection by 200ms so it doesn't block the browser's main painting thread
+          setTimeout(() => {
+            if (containerRef.current) {
+              containerRef.current.innerHTML = ""; 
+              const script = document.createElement("script");
+              script.src = widgetUrl;
+              script.defer = true;
+              script.async = true;
+              containerRef.current.appendChild(script);
+            }
+            setHasLoaded(true);
+          }, 200);
           
-          setHasLoaded(true); // Mark as loaded so it doesn't run again
-          observer.disconnect(); // Stop observing to save memory
+          observer.disconnect();
         }
       },
-      { rootMargin: "300px" } // Start loading 300px BEFORE it comes into view so it's ready when they scroll
+      // Changed from 300px to 0px. It will now STRICTLY wait until scrolled into view.
+      { rootMargin: "0px" } 
     );
 
     observer.observe(containerRef.current);
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [widgetUrl, hasLoaded]);
 
   return (
@@ -69,7 +66,7 @@ export default function TrustReviews({ widgetUrl }: TrustReviewsProps) {
           </motion.h2>
         </div>
 
-        {/* The Trustindex widget will securely load inside this exact div */}
+        {/* Min-height prevents "Cumulative Layout Shift" (CLS) penalties when the widget finally loads */}
         <div ref={containerRef} className="w-full min-h-[250px] flex items-center justify-center" />
         
       </div>
