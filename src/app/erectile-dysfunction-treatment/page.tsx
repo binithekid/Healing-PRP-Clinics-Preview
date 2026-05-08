@@ -220,7 +220,6 @@ export default function ErectileDysfunctionTreatmentPage() {
       <ErectileDysfunctionTreatmentClient 
         locationName="St Albans"
         servingAreas="St Albans • Luton • Harpenden • Hertfordshire"
-        heroDescription={<>Start with a <strong>free confidential consultation</strong> at our St Albans clinic.</>}
         whyChooseText="Patients choose our St Albans clinic for accessible, doctor-led care and a structured approach to erectile dysfunction assessment and treatment."
         faqs={faqs}
       />
