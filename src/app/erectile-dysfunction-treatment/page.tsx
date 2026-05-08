@@ -7,11 +7,12 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Consult A Private ED Doctor St Albans | Healing-PRP",
+    absolute: "Private Erectile Dysfunction Treatment St Albans",
   },
 
   description:
-    "Face-to-face erectile dysfunction assessments with a private GMC doctor in St Albans. Move beyond online pills. Private clinic fees apply.",
+    "Face-to-face ED assessments with a GMC-registered doctor in St Albans. Discreet private clinic care beyond online pills. Treatment fees apply.",
+
 
   // --- CANONICAL URL DEFINED HERE ---
   alternates: {
