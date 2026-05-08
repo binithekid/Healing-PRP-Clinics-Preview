@@ -7,11 +7,11 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Doctor-Led Erectile Dysfunction Treatment St Albans | Healing-PRP",
+    absolute: "Consult A Private ED Doctor St Albans | Healing-PRP",
   },
 
   description:
-    "Doctor-led Erectile Dysfunction (ED) clinic serving Luton & St Albans.",
+    "Face-to-face erectile dysfunction assessments with a private GMC doctor in St Albans. Move beyond online pills. Private clinic fees apply.",
 
   // --- CANONICAL URL DEFINED HERE ---
   alternates: {
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Doctor-Led Erectile Dysfunction Treatment St Albans | Healing-PRP Clinics",
+    title: "Consult A Private ED Doctor St Albans | Healing-PRP Clinics",
     description:
-      "Doctor-led non-surgical therapy for ED. Private, confidential assessments. Conveniently serving Luton, St Albans, and Hertfordshire.",
+      "Doctor-led non-surgical therapy for ED. Face-to-face private assessments. Conveniently serving Luton, St Albans, and Hertfordshire. Private fees apply.",
     url: "https://www.healing-prp.co.uk/erectile-dysfunction-treatment",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -38,25 +38,29 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Doctor-Led Erectile Dysfunction Treatment St Albans",
-    description: "Doctor-led non-surgical therapy for ED in St Albans. Private, confidential assessments.",
+    title: "Private ED Doctor St Albans",
+    description: "Face-to-face erectile dysfunction assessments with a private GMC doctor. No GP referral needed.",
     images: ["/ed-doctor-consultation.webp"],
   },
 };
 
-// --- COMPLIANT SEO RICH FAQS ---
+// --- COMPLIANT SEO RICH FAQS (Upgraded with Financial Filters & Anti-Telehealth) ---
 const faqs = [
+  {
+    question: "Is this service available on the NHS?",
+    answer: "No, Healing-PRP is a private medical clinic. All consultations, diagnostics, and treatments are subject to private clinic fees. This allows us to offer immediate, face-to-face appointments with a specialist doctor without the NHS wait times."
+  },
   {
     question: "Do I need a GP referral to book a consultation?",
     answer: "No, a GP referral is not required. You can book a direct, private consultation with our GMC-registered doctors for a full assessment of your symptoms."
   },
   {
-    question: "What happens during the initial consultation at the St Albans clinic?",
-    answer: "Your doctor will discuss your medical history, current symptoms, and any previous treatments (like oral tablets) you have tried. We focus on identifying the root cause rather than just providing a temporary fix."
+    question: "How is this different from online pill subscriptions?",
+    answer: "Unlike automated online services, we provide face-to-face medical care. Your doctor will discuss your medical history, current symptoms, and physically assess you. We focus on identifying the root cause rather than just providing a generic, temporary tablet."
   },
   {
     question: "Are your treatments surgical?",
-    answer: "No. Our clinics focus entirely on non-surgical, minimally invasive treatments such as advanced shockwave therapy and personalised medical management."
+    answer: "No. Our clinics focus entirely on non-surgical, minimally invasive physical treatments such as advanced shockwave therapy and personalised medical management."
   },
   {
     question: "How do I know which treatment is right for me?",
@@ -72,7 +76,7 @@ const edSchema = {
       "@type": "MedicalClinic",
       "@id": "https://www.healing-prp.co.uk/erectile-dysfunction-treatment#clinic",
       "name": "Healing-PRP Clinics St Albans",
-      "description": "Doctor-led Erectile Dysfunction (ED) clinic offering Shockwave Therapy and personalised medical management.",
+      "description": "Private, Doctor-led Erectile Dysfunction (ED) clinic offering face-to-face assessments and advanced physical therapies.",
       "telephone": "+44 7990 364147",
       "address": {
         "@type": "PostalAddress",
@@ -220,7 +224,7 @@ export default function ErectileDysfunctionTreatmentPage() {
       <ErectileDysfunctionTreatmentClient 
         locationName="St Albans"
         servingAreas="St Albans • Luton • Harpenden • Hertfordshire"
-        whyChooseText="Patients choose our St Albans clinic for accessible, doctor-led care and a structured approach to erectile dysfunction assessment and treatment."
+        whyChooseText="Patients choose our St Albans clinic to move beyond automated online pill subscriptions. We provide face-to-face, doctor-led care and a structured approach to identifying the root cause of erectile dysfunction. Private clinic fees apply."
         faqs={faqs}
       />
     </main>
