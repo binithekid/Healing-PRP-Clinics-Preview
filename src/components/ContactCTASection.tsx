@@ -83,28 +83,31 @@ export default function ContactCTASection() {
         const w = window as Window & { gtag?: (...args: unknown[]) => void };
         if (w.gtag) {
           w.gtag('event', 'conversion', {
-            'send_to': 'AW-18130686557/hY3YCIONsKUcEN2kscVD'
+            'send_to': 'AW-18130686557/hY3YCIONsKUcEN2kscVD' // Ensure this label is correct!
           });
         }
       }
       // ---------------------------------------
 
-      // REDIRECT TO THE CORRECT THANK YOU PAGE
-      if (activeClinic === "birmingham") {
-        router.push("/birmingham/thank-you");
-      } else {
-        router.push("/thank-you");
-      }
-      
-      // Clear form in the background
+      // Clear form in the background immediately
       setFormData({ name: "", email: "", phone: "", treatment: "Erectile Dysfunction", message: "" });
+
+      // DELAY THE REDIRECT BY 400ms TO ENSURE GOOGLE ADS CATCHES THE CONVERSION
+      setTimeout(() => {
+        if (activeClinic === "birmingham") {
+          router.push("/birmingham/thank-you");
+        } else {
+          router.push("/thank-you");
+        }
+      }, 400);
+
     } catch (error) {
       setSubmitStatus({ type: "error", message: "Failed to send. Please try WhatsApp." });
     } finally {
       setIsSubmitting(false);
     }
   };
-
+  
   return (
     <section id="contact-form-section" className="relative py-12 bg-white font-inter scroll-mt-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
