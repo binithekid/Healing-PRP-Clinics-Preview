@@ -19,9 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/sexual-rejuvenation", priority: 0.9 },
     { url: "/p-shot", priority: 0.95 },
     { url: "/o-shot", priority: 0.95 }, 
-    { url: "/penis-enlargement", priority: 0.95 }, // <-- ADDED: Penis Enlargement
-    { url: "/erectile-dysfunction", priority: 0.95 },
-    { url: "/shockwave-therapy-erectile-dysfunction", priority: 0.9 }, // <-- ADDED: Shockwave Therapy
+    { url: "/penis-enlargement", priority: 0.95 },
+    { url: "/erectile-dysfunction", priority: 0.95 }, // <-- General ED page
+    { url: "/erectile-dysfunction-treatment", priority: 0.95 }, // <-- ED Treatment page
+    { url: "/shockwave-therapy-erectile-dysfunction", priority: 0.9 },
     { url: "/peyronies-disease", priority: 0.9 },
     { url: "/premature-ejaculation", priority: 0.9 },
     
@@ -35,9 +36,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/birmingham/sexual-rejuvenation", priority: 0.85 },
     { url: "/birmingham/p-shot", priority: 0.9 },
     { url: "/birmingham/o-shot", priority: 0.9 }, 
-    { url: "/birmingham/penis-enlargement", priority: 0.9 }, // <-- ADDED: Birmingham Penis Enlargement
-    { url: "/birmingham/erectile-dysfunction", priority: 0.9 },
-    { url: "/birmingham/shockwave-therapy-erectile-dysfunction", priority: 0.85 }, // <-- ADDED: Birmingham Shockwave
+    { url: "/birmingham/penis-enlargement", priority: 0.9 },
+    { url: "/birmingham/erectile-dysfunction", priority: 0.9 }, // <-- General Birmingham ED page
+    { url: "/birmingham/erectile-dysfunction-treatment", priority: 0.9 }, // <-- Birmingham ED Treatment page
+    { url: "/birmingham/shockwave-therapy-erectile-dysfunction", priority: 0.85 },
     { url: "/birmingham/peyronies-disease", priority: 0.85 },
     { url: "/birmingham/premature-ejaculation", priority: 0.85 },
 
