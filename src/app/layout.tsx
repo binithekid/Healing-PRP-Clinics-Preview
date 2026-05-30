@@ -5,8 +5,8 @@ import Header from "@/components/Header";
 import GlobalStickyCTAs from "@/components/GlobalStickyCTAs";
 import Script from "next/script";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway", display: "swap" });
 
 // --- GLOBAL SEO DEFAULTS ---
 export const metadata: Metadata = {
