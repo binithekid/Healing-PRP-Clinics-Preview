@@ -212,7 +212,7 @@ export default function ErectileDysfunctionTreatmentClient({
           
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 border border-white/20 rounded-full bg-[#1e293b]/50 backdrop-blur-md shadow-lg">
             <FaStethoscope className="text-blue-400 w-3 h-3" />
-            <span className="text-blue-100 text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase font-inter">Doctor-Led Private Clinic</span>
+            <span className="text-blue-100 text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase font-inter">Led By Dr Abdi</span>
           </div>
 
           <h1 className="md:text-6xl text-4xl font-bold font-raleway text-white leading-tight mb-5 tracking-tight drop-shadow-lg">
@@ -266,6 +266,29 @@ export default function ErectileDysfunctionTreatmentClient({
         </div>
       </div>
 
+       {/* --- DOCTOR-LED TRUST SECTION (MOVED UP) --- */}
+      <section className="py-24 bg-white font-inter border-b border-slate-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div className="shrink-0 relative">
+              <img
+                src="/dr-syed-abdi.webp"
+                alt="Dr Syed Abdi, GMC-registered doctor at Healing-PRP Clinics"
+                className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover shadow-md mx-auto md:mx-0 border-4 border-white"
+              />
+            </div>
+            <div className="text-center md:text-left">
+              <h2 className="text-2xl md:text-3xl font-raleway font-bold text-slate-900 mb-4">
+                Treatment With Dr Syed Abdi
+              </h2>
+              <p className="text-slate-600 text-base md:text-lg leading-relaxed">
+                Your consultation and treatment are carried out by Dr Syed Abdi, a GMC-registered doctor with experience in men’s intimate health, PRP treatments and non-surgical intimate health procedures. The appointment is discreet, private and focused on suitability, safety and realistic expectations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* --- MOVED UP: DOCTOR-LED APPROACH --- */}
       <section className="py-16 md:py-20 bg-slate-50 font-inter border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -279,6 +302,8 @@ export default function ErectileDysfunctionTreatmentClient({
                     "Previous treatments and response so far",
                     "Medical history and current medication",
                     "Possible contributing factors (circulation, hormones, stress)",
+                    "Treatment options that may be suitable for you, including shockwave therapy, PRP-based treatment, blood tests or medication review",
+      
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0 text-base" />
