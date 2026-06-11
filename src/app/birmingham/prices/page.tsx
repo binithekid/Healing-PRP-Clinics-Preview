@@ -1,95 +1,117 @@
 import type { Metadata } from "next";
 import PricesClient from "@/components/pages/PricesClient";
-import Script from "next/script";
+
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
-  // 1. Optimized Title: Result will be "Treatment Prices & Packages | Birmingham Clinic"
-  title: "Treatment Prices & Packages", 
-  
-  description: "View competitive pricing for P-Shot, O-Shot, and PRP therapy in Birmingham. Doctor-led treatments in Edgbaston, Solihull, and the West Midlands.",
-  
+  title: {
+    absolute: "Treatment Prices Birmingham | Doctor-Led Clinic Edgbaston",
+  },
+  description: "Transparent, doctor-led pricing for PRP Hair Restoration, Joint Pain Injections, and Sexual Rejuvenation in Birmingham. No hidden costs. Serving the West Midlands.",
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/prices",
   },
-
-  // 2. Expanded Local & Intent-Based Keywords
-  keywords: [
-    // --- MEN'S HEALTH & ED ---
-    "ED treatment cost Birmingham",
-    "Erectile dysfunction clinic prices West Midlands",
-    "Personalised ED medication cost",
-    "P-Shot price West Midlands",
-    
-    // --- WOMEN'S HEALTH ---
-    "O-Shot cost Solihull",
-    
-    // --- HAIR RESTORATION ---
-    "Affordable PRP hair loss Sutton Coldfield",
-    "Hair regrowth course price West Midlands",
-    
-    // --- JOINT PAIN ---
-    "Joint injection prices Wolverhampton",
-    "Joint pain therapy cost Dudley",
-    
-    // --- SKIN & AESTHETICS ---
-    "Polynucleotides price Birmingham",
-    "Polynucleotide package cost West Midlands", 
-    "Vampire Facial cost Harborne",
-    
-    // --- GENERAL CLINIC INTENT ---
-    "Private clinic prices Edgbaston",
-    "PRP treatment packages Birmingham"
-  ],
-
   openGraph: {
     title: "Healing-PRP Clinics | Birmingham Price List",
-    description: "Transparent pricing for specialist regenerative medicine in Birmingham. Serving Solihull, Sutton Coldfield & Harborne.",
+    description: "View our full price list for regenerative medical treatments. Specialist care by GMC-registered doctors in Edgbaston and the West Midlands.",
     url: "https://www.healing-prp.co.uk/birmingham/prices",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
+    images: [
+      {
+        url: "/hero_img.png",
+        width: 1200,
+        height: 630,
+        alt: "Doctor-Led Treatment Prices Birmingham",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Healing-PRP Clinics | Birmingham Price List",
+    description: "View our full price list for regenerative medical treatments in Edgbaston, Birmingham.",
+    images: ["/hero_img.png"],
   },
 };
 
-// --- UPGRADED JSON-LD SCHEMA: Medical Clinic E-E-A-T (Birmingham) ---
+// --- UPGRADED JSON-LD SCHEMA: Medical Clinic & Local Pricing ---
 const priceSchemaBirmingham = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "MedicalClinic",
+      "@id": "https://www.healing-prp.co.uk/birmingham/prices#clinic",
       "name": "Healing-PRP Clinics Birmingham",
-      "priceRange": "£120 - £1800",
+      "url": "https://www.healing-prp.co.uk/birmingham/prices",
+      "description": "Doctor-led regenerative medicine prices for Edgbaston and the West Midlands.",
+      "telephone": "+447990364147",
       "image": "https://www.healing-prp.co.uk/Logo2.png",
-      "description": "Doctor-led regenerative medicine prices for Birmingham, Edgbaston, and the West Midlands.",
+      "priceRange": "£150 - £4000",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "38 Harborne Rd",
         "addressLocality": "Birmingham",
         "addressRegion": "West Midlands",
-        "addressCountry": "UK"
+        "postalCode": "B15 3EB",
+        "addressCountry": "GB"
       },
-      "areaServed": {
-        "@type": "City",
-        "name": "Birmingham"
-      },
-      // --- E-E-A-T UPGRADE: Connecting You to the Clinic ---
-      "medicalDirector": {
-        "@type": "Physician",
-        "name": "Dr Syed Abdi",
-        "url": "https://www.healing-prp.co.uk/our-doctor"
-      }
+      "areaServed": [
+        { "@type": "City", "name": "Birmingham" },
+        { "@type": "City", "name": "Edgbaston" },
+        { "@type": "AdministrativeArea", "name": "West Midlands" }
+      ],
+      "employee": [
+        { 
+          "@type": "Person",
+          "name": "Dr Syed Abdi",
+          "jobTitle": "Medical Director",
+          "url": "https://www.healing-prp.co.uk/our-doctor"
+        }
+      ]
+    }
+  ]
+};
+
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Birmingham Clinic",
+      "item": "https://www.healing-prp.co.uk/birmingham"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Treatment Prices",
+      "item": "https://www.healing-prp.co.uk/birmingham/prices"
     }
   ]
 };
 
 export default function BirminghamPricesPage() {
   return (
-    <>
-      <Script
-        id="price-schema-birmingham"
+    <main>
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(priceSchemaBirmingham) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(priceSchemaBirmingham) }}
       />
-      <PricesClient isBirmingham={true} />
-    </>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+      <PricesClient isBirmingham={true} isHampstead={false} />
+    </main>
   );
 }
