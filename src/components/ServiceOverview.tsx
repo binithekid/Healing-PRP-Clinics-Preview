@@ -8,17 +8,54 @@ import { FaVenusMars, FaSyringe, FaRunning, FaSmile } from "react-icons/fa";
 export default function ServiceOverview() {
   const pathname = usePathname();
   const isBirmingham = pathname?.startsWith("/birmingham");
-  const prefix = isBirmingham ? "/birmingham" : "";
+  const isHampstead = pathname?.startsWith("/hampstead");
+  
+  const prefix = isBirmingham ? "/birmingham" : isHampstead ? "/hampstead" : "";
 
-  // REORDERED SERVICES: Intimate Health is now #1 (Far Left)
-  const services = [
+  // --- HAMPSTEAD SPECIFIC SERVICES ---
+  const hampsteadServices = [
+    {
+      title: "Men’s Intimate Health",
+      description: "Doctor-led assessment and treatment options for erectile dysfunction, Peyronie’s disease, premature ejaculation and selected male intimate health concerns.",
+      icon: FaVenusMars, 
+      link: `${prefix}/sexual-rejuvenation`,
+      color: "bg-blue-50 text-[#4041d1]",
+      ctaLabel: "View Men’s Treatments",
+      subLinks: [
+        { name: "Erectile Dysfunction", href: `${prefix}/erectile-dysfunction` },
+        { name: "Peyronie's Disease", href: `${prefix}/peyronies-disease` },
+        { name: "Premature Ejaculation", href: `${prefix}/premature-ejaculation` },
+        { name: "Shockwave", href: `${prefix}/shockwave-therapy-erectile-dysfunction` },
+        { name: "P-Shot", href: `${prefix}/p-shot` },
+        { name: "Penis Filler", href: `${prefix}/penis-filler` }
+      ]
+    },
+    {
+      title: "Women’s Intimate Health",
+      description: "Doctor-led assessment and treatment options for vaginal dryness, reduced sensitivity and selected women’s intimate health concerns, with discreet care tailored to symptoms and treatment goals.",
+      icon: FaVenusMars, // Re-using for intimate health, styled with a different color below
+      link: `${prefix}/sexual-rejuvenation`,
+      color: "bg-rose-50 text-rose-600",
+      ctaLabel: "View Women’s Treatments",
+      subLinks: [
+        { name: "Vaginal Dryness", href: `${prefix}/vaginal-dryness` },
+        { name: "Reduced Sensitivity", href: `${prefix}/sexual-rejuvenation` },
+        { name: "O-Shot", href: `${prefix}/o-shot` },
+        { name: "Vaginal HA", href: `${prefix}/vaginal-dryness` },
+        { name: "Vaginal Polynucleotide/HA", href: `${prefix}/vaginal-dryness` }
+      ]
+    }
+  ];
+
+  // --- STANDARD CLINIC SERVICES ---
+  const standardServices = [
     {
       title: "Men's & Women's Intimate Health",
       description: "Doctor-led treatment options for erectile dysfunction, Peyronie’s disease, premature ejaculation, and selected women’s sexual wellness concerns.",
       icon: FaVenusMars, 
       link: `${prefix}/sexual-rejuvenation`,
       color: "bg-blue-50 text-[#4041d1]",
-      // THE SEO GOLDMINE: Direct links to specific YMYL pages
+      ctaLabel: "View Treatments",
       subLinks: [
         { name: "ED", href: `${prefix}/erectile-dysfunction` },
         { name: "P-Shot", href: `${prefix}/p-shot` },
@@ -33,6 +70,7 @@ export default function ServiceOverview() {
       icon: FaRunning,
       link: `${prefix}/joint-injections`,
       color: "bg-indigo-50 text-indigo-600",
+      ctaLabel: "View Treatments",
       subLinks: [
         { name: "PRP for Joints", href: `${prefix}/joint-injections` },
         { name: "Sports Injuries", href: `${prefix}/joint-injections` }
@@ -44,6 +82,7 @@ export default function ServiceOverview() {
       icon: FaSyringe, 
       link: `${prefix}/hair-restoration`,
       color: "bg-teal-50 text-teal-600",
+      ctaLabel: "View Treatments",
       subLinks: [
         { name: "PRP Hair Therapy", href: `${prefix}/hair-restoration` },
         { name: "Exosomes", href: `${prefix}/hair-restoration` }
@@ -55,12 +94,15 @@ export default function ServiceOverview() {
       icon: FaSmile,
       link: `${prefix}/facial-aesthetics`,
       color: "bg-rose-50 text-rose-600",
+      ctaLabel: "View Treatments",
       subLinks: [
         { name: "Polynucleotides", href: `${prefix}/facial-aesthetics` },
         { name: "Vampire Facials", href: `${prefix}/facial-aesthetics` }
       ]
     }
   ];
+
+  const displayedServices = isHampstead ? hampsteadServices : standardServices;
 
   return (
     <section className="py-24 bg-white font-inter">
@@ -72,7 +114,7 @@ export default function ServiceOverview() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-raleway font-bold text-slate-900 mb-6 tracking-tight"
           >
-            Our Core Treatments
+            {isHampstead ? "Our Intimate Health Focus" : "Our Core Treatments"}
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -81,13 +123,15 @@ export default function ServiceOverview() {
             transition={{ delay: 0.1 }}
             className="text-slate-600 text-lg leading-relaxed font-inter"
           >
-            We specialize in regenerative medicine, using your body&apos;s natural healing abilities 
-            alongside medically proven aesthetic and pain-relief protocols.
+            {isHampstead 
+              ? "Our Hampstead clinic focuses on discreet, doctor-led care for men’s and women’s intimate health, with treatment options tailored to symptoms, medical history and individual goals." 
+              : "We specialize in regenerative medicine, using your body's natural healing abilities alongside medically proven aesthetic and pain-relief protocols."}
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-          {services.map((service, index) => (
+        {/* Adjust grid dynamically based on the number of cards */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${!isHampstead && 'lg:grid-cols-4'} gap-8 relative max-w-5xl mx-auto`}>
+          {displayedServices.map((service, index) => (
             <motion.div 
               key={index} 
               className="relative flex items-center h-full"
@@ -114,23 +158,29 @@ export default function ServiceOverview() {
                   {service.description}
                 </p>
 
-                {/* PREMIUM SEO SUB-LINKS (Interactive Pills) */}
-                <div className="flex flex-wrap gap-2 mb-8 mt-auto pt-4">
+                {/* UPDATED: Valid Tailwind classes for padding (px-4 py-[10px]) and gap-3 */}
+                <div className="flex flex-wrap gap-3 mt-auto pt-4">
                   {service.subLinks.map((subLink, idx) => (
                     <Link 
                       key={idx} 
                       href={subLink.href}
-                      className="inline-flex items-center justify-center text-[11px] font-bold uppercase tracking-wider bg-blue-50/50 border border-blue-100 text-[#4041d1] px-4 py-2 rounded-lg hover:bg-[#4041d1] hover:border-[#4041d1] hover:text-white hover:shadow-md transition-all duration-300"
+                      className={`inline-flex items-center justify-center text-xs font-bold uppercase tracking-wider border px-4 py-[10px] rounded-lg transition-all duration-300 ${
+                        isHampstead && index === 1 
+                          ? 'bg-rose-50/50 border-rose-200 text-rose-700 hover:bg-rose-600 hover:border-rose-600 hover:text-white hover:shadow-md'
+                          : 'bg-blue-50/50 border-blue-200 text-[#4041d1] hover:bg-[#4041d1] hover:border-[#4041d1] hover:text-white hover:shadow-md'
+                      }`}
                     >
                       {subLink.name}
                     </Link>
                   ))}
                 </div>
                 
-                {/* View Treatments Link (Cleaned up, no arrow) */}
-                <Link href={service.link} className="inline-block text-xs font-bold uppercase tracking-widest text-[#4041d1] hover:text-[#2a2bb8] transition-colors w-max mt-auto">
-                  View Treatments
-                </Link>
+                {/* Standard Clinic locations keep the bottom text link, Hampstead removes it */}
+                {!isHampstead && service.ctaLabel && (
+                  <Link href={service.link} className="inline-block text-xs font-bold uppercase tracking-widest transition-colors w-max mt-6 text-[#4041d1] hover:text-[#2a2bb8]">
+                    {service.ctaLabel}
+                  </Link>
+                )}
               </motion.div>
             </motion.div>
           ))}

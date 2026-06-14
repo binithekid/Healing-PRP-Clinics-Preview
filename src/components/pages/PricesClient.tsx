@@ -8,8 +8,22 @@ import Footer from "@/components/Footer";
 import Script from "next/script";
 import Link from "next/link";
 
-export default function PricesClient({ isBirmingham = false }: { isBirmingham?: boolean }) {
-  const locationName = isBirmingham ? "Birmingham" : "St Albans";
+interface PricesClientProps {
+  isBirmingham?: boolean;
+  isHampstead?: boolean;
+}
+
+export default function PricesClient({ isBirmingham = false, isHampstead = false }: PricesClientProps) {
+  
+  // Dynamic location naming
+  const locationName = isBirmingham ? "Birmingham" : isHampstead ? "Hampstead" : "St Albans";
+  
+  // Dynamic service area for the subtitle
+  const regionalArea = isBirmingham 
+    ? "the West Midlands" 
+    : isHampstead 
+    ? "North West London" 
+    : "Hertfordshire";
 
   const categories = [
     {
@@ -54,7 +68,7 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
         { name: "Botox (3 Areas)", price: "£200", sessions: "Single", details: "Anti-wrinkle injections" },
       ]
     }
-  ]; // <-- The missing syntax has been fixed here!
+  ]; 
 
   const priceSchema = {
     "@context": "https://schema.org",
@@ -127,7 +141,7 @@ export default function PricesClient({ isBirmingham = false }: { isBirmingham?: 
                   className="text-base mt-2 text-slate-600 leading-relaxed max-w-2xl mx-auto font-inter"
                   variants={itemVariants}
                 >
-                  Doctor-led regenerative treatments with clear, upfront costs. Serving patients across {isBirmingham ? "the West Midlands" : "Hertfordshire"}.
+                  Doctor-led regenerative treatments with clear, upfront costs. Serving patients across {regionalArea}.
                 </motion.p>
 
                 {/* Stacked Layout */}

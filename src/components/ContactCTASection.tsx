@@ -7,21 +7,30 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import emailjs from "@emailjs/browser";
 
-export default function ContactCTASection() {
+interface ContactCTASectionProps {
+  defaultTreatment?: string;
+}
+
+export default function ContactCTASection({ defaultTreatment = "Erectile Dysfunction" }: ContactCTASectionProps) {
   const pathname = usePathname();
   const router = useRouter(); 
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false); // Used for QR Logic
   
-  const [activeClinic, setActiveClinic] = useState<"st-albans" | "birmingham">(
-    pathname?.startsWith("/birmingham") ? "birmingham" : "st-albans"
+  // ADDED: Hampstead to the clinic state logic
+  const [activeClinic, setActiveClinic] = useState<"st-albans" | "birmingham" | "hampstead">(
+    pathname?.startsWith("/birmingham") 
+      ? "birmingham" 
+      : pathname?.startsWith("/hampstead") 
+      ? "hampstead" 
+      : "st-albans"
   );
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    treatment: "Erectile Dysfunction",
+    treatment: defaultTreatment,
     message: "",
   });
   
@@ -52,6 +61,33 @@ export default function ContactCTASection() {
     if (submitStatus.type) setSubmitStatus({ type: null, message: "" });
   };
 
+  // --- Call & WhatsApp tracking handlers ---
+  const handlePhoneClick = () => {
+    if (typeof window !== "undefined") {
+      const w = window as Window & { gtag?: (...args: unknown[]) => void };
+      if (w.gtag) {
+        w.gtag("event", "phone_click", {
+          event_category: "contact",
+          event_label: "phone_number_clicked",
+          page_path: window.location.pathname,
+        });
+      }
+    }
+  };
+
+  const handleWhatsAppClick = () => {
+    if (typeof window !== "undefined") {
+      const w = window as Window & { gtag?: (...args: unknown[]) => void };
+      if (w.gtag) {
+        w.gtag("event", "whatsapp_click", {
+          event_category: "contact",
+          event_label: "whatsapp_button_clicked",
+          page_path: window.location.pathname,
+        });
+      }
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return; 
@@ -75,7 +111,8 @@ export default function ContactCTASection() {
         phone: formData.phone,
         treatment: formData.treatment,
         message: formData.message,
-        clinic_location: activeClinic === "birmingham" ? "Birmingham (Edgbaston)" : "St Albans",
+        // ADDED: Hampstead handling for email output
+        clinic_location: activeClinic === "birmingham" ? "Birmingham (Edgbaston)" : activeClinic === "hampstead" ? "Hampstead (London)" : "St Albans",
       });
 
     // --- GOOGLE ADS CONVERSION TRACKING ---
@@ -83,19 +120,21 @@ export default function ContactCTASection() {
         const w = window as Window & { gtag?: (...args: unknown[]) => void };
         if (w.gtag) {
           w.gtag('event', 'conversion', {
-            'send_to': 'AW-18130686557/hY3YCIONsKUcEN2kscVD' // Ensure this label is correct!
+            'send_to': 'AW-18130686557/hY3YCIONsKUcEN2kscVD' 
           });
         }
       }
       // ---------------------------------------
 
       // Clear form in the background immediately
-      setFormData({ name: "", email: "", phone: "", treatment: "Erectile Dysfunction", message: "" });
+      setFormData({ name: "", email: "", phone: "", treatment: defaultTreatment, message: "" });
 
       // DELAY THE REDIRECT BY 400ms TO ENSURE GOOGLE ADS CATCHES THE CONVERSION
       setTimeout(() => {
         if (activeClinic === "birmingham") {
           router.push("/birmingham/thank-you");
+        } else if (activeClinic === "hampstead") {
+          router.push("/hampstead/thank-you");
         } else {
           router.push("/thank-you");
         }
@@ -136,6 +175,7 @@ export default function ContactCTASection() {
 
             <a 
               href="tel:07990364147"
+              onClick={handlePhoneClick}
               className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-2xl font-bold text-sm hover:bg-slate-50 transition-all"
             >
               <FaPhoneAlt className="text-[#4041d1] w-3.5 h-3.5" />
@@ -168,17 +208,18 @@ export default function ContactCTASection() {
                     <div className="lg:col-span-7">
                       <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
                         <div className="md:col-span-2 mb-2">
-                          <div className="flex p-1 bg-slate-200/50 rounded-2xl w-fit">
-                            {(["st-albans", "birmingham"] as const).map((clinic) => (
+                          <div className="flex flex-wrap gap-1 p-1 bg-slate-200/50 rounded-2xl w-fit">
+                            {/* ADDED: Hampstead to the map array */}
+                            {(["st-albans", "birmingham", "hampstead"] as const).map((clinic) => (
                               <button
                                 key={clinic}
                                 type="button"
                                 onClick={() => setActiveClinic(clinic)}
-                                className={`px-6 py-2 rounded-xl text-[11px] font-bold transition-all ${
+                                className={`px-4 sm:px-6 py-2 rounded-xl text-[11px] font-bold transition-all ${
                                   activeClinic === clinic ? "bg-white text-[#4041d1] shadow-sm" : "text-slate-500 hover:text-slate-700"
                                 }`}
                               >
-                                {clinic === "st-albans" ? "St Albans" : "Birmingham"}
+                                {clinic === "st-albans" ? "St Albans" : clinic === "birmingham" ? "Birmingham" : "Hampstead"}
                               </button>
                             ))}
                           </div>
@@ -227,13 +268,16 @@ export default function ContactCTASection() {
                         <div className="md:col-span-2 space-y-1">
                           <label className="text-[10px] font-bold uppercase text-slate-500 ml-1 tracking-widest">Treatment</label>
                           <select name="treatment" value={formData.treatment} onChange={handleInputChange} className="w-full px-5 py-3 rounded-2xl border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-[#4041d1] transition-shadow bg-white text-slate-600 appearance-none text-sm">
+                            <option>Penis Filler / Girth Enhancement</option>
                             <option>Erectile Dysfunction</option>
                             <option>Shockwave Therapy for ED</option>
                             <option>P-Shot / PRP for ED</option>
                             <option>Peyronie&apos;s Disease</option>
-                            <option>Penis Filler / Girth Enhancement</option>
-                            <option>Testosterone / Blood Review</option>
-                            <option>Not sure — I want advice</option>
+                            <option>Vaginal Dryness Treatment</option>
+                            <option>Hair Restoration</option>
+                            <option>Joint Pain Relief</option>
+                            <option>Facial Aesthetics</option>
+                            <option>Other</option>
                           </select>
                         </div>
                         <div className="md:col-span-2 space-y-1">
@@ -279,6 +323,7 @@ export default function ContactCTASection() {
                                href="https://wa.me/447990364147" 
                                target="_blank" 
                                rel="noopener noreferrer"
+                               onClick={handleWhatsAppClick}
                                className="flex items-center justify-center gap-3 w-full py-4 bg-[#25D366] text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
                              >
                                <FaWhatsapp className="w-6 h-6" /> Open WhatsApp

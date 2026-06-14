@@ -28,15 +28,14 @@ import {
 } from "react-icons/fa";
 
 // --- DYNAMIC IMPORTS FOR PAGESPEED OPTIMISATION ---
-// These components will only load when needed, speeding up the initial page render (LCP)
 const TrustReviews = dynamic(() => import("@/components/TrustReviews"), { 
-  ssr: false, // Prevents the heavy Trustindex widget from blocking the server render
+  ssr: false, 
 });
 const ContactCTASection = dynamic(() => import("@/components/ContactCTASection"));
 const LocationSection = dynamic(() => import("@/components/LocationSection"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const PEOnlineAssessmentModal = dynamic(() => import("@/components/PEOnlineAssessmentModal"), {
-  ssr: false, // Modals do not need to be server-side rendered
+  ssr: false,
 });
 
 // --- INTERFACE FOR DYNAMIC PROPS ---
@@ -62,17 +61,16 @@ export default function PenisEnlargementClient({
   const [isLoaded, setIsLoaded] = useState(false);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
-
-  const isBirmingham = locationName === "Birmingham";
-
- // --- NEW: Added the interaction state ---
   const [hasInteracted, setHasInteracted] = useState(false);
+
+  // --- LOCATION LOGIC ---
+  const isBirmingham = locationName === "Birmingham";
+  const isHampstead = locationName === "Hampstead";
 
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsLoaded(true);
 
-    // --- NEW: Listen for the first real user interaction for PageSpeed ---
     const handleInteraction = () => {
       setHasInteracted(true);
       window.removeEventListener("scroll", handleInteraction);
@@ -101,7 +99,7 @@ export default function PenisEnlargementClient({
     if (typeof window !== "undefined") {
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
       if (w.gtag) {
-        w.gtag("event", "generate_lead", {
+        w.gtag("event", "contact_initiated", {
           event_category: "engagement",
           event_label: "opened_contact_drawer",
           page_path: window.location.pathname,
@@ -109,17 +107,12 @@ export default function PenisEnlargementClient({
       }
     }
 
-    // --- NEW: Force interaction state if they click before scrolling ---
     setHasInteracted(true);
-    
     window.dispatchEvent(new CustomEvent("open-contact-drawer"));
     
-    // Increased timeout to 300ms to allow any form/drawer animations to complete
     setTimeout(() => {
       const section = document.getElementById("contact-form-section");
       if (section) {
-        // Reduced headerOffset from 100 to 20 to scroll further down the page
-        // This ensures the bottom of the form clears the sticky footer bar
         const headerOffset = 20; 
         const elementPosition = section.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.scrollY - headerOffset;
@@ -155,35 +148,31 @@ export default function PenisEnlargementClient({
   const benefits = [
     {
       title: "Immediate Visible Girth Enhancement",
-      description:
-        "Notice a visible increase in penis girth immediately after treatment, with results designed to look proportionate and natural.",
+      description: "Designed to create a visible increase in penile girth immediately after treatment, with results planned to look proportionate and natural.",
       icon: FaExpandArrowsAlt,
       color: "bg-blue-50 text-blue-600",
     },
     {
       title: "Fuller Flaccid Appearance",
-      description:
-        "In some men, the added volume and weight of the filler may contribute to a fuller flaccid appearance and less visible shrinkage.",
+      description: "In some men, added HA volume may contribute to a fuller flaccid appearance.",
       icon: FaArrowRight,
       color: "bg-indigo-50 text-indigo-600",
     },
     {
       title: "Improved Intimate Confidence",
-      description:
-        "An increase in penis girth may help some men feel more confident during intimacy and more positive about their overall appearance.",
+      description: "Treatment may help some men feel more confident about their appearance and intimacy.",
       icon: FaHeart,
       color: "bg-rose-50 text-rose-600",
     },
     {
       title: "Doctor-Led, Non-Surgical Option",
-      description:
-        "This doctor-led penis filler treatment offers a discreet option for men seeking visible girth enhancement without surgery.",
+      description: "A doctor-led, non-surgical option for men seeking discreet girth enhancement without surgery.",
       icon: FaShieldAlt,
       color: "bg-teal-50 text-teal-600",
     },
   ];
 
- const protocolSteps = [
+  const protocolSteps = [
     {
       number: 1,
       icon: FaUserMd,
@@ -227,7 +216,7 @@ export default function PenisEnlargementClient({
             fill
             priority
             fetchPriority="high" 
-            quality={90}
+            quality={70}
             sizes="100vw"
             className="object-cover opacity-90"
           />
@@ -256,10 +245,13 @@ export default function PenisEnlargementClient({
             variants={fadeUpVariants}
             className="text-3xl md:text-4xl lg:text-5xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
           >
-            Doctor-Led Penile Filler <br />
-            <span className="text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2 inline-block">in {locationName}</span>
+            {isHampstead ? "Doctor-Led Penis Filler" : "Doctor-Led Penile Filler"} <br />
+            {/* SAFELY ADDED LONDON CONDITIONALLY */}
+            <span className="text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2 inline-block">
+              in {isHampstead ? "Hampstead, London" : locationName}
+            </span>
           </motion.h1>
-
+          
           <motion.p 
             custom={2}
             initial="hidden"
@@ -267,10 +259,12 @@ export default function PenisEnlargementClient({
             variants={fadeUpVariants}
             className="mt-4 text-sm md:text-base text-blue-50/90 font-inter leading-relaxed max-w-2xl mx-auto mb-6 font-medium"
           >
-           Premium hyaluronic acid (HA) filler for men seeking discreet, non-surgical penile girth enhancement in a clinical setting.
+            {isHampstead 
+              ? "Private hyaluronic acid filler treatment for men seeking discreet, non-surgical girth enhancement in Hampstead, North West London." 
+              : "Premium hyaluronic acid (HA) filler for men seeking discreet, non-surgical penile girth enhancement in a clinical setting."}
           </motion.p>
 
-          {/* New Injected Trust Signals Above Fold */}
+          {/* Trust Signals Above Fold */}
           <motion.div
             custom={3}
             initial="hidden"
@@ -294,7 +288,7 @@ export default function PenisEnlargementClient({
               onClick={() => setIsAssessmentOpen(true)}
               className="px-8 py-4 w-full sm:w-auto flex items-center justify-center text-sm cursor-pointer bg-white text-[#4041d1] hover:bg-slate-50 rounded-xl font-bold transition-all duration-300 gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] active:scale-95 font-inter"
             >
-              Free Confidential Online Assessment
+              Check Suitability
             </button>
 
             <button 
@@ -302,12 +296,22 @@ export default function PenisEnlargementClient({
               aria-label="Book Consultation"
               className="px-8 py-4 w-full sm:w-auto flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-[0_0_20px_rgba(64,65,209,0.3)] hover:shadow-[0_0_25px_rgba(64,65,209,0.5)] active:scale-95 font-inter"
             >
-              <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Book Free Confidential Consultation
+              <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Book Private Consultation
             </button>
           </motion.div>
+          
+          <motion.p
+             custom={5}
+             initial="hidden"
+             animate={isLoaded ? "visible" : "hidden"}
+             variants={fadeUpVariants}
+             className="text-white/70 text-xs mt-4 font-inter"
+          >
+             Free initial discussion available. Private treatment fees apply if you proceed.
+          </motion.p>
 
           <motion.div 
-            custom={5}
+            custom={6}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeUpVariants}
@@ -318,7 +322,7 @@ export default function PenisEnlargementClient({
           </motion.div>
         </div>
 
-        {/* --- HERO TRUST BADGES (Fixed for Mobile) --- */}
+        {/* --- HERO TRUST BADGES --- */}
         <div className={`absolute bottom-0 left-0 w-full z-30 bg-[#0A1128]/95 backdrop-blur-xl border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="px-2 py-4 max-w-7xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-2 divide-none md:divide-x divide-white/10">
@@ -354,7 +358,7 @@ export default function PenisEnlargementClient({
                   </div>
                   <div className="flex flex-col items-start">
                     <span className="text-white text-[9px] font-bold uppercase tracking-widest leading-tight font-inter">Premium Fillers</span>
-                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">100% Reversible</span>
+                    <span className="text-blue-400 text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5 font-inter">Dissolvable HA Filler</span>
                   </div>
                 </div>
               </div>
@@ -414,17 +418,15 @@ export default function PenisEnlargementClient({
       {/* --- INTRODUCTION & SYNONYM BRIDGE --- */}
       <section className="py-16 md:py-24 bg-white relative z-30 border-b border-slate-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Layer 2 target strengthened with location */}
           <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
-            Non-Surgical Penis Enlargement {locationName ? `in ${locationName}` : ''}
+            Non-Surgical Penis Enlargement {isHampstead ? "in Hampstead, London" : locationName ? `in ${locationName}` : ''}
           </h2>
           <div className="prose prose-lg text-slate-600 mx-auto font-inter">
-            {/* Layer 3 target "non-surgical penoplasty" injected seamlessly */}
             <p className="font-semibold text-slate-800 text-lg md:text-xl mb-4">
               Penis filler, also referred to as penile filler, penile dermal filler, or non-surgical penoplasty, uses premium hyaluronic acid (HA) to increase girth without the need for invasive surgery.
             </p>
             <p className="mb-8">
-              While historically associated with surgical &quot;penis enlargement,&quot; modern advancements mean that achieving a proportionate, natural-looking increase in girth and a fuller flaccid appearance is now possible through a quick, minimally invasive procedure. Our treatments are administered exclusively by experienced doctors, ensuring maximum safety, discretion, and tailored volume planning.
+              While historically associated with surgical &quot;penis enlargement,&quot; modern advancements mean that achieving a proportionate, natural-looking increase in girth and a fuller flaccid appearance is now possible through a quick, minimally invasive procedure. Treatment is carried out by Dr Abdi in a discreet clinical setting, supporting a high standard of safety, discretion and tailored volume planning.
             </p>
             <div className="bg-blue-50/50 border border-blue-100 rounded-2xl p-6 inline-block text-sm text-left shadow-sm">
               <strong className="text-slate-900">Looking to improve erectile function or blood flow?</strong><br/>
@@ -493,7 +495,7 @@ export default function PenisEnlargementClient({
               HA Fillers vs. Surgical Fat Transfer
             </h2>
             <p className="text-slate-600 text-lg leading-relaxed mb-6">
-              We exclusively use premium Hyaluronic Acid (HA) because it offers a safer, more predictable, and natural-feeling result compared to invasive surgical options.
+              We use premium hyaluronic acid filler because it offers a controlled, adjustable and non-surgical approach for men seeking girth enhancement without surgery.
             </p>
           </div>
 
@@ -508,7 +510,7 @@ export default function PenisEnlargementClient({
               <ul className="space-y-5">
                 {[
                   "Safe & Bio-Compatible: Uses Hyaluronic Acid, naturally found in the body.",
-                  "Zero Downtime: A walk-in, walk-out procedure taking under an hour.",
+                  "Minimal Downtime: A walk-in, walk-out procedure taking under an hour.",
                   "Smooth Texture: Specially formulated to mimic natural tissue.",
                   "Adjustable & Reversible: Can be dissolved safely at any time if desired.",
                   "Predictable Volume: You know exactly how much volume is being added."
@@ -533,9 +535,9 @@ export default function PenisEnlargementClient({
               <ul className="space-y-5 opacity-70">
                 {[
                   "Surgical Risks: Requires liposuction, general anaesthesia, and hospital time.",
-                  "Long Downtime: Weeks of painful recovery and swelling.",
-                  "High Risk of Lumps: Fat can integrate unevenly, causing a lumpy texture (fat necrosis).",
-                  "Permanent & Hard to Fix: Very difficult to correct or reverse if you are unhappy with the result.",
+                  "Longer Recovery: Surgical options usually involve more downtime, swelling and recovery.",
+                  "Risk of Irregularity: Fat transfer can sometimes settle unevenly or unpredictably.",
+                  "More Difficult to Adjust: Surgical results may be harder to revise compared with dissolvable HA filler.",
                   "Unpredictable: The body naturally reabsorbs a random percentage of the fat."
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -682,13 +684,13 @@ export default function PenisEnlargementClient({
               <div className="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
                    <FaShieldAlt className="text-[#4041d1] text-xl mb-2" aria-hidden="true" />
                    <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Comfort</div>
-                   <div className="text-slate-900 font-raleway font-bold text-sm md:text-base mb-0.5">Pain-Free</div>
-                   <div className="text-slate-500 text-[10px] font-medium">Strong local anaesthetic</div>
+                   <div className="text-slate-900 font-raleway font-bold text-sm md:text-base mb-0.5">Anaesthetic Used</div>
+                   <div className="text-slate-500 text-[10px] font-medium">Designed for comfort</div>
               </div>
               <div className="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
                    <FaWalking className="text-[#4041d1] text-xl mb-2" aria-hidden="true" />
                    <div className="text-slate-400 text-[10px] uppercase tracking-wider font-bold mb-1">Downtime</div>
-                   <div className="text-slate-900 font-raleway font-bold text-sm md:text-base mb-0.5">Walk-Out</div>
+                   <div className="text-slate-900 font-raleway font-bold text-sm md:text-base mb-0.5">Minimal Downtime</div>
                    <div className="text-slate-500 text-[10px] font-medium">Resume daily activities</div>
               </div>
               <div className="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
@@ -702,7 +704,7 @@ export default function PenisEnlargementClient({
         </div>
       </section>
 
-      {/* --- DOCTOR & PRIVACY SECTION --- */}
+      {/* --- PRIVACY & LOCATION SECTION --- */}
       <section className="py-24 bg-white font-inter">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           
@@ -722,7 +724,7 @@ export default function PenisEnlargementClient({
             </p>
           </div>
 
-          {/* Localised Location Block */}
+          {/* Localised Location Blocks */}
           {isBirmingham && (
             <div className="max-w-3xl mx-auto mb-16 bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm text-left flex items-start gap-4">
                <FaMapMarkerAlt className="text-[#4041d1] text-3xl shrink-0 mt-1" aria-hidden="true" />
@@ -735,6 +737,18 @@ export default function PenisEnlargementClient({
             </div>
           )}
 
+          {isHampstead && (
+            <div className="max-w-3xl mx-auto mb-16 bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm text-left flex items-start gap-4">
+               <FaMapMarkerAlt className="text-[#4041d1] text-3xl shrink-0 mt-1" aria-hidden="true" />
+               <div>
+                 <h3 className="font-bold font-raleway text-slate-900 mb-2 text-lg">Visiting our Hampstead Clinic</h3>
+                 <p className="text-slate-600 text-sm leading-relaxed">
+                   Our Hampstead clinic provides a discreet North West London setting for private men’s health and penile filler consultations. The clinic is convenient for patients from Belsize Park, West Hampstead, Highgate, Golders Green, St John’s Wood, Swiss Cottage, Camden and surrounding areas.
+                 </p>
+               </div>
+            </div>
+          )}
+
           {/* Action Buttons */}
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 w-full">
             <button
@@ -742,13 +756,13 @@ export default function PenisEnlargementClient({
               aria-label="Speak To A Specialist"
               className="px-6 py-4 w-full md:w-max md:text-base text-sm items-center justify-center cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-inter font-bold transition-all duration-300 inline-flex gap-2 shadow-lg shadow-[#4041d1]/20 active:scale-95"
             >
-              <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Request Free Consultation
+              <FaEnvelope className="w-4 h-4" aria-hidden="true" /> Book Private Consultation
             </button>
             <button
               onClick={() => setIsAssessmentOpen(true)}
               className="px-6 py-4 w-full md:w-max md:text-base text-sm items-center justify-center cursor-pointer border-2 border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl font-inter font-bold transition-all duration-300 inline-flex gap-2 active:scale-95"
             >
-              Start Free Online Assessment
+              Check Suitability
             </button>
           </div>
 
@@ -770,8 +784,8 @@ export default function PenisEnlargementClient({
               Because every patient’s anatomy and treatment goals are different, pricing is based on the number of millilitres (ml) of premium hyaluronic acid (HA) filler required. The most appropriate volume will be discussed during your consultation with Dr Abdi.
             </p>
           </div>
-      
-          {/* Pricing Tiers */}
+       
+          {/* --- Standard Pricing Tiers --- */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             
             {/* Tier 1 */}
@@ -789,7 +803,7 @@ export default function PenisEnlargementClient({
                 Discuss 10ml Option
               </button>
             </div>
-      
+       
             {/* Tier 2 */}
             <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow relative flex flex-col h-full">
               <h3 className="text-slate-500 font-bold uppercase tracking-widest text-xs mb-2">Standard Enhancement</h3>
@@ -805,7 +819,7 @@ export default function PenisEnlargementClient({
                 Discuss 15ml Option
               </button>
             </div>
-      
+       
             {/* Tier 3 */}
             <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow relative flex flex-col h-full">
               <h3 className="text-slate-500 font-bold uppercase tracking-widest text-xs mb-2">Advanced Enhancement</h3>
@@ -821,16 +835,107 @@ export default function PenisEnlargementClient({
                 Discuss 20ml+ Option
               </button>
             </div>
-      
           </div>
-      
-          <p className="text-sm text-slate-500 italic max-w-2xl mx-auto">
-            * Prices shown are indicative. Depending on your anatomy and treatment goals, Dr Abdi may recommend a different volume. All costs will be confirmed with you in writing before any procedure takes place.
+
+          {/* --- NEW: Premium Teoxane Section (Applies universally) --- */}
+          <div className="mt-16 bg-[#0A1128] text-white p-8 md:p-10 rounded-3xl border border-blue-900/40 shadow-xl text-left">
+            <div className="inline-block px-4 py-1.5 bg-white/10 text-blue-200 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+              Premium Filler Option
+            </div>
+
+            <h3 className="text-2xl md:text-3xl font-raleway font-bold mb-3">
+              Premium Teoxane Ultra Deep HA Filler Packages
+            </h3>
+
+            <p className="text-slate-300 leading-relaxed mb-4">
+              For selected patients seeking a premium high-density HA filler option, Teoxane Ultra Deep may be discussed as part of a personalised penile girth enhancement plan. Filler choice, volume and suitability are reviewed during consultation with Dr Syed Abdi.
+            </p>
+
+            <p className="text-slate-400 text-sm leading-relaxed mb-8">
+              Teoxane Ultra Deep is supplied in 1.2ml syringes, so premium treatment packages are planned in precise volume options of 9.6ml, 14.4ml or 19.2ml.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              {/* Premium Card 1 */}
+              <div className="bg-white/10 border border-white/10 rounded-2xl p-6 flex flex-col h-full">
+                <h4 className="text-blue-200 font-bold uppercase tracking-widest text-xs mb-2">
+                  Premium Starter
+                </h4>
+                <div className="text-4xl font-raleway font-bold text-white mb-2">
+                  9.6ml
+                </div>
+                <div className="text-blue-300 font-bold text-xl mb-5">
+                  From £2,200
+                </div>
+                <p className="text-slate-300 text-sm leading-relaxed mb-6 flex-grow">
+                  A premium HA filler option for selected patients seeking a discreet, natural-looking girth enhancement using 8 x 1.2ml syringes.
+                </p>
+                <button
+                  onClick={handleAction}
+                  className="w-full py-3 bg-white text-[#4041d1] hover:bg-blue-50 rounded-xl font-bold transition-colors text-sm"
+                >
+                  Discuss 9.6ml Premium Option
+                </button>
+              </div>
+
+              {/* Premium Card 2 */}
+              <div className="bg-white/10 border border-white/10 rounded-2xl p-6 flex flex-col h-full">
+                <h4 className="text-blue-200 font-bold uppercase tracking-widest text-xs mb-2">
+                  Premium Plus
+                </h4>
+                <div className="text-4xl font-raleway font-bold text-white mb-2">
+                  14.4ml
+                </div>
+                <div className="text-blue-300 font-bold text-xl mb-5">
+                  From £2,950
+                </div>
+                <p className="text-slate-300 text-sm leading-relaxed mb-6 flex-grow">
+                  A higher-volume premium option using 12 x 1.2ml syringes, suitable for selected patients wanting a more noticeable but proportionate enhancement.
+                </p>
+                <button
+                  onClick={handleAction}
+                  className="w-full py-3 bg-white text-[#4041d1] hover:bg-blue-50 rounded-xl font-bold transition-colors text-sm"
+                >
+                  Discuss 14.4ml Premium Option
+                </button>
+              </div>
+
+              {/* Premium Card 3 */}
+              <div className="bg-white/10 border border-white/10 rounded-2xl p-6 flex flex-col h-full">
+                <h4 className="text-blue-200 font-bold uppercase tracking-widest text-xs mb-2">
+                  Premium Maximum
+                </h4>
+                <div className="text-4xl font-raleway font-bold text-white mb-2">
+                  19.2ml
+                </div>
+                <div className="text-blue-300 font-bold text-xl mb-5">
+                  From £3,500
+                </div>
+                <p className="text-slate-300 text-sm leading-relaxed mb-6 flex-grow">
+                  A high-volume premium package using 16 x 1.2ml syringes, considered only after consultation, anatomy review and suitability assessment.
+                </p>
+                <button
+                  onClick={handleAction}
+                  className="w-full py-3 bg-white text-[#4041d1] hover:bg-blue-50 rounded-xl font-bold transition-colors text-sm"
+                >
+                  Discuss 19.2ml Premium Option
+                </button>
+              </div>
+            </div>
+
+            <p className="text-xs text-slate-400 leading-relaxed mt-8">
+              Teoxane Ultra Deep is a premium hyaluronic acid dermal filler. Use for penile girth enhancement is considered only after consultation, consent and suitability assessment. Results vary between patients.
+            </p>
+          </div>
+       
+          <p className="text-sm text-slate-500 italic max-w-2xl mx-auto mt-8">
+            * Prices shown are indicative. Depending on your anatomy and treatment goals, Dr Abdi may recommend a different volume or filler option. All costs will be confirmed with you in writing before any procedure takes place. All treatment is subject to consultation and suitability assessment.
           </p>
-      
+       
         </div>
       </section>
-      
+       
       {/* --- FAQs --- */}
       <section id="faqs" className="py-24 bg-slate-50 font-inter border-t border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -910,7 +1015,7 @@ export default function PenisEnlargementClient({
         />
       </div>
 
-      <ContactCTASection />
+      <ContactCTASection defaultTreatment="Penis Filler / Girth Enhancement" />
       <LocationSection />
       <Footer />
 

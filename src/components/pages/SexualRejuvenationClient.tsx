@@ -49,19 +49,22 @@ export default function SexualRejuvenationClient({
 
   // --- DYNAMIC LINKS BASED ON LOCATION ---
   const isBirmingham = locationName === "Birmingham";
+  const isHampstead = locationName === "Hampstead";
   
-  const pShotUrl = isBirmingham ? "/birmingham/p-shot" : "/p-shot";
-  const edUrl = isBirmingham ? "/birmingham/erectile-dysfunction" : "/erectile-dysfunction";
-  const peUrl = isBirmingham ? "/birmingham/premature-ejaculation" : "/premature-ejaculation";
-  const peyroniesUrl = isBirmingham ? "/birmingham/peyronies-disease" : "/peyronies-disease";
-  const oShotUrl = isBirmingham ? "/birmingham/o-shot" : "/o-shot"; 
-  const medsUrl = isBirmingham ? "/birmingham/personalised-ed-medication" : "/personalised-ed-medication";
-  const pricesUrl = isBirmingham ? "/birmingham/prices" : "/prices";
-  const faqUrl = isBirmingham ? "/birmingham/faq" : "/faq";
+  const pShotUrl = isBirmingham ? "/birmingham/p-shot" : isHampstead ? "/hampstead/p-shot" : "/p-shot";
+  const edUrl = isBirmingham ? "/birmingham/erectile-dysfunction" : isHampstead ? "/hampstead/erectile-dysfunction" : "/erectile-dysfunction";
+  const peUrl = isBirmingham ? "/birmingham/premature-ejaculation" : isHampstead ? "/hampstead/premature-ejaculation" : "/premature-ejaculation";
+  const peyroniesUrl = isBirmingham ? "/birmingham/peyronies-disease" : isHampstead ? "/hampstead/peyronies-disease" : "/peyronies-disease";
+  const oShotUrl = isBirmingham ? "/birmingham/o-shot" : isHampstead ? "/hampstead/o-shot" : "/o-shot"; 
+  const medsUrl = isBirmingham ? "/birmingham/personalised-ed-medication" : isHampstead ? "/hampstead/personalised-ed-medication" : "/personalised-ed-medication";
+  const pricesUrl = isBirmingham ? "/birmingham/prices" : isHampstead ? "/hampstead/prices" : "/prices";
+  const faqUrl = isBirmingham ? "/birmingham/faq" : isHampstead ? "/hampstead/faq" : "/faq";
 
   // Determine nearby areas text based on location
   const nearbyAreas = isBirmingham
     ? "Solihull, Edgbaston, Sutton Coldfield, and the West Midlands"
+    : isHampstead
+    ? "Hampstead, Belsize Park, West Hampstead, and North West London"
     : "Harpenden, Watford, Welwyn Garden City, Hitchin, Luton, Hertford, and London";
 
   useEffect(() => {
@@ -108,7 +111,7 @@ export default function SexualRejuvenationClient({
       icon: FaHeartbeat
     },
     {
-      title: "The P-Shot® (Priapus Shot)",
+      title: "The P-Shot (Priapus Shot)",
       category: "Men's Health",
       description: "Advanced Platelet-Rich Plasma (PRP) therapy designed to rejuvenate penile tissue, support firmness, and enhance sensitivity.",
       bullets: [
@@ -144,7 +147,7 @@ export default function SexualRejuvenationClient({
       icon: FaDna
     },
     {
-      title: "The O-Shot®",
+      title: "The O-Shot",
       category: "Female Rejuvenation",
       description: "A natural, PRP-based treatment to support vaginal health, improve natural lubrication, and enhance sexual sensation.",
       bullets: [
@@ -231,7 +234,7 @@ export default function SexualRejuvenationClient({
             className="md:text-[2.75rem] lg:text-5xl text-3xl font-bold font-raleway text-white leading-tight mb-6 tracking-tight drop-shadow-lg"
           >
             <span className="md:whitespace-nowrap">Sexual Rejuvenation & Natural Regeneration</span> <br className="hidden md:block" />
-            in {locationName}
+            in {isHampstead ? "Hampstead, London" : locationName}
           </motion.h1>
 
           <motion.p 
@@ -243,7 +246,7 @@ export default function SexualRejuvenationClient({
           >
             Patient-centred, non-surgical solutions to support confidence,
             sensitivity and intimacy — delivered by a fully insured,
-            GMC-registered doctor in {locationName}.
+            GMC-registered doctor in {isHampstead ? "Hampstead, London" : locationName}.
           </motion.p>
 
           <motion.div 

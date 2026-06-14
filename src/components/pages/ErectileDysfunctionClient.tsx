@@ -60,8 +60,11 @@ export default function ErectileDysfunctionClient({
   const [showAllFaqs, setShowAllFaqs] = useState(false); 
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
 
+  // --- LOCATION LOGIC ---
   const isBirmingham = locationName === "Birmingham";
-  const basePath = isBirmingham ? "/birmingham" : "";
+  const isHampstead = locationName === "Hampstead";
+  
+  const basePath = isBirmingham ? "/birmingham" : isHampstead ? "/hampstead" : "";
   const shockwaveLink = `${basePath}/shockwave-therapy-erectile-dysfunction`;
 
   useEffect(() => {
@@ -222,7 +225,7 @@ export default function ErectileDysfunctionClient({
             custom={1} initial="hidden" animate={isLoaded ? "visible" : "hidden"} variants={fadeUpVariants}
             className="md:text-6xl text-4xl font-bold font-raleway text-white leading-tight mb-6 tracking-tight drop-shadow-lg"
           >
-            Erectile Dysfunction <br className="hidden sm:block"/> Treatment in {locationName}
+            Erectile Dysfunction <br className="hidden sm:block"/> Treatment in {isHampstead ? "Hampstead, London" : locationName}
           </motion.h1>
 
           {/* Shortened Hero Paragraph */}
@@ -628,7 +631,7 @@ export default function ErectileDysfunctionClient({
               Book Free Confidential Consultation
             </button>
             <Link
-              href={isBirmingham ? "/birmingham/prices" : "/prices"}
+              href={isBirmingham ? "/birmingham/prices" : isHampstead ? "/hampstead/prices" : "/prices"}
               className="px-10 py-5 w-full md:w-auto border-2 border-slate-200 text-slate-600 rounded-xl font-bold text-lg hover:bg-slate-50 transition-all"
             >
               View Treatment Prices

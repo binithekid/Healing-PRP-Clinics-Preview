@@ -1,73 +1,105 @@
 import type { Metadata } from "next";
 import ContactClient from "@/components/pages/ContactClient";
-import Script from "next/script";
+
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
-  title: "Contact Our Doctor-Led ED Clinic | St Albans & Luton",
-  description: "Private medical treatment for Erectile Dysfunction (ED) and P-Shot in St Albans. Expert regenerative care serving patients from Luton, Dunstable, and Hertfordshire.",
-  keywords: [
-    "Erectile Dysfunction treatment Luton",
-    "P-Shot clinic Bedfordshire",
-    "ED treatment Hertfordshire",
-    "Erectile Dysfunction clinic St Albans",
-    "Men's sexual health Luton",
-    "Priapus Shot St Albans",
-    "Private ED clinic Hertfordshire",
-    "Regenerative medicine St Albans",
-    "GMC registered doctor Luton",
-    "P-Shot Luton"
-  ],
+  title: {
+    absolute: "Contact Our St Albans Clinic | Healing-PRP",
+  },
+  description: "Get in touch with our St Albans clinic for doctor-led PRP, Joint Injections, and Sexual Rejuvenation. Book your private, confidential consultation today.",
   alternates: {
-    canonical: "https://www.healing-prp.co.uk/contact", 
+    canonical: "https://www.healing-prp.co.uk/contact",
   },
   openGraph: {
-    title: "Contact Our Doctor-Led ED Clinic | St Albans & Luton",
-    description: "Doctor-led medical treatment for Erectile Dysfunction (ED) and P-Shot in St Albans. Expert regenerative care serving patients from Luton, Dunstable, and Hertfordshire.",
+    title: "Contact Healing-PRP Clinics | St Albans",
+    description: "Book a consultation at our St Albans clinic for specialist, doctor-led regenerative medicine.",
     url: "https://www.healing-prp.co.uk/contact",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
   },
+  twitter: {
+    card: "summary",
+    title: "Contact Healing-PRP Clinics | St Albans",
+    description: "Book a consultation at our St Albans clinic for specialist, doctor-led regenerative medicine.",
+  },
 };
 
-// --- CONTACT PAGE SCHEMA: Medical Clinic & Trust signals for St Albans ---
+// --- UPGRADED JSON-LD SCHEMA: Contact Page & Medical Clinic ---
 const contactSchemaStAlbans = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "MedicalClinic",
-      "name": "Healing-PRP Clinics St Albans",
+      "@type": "ContactPage",
+      "@id": "https://www.healing-prp.co.uk/contact#webpage",
       "url": "https://www.healing-prp.co.uk/contact",
-      "image": "https://www.healing-prp.co.uk/Logo2.png",
+      "name": "Contact Healing-PRP Clinics St Albans",
+      "description": "Contact page for Healing-PRP Clinics in St Albans, Hertfordshire."
+    },
+    {
+      "@type": "MedicalClinic",
+      "@id": "https://www.healing-prp.co.uk/contact#clinic",
+      "name": "Healing-PRP Clinics St Albans",
+      "url": "https://www.healing-prp.co.uk/",
+      "telephone": "+447990364147",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "21 Victoria St",
         "addressLocality": "St Albans",
         "addressRegion": "Hertfordshire",
-        "addressCountry": "UK"
+        "postalCode": "AL1 3JJ",
+        "addressCountry": "GB"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "51.7527",
-        "longitude": "-0.3394"
-      },
-      "medicalDirector": {
-        "@type": "Physician",
-        "name": "Dr Syed Abdi",
-        "url": "https://www.healing-prp.co.uk/our-doctor"
+      "areaServed": [
+        { "@type": "City", "name": "St Albans" },
+        { "@type": "City", "name": "Luton" },
+        { "@type": "AdministrativeArea", "name": "Hertfordshire" }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+447990364147",
+        "contactType": "customer service",
+        "areaServed": "GB",
+        "availableLanguage": "English"
       }
     }
   ]
 };
 
-export default function Page() {
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Contact Us",
+      "item": "https://www.healing-prp.co.uk/contact"
+    }
+  ]
+};
+
+export default function ContactPage() {
   return (
-    <>
-      <Script
-        id="contact-schema-stalbans"
+    <main>
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchemaStAlbans) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(contactSchemaStAlbans) }}
       />
-      <ContactClient />
-    </>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+      <ContactClient locationName="St Albans" />
+    </main>
   );
 }
