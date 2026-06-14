@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // 1. High Priority: Main Landing Pages
     { url: "", priority: 1.0 },
     { url: "/birmingham", priority: 0.95 },
+    { url: "/hampstead", priority: 0.95 }, // ✅ Added Hampstead Main Page
     
     // ✅ CORE UK-WIDE TELEHEALTH (High Priority)
     { url: "/personalised-ed-medication", priority: 0.95 },
@@ -19,9 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/sexual-rejuvenation", priority: 0.9 },
     { url: "/p-shot", priority: 0.95 },
     { url: "/o-shot", priority: 0.95 }, 
+    { url: "/vaginal-dryness", priority: 0.95 }, // ✅ Added Vaginal Dryness
     { url: "/penis-enlargement", priority: 0.95 },
-    { url: "/erectile-dysfunction", priority: 0.95 }, // <-- General ED page
-    { url: "/erectile-dysfunction-treatment", priority: 0.95 }, // <-- ED Treatment page
+    { url: "/erectile-dysfunction", priority: 0.95 },
+    { url: "/erectile-dysfunction-treatment", priority: 0.95 },
     { url: "/shockwave-therapy-erectile-dysfunction", priority: 0.9 },
     { url: "/peyronies-disease", priority: 0.9 },
     { url: "/premature-ejaculation", priority: 0.9 },
@@ -36,9 +38,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/birmingham/sexual-rejuvenation", priority: 0.85 },
     { url: "/birmingham/p-shot", priority: 0.9 },
     { url: "/birmingham/o-shot", priority: 0.9 }, 
+    { url: "/birmingham/vaginal-dryness", priority: 0.9 }, // ✅ Added Vaginal Dryness
     { url: "/birmingham/penis-enlargement", priority: 0.9 },
-    { url: "/birmingham/erectile-dysfunction", priority: 0.9 }, // <-- General Birmingham ED page
-    { url: "/birmingham/erectile-dysfunction-treatment", priority: 0.9 }, // <-- Birmingham ED Treatment page
+    { url: "/birmingham/erectile-dysfunction", priority: 0.9 },
+    { url: "/birmingham/erectile-dysfunction-treatment", priority: 0.9 },
     { url: "/birmingham/shockwave-therapy-erectile-dysfunction", priority: 0.85 },
     { url: "/birmingham/peyronies-disease", priority: 0.85 },
     { url: "/birmingham/premature-ejaculation", priority: 0.85 },
@@ -49,17 +52,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/birmingham/polynucleotides", priority: 0.85 }, 
     { url: "/birmingham/joint-injections", priority: 0.85 },
 
-    // 4. Information, Clinic & Support
+    // ✅ 4. NEW: Hampstead Location Pages (Men's & Women's Intimate Health Only)
+    { url: "/hampstead/sexual-rejuvenation", priority: 0.85 },
+    { url: "/hampstead/p-shot", priority: 0.9 },
+    { url: "/hampstead/o-shot", priority: 0.9 }, 
+    { url: "/hampstead/vaginal-dryness", priority: 0.9 },
+    { url: "/hampstead/penis-enlargement", priority: 0.9 },
+    { url: "/hampstead/penis-filler", priority: 0.85 }, // Included based on your recent folder structure
+    { url: "/hampstead/erectile-dysfunction", priority: 0.9 }, 
+    { url: "/hampstead/peyronies-disease", priority: 0.85 },
+    { url: "/hampstead/premature-ejaculation", priority: 0.85 },
+
+    // 5. Information, Clinic & Support
     { url: "/our-doctor", priority: 0.8 }, 
     { url: "/prices", priority: 0.8 },
     { url: "/birmingham/prices", priority: 0.8 }, 
+    { url: "/hampstead/prices", priority: 0.8 }, // ✅ Added Hampstead Prices
     { url: "/faq", priority: 0.7 },
     { url: "/birmingham/faq", priority: 0.7 }, 
+    { url: "/hampstead/faq", priority: 0.7 }, // ✅ Added Hampstead FAQ
     { url: "/blog", priority: 0.7 },
     { url: "/contact", priority: 0.8 },
     { url: "/birmingham/contact", priority: 0.8 }, 
+    { url: "/hampstead/contact", priority: 0.8 }, // ✅ Added Hampstead Contact
 
-    // 5. Legal Policies (Lower priority)
+    // 6. Legal Policies (Lower priority)
     { url: "/privacy-policy", priority: 0.5 },
     { url: "/terms-of-service", priority: 0.5 },
     { url: "/cookie-policy", priority: 0.5 },
