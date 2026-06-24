@@ -78,7 +78,7 @@ export default function LocationSection() {
                   </div>
                   <div>
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5 font-inter">Clinic Hours</p>
-                    <p className="text-sm text-slate-600 font-medium font-inter">Mon-Fri: 9am - 6pm</p>
+                    <p className="text-sm text-slate-600 font-medium font-inter">Mon-Fri: 9am - 6pm Sat: 10am - 4pm Sun: 10am - 3pm</p>
                   </div>
                 </div>
               </div>
