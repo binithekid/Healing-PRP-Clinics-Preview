@@ -24,11 +24,10 @@ export default function GoogleAdsLeadForm({
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const CLINIC_PHONE_NUMBER = "07990364147";
   const CLINIC_WHATSAPP_NUMBER = "447990364147";
 
   const handleWhatsAppClick = () => {
-    // --- GA4 Tracking for WhatsApp Click ---
+    // 1. GA4 Tracking for WhatsApp Click
     if (typeof window !== "undefined") {
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
       if (w.gtag) {
@@ -46,7 +45,7 @@ export default function GoogleAdsLeadForm({
       }
     }
 
-    // Dynamic WhatsApp Message
+    // 2. Dynamic WhatsApp Message
     const whatsappMessage = `Hello, I would like to enquire about ${defaultTreatment}${
       defaultLocation ? ` in ${defaultLocation}` : ""
     }.`;
@@ -55,23 +54,6 @@ export default function GoogleAdsLeadForm({
     )}`;
     
     window.open(waUrl, "_blank");
-  };
-
-  const handlePhoneClick = () => {
-    // --- GA4 Tracking for Phone Click ---
-    if (typeof window !== "undefined") {
-      const w = window as Window & { gtag?: (...args: unknown[]) => void };
-      if (w.gtag) {
-        w.gtag("event", "phone_click", {
-          event_category: "lead",
-          event_label: defaultTreatment,
-          location: defaultLocation,
-          page_path: window.location.pathname,
-        });
-      }
-    }
-    
-    window.location.href = `tel:${CLINIC_PHONE_NUMBER}`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -171,7 +153,7 @@ export default function GoogleAdsLeadForm({
         className="w-full flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-bold font-inter transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95 mb-6"
       >
         <FaWhatsapp className="text-2xl" />
-        Chat or Call on WhatsApp
+        Chat on WhatsApp
       </button>
 
       {/* --- DIVIDER --- */}
@@ -243,23 +225,8 @@ export default function GoogleAdsLeadForm({
         </button>
       </form>
 
-      {/* --- NEW DIRECT CALL OPTION --- */}
-      <div className="mt-5 pt-5 border-t border-slate-100">
-        <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-wide mb-3 font-inter">
-          Prefer to speak immediately?
-        </p>
-        <button
-          onClick={handlePhoneClick}
-          type="button"
-          className="w-full flex items-center justify-center gap-2 bg-transparent border-2 border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-[#4041d1] hover:border-[#4041d1] py-3.5 rounded-xl font-bold font-inter transition-all duration-300 active:scale-95"
-        >
-          <FaPhoneAlt className="text-sm" />
-          Call the Clinic
-        </button>
-      </div>
-
       {/* --- COMPLIANCE FOOTER NOTE --- */}
-      <div className="mt-5 text-center">
+      <div className="mt-6 text-center border-t border-slate-100 pt-5">
         <p className="text-[10px] leading-relaxed text-slate-400 font-inter">
           This is a private, doctor-led service. Initial discussions may be free; treatments, tests and procedures are charged separately if you proceed. Suitability, risks and fees are discussed before any treatment.
         </p>
