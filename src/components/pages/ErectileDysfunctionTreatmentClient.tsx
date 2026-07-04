@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import {
   FaPlus,
   FaMinus,
