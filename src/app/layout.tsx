@@ -10,34 +10,22 @@ const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway", displa
 
 // --- GLOBAL SEO DEFAULTS ---
 export const metadata: Metadata = {
-  // Required for Next.js to auto-generate correct URLs for all child pages
   metadataBase: new URL("https://www.healing-prp.co.uk"),
-  
   title: {
-    // Moved "Doctor-Led" to the front for maximum impact
-    // Length: 58 characters (Perfect sweet spot)
     default: "Doctor-Led Regenerative Medicine | Healing-PRP Clinics",
-    // General brand template for top-level pages (Home, About, Contact)
     template: "%s | Healing-PRP Clinics", 
   },
-  
   description: "Specialist private clinic in St Albans & Birmingham. PRP Hair Restoration, Joint Injections, P-Shot & O-Shot treatments by GMC-registered doctors.",
-  
   icons: {
     icon: "/Logo2.png", 
     shortcut: "/Logo2.png",
     apple: "/Logo2.png", 
   },
-  
   openGraph: {
-    // Universal site-wide tags ONLY. 
-    // Title, description, and URL are intentionally left out so child pages can define them!
     type: "website",
     locale: "en_GB",
     siteName: "Healing-PRP Clinics",
   },
-
-  // Added base Twitter formatting for site-wide social sharing reliability
   twitter: {
     card: "summary_large_image",
   },
@@ -49,34 +37,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Updated lang to "en-GB" for stronger local UK SEO targeting
     <html lang="en-GB" className="scroll-smooth">
       <body className={`${inter.variable} ${raleway.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
-        {/* Header appears on ALL pages */}
         <Header /> 
-        
-        {/* Main Content Area */}
-        <main>
-          {children}
-        </main>
-            
-        {/* The Global Sticky Buttons */}
+        <main>{children}</main>
         <GlobalStickyCTAs />
 
-       {/* GOOGLE ADS BASE TRACKING CODE */}
+        {/* COMBINED GOOGLE ADS & GA4 SCRIPT (Forced to lazyOnload for max PageSpeed) */}
         <Script
           strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=AW-18130686557"
         />
         <Script
-          id="google-ads-tag"
+          id="google-tracking-tags"
           strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
+              
+              // Google Ads
               gtag('config', 'AW-18130686557');
+              
+              // Google Analytics 4
+              gtag('config', 'G-PB0GD280PD');
             `,
           }}
         />
