@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     absolute: "Doctor-Led Erectile Dysfunction Treatment Hampstead, London",
   },
   description:
-    "Doctor-led Erectile Dysfunction (ED) clinic in Hampstead, North West London. We restore natural function using Shockwave Therapy and PRP (P-Shot). Private, non-pharmaceutical ED solutions.",
+    "Doctor-led Erectile Dysfunction (ED) clinic in Hampstead, North West London. Private assessment with tailored options including Shockwave Therapy and PRP (P-Shot). Discreet, non-judgemental care.",
 
   alternates: {
     canonical: "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Doctor-Led Erectile Dysfunction Treatment Hampstead | Healing-PRP Clinics",
     description:
-      "Restore spontaneity and confidence. Doctor-led Shockwave & PRP therapy for ED. Conveniently serving Hampstead, Belsize Park, and North West London.",
+      "Doctor-led Shockwave & PRP therapy for ED. Conveniently serving Hampstead, Belsize Park, and North West London.",
     url: "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
