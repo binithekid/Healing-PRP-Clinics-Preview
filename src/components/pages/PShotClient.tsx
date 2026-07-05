@@ -394,7 +394,7 @@ export default function PShotClient({
                 Treatment With Dr Syed Abdi
               </h2>
               <p className="text-slate-600 text-base md:text-lg leading-relaxed">
-                Your consultation and treatment are carried out by Dr Syed Abdi, a GMC-registered doctor with experience in men’s intimate health, erectile dysfunction assessment, shockwave therapy, PRP-based treatments and non-surgical intimate health procedures. The appointment is discreet, private and focused on understanding the likely cause of your symptoms, checking suitability and discussing realistic treatment options.
+                Your consultation and treatment are carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor with experience in men’s intimate health, erectile dysfunction assessment, shockwave therapy, PRP-based treatments and non-surgical intimate health procedures. The appointment is discreet, private and focused on understanding the likely cause of your symptoms, checking suitability and discussing realistic treatment options.
               </p>
             </div>
           </div>
