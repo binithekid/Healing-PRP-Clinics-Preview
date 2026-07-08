@@ -27,7 +27,7 @@ export default function GoogleAdsLeadForm({
   const CLINIC_PHONE_NUMBER = "07990364147";
   const CLINIC_WHATSAPP_NUMBER = "447990364147";
 
-  const handleWhatsAppClick = () => {
+const handleWhatsAppClick = () => {
     // --- GA4 Tracking for WhatsApp Click ---
     if (typeof window !== "undefined") {
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
@@ -68,6 +68,11 @@ export default function GoogleAdsLeadForm({
           location: defaultLocation,
           page_path: window.location.pathname,
         });
+
+        // --- NEW: Fire Google Ads Conversion on Phone Click ---
+        if (conversionLabel) {
+          w.gtag('event', 'conversion', { 'send_to': conversionLabel });
+        }
       }
     }
     
@@ -133,7 +138,7 @@ export default function GoogleAdsLeadForm({
       setIsSubmitting(false);
     }
   };
-
+  
   if (isSuccess) {
     return (
       <div className="bg-green-50 border border-green-200 rounded-3xl p-8 text-center shadow-sm max-w-lg mx-auto w-full">
