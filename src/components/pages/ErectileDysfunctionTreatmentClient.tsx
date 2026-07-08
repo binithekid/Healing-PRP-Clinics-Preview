@@ -555,11 +555,7 @@ export default function ErectileDysfunctionTreatmentClient({
           defaultTreatment="Erectile Dysfunction"
           defaultLocation={locationName} 
           sourcePage={`${locationName} ED Google Ads Landing Page`}
-          conversionLabel={
-            isBirmingham 
-              ? "AW-18130686557/YOUR_BIRMINGHAM_LABEL"
-              : "AW-18130686557/hY3YCIONsKUcEN2kscVD" // St Albans Label
-          } 
+          conversionLabel="AW-18130686557/2l-mCPTDgsDcEN2kscVD" 
         />
       </div>
 
