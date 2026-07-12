@@ -112,12 +112,18 @@ export default function GoogleAdsLeadForm({
         }`,
       });
 
-      // --- GA4 & GOOGLE ADS TRACKING ON SUCCESSFUL SUBMIT ---
+     // --- GA4 & GOOGLE ADS TRACKING ON SUCCESSFUL SUBMIT ---
       if (typeof window !== "undefined") {
         
-        // --- Explicit DataLayer Push for Enhanced Conversions ---
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
+        // 1. Tell TypeScript about both gtag and dataLayer on the window object
+        const w = window as Window & { 
+          gtag?: (...args: unknown[]) => void;
+          dataLayer?: Record<string, any>[]; 
+        };
+
+        // 2. Explicit DataLayer Push for Enhanced Conversions (Using 'w' instead of 'window')
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({
           event: "callback_request_submitted",
           user_data: {
             phone_number: phone,
@@ -125,7 +131,7 @@ export default function GoogleAdsLeadForm({
           },
         });
 
-        const w = window as Window & { gtag?: (...args: unknown[]) => void };
+        // 3. Fire standard gtag events
         if (w.gtag) {
           w.gtag("event", "callback_request_submitted", {
             event_category: "lead",
