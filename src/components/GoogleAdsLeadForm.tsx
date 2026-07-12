@@ -18,7 +18,6 @@ export default function GoogleAdsLeadForm({
   conversionLabel,
 }: GoogleAdsLeadFormProps) {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [concern, setConcern] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,7 +27,7 @@ export default function GoogleAdsLeadForm({
   const CLINIC_PHONE_NUMBER = "07990364147";
   const CLINIC_WHATSAPP_NUMBER = "447990364147";
 
-  const handleWhatsAppClick = () => {
+const handleWhatsAppClick = () => {
     // --- GA4 Tracking for WhatsApp Click ---
     if (typeof window !== "undefined") {
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
@@ -42,7 +41,7 @@ export default function GoogleAdsLeadForm({
 
         // Fire Google Ads Conversion on WA Click if label provided
         if (conversionLabel) {
-          w.gtag("event", "conversion", { send_to: conversionLabel });
+          w.gtag('event', 'conversion', { 'send_to': conversionLabel });
         }
       }
     }
@@ -54,7 +53,7 @@ export default function GoogleAdsLeadForm({
     const waUrl = `https://wa.me/${CLINIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(
       whatsappMessage
     )}`;
-
+    
     window.open(waUrl, "_blank");
   };
 
@@ -72,11 +71,11 @@ export default function GoogleAdsLeadForm({
 
         // --- NEW: Fire Google Ads Conversion on Phone Click ---
         if (conversionLabel) {
-          w.gtag("event", "conversion", { send_to: conversionLabel });
+          w.gtag('event', 'conversion', { 'send_to': conversionLabel });
         }
       }
     }
-
+    
     window.location.href = `tel:${CLINIC_PHONE_NUMBER}`;
   };
 
@@ -101,37 +100,18 @@ export default function GoogleAdsLeadForm({
       emailjs.init(publicKey);
       await emailjs.send(serviceId, templateId, {
         from_name: name,
-        from_email: email, 
+        from_email: "google-ads@healing-prp.co.uk",
         phone: phone,
         treatment: defaultTreatment,
         clinic_location: defaultLocation || "Not specified",
-        message: `New callback request\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nBrief symptoms / concern: ${
+        message: `New callback request\n\nName: ${name}\nPhone: ${phone}\nBrief symptoms / concern: ${
           concern.trim() ? concern : "Not provided"
-        }\nTreatment: ${defaultTreatment}\nLocation: ${defaultLocation}\nSource page: ${sourcePage}\nPage path: ${
-          window.location.pathname
-        }`,
+        }\nTreatment: ${defaultTreatment}\nLocation: ${defaultLocation}\nSource page: ${sourcePage}\nPage path: ${window.location.pathname}`,
       });
 
-     // --- GA4 & GOOGLE ADS TRACKING ON SUCCESSFUL SUBMIT ---
+      // --- GA4 & GOOGLE ADS TRACKING ON SUCCESSFUL SUBMIT ---
       if (typeof window !== "undefined") {
-        
-        // 1. Tell TypeScript about both gtag and dataLayer on the window object
-        const w = window as Window & { 
-          gtag?: (...args: unknown[]) => void;
-          dataLayer?: Record<string, any>[]; 
-        };
-
-        // 2. Explicit DataLayer Push for Enhanced Conversions (Using 'w' instead of 'window')
-        w.dataLayer = w.dataLayer || [];
-        w.dataLayer.push({
-          event: "callback_request_submitted",
-          user_data: {
-            phone_number: phone,
-            email: email.trim().toLowerCase(),
-          },
-        });
-
-        // 3. Fire standard gtag events
+        const w = window as Window & { gtag?: (...args: unknown[]) => void };
         if (w.gtag) {
           w.gtag("event", "callback_request_submitted", {
             event_category: "lead",
@@ -142,48 +122,40 @@ export default function GoogleAdsLeadForm({
 
           // Fire Google Ads Conversion on Form Submit
           if (conversionLabel) {
-            w.gtag("event", "conversion", { send_to: conversionLabel });
+            w.gtag('event', 'conversion', { 'send_to': conversionLabel });
           }
         }
       }
 
       setIsSuccess(true);
       setName("");
-      setEmail("");
       setPhone("");
       setConcern("");
     } catch (error) {
       console.error("EmailJS Error:", error);
-      setErrorMessage(
-        "Failed to send. Please try clicking the WhatsApp button instead."
-      );
+      setErrorMessage("Failed to send. Please try clicking the WhatsApp button instead.");
     } finally {
       setIsSubmitting(false);
     }
   };
-
+  
   if (isSuccess) {
     return (
       <div className="bg-green-50 border border-green-200 rounded-3xl p-8 text-center shadow-sm max-w-lg mx-auto w-full">
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <FaCheckCircle className="text-green-600 text-3xl" />
         </div>
-        <h3 className="text-2xl font-bold font-raleway text-slate-900 mb-2">
-          Request Received
-        </h3>
+        <h3 className="text-2xl font-bold font-raleway text-slate-900 mb-2">Request Received</h3>
         <p className="text-slate-600 font-inter text-sm leading-relaxed">
-          Thank you. Your callback request has been received. We will contact
-          you discreetly.
+          Thank you. Your callback request has been received. We will contact you discreetly.
         </p>
       </div>
     );
   }
 
   return (
-    <div
-      id="google-lead-form"
-      className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-xl max-w-lg mx-auto w-full relative z-10 scroll-mt-6"
-    >
+    <div id="google-lead-form" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-xl max-w-lg mx-auto w-full relative z-10 scroll-mt-6">
+      
       {/* --- FORM HEADER --- */}
       <div className="text-center mb-6">
         <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full mb-3">
@@ -193,8 +165,7 @@ export default function GoogleAdsLeadForm({
           Request a Private Callback
         </h3>
         <p className="text-slate-500 text-sm font-inter">
-          Leave your details below or message us directly on WhatsApp for a fast,
-          discreet response.
+          Leave your details below or message us directly on WhatsApp for a fast, discreet response.
         </p>
       </div>
 
@@ -211,19 +182,14 @@ export default function GoogleAdsLeadForm({
       {/* --- DIVIDER --- */}
       <div className="flex items-center gap-4 mb-6">
         <div className="h-px bg-slate-200 flex-1"></div>
-        <span className="text-slate-400 text-xs font-bold uppercase font-inter">
-          OR REQUEST A CALL
-        </span>
+        <span className="text-slate-400 text-xs font-bold uppercase font-inter">OR REQUEST A CALL</span>
         <div className="h-px bg-slate-200 flex-1"></div>
       </div>
 
       {/* --- FORM FIELDS --- */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-semibold text-slate-700 mb-1.5 font-inter"
-          >
+          <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-1.5 font-inter">
             Name
           </label>
           <input
@@ -239,29 +205,7 @@ export default function GoogleAdsLeadForm({
         </div>
 
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-semibold text-slate-700 mb-1.5 font-inter"
-          >
-            Email Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            required
-            autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-[#4041d1] focus:border-[#4041d1] outline-none transition-all font-inter text-slate-900 placeholder:text-slate-400"
-            placeholder="yourname@example.com"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="phone"
-            className="block text-sm font-semibold text-slate-700 mb-1.5 font-inter"
-          >
+          <label htmlFor="phone" className="block text-sm font-semibold text-slate-700 mb-1.5 font-inter">
             Phone Number
           </label>
           <input
@@ -277,12 +221,8 @@ export default function GoogleAdsLeadForm({
         </div>
 
         <div>
-          <label
-            htmlFor="concern"
-            className="block text-sm font-semibold text-slate-700 mb-1.5 font-inter"
-          >
-            Brief symptoms or concern{" "}
-            <span className="text-slate-400 font-normal">(optional)</span>
+          <label htmlFor="concern" className="block text-sm font-semibold text-slate-700 mb-1.5 font-inter">
+            Brief symptoms or concern <span className="text-slate-400 font-normal">(optional)</span>
           </label>
           <textarea
             id="concern"
@@ -326,9 +266,7 @@ export default function GoogleAdsLeadForm({
       {/* --- COMPLIANCE FOOTER NOTE --- */}
       <div className="mt-5 text-center">
         <p className="text-[10px] leading-relaxed text-slate-400 font-inter">
-          This is a private, doctor-led service. Initial discussions may be free;
-          treatments, tests and procedures are charged separately if you proceed.
-          Suitability, risks and fees are discussed before any treatment.
+          This is a private, doctor-led service. Initial discussions may be free; treatments, tests and procedures are charged separately if you proceed. Suitability, risks and fees are discussed before any treatment.
         </p>
       </div>
     </div>
