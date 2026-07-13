@@ -101,11 +101,11 @@ export default function GoogleAdsLeadForm({
       emailjs.init(publicKey);
       await emailjs.send(serviceId, templateId, {
         from_name: name,
-        from_email: email, 
+        from_email: email || "Not provided", 
         phone: phone,
         treatment: defaultTreatment,
         clinic_location: defaultLocation || "Not specified",
-        message: `New callback request\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nBrief symptoms / concern: ${
+        message: `New callback request\n\nName: ${name}\nEmail: ${email || "Not provided"}\nPhone: ${phone}\nBrief symptoms / concern: ${
           concern.trim() ? concern : "Not provided"
         }\nTreatment: ${defaultTreatment}\nLocation: ${defaultLocation}\nSource page: ${sourcePage}\nPage path: ${
           window.location.pathname
@@ -127,7 +127,8 @@ export default function GoogleAdsLeadForm({
           event: "callback_request_submitted",
           user_data: {
             phone_number: phone,
-            email: email.trim().toLowerCase(),
+            // Only attach the email to user_data if the patient actually typed one in
+            ...(email.trim() ? { email: email.trim().toLowerCase() } : {}),
           },
         });
 
@@ -243,12 +244,12 @@ export default function GoogleAdsLeadForm({
             htmlFor="email"
             className="block text-sm font-semibold text-slate-700 mb-1.5 font-inter"
           >
-            Email Address
+            Email Address{" "}
+            <span className="text-slate-400 font-normal">(optional)</span>
           </label>
           <input
             type="email"
             id="email"
-            required
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
