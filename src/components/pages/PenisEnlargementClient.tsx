@@ -15,7 +15,7 @@ import {
   FaExpandArrowsAlt,
   FaShieldAlt,
   FaArrowRight,
-  FaRegClock,      
+  FaRegClock,       
   FaWalking,  
   FaUserMd,   
   FaGoogle,
@@ -24,7 +24,8 @@ import {
   FaChevronDown,
   FaHeart,
   FaHandsHelping,
-  FaTimesCircle
+  FaTimesCircle,
+  FaWhatsapp // <-- ADDED WHATSAPP ICON
 } from "react-icons/fa";
 
 // --- DYNAMIC IMPORTS FOR PAGESPEED OPTIMISATION ---
@@ -933,6 +934,36 @@ export default function PenisEnlargementClient({
             * Prices shown are indicative. Depending on your anatomy and treatment goals, Dr Abdi may recommend a different volume or filler option. All costs will be confirmed with you in writing before any procedure takes place. All treatment is subject to consultation and suitability assessment.
           </p>
        
+        </div>
+      </section>
+
+      {/* --- NOT SURE WHICH VOLUME CTA --- */}
+      <section className="py-16 bg-white font-inter border-t border-slate-200">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-raleway font-bold text-slate-900 mb-4">
+            Not Sure Which Volume Is Right?
+          </h2>
+          <p className="text-slate-600 md:text-lg mb-8 leading-relaxed">
+            Most men are unsure whether 10ml, 15ml or 20ml+ is suitable before consultation. Dr Syed Abdi will assess your anatomy, goals and previous treatment history before recommending a volume. You can start with a smaller treatment and consider further enhancement later if appropriate.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <button 
+              onClick={handleAction}
+              className="bg-[#4041d1] text-white px-8 py-3.5 rounded-full font-bold hover:bg-[#2a2bb8] transition-colors inline-flex items-center justify-center gap-2 w-full sm:w-auto shadow-sm cursor-pointer"
+            >
+              Request Private Callback <FaArrowRight className="w-4 h-4" />
+            </button>
+            
+            <a 
+              href="https://wa.me/447990364147" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-[#25D366] text-white px-8 py-3.5 rounded-full font-bold hover:bg-[#20ba59] transition-colors inline-flex items-center justify-center gap-2 w-full sm:w-auto shadow-sm"
+            >
+              <FaWhatsapp className="w-5 h-5" /> WhatsApp Discreetly
+            </a>
+          </div>
         </div>
       </section>
        
