@@ -212,7 +212,7 @@ export default function PenisEnlargementClient({
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80 z-10" />
           <Image 
             src="/PEnlargement.webp" 
-            alt="Doctor-Led Penile Filler Consultation" 
+            alt="Doctor-Led Penis Filler in Birmingham" 
             fill
             priority
             fetchPriority="high" 
@@ -455,7 +455,7 @@ export default function PenisEnlargementClient({
               transition={{ delay: 0.1 }}
               className="text-slate-600 text-lg leading-relaxed font-inter"
             >
-              A fast, predictable, and non-surgical way to achieve your aesthetic goals without the risks associated with fat transfer surgery.
+              A discreet, non-surgical option for men seeking a planned and proportionate increase in girth without surgical fat transfer.
             </motion.p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -509,10 +509,10 @@ export default function PenisEnlargementClient({
               </h3>
               <ul className="space-y-5">
                 {[
-                  "Safe & Bio-Compatible: Uses Hyaluronic Acid, naturally found in the body.",
+                  "HA-Based & Bio-Compatible: Uses hyaluronic acid, a substance naturally found in the body.",
                   "Minimal Downtime: A walk-in, walk-out procedure taking under an hour.",
                   "Smooth Texture: Specially formulated to mimic natural tissue.",
-                  "Adjustable & Reversible: Can be dissolved safely at any time if desired.",
+                  "Adjustable & Dissolvable: HA filler can usually be dissolved if clinically appropriate.",
                   "Predictable Volume: You know exactly how much volume is being added."
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -566,7 +566,7 @@ export default function PenisEnlargementClient({
               A Two-Part Success Formula
             </h2>
             <p className="text-slate-300 text-lg leading-relaxed max-w-3xl mx-auto">
-              There is no single quick fix. A smooth, natural-looking, and lasting result depends on a partnership between expert treatment and careful aftercare.
+              There is no single quick fix. A smooth, natural-looking and well-settled result depends on a partnership between careful treatment and good aftercare.
             </p>
           </div>
 
