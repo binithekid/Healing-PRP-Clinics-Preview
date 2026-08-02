@@ -164,6 +164,38 @@ export default function BlogPostClient({ post, navigation }: { post: BlogPost; n
                </h3>
              )
           }
+          
+          // --- NEW: ADD LIST HANDLING ---
+          if (n.nodeType === "unordered-list" || n.nodeType === "ordered-list") {
+            const ListTag = n.nodeType === "unordered-list" ? "ul" : "ol";
+            const listClass = n.nodeType === "unordered-list" ? "list-disc" : "list-decimal";
+
+            return (
+              <ListTag key={i} className={`${listClass} pl-8 mb-6 space-y-3 text-slate-700 text-base md:text-lg font-light font-inter marker:text-[#4041d1]`}>
+                {n.content?.map((listItem, liIndex) => (
+                  <li key={liIndex} className="pl-1">
+                    {/* Contentful usually wraps list item text in a paragraph node */}
+                    {listItem.content?.map((liContent, contentIndex) => {
+                      if (liContent.nodeType === "paragraph") {
+                        return (
+                          <span key={contentIndex}>
+                            {renderInlineContent(liContent.content)}
+                          </span>
+                        );
+                      }
+                      // Just in case the text is directly inside the list item
+                      if (liContent.nodeType === "text" || liContent.nodeType === "hyperlink") {
+                         return renderInlineContent([liContent]);
+                      }
+                      return null;
+                    })}
+                  </li>
+                ))}
+              </ListTag>
+            );
+          }
+          // ------------------------------
+
           return null;
         })
       );
