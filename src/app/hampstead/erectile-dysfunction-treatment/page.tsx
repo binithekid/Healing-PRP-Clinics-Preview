@@ -7,17 +7,17 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Erectile Dysfunction Treatment Hampstead, London | Doctor-Led ED Clinic",
+    absolute: "Erectile Dysfunction & Impotence Clinic Hampstead, London",
   },
   description:
-    "Private ED clinic in Hampstead, London offering discreet doctor-led assessment, shockwave therapy options, vascular review and hormone testing. Free confidential consultation.",
+    "Private doctor-led erectile dysfunction and impotence clinic in Hampstead, London. Discreet assessment for ED, reduced firmness and erection difficulties. Fees apply.",
   alternates: {
     canonical: "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction-treatment",
   },
   openGraph: {
-    title: "Erectile Dysfunction Treatment Hampstead | Healing-PRP Clinics",
+    title: "Erectile Dysfunction & Impotence Clinic Hampstead, London",
     description:
-      "Private doctor-led erectile dysfunction assessment and non-surgical treatment options in Hampstead, serving Highgate, Camden, and Central London.",
+      "Private doctor-led erectile dysfunction and impotence assessment in Hampstead, London, with discreet ED treatment options discussed where suitable.",
     url: "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction-treatment",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -27,15 +27,15 @@ export const metadata: Metadata = {
         url: "/ed-doctor-consultation.webp",
         width: 1200,
         height: 630,
-        alt: "Private erectile dysfunction consultation in Hampstead, London",
+        alt: "Private erectile dysfunction and impotence consultation in Hampstead, London",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Erectile Dysfunction Treatment Hampstead, London",
+    title: "Erectile Dysfunction & Impotence Clinic Hampstead, London",
     description:
-      "Doctor-led erectile dysfunction treatment options in Hampstead. Private, discreet and confidential consultations.",
+      "Private doctor-led assessment for erectile dysfunction, impotence and erection difficulties in Hampstead, London. Fees apply.",
     images: ["/ed-doctor-consultation.webp"],
   },
 };
@@ -51,6 +51,16 @@ const faqs = [
     question: "What happens during the initial consultation?",
     answer:
       "Your doctor will discuss your symptoms, medical history, current medication and any previous treatment response. The aim is to understand the likely cause and discuss suitable options.",
+  },
+  {
+    question: "Is this an impotence clinic?",
+    answer:
+      "Yes. Healing PRP Clinics provides private, doctor-led assessment for men experiencing erectile dysfunction, impotence, reduced firmness or erection difficulties. Impotence is another term often used for erectile dysfunction. Treatment options are discussed after consultation and may include shockwave therapy, PRP-based treatment, blood tests, hormone review or medication review where suitable.",
+  },
+  {
+    question: "Do you offer impotence treatment in Hampstead, London?",
+    answer:
+      "Yes. Our Hampstead clinic offers private doctor-led assessment for erectile dysfunction, impotence, reduced firmness and erection difficulties. Treatment options are discussed after consultation and depend on your symptoms, medical history and suitability.",
   },
   {
     question: "Are the treatments surgical?",
@@ -77,7 +87,7 @@ const edSchema = {
       "@type": "MedicalClinic",
       "@id": "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction-treatment#clinic",
       "name": "Healing-PRP Clinics Hampstead",
-      "description": "Doctor-led Erectile Dysfunction (ED) clinic offering Shockwave Therapy and personalised medical management.",
+      "description": "Doctor-led erectile dysfunction and impotence clinic in Hampstead, London offering discreet assessment, shockwave therapy options and personalised medical review.",
       "telephone": "+44 7990 364147",
       "address": {
         "@type": "PostalAddress",
@@ -133,7 +143,7 @@ const edSchema = {
     {
       "@type": "MedicalTherapy",
       "@id": "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction-treatment#therapy",
-      "name": "Erectile Dysfunction Treatment",
+      "name": "Erectile Dysfunction and Impotence Treatment",
       "url": "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction-treatment",
       "relevantSpecialty": "Urologic"
     },
@@ -141,7 +151,7 @@ const edSchema = {
       "@type": "MedicalCondition",
       "@id": "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction-treatment#condition",
       "name": "Erectile Dysfunction",
-      "alternateName": ["ED", "Erection Difficulties"],
+      "alternateName": ["ED", "Impotence", "Erection Difficulties", "Reduced Firmness"],
       "associatedAnatomy": {
         "@type": "AnatomicalStructure",
         "name": "Penis"
@@ -184,7 +194,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Erectile Dysfunction Treatment",
+      "name": "Erectile Dysfunction and Impotence Treatment",
       "item": "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction-treatment"
     }
   ]
