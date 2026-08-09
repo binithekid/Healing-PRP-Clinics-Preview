@@ -171,7 +171,7 @@ const symptoms = [
 export default function ErectileDysfunctionTreatmentClient({
   locationName = "Birmingham",
   servingAreas = "Edgbaston • Solihull • Sutton Coldfield • West Midlands",
-  heroDescription = <>Doctor-led assessment and treatment options for erection difficulties, reduced firmness and ED symptoms.</>, 
+  heroDescription = <>Private doctor-led assessment for erectile dysfunction, impotence, erection difficulties and reduced firmness.</>, 
   whyChooseText = "Patients choose our clinic for accessible, doctor-led care and a structured approach to erectile dysfunction assessment and treatment.",
   faqs = [], 
 }: ErectileDysfunctionProps) {
@@ -274,13 +274,16 @@ export default function ErectileDysfunctionTreatmentClient({
           <p className="text-sm md:text-base text-white/90 font-inter leading-relaxed max-w-2xl mx-auto mb-5 drop-shadow-md">
             {heroDescription}
           </p>
+          <p className="text-xs md:text-sm text-blue-200 font-inter max-w-2xl mx-auto mb-5 font-semibold">
+            Private ED and impotence clinic in {locationName}.
+          </p>
 
           {/* NEW TREATMENT PILLS */}
           <motion.div 
             custom={0} initial="hidden" animate="visible" variants={fadeUpVariants}
             className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto mb-8"
           >
-            {["Shockwave Therapy", "PRP-Based Treatment", "Vascular Review", "Medication Review"].map((pill, idx) => (
+            {["Shockwave Therapy", "PRP-Based Treatment", "Impotence Assessment", "Vascular Review", "Medication Review"].map((pill, idx) => (
               <div key={idx} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm">
                 <FaCheckCircle className="text-blue-400 w-3 h-3 shrink-0" />
                 <span className="text-white text-[11px] md:text-xs font-semibold tracking-wide font-inter">{pill}</span>
@@ -394,7 +397,7 @@ export default function ErectileDysfunctionTreatmentClient({
                 Treatment With Dr Syed Abdi
               </h2>
               <p className="text-slate-600 text-base md:text-lg leading-relaxed">
-                Your consultation and treatment are carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor with experience in men’s intimate health, erectile dysfunction assessment, shockwave therapy, PRP-based treatments and non-surgical intimate health procedures. The appointment is discreet, private and focused on understanding the likely cause of your symptoms, checking suitability and discussing realistic treatment options.
+                Your consultation and treatment are carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor with experience in men’s intimate health, erectile dysfunction assessment and impotence assessment, shockwave therapy, PRP-based treatments and non-surgical intimate health procedures. The appointment is discreet, private and focused on understanding the likely cause of your symptoms, checking suitability and discussing realistic treatment options.
               </p>
             </div>
           </div>
@@ -410,12 +413,12 @@ export default function ErectileDysfunctionTreatmentClient({
                  <h4 className="text-lg font-raleway font-bold text-slate-900 mb-5 border-b border-slate-100 pb-4">Your consultation focuses on:</h4>
                  <ul className="space-y-4">
                   {[
-                    "Your symptoms and concerns",
+                    "Your erectile dysfunction or impotence symptoms and concerns",
                     "Previous treatments and response so far",
                     "Medical history and current medication",
                     "Possible contributing factors, including circulation, hormones, stress and lifestyle",
                     "Vascular review, with penile Doppler ultrasound discussed or arranged where clinically appropriate",
-                    "Suitable treatment options, which may include shockwave therapy, PRP-based treatment, blood tests, medication review or referral where appropriate",
+                    "Suitable ED and impotence treatment options, which may include shockwave therapy, PRP-based treatment, blood tests, medication review or referral where appropriate",
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0 text-base" />
@@ -444,6 +447,21 @@ export default function ErectileDysfunctionTreatmentClient({
         </div>
       </section>
 
+      {/* --- PRIVATE ED / IMPOTENCE CLINIC SECTION --- */}
+      <section className="py-16 bg-white font-inter border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-[#4041d1] font-bold tracking-widest text-xs uppercase mb-3 block">
+            Private Men’s Health Clinic
+          </span>
+          <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
+            Private ED and Impotence Clinic in {locationName}
+          </h2>
+          <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+            Impotence is another term often used for erectile dysfunction. At Healing-PRP Clinics {locationName}, we provide discreet, doctor-led assessment for men experiencing erection difficulties, reduced firmness, less reliable erections or concerns about sexual performance. Treatment options are discussed after consultation and depend on your symptoms, medical history and suitability.
+          </p>
+        </div>
+      </section>
+    
       {/* --- NEW SHOCKWAVE FOCUS SECTION --- */}
       <section className="py-16 md:py-20 bg-white font-inter">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -467,7 +485,7 @@ export default function ErectileDysfunctionTreatmentClient({
       <section className="relative py-16 lg:py-20 bg-slate-50 overflow-hidden font-inter border-y border-slate-200">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-4 tracking-tight">ED Treatment Options</h2>
+            <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-4 tracking-tight">   ED and Impotence Treatment Options </h2>
             <p className="text-slate-600 text-base">
               After a doctor-led assessment, suitable options may include:
             </p>
@@ -503,7 +521,7 @@ export default function ErectileDysfunctionTreatmentClient({
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-4">Is this suitable for you?</h2>
             <p className="text-slate-600 text-base">
-              This service may be suitable for men experiencing:
+              This private ED and impotence service may be suitable for men experiencing:
             </p>
           </div>
 
