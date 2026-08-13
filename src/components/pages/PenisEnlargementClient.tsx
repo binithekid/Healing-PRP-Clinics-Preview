@@ -809,7 +809,7 @@ export default function PenisEnlargementClient({
             <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow relative flex flex-col h-full">
               <h3 className="text-slate-500 font-bold uppercase tracking-widest text-xs mb-2">Standard Enhancement</h3>
               <div className="text-4xl font-raleway font-bold text-slate-900 mb-2">15ml</div>
-              <div className="text-[#4041d1] font-bold text-xl mb-6">From £1,450</div>
+              <div className="text-[#4041d1] font-bold text-xl mb-6">From £1,550</div>
               <p className="text-slate-600 text-sm leading-relaxed mb-8 flex-grow">
                 A popular option for men looking for a more noticeable yet proportionate increase in penis girth.
               </p>
@@ -825,7 +825,7 @@ export default function PenisEnlargementClient({
             <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow relative flex flex-col h-full">
               <h3 className="text-slate-500 font-bold uppercase tracking-widest text-xs mb-2">Advanced Enhancement</h3>
               <div className="text-4xl font-raleway font-bold text-slate-900 mb-2">20ml+</div>
-              <div className="text-[#4041d1] font-bold text-xl mb-6">From £1,850</div>
+              <div className="text-[#4041d1] font-bold text-xl mb-6">From £1,950</div>
               <p className="text-slate-600 text-sm leading-relaxed mb-8 flex-grow">
                 For men seeking greater volume in a single session, or for those returning for further enhancement.
               </p>
