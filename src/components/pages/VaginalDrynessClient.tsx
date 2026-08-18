@@ -287,7 +287,7 @@ export default function VaginalDrynessClient({
             Private treatment for vaginal dryness and intimate discomfort
           </h2>
           <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6">
-            Vaginal dryness is common, especially around menopause, after childbirth, or with hormonal change. It may cause dryness, burning, soreness, reduced lubrication or discomfort during intimacy.
+            Vaginal dryness is common, especially during perimenopause and menopause. It can form part of genitourinary syndrome of menopause (GSM), a group of changes that may affect the vaginal, vulval and urinary tissues as oestrogen levels fall. Symptoms can include dryness, burning, soreness, reduced lubrication or discomfort during intimacy.
           </p>
           <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-8">
             At HealingPRP Clinics, we take a medical-first approach. Your symptoms are assessed carefully before treatment is recommended.
@@ -307,6 +307,9 @@ export default function VaginalDrynessClient({
             <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">What can cause vaginal dryness?</h2>
             <p className="text-slate-600 text-lg leading-relaxed">
               Vaginal dryness can happen for several reasons. For many women, it is linked to lower oestrogen levels during perimenopause or menopause. This can make the vaginal and vulval tissues feel thinner, drier, more sensitive or more easily irritated.
+            </p>
+            <p className="text-slate-600 text-lg leading-relaxed mt-4">
+              When these changes are related to menopause, they are often described as genitourinary symptoms of menopause. Some women may also notice urinary irritation, recurrent urinary symptoms or increasing discomfort during sex.
             </p>
             <p className="text-slate-600 text-lg leading-relaxed mt-4">
               Other possible causes include breastfeeding, some medications, cancer treatment, stress, reduced arousal, recurrent thrush or urinary infections, perfumed intimate products, and vulval skin conditions.
@@ -334,16 +337,16 @@ export default function VaginalDrynessClient({
       <section className="py-16 bg-white font-inter">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-raleway font-bold text-slate-900 mb-4">When to see your regular GP urgently</h2>
+            <h2 className="text-3xl font-raleway font-bold text-slate-900 mb-4">When further medical assessment is needed</h2>
             <p className="text-slate-600">
-              While your consultation with Dr Abdi includes a full medical review, certain &quot;red flag&quot; symptoms require diagnostic investigation through your regular NHS GP or gynaecologist before private regenerative treatments can be considered.
+              Some symptoms should be investigated before intimate injectable treatment is considered. Depending on the symptoms and medical history, Dr Abdi may advise assessment by your GP, gynaecologist or another appropriate specialist.
             </p>
           </div>
           
           <div className="bg-red-50 border border-red-200 rounded-2xl p-8 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
               <FaExclamationTriangle className="text-red-600 text-2xl" />
-              <h3 className="font-bold text-red-900 text-lg">Please consult your GP urgently if you have:</h3>
+              <h3 className="font-bold text-red-900 text-lg">Please arrange medical assessment if you have:</h3>
             </div>
             <ul className="space-y-2 mb-6">
               {redFlagsList.map((flag, idx) => (
@@ -354,7 +357,7 @@ export default function VaginalDrynessClient({
               ))}
             </ul>
             <p className="text-red-800 text-sm font-bold bg-red-100 p-4 rounded-xl">
-              If you are experiencing any of these symptoms, please arrange an urgent review with your regular healthcare provider. Regenerative treatments cannot proceed until serious underlying conditions have been safely ruled out.
+              If any of these apply, further assessment may be recommended before treatment. This helps ensure that infection, gynaecological conditions or other underlying causes are appropriately investigated.
             </p>
           </div>
         </div>
@@ -365,7 +368,7 @@ export default function VaginalDrynessClient({
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">Treatment options for vaginal dryness</h2>
           <p className="text-slate-600 text-lg leading-relaxed mb-6">
-            Treatment depends on the cause, severity and your personal preferences. Some women benefit from lubricants, vaginal moisturisers or vaginal oestrogen where appropriate.
+            Treatment depends on the cause, severity and your personal preferences. For menopause-related vaginal dryness or other symptoms of genitourinary syndrome of menopause, first-line options may include lubricants, vaginal moisturisers and vaginal oestrogen where appropriate.
           </p>
           <p className="text-slate-600 text-lg leading-relaxed">
             Some women prefer non-hormonal options, cannot use hormones, or want additional support for hydration, tissue comfort and intimate wellbeing. In these cases, selected treatments such as vaginal hyaluronic acid, combined polynucleotide + hyaluronic acid treatment, or PRP/O-Shot may be discussed after assessment.
@@ -400,7 +403,6 @@ export default function VaginalDrynessClient({
                 <p>Vaginal hyaluronic acid may be considered for women looking for a non-hormonal option focused on hydration, comfort and tissue support.</p>
               </div>
               
-              {/* UPDATED: White box now has flex-grow to stretch and fill gaps */}
               <div className="bg-white p-5 rounded-2xl border border-slate-100 mb-6 flex-grow flex flex-col">
                 <p className="text-xs font-bold text-slate-900 mb-2 uppercase">May be suitable for:</p>
                 <ul className="text-sm text-slate-600 space-y-1 list-disc pl-4">
@@ -412,7 +414,6 @@ export default function VaginalDrynessClient({
                 </ul>
               </div>
               
-              {/* UPDATED: Grouped disclaimer & link with mt-auto and min-h-[60px] to align bottoms */}
               <div className="flex flex-col justify-end mt-auto">
                 <p className="text-xs text-slate-500 italic border-l-2 border-blue-300 pl-3 mb-6 min-h-[60px] flex items-center">
                   The aim is to support hydration, tissue comfort and intimate wellbeing in suitable patients.
@@ -430,7 +431,6 @@ export default function VaginalDrynessClient({
               <div className="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6 shrink-0">
                 <FaDna />
               </div>
-              {/* UPDATED HEADING: Shortened to keep on one line */}
               <h3 className="text-2xl font-raleway font-bold text-slate-900 mb-2">Polynucleotide + HA</h3>
               <p className="text-sm font-bold text-[#4041d1] mb-4 uppercase tracking-wide">Combined tissue-support and hydration treatment</p>
               
@@ -697,7 +697,7 @@ export default function VaginalDrynessClient({
           </div>
           <div className="prose prose-slate max-w-none text-slate-600 mb-12">
             <p>
-              Vaginal dryness can be treated in different ways. Lubricants, moisturisers and vaginal oestrogen are commonly used options, especially when symptoms are related to menopause. Regenerative treatments such as PRP/O-Shot and polynucleotides are newer options and the evidence is still developing.
+              Vaginal dryness, including dryness associated with genitourinary syndrome of menopause, can be managed in different ways. Lubricants, vaginal moisturisers and vaginal oestrogen are established options, particularly when symptoms are related to menopause. Regenerative treatments such as PRP/O-Shot and combined polynucleotide + hyaluronic acid treatment are newer options and the evidence is still developing.
             </p>
             <p>
               Some studies suggest that PRP may improve symptoms such as lubrication, discomfort and sexual function in selected women, but treatment protocols vary and the long-term durability of results is not fully established.
