@@ -219,7 +219,7 @@ export default function VaginalDrynessClient({
             custom={2} initial="hidden" animate={isLoaded ? "visible" : "hidden"} variants={fadeUpVariants}
             className="mt-4 text-base md:text-lg text-blue-50/90 font-inter leading-relaxed max-w-2xl mx-auto mb-8 font-medium"
           >
-            Doctor-led care for vaginal dryness, reduced lubrication, soreness and discomfort during intimacy. Confidential non-hormonal treatment options are discussed after assessment.
+            Doctor-led care for vaginal dryness, reduced lubrication, soreness and discomfort during intimacy, including symptoms associated with genitourinary syndrome of menopause (GSM). Confidential non-hormonal treatment options are discussed after assessment.
           </motion.p>
           
           <motion.p
