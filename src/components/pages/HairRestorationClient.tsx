@@ -143,7 +143,7 @@ export default function HairRestorationClient({
       <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white z-10" />
-          <img src="/hero_img.png" alt="Hair Restoration" className="w-full h-full object-cover" />
+          <img src="/hero_img3.png" alt="Hair Restoration" className="w-full h-full object-cover" />
         </div>
 
         <div className="relative w-full z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center md:justify-start">
