@@ -51,7 +51,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white z-10" />
           <img 
-            src="/hero_img.png" 
+            src="/hero_img3.png" 
             alt="Blog Background" 
             className="w-full h-full object-cover" 
             loading="eager"
