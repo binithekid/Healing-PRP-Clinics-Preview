@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     icon: "/Logo2.png", 
     shortcut: "/Logo2.png",
     apple: "/Logo2.png", 
-  }
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",
