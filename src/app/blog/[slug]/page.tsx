@@ -12,8 +12,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     return { title: "Post Not Found | Healing-PRP Clinics" };
   }
 
-  const seoTitle = `${post.title} | Healing-PRP Clinics UK`;
-  const seoDescription = post.excerpt || "Read the latest medical insights and advanced regenerative aesthetic treatments from Dr. Syed Abdi at Healing-PRP Clinics.";
+  const seoTitle = post.seoTitle?.trim() || post.title;
+  const socialTitle = `${post.title} | Healing-PRP Clinics`;
+  const seoDescription = 
+    post.seoDescription?.trim() || 
+    post.excerpt || 
+    "Medical insights on intimate health, regenerative medicine and non-surgical treatments from Dr Syed Abdi.";
+  
   const canonicalUrl = `https://www.healing-prp.co.uk/blog/${params.slug}`;
   
   const imageUrl = post.coverImage?.url 
@@ -21,13 +26,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     : "https://www.healing-prp.co.uk/Logo2.png";
 
   return {
-    title: seoTitle,
+    title: {
+      absolute: seoTitle,
+    },
     description: seoDescription,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: seoTitle,
+      title: socialTitle,
       description: seoDescription,
       url: canonicalUrl,
       siteName: "Healing-PRP Clinics",
@@ -46,7 +53,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     },
     twitter: {
       card: "summary_large_image",
-      title: seoTitle,
+      title: socialTitle,
       description: seoDescription,
       images: [imageUrl],
     },
