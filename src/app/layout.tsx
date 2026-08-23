@@ -11,15 +11,15 @@ const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway", displa
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.healing-prp.co.uk"),
   title: {
-    default: "Doctor-Led Regenerative Medicine | Healing-PRP Clinics",
-    template: "%s | Healing-PRP Clinics", 
+    default: "Doctor-Led Regenerative & Intimate Health | Healing-PRP Clinics", 
+    template: "%s | Healing-PRP Clinics",
   },
-  description: "Specialist private clinic in St Albans & Birmingham. PRP Hair Restoration, Joint Injections, P-Shot & O-Shot treatments by GMC-registered doctors.",
+  description: "Healing-PRP Clinics provides doctor-led intimate health, regenerative and non-surgical treatments in Birmingham, St Albans and Hampstead, London.",
   icons: {
     icon: "/Logo2.png", 
     shortcut: "/Logo2.png",
     apple: "/Logo2.png", 
-  },
+  }
   openGraph: {
     type: "website",
     locale: "en_GB",
