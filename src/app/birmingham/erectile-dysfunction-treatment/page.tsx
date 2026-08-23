@@ -7,7 +7,7 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Erectile Dysfunction & Impotence Clinic Birmingham | Healing PRP",
+    absolute: "Erectile Dysfunction & Impotence Clinic Birmingham | Healing-PRP Clinics",
   },
   description:
     "Private doctor-led erectile dysfunction and impotence clinic in Birmingham. Discreet assessment for ED, reduced firmness and erection difficulties. Fees apply.",
