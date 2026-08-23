@@ -20,11 +20,16 @@ export const metadata: Metadata = {
     shortcut: "/Logo2.png",
     apple: "/Logo2.png", 
   },
-  openGraph: {
+ openGraph: {
     type: "website",
     locale: "en_GB",
     siteName: "Healing-PRP Clinics",
+    title: "Doctor-Led Regenerative & Intimate Health | Healing-PRP Clinics",
+    description:
+      "Doctor-led intimate health, regenerative and non-surgical treatments in Birmingham, St Albans and Hampstead, London.",
+    url: "https://www.healing-prp.co.uk/",
   },
+
   twitter: {
     card: "summary_large_image",
   },
