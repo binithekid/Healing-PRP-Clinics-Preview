@@ -69,8 +69,8 @@ const mobileTreatmentCards = [
     icon: FaWaveSquare,
   },
   {
-    title: "PRP-Based ED Treatment",
-    text: "A regenerative treatment option that may be discussed where suitable after doctor-led assessment.",
+    title: "Advanced ED Treatment Options",
+    text: "Additional treatment options may be discussed where suitable after doctor-led assessment, depending on your symptoms, medical history and treatment goals.",
     icon: FaSyringe,
   },
   {
@@ -99,8 +99,8 @@ const treatmentOptions = [
   },
   { 
     icon: FaSyringe, 
-    title: "PRP-Based ED Treatment", 
-    description: "A doctor-prepared treatment using a concentrated sample from your own blood. This may be considered as part of a personalised ED plan after consultation, depending on your symptoms and suitability.",
+    title: "Advanced ED Treatment Options", 
+    description: "Additional treatment options may be discussed where suitable after doctor-led assessment, depending on your symptoms, medical history and treatment goals.",
     tags: ["Minimal discomfort", "Takes ~30 mins", "No planned downtime"]
   },
   { 
@@ -185,6 +185,7 @@ export default function ErectileDysfunctionTreatmentClient({
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const isBirmingham = locationName === "Birmingham";
+  const isHampstead = locationName === "Hampstead";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -268,14 +269,20 @@ export default function ErectileDysfunctionTreatmentClient({
           </div>
 
           <h1 className="md:text-5xl lg:text-6xl text-4xl font-bold font-raleway text-white leading-tight mb-5 tracking-tight drop-shadow-lg">
-            Erectile Dysfunction <br className="hidden sm:block"/> Treatment in {locationName}
+            {isHampstead 
+              ? <>Erectile Dysfunction Clinic <br className="hidden sm:block"/> in Hampstead, London</>
+              : <>Erectile Dysfunction <br className="hidden sm:block"/> Treatment in {locationName}</>
+            }
           </h1>
           
           <p className="text-sm md:text-base text-white/90 font-inter leading-relaxed max-w-2xl mx-auto mb-5 drop-shadow-md">
             {heroDescription}
           </p>
           <p className="text-xs md:text-sm text-blue-200 font-inter max-w-2xl mx-auto mb-5 font-semibold">
-            Private ED and impotence clinic in {locationName}.
+            {isHampstead 
+              ? "Private ED and impotence clinic in Hampstead, North West London."
+              : `Private ED and impotence clinic in ${locationName}.`
+            }
           </p>
 
           {/* NEW TREATMENT PILLS */}
@@ -283,7 +290,7 @@ export default function ErectileDysfunctionTreatmentClient({
             custom={0} initial="hidden" animate="visible" variants={fadeUpVariants}
             className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto mb-8"
           >
-            {["Shockwave Therapy", "PRP-Based Treatment", "Impotence Assessment", "Vascular Review", "Medication Review"].map((pill, idx) => (
+            {["Shockwave Therapy", "Advanced ED Options", "Impotence Assessment", "Vascular Review", "Medication Review"].map((pill, idx) => (
               <div key={idx} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm">
                 <FaCheckCircle className="text-blue-400 w-3 h-3 shrink-0" />
                 <span className="text-white text-[11px] md:text-xs font-semibold tracking-wide font-inter">{pill}</span>
@@ -303,7 +310,7 @@ export default function ErectileDysfunctionTreatmentClient({
               onClick={handleAction}
               className="px-8 py-4 w-full sm:w-auto flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-[0_0_20px_rgba(64,65,209,0.3)] hover:shadow-[0_0_25px_rgba(64,65,209,0.5)] active:scale-95 font-inter"
             >
-              Book Private ED Consultation
+              Request Private Callback
             </button>
             <button 
               onClick={() => setIsAssessmentOpen(true)}
@@ -418,7 +425,7 @@ export default function ErectileDysfunctionTreatmentClient({
                     "Medical history and current medication",
                     "Possible contributing factors, including circulation, hormones, stress and lifestyle",
                     "Vascular review, with penile Doppler ultrasound discussed or arranged where clinically appropriate",
-                    "Suitable ED and impotence treatment options, which may include shockwave therapy, PRP-based treatment, blood tests, medication review or referral where appropriate",
+                    "Suitable ED and impotence treatment options, which may include shockwave therapy, advanced ED options, blood tests, medication review or referral where appropriate",
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0 text-base" />
