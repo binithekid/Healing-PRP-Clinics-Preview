@@ -731,16 +731,28 @@ export default function PShotClient({
             </div>
           </div>
 
-          {/* Localised Location Block */}
+          {/* Localised Location Blocks for Birmingham (with Manchester Link) */}
           {isBirmingham && (
-            <div className="max-w-3xl mx-auto mb-16 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-left flex items-start gap-4">
-               <FaMapMarkerAlt className="text-[#4041d1] text-3xl shrink-0 mt-1" aria-hidden="true" />
-               <div>
-                 <h3 className="font-bold font-raleway text-slate-900 mb-2 text-lg">Visiting our Edgbaston Clinic</h3>
-                 <p className="text-slate-600 text-sm leading-relaxed">
-                   Located at 38 Harborne Rd, Edgbaston, our Birmingham clinic offers a highly discreet environment with private consultation rooms. We provide clear directions and parking instructions prior to your appointment to ensure your arrival is stress-free and entirely confidential.
-                 </p>
-               </div>
+            <div className="max-w-3xl mx-auto mb-16 flex flex-col gap-6">
+              <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-left flex items-start gap-4">
+                 <FaMapMarkerAlt className="text-[#4041d1] text-3xl shrink-0 mt-1" aria-hidden="true" />
+                 <div>
+                   <h3 className="font-bold font-raleway text-slate-900 mb-2 text-lg">Visiting our Edgbaston Clinic</h3>
+                   <p className="text-slate-600 text-sm leading-relaxed">
+                     Located at 38 Harborne Rd, Edgbaston, our Birmingham clinic offers a highly discreet environment with private consultation rooms. We provide clear directions and parking instructions prior to your appointment to ensure your arrival is stress-free and entirely confidential.
+                   </p>
+                 </div>
+              </div>
+
+              {/* Manchester Travel Link (Birmingham Only) */}
+              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-left">
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Some patients travel from Manchester and the wider North West to our Birmingham clinic for private, doctor-led P-Shot / PRP-based ED treatment. Healing PRP Clinics does not currently have a Manchester clinic; patients from Manchester are seen at our Edgbaston, Birmingham clinic after consultation and suitability assessment.
+                </p>
+                <p className="text-slate-600 text-sm leading-relaxed mt-2">
+                  Read more here: <Link href="/blog/p-shot-near-manchester-prp-treatment-ed" className="text-[#4041d1] font-bold hover:underline transition-colors">P-Shot Near Manchester</Link>
+                </p>
+              </div>
             </div>
           )}
 
