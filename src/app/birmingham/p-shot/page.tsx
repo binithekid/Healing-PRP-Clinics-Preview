@@ -52,6 +52,10 @@ const faqs = [
     answer: "Our clinic is located at 38 Harborne Rd in Edgbaston (B15 3EB). We offer a highly discreet, private setting with accessible parking nearby, ensuring your visit from anywhere in the West Midlands is stress-free and confidential.",
   },
   {
+    question: "Do patients travel from Manchester for P-Shot treatment?",
+    answer: "Yes, some patients travel from Manchester and the wider North West to our Birmingham clinic for private, doctor-led P-Shot / PRP-based ED treatment. Healing PRP Clinics does not currently have a Manchester clinic. Patients from Manchester are seen at our Edgbaston, Birmingham clinic after consultation and suitability assessment.",
+  },
+  {
     question: "Who administers the P-Shot at the Edgbaston clinic?",
     answer: "All P-Shot consultations and treatments in Birmingham are personally conducted by our Medical Director, Dr. Syed Abdi. He is a GMC-registered doctor with experience in private regenerative and sexual health treatments.",
   },
