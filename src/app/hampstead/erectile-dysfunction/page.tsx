@@ -6,19 +6,19 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Doctor-Led Erectile Dysfunction Treatment Hampstead, London",
+    absolute: "Erectile Dysfunction Treatment Hampstead, London | Private ED Clinic",
   },
   description:
-    "Doctor-led Erectile Dysfunction (ED) clinic in Hampstead, North West London. Private assessment with tailored options including Shockwave Therapy and PRP (P-Shot). Discreet, non-judgemental care.",
+    "Private erectile dysfunction treatment in Hampstead, London. Doctor-led ED and impotence assessment for weak erections, reduced firmness, difficulty maintaining erections and blood-flow related ED. Fees apply.",
 
   alternates: {
     canonical: "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction",
   },
 
   openGraph: {
-    title: "Doctor-Led Erectile Dysfunction Treatment Hampstead | Healing-PRP Clinics",
+    title: "Erectile Dysfunction Treatment Hampstead, London | Private ED Clinic",
     description:
-      "Doctor-led Shockwave & PRP therapy for ED. Conveniently serving Hampstead, Belsize Park, and North West London.",
+      "Private erectile dysfunction treatment in Hampstead, London. Doctor-led ED and impotence assessment for weak erections, reduced firmness, difficulty maintaining erections and blood-flow related ED. Fees apply.",
     url: "https://www.healing-prp.co.uk/hampstead/erectile-dysfunction",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -35,14 +35,26 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Doctor-Led Erectile Dysfunction Treatment Hampstead",
-    description: "Restore spontaneity and confidence. Doctor-led Shockwave & PRP therapy for ED in Hampstead, London.",
+    title: "Erectile Dysfunction Treatment Hampstead, London | Private ED Clinic",
+    description: "Private erectile dysfunction treatment in Hampstead, London. Doctor-led ED and impotence assessment for weak erections, reduced firmness, difficulty maintaining erections and blood-flow related ED. Fees apply.",
     images: ["/ed-doctor-consultation.webp"],
   },
 };
 
 // --- SEO RICH FAQS (Hampstead & North West London Focus) ---
 const faqs = [
+  {
+    question: "What is the difference between erectile dysfunction and impotence?",
+    answer: "Impotence is an older term often used to describe erectile dysfunction. Both usually refer to difficulty getting or maintaining an erection firm enough for satisfactory sexual activity. At our Hampstead clinic, we use a doctor-led assessment to understand possible causes and discuss suitable private treatment options.",
+  },
+  {
+    question: "Can you help with weak erections or reduced firmness?",
+    answer: "Yes. Men often seek help for weak erections, reduced firmness, losing an erection, or difficulty maintaining an erection. These symptoms can be linked to blood flow, hormones, medication, stress, lifestyle factors or other medical conditions. Suitability for treatment is assessed before any plan is recommended.",
+  },
+  {
+    question: "Is ED linked to high blood pressure or circulation problems?",
+    answer: "Yes, erectile dysfunction can sometimes be linked to blood-flow problems, high blood pressure, diabetes, cholesterol, smoking or cardiovascular risk factors. A private ED consultation can help identify possible contributors and whether treatment such as shockwave therapy, medication review, blood tests or other options may be suitable.",
+  },
   {
     question: "What are the main treatments for Erectile Dysfunction at your Hampstead clinic?",
     answer: "At our Hampstead clinic, we offer a comprehensive, doctor-led approach to ED. This includes advanced regenerative options like Low-Intensity Shockwave Therapy and the P-Shot (PRP), as well as prescribing personalised medication for ED treatment tailored to your specific cardiovascular and metabolic profile.",
