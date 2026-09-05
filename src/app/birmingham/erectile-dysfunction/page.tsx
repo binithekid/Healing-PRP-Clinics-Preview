@@ -7,19 +7,19 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Erectile Dysfunction Treatment Birmingham | Doctor-Led ED Clinic",
+    absolute: "Erectile Dysfunction Treatment Birmingham | Private ED Clinic",
   },
 
-  description:
-    "Private doctor-led erectile dysfunction treatment in Birmingham. Consultation for Shockwave Therapy, P-Shot and personalised ED treatment options in Edgbaston. Assessment required.",
+ description:
+  "Private erectile dysfunction treatment in Birmingham. Doctor-led ED and impotence assessment for weak erections, reduced firmness, difficulty maintaining erections and blood-flow related ED. Fees apply.",
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
   },
 
   openGraph: {
-    title: "Doctor-Led Erectile Dysfunction Treatment | Birmingham & Midlands",
+    title: "Erectile Dysfunction Treatment Birmingham | Private ED Clinic",
     description:
-      "Confidential, doctor-led ED treatments in Birmingham. Shockwave & PRP therapy. Conveniently serving Edgbaston, Solihull & Sutton Coldfield.",
+      "Private doctor-led ED and impotence assessment in Birmingham for weak erections, reduced firmness and difficulty maintaining erections. Serving Edgbaston, Solihull, Sutton Coldfield and the West Midlands.",
     url: "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -36,8 +36,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Doctor-Led Erectile Dysfunction Treatment | Birmingham",
-    description: "Confidential, doctor-led ED treatments in Birmingham. Shockwave & PRP therapy in Edgbaston.",
+    title: "Erectile Dysfunction Treatment Birmingham | Private ED Clinic",
+    description:
+      "Private ED and impotence assessment in Birmingham for weak erections, reduced firmness and difficulty maintaining erections. Doctor-led care. Fees apply.",
     images: ["/ed-doctor-consultation.webp"],
   },
 };
@@ -45,33 +46,33 @@ export const metadata: Metadata = {
 // --- SEO RICH FAQS (Birmingham & Midlands Focus) ---
 const faqs = [
   {
-    question: "What are the main treatments for Erectile Dysfunction at your Birmingham clinic?",
-    answer: "At our Birmingham clinic in Edgbaston, we offer a comprehensive, doctor-led approach to ED. This includes advanced regenerative options like Low-Intensity Shockwave Therapy and the P-Shot (PRP), as well as prescribing personalised medication for ED treatment tailored to your specific cardiovascular and metabolic profile.",
+  question: "Can you help with weak erections or reduced firmness?",
+  answer: "Yes. Men often seek help for weak erections, reduced firmness, trouble maintaining an erection, losing an erection during intimacy, or erections that feel less reliable than before. These symptoms can be linked to blood flow, hormones, medication, stress, lifestyle factors or other medical conditions. At our Birmingham clinic, suitability for treatment is assessed before any plan is recommended.",
   },
   {
-    question: "Is Shockwave Therapy painful?",
-    answer: "Most men visiting our West Midlands clinic find Shockwave Therapy very tolerable. You may feel a mild tapping sensation, but anaesthetic is not usually required. There is no downtime, allowing you to drive home to Solihull, Sutton Coldfield, or central Birmingham immediately after your session.",
+    question: "What is the difference between erectile dysfunction and impotence?",
+    answer: "Impotence is an older term often used to describe erectile dysfunction. Both usually refer to difficulty getting or maintaining an erection firm enough for satisfactory sexual activity. At Healing PRP Clinics Birmingham, we provide a doctor-led assessment to understand possible causes and discuss suitable private treatment options.",
   },
   {
-    question: "How is this different from standard Viagra or Cialis?",
-    answer: "Standard tablets only provide a temporary, symptom-based increase in blood flow. While we do prescribe personalised medication for ED treatment when appropriate, our core focus is on restorative therapies like Shockwave and PRP that aim to support long-term vascular function and tissue health.",
+    question: "Do you offer ED treatment near me in Birmingham?",
+    answer: "Healing PRP Clinics offers private doctor-led ED assessment in Edgbaston, Birmingham, serving men from Birmingham, Solihull, Harborne, Sutton Coldfield, Smethwick, Wolverhampton and the wider West Midlands. No GP referral is needed. Treatment options are discussed after consultation and suitability assessment.",
   },
   {
-    question: "How quickly will I see results from ED treatments?",
-    answer: "Tissue healing and vascular regeneration take time. While some men notice changes after just a few sessions, optimal improvements usually develop gradually in the weeks following your complete treatment course at our Birmingham clinic.",
+    question: "Is erectile dysfunction linked to high blood pressure or circulation problems?",
+    answer: "Yes. Erectile dysfunction can sometimes be linked to blood-flow problems, high blood pressure, diabetes, cholesterol, smoking or wider cardiovascular risk factors. A private ED consultation can help identify possible contributing factors and whether options such as shockwave therapy, blood tests, medication review or other treatments may be suitable.",
   },
   {
-    question: "Can I treat ED if I have diabetes or high blood pressure?",
-    answer: "Yes. Erectile dysfunction related to diabetes or vascular issues is incredibly common. During your private consultation at our Edgbaston clinic, our doctor will thoroughly assess your cardiovascular health and may recommend a combination of regenerative therapy alongside personalised medication for ED treatment.",
+    question: "Why am I losing my erection during intimacy?",
+    answer: "Losing an erection during intimacy can happen for several reasons, including blood-flow changes, stress, anxiety, tiredness, alcohol, medication side effects, hormone imbalance or underlying health conditions. A doctor-led ED assessment can help explore possible causes and suitable next steps.",
   },
   {
-    question: "Do I need a GP referral to visit your Birmingham ED clinic?",
-    answer: "No GP referral is required. We offer direct access to discreet, strictly 1:1 private consultations with our GMC-registered doctors for men across Birmingham, Solihull, and the wider West Midlands area.",
+    question: "Can psychological ED be treated?",
+    answer: "Psychological factors such as stress, anxiety, low confidence or relationship pressure can contribute to erectile dysfunction. In some men, physical and psychological factors overlap. During consultation, Dr Syed Abdi will assess your symptoms, medical history and likely contributing factors before discussing suitable options or onward referral where appropriate.",
   },
   {
-    question: "Is this treatment suitable for everyone?",
-    answer: "Suitability highly depends on the root cause of your erectile dysfunction, your overall health, and current medications. A thorough medical assessment at our Birmingham clinic ensures we recommend the safest and most effective protocol for your specific needs.",
-  },
+    question: "Can ED treatment help if tablets are no longer working well?",
+    answer: "Some men seek help because tablets such as sildenafil or tadalafil are no longer working as well as before, or because they experience side effects. At our Birmingham clinic, your response to previous treatments can be reviewed alongside possible causes such as blood flow, hormones, diabetes, blood pressure, medication and lifestyle factors.",
+  }
 ];
 
 // --- UPGRADED JSON-LD SCHEMA: Medical Clinic, Condition & Interconnected Therapies ---
