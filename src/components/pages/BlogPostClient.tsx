@@ -244,11 +244,6 @@ export default function BlogPostClient({ post, navigation }: { post: BlogPost; n
     <div className="bg-white min-h-screen font-inter flex flex-col">
       
       <header className="relative pt-8 md:pt-10 pb-12 md:pb-16 bg-[#0A1128] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#0A1128]/90 z-10"></div>
-          <img src="/hero_img.png" alt="Background" className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
-        </div>
-
         {/* --- HORIZON NAVIGATION --- */}
         <div className="relative z-20 max-w-[1200px] mx-auto px-6 mb-8 md:mb-10">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-between">
