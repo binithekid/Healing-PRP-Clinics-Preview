@@ -34,7 +34,7 @@ export default function PricesClient({ isBirmingham = false, isHampstead = false
         { name: "Peyronie’s Disease Protocol", price: "Upon consultation", sessions: "Custom treatment plan", details: "Targeted doctor-led regenerative protocol" },
         { name: "EXO P-Shot", price: "£1500", sessions: "Course of 3: £4000", details: "Advanced exosome-enhanced treatment" },
         { name: "Personalised Medication", price: "Upon consultation", sessions: "Custom treatment plan", details: "Tailored support for ED and PE" },
-        { name: "Shockwave Therapy", price: "£300", sessions: "Course of 6: £1500", details: "Low-intensity acoustic wave therapy" },
+        { name: "Shockwave Therapy", price: "£350", sessions: "Course of 6: £1750", details: "Low-intensity acoustic wave therapy" },
         { name: "O-Shot", price: "£995/session", sessions: "1–3 sessions", details: "Doctor-led treatment for intimate wellbeing" },
       ]
     },
