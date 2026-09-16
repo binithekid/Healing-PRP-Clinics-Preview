@@ -480,9 +480,9 @@ export default function ErectileDysfunctionClient({
       <section className="py-24 bg-white font-inter border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">Who this page is for</h2>
+            <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">Who May Benefit From a Private ED Assessment?</h2>
             <p className="text-slate-600 text-lg">
-              This service may be appropriate for men who recognise one or more of the following and want a confidential doctor-led discussion about the next step:
+              This page is for men who recognise one or more of the following symptoms and want a confidential, doctor-led discussion about erectile dysfunction treatment options:
             </p>
           </div>
 
