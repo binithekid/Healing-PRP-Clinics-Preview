@@ -239,7 +239,7 @@ export default function ErectileDysfunctionClient({
             {isHampstead ? (
               "Private doctor-led ED and impotence assessment in Hampstead, North West London, for men with erection difficulties, reduced firmness, weak erections or difficulty maintaining an erection."
             ) : (
-              <>Private, doctor-led care for erection difficulties, reduced firmness, or tablet side effects. Start with a <strong>free confidential consultation</strong> to assess the cause and discuss tailored options like medication, Shockwave, or P-Shot treatment.</>
+              <>Private doctor-led ED and impotence assessment in Birmingham for men with weak erections, reduced firmness, difficulty maintaining an erection, tablet side effects or a less reliable response to previous treatment. Suitability, risks and fees are discussed before any treatment plan is agreed.</>
             )}
           </motion.p>
 
@@ -251,13 +251,13 @@ export default function ErectileDysfunctionClient({
               onClick={handleAction}
               className="px-8 py-4 w-full sm:w-auto flex items-center justify-center text-sm cursor-pointer bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all duration-300 gap-2 shadow-[0_0_20px_rgba(64,65,209,0.3)] hover:shadow-[0_0_25px_rgba(64,65,209,0.5)] active:scale-95 font-inter"
             >
-              <FaEnvelope className="w-4 h-4" /> Book Free Confidential Consultation
+              <FaEnvelope className="w-4 h-4" /> Request Private Callback
             </button>
             <button 
               onClick={() => setIsAssessmentOpen(true)}
               className="px-8 py-4 w-full sm:w-auto flex items-center justify-center text-sm cursor-pointer bg-white text-[#4041d1] hover:bg-slate-50 rounded-xl font-bold transition-all duration-300 gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] active:scale-95 font-inter"
             >
-              Start Free Online Assessment
+              Check ED Suitability
             </button>
           </motion.div>
 
@@ -266,7 +266,7 @@ export default function ErectileDysfunctionClient({
             custom={4} initial="hidden" animate={isLoaded ? "visible" : "hidden"} variants={fadeUpVariants}
             className="flex flex-wrap justify-center gap-3 mt-10"
           >
-            {["Tablets not working as well?", "Doctor-led treatment options", "Free confidential consultation", "Discreet private care"].map((chip) => (
+            {["Weak erections or reduced firmness?", "Difficulty maintaining an erection?", "Doctor-led ED treatment options", "Discreet private care"].map((chip) => (
               <div key={chip} className="flex items-center gap-1.5 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-[10px] md:text-xs font-bold text-white uppercase tracking-wider backdrop-blur-sm">
                 <FaCheckCircle className="text-blue-400" /> {chip}
               </div>
