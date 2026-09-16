@@ -78,17 +78,19 @@ const Header = () => {
     { name: "Contact Us", href: link("/contact"), isContact: true, isSpacer: true },
   ];
 
-  // Filter out aesthetics for Hampstead
+  // Hampstead-specific menu
   if (isHampstead) {
     menuColumn2 = [
-      { name: "Clinic Information", isCategoryTitle: true },
+      { name: "Regenerative & Wellness", isCategoryTitle: true },
+      { name: "Ozone Therapy", href: link("/ozone-therapy"), isSubItem: true },
+  
+      { name: "Clinic Information", isCategoryTitle: true, isSpacer: true },
       { name: "Prices", href: link("/prices"), isSubItem: true },
       { name: "FAQs", href: link("/faq"), isSubItem: true },
       { name: "Health Blog", href: "/blog", isSubItem: true },
       { name: "Contact Us", href: link("/contact"), isContact: true, isSpacer: true },
     ];
   }
-
   // Active Style logic for the location selector
   const activeLocationStyle = "border-[#4041d1] bg-[#4041d1]/10 text-white font-bold shadow-[0_0_20px_rgba(64,65,209,0.3)]";
   const inactiveLocationStyle = "border-white/10 text-slate-400 hover:border-white/20 hover:text-white";
