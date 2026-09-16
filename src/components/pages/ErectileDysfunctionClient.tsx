@@ -134,18 +134,21 @@ export default function ErectileDysfunctionClient({
 
   const quickSteps = [
     {
-      title: "Complete a confidential assessment",
-      description: "Tell us about your symptoms, medical history, and any current treatment.",
+      title: "Private ED assessment",
+      description:
+        "Tell us about your erection difficulties, weak erections, reduced firmness, medical history and any previous response to tablets or treatment.",
       icon: FaFileAlt,
     },
     {
       title: "Doctor-led consultation",
-      description: "We review likely contributing factors and discuss the most suitable options.",
+      description:
+        "Dr Syed Abdi reviews possible causes of erectile dysfunction, including blood-flow changes, diabetes, blood pressure, hormones, medication side effects and psychological factors.",
       icon: FaUserMd,
     },
     {
-      title: "Move forward with a tailored plan",
-      description: "This may include medication support, shockwave therapy, P-Shot, or a combined approach where appropriate.",
+      title: "Tailored ED treatment plan",
+      description:
+        "Suitable options may include medication review, blood tests, shockwave therapy, P-Shot or a combined approach where appropriate. Treatment is only discussed after suitability assessment.",
       icon: FaCheckCircle,
     },
   ];
@@ -362,7 +365,7 @@ export default function ErectileDysfunctionClient({
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-4">How the process works</h2>
-            <p className="text-slate-600 text-lg">The aim is to make the process clear, discreet, and medically guided from the start.</p>
+            <p className="text-slate-600 text-lg">A clear, discreet process for erectile dysfunction, impotence, weak erections, reduced firmness or difficulty maintaining an erection — starting with a doctor-led assessment.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -379,13 +382,13 @@ export default function ErectileDysfunctionClient({
           
           <div className="mt-12 p-8 bg-blue-600 rounded-2xl text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-blue-900/20">
             <p className="text-lg font-medium max-w-2xl">
-              There is no pressure to proceed. The purpose of the consultation is to help you understand the likely cause of the problem and which treatment options may be suitable for you.
+              There is no pressure to proceed. The purpose of the private ED consultation is to help you understand the likely cause of your symptoms and which erectile dysfunction treatment options may be suitable for you.
             </p>
             <button 
               onClick={handleAction}
               className="px-8 py-4 bg-white text-[#4041d1] rounded-xl font-bold whitespace-nowrap hover:bg-slate-100 transition-colors shadow-lg active:scale-95"
             >
-              Book Free Confidential Consultation
+              Request Private Callback
             </button>
           </div>
         </div>
