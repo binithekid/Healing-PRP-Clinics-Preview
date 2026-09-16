@@ -99,7 +99,7 @@ export default function OzoneClient({
           <div className="absolute inset-0 bg-[#0A1128]/80 z-10" /> 
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A1128]/70 via-transparent to-[#0A1128] z-10" />
           <img 
-            src="/hero_img.png" 
+            src="/hero_img2.png" 
             alt="Medical Ozone Therapy Consultation" 
             className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay"
           />
