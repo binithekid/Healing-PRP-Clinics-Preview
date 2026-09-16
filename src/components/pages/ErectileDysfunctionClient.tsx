@@ -153,42 +153,48 @@ export default function ErectileDysfunctionClient({
     },
   ];
 
-  const symptoms = [
+   const symptoms = [
     {
-      title: "Struggling to get an erection",
-      description: "You may find it harder than before to achieve an erection even when desire is still there.",
+      title: "Weak erections or reduced firmness",
+      description:
+        "Erections may feel softer, less reliable, or not firm enough for sex even when desire is still present.",
       icon: FaBatteryQuarter,
       color: "bg-rose-50 text-rose-600",
     },
     {
-      title: "Losing firmness during intimacy",
-      description: "An erection may start but become softer or harder to maintain during sex.",
+      title: "Difficulty maintaining an erection",
+      description:
+        "You may be able to get an erection but struggle to maintain firmness during intimacy or lose your erection during sex.",
       icon: FaHourglassEnd,
       color: "bg-indigo-50 text-indigo-600",
     },
     {
-      title: "Tablets no longer feel enough",
-      description: "Viagra or Cialis may still help, but the response may feel weaker or less reliable than before.",
+      title: "ED tablets not working as well",
+      description:
+        "Viagra or Cialis may still help, but the response may feel weaker, less predictable or not as reliable as before.",
       icon: FaPills,
       color: "bg-[#f0f0ff] text-[#4041d1]",
     },
     {
-      title: "Side effects from ED tablets",
-      description: "Some men want an alternative approach because of headaches, flushing, or other unwanted effects.",
+      title: "Blood pressure, diabetes or circulation concerns",
+      description:
+        "Erectile dysfunction can sometimes be linked with blood-flow changes, high blood pressure, diabetes, cholesterol or wider cardiovascular risk factors.",
       icon: FaVial,
       color: "bg-teal-50 text-teal-600",
     },
     {
-      title: "Confidence has dropped",
-      description: "ED often affects more than physical function and can begin to impact self-esteem and relationships.",
-      icon: FaUserShield,
-      color: "bg-amber-50 text-amber-600",
-    },
-    {
-      title: "You want a medically guided plan",
-      description: "You are not looking for a quick online prescription, but a proper assessment and a tailored treatment strategy.",
+      title: "Side effects from ED tablets",
+      description:
+        "Some men want a doctor-led review because tablets cause headaches, flushing, indigestion, nasal congestion or other unwanted effects.",
       icon: FaStethoscope,
       color: "bg-emerald-50 text-emerald-600",
+    },
+    {
+      title: "Stress, confidence or psychological ED",
+      description:
+        "ED can affect confidence and relationships. Stress, anxiety and psychological factors may also contribute, either alone or alongside physical causes.",
+      icon: FaUserShield,
+      color: "bg-amber-50 text-amber-600",
     },
   ];
 
@@ -449,13 +455,13 @@ export default function ErectileDysfunctionClient({
         </div>
       </section>
 
-      {/* --- COMMON ED SYMPTOMS WE HELP ASSESS --- */}
+      {/* --- ED and Impotence Symptoms We Help Assess --- */}
       <section className="py-20 bg-slate-50 font-inter border-t border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">Common ED Symptoms We Help Assess</h2>
+          <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">ED and Impotence Symptoms We Help Assess</h2>
           <div className="prose prose-lg prose-slate mx-auto text-left md:text-center">
             <p className="text-slate-600 mb-6 text-base md:text-lg">
-              Men may seek private ED treatment for different symptoms, including difficulty getting or maintaining an erection, reduced firmness, losing an erection during intimacy, weaker erections than before, or a less reliable response to tablets.
+              Men may seek private ED treatment for different symptoms, including weak erections, reduced firmness, difficulty getting or maintaining an erection, losing an erection during sex, or a less reliable response to tablets.
             </p>
             <p className="text-slate-600 mb-8 text-base md:text-lg">
               At Healing-PRP Clinics {locationName}, Dr Syed Abdi provides a discreet, doctor-led assessment to understand possible causes such as blood-flow changes, high blood pressure, diabetes, medication side effects, stress, anxiety, hormone imbalance or lifestyle factors.
