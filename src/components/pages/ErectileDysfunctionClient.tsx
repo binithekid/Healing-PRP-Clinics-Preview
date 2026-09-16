@@ -401,19 +401,19 @@ export default function ErectileDysfunctionClient({
             <div className="bg-blue-50/50 p-10 rounded-3xl border border-blue-100">
                 <span className="text-[#4041d1] font-bold tracking-widest text-xs uppercase mb-3 block">Treatment Planning</span>
                 <h3 className="text-3xl font-raleway font-bold text-slate-900 mb-6">
-                  The right treatment depends on the cause
+                  The right erectile dysfunction treatment depends on the cause
                 </h3>
                 <p className="text-slate-600 text-base leading-relaxed mb-6">
-                  Not every case of erectile dysfunction is the same. Some men are better suited to medication optimisation, while others may benefit from circulation-focused treatment such as shockwave therapy or PRP-based options such as the P-Shot.
+                  Not every case of erectile dysfunction or impotence has the same cause. Some men mainly need medication review or health optimisation, while others may be suitable for circulation-focused treatment such as shockwave therapy or PRP-based options such as the P-Shot.
                 </p>
                 <ul className="space-y-4 mb-8">
                   {[
-                    "Erection quality and firmness",
-                    "Response to Viagra or Cialis",
-                    "Circulation and vascular factors",
-                    "Hormonal and metabolic health",
-                    "Medication side effects",
-                    "Confidence and relationship impact",
+                    "Weak erections and reduced firmness",
+                    "Difficulty getting or maintaining an erection",
+                    "Response to ED tablets such as Viagra or Cialis",
+                    "Blood-flow, diabetes and blood pressure factors",
+                    "Hormone, testosterone and metabolic health",
+                    "Medication side effects, stress or psychological ED",
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-slate-700 font-medium">
                       <FaCheckCircle className="text-[#4041d1] shrink-0" /> {item}
@@ -424,24 +424,24 @@ export default function ErectileDysfunctionClient({
                   onClick={handleAction}
                   className="w-full sm:w-max px-8 py-3.5 bg-[#4041d1] text-white rounded-xl font-bold transition-all duration-300 text-sm flex items-center justify-center gap-2 group shadow-xl shadow-[#4041d1]/20 active:scale-95"
                 >
-                  Book Free Confidential Consultation
+                  Request Private Callback
                   <FaArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </button>
             </div>
 
             <div className="p-10">
-              <h3 className="text-3xl font-raleway font-bold text-slate-900 mb-6">Why choose a doctor-led review?</h3>
+              <h3 className="text-3xl font-raleway font-bold text-slate-900 mb-6">Why choose a doctor-led ED review?</h3>
               <p className="text-slate-600 text-base leading-relaxed mb-6">
-                A proper doctor-led assessment helps identify contributing factors, review treatment suitability properly, and avoid a one-size-fits-all approach.
+                A doctor-led ED assessment helps identify possible causes of erectile dysfunction, review treatment suitability properly, and avoid a one-size-fits-all approach to impotence or weak erections.
               </p>
               <div className="space-y-4">
                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
                     <h4 className="font-bold text-slate-900 mb-1 italic">Medical assessment first</h4>
-                    <p className="text-sm text-slate-600">Treatment recommendations are based on your symptoms, medical history, current medication, and wider health factors.</p>
+                    <p className="text-sm text-slate-600">Treatment recommendations are based on your symptoms, medical history, current medication, blood pressure, diabetes risk, hormone health and wider lifestyle factors.</p>
                  </div>
                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                    <h4 className="font-bold text-slate-900 mb-1 italic">Options beyond standard tablets</h4>
-                    <p className="text-sm text-slate-600">Where appropriate, your plan may include medication support, shockwave therapy, P-Shot treatment, or a combined approach.</p>
+                    <h4 className="font-bold text-slate-900 mb-1 italic">Options beyond standard ED tablets</h4>
+                    <p className="text-sm text-slate-600">Where appropriate, your plan may include medication review, blood tests, shockwave therapy, P-Shot treatment, or a combined approach after suitability assessment.</p>
                  </div>
               </div>
             </div>
