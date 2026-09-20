@@ -1,102 +1,61 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaArrowRight, FaUserMd } from "react-icons/fa";
+import { FaArrowRight, FaLinkedin } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function EDFeatureBlock() {
   const pathname = usePathname();
   const isBirmingham = pathname?.startsWith("/birmingham");
   const prefix = isBirmingham ? "/birmingham" : "";
 
-  const handleContactClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.dispatchEvent(new CustomEvent("open-contact-drawer"));
-    const section = document.getElementById("contact-form-section");
-    if (section) section.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <section className="pt-6 pb-24 bg-slate-50 border-y border-slate-200 overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          
-          {/* Left Column: Copy & CTAs */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              
-              {/* HEADLINE MOVED TO TOP FOR HERO "PEEK" EFFECT */}
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-raleway font-bold text-slate-900 leading-tight tracking-tight mt-4">
-                Private Doctor-Led Help for Erectile Dysfunction
-              </h2>
-              
-              <p className="text-lg text-slate-600 font-inter leading-relaxed">
-                If erections have become less reliable, less firm, or more dependent on tablets, a personalised assessment may help identify the right treatment pathway.
-              </p>
-              
-              <p className="text-base text-slate-600 font-inter leading-relaxed">
-                We take a discreet, medically grounded approach to erectile dysfunction, with treatment plans tailored to the individual rather than a one-size-fits-all package. Options may include medication, shockwave therapy, PRP-based procedures, and hormone review where appropriate.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link 
-                  href={`${prefix}/erectile-dysfunction`}
-                  className="px-8 py-4 bg-white border border-slate-200 text-slate-900 hover:border-[#4041d1] hover:text-[#4041d1] rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-sm font-inter group"
-                >
-                  View ED Treatment Options <FaArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
-                </Link>
-                <button 
-                  onClick={handleContactClick}
-                  className="px-8 py-4 bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#4041d1]/20 font-inter"
-                >
-                  Book Free Initial Consultation
-                </button>
-              </div>
-            </motion.div>
+    <section className="py-24 bg-white font-inter border-b border-slate-100">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-8 md:gap-12"
+        >
+          <div className="shrink-0 relative">
+            <Image
+              src="/dr-syed-abdi.webp"
+              alt="Dr Syed Abdi, GMC-registered doctor at Healing-PRP Clinics"
+              width={192}
+              height={192}
+              className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover shadow-md mx-auto md:mx-0 border-4 border-white"
+              loading="lazy"
+              quality={85}
+            />
           </div>
-
-          {/* Right Column: Doctor Trust Card (Shifted Upwards) */}
-          <div className="lg:col-span-5 relative mt-10 lg:-mt-12">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="bg-white p-8 md:p-10 rounded-[3rem] shadow-2xl border border-slate-100 relative z-10"
-            >
-              <div className="flex items-center gap-5 mb-8">
-                <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-[#4041d1] border border-blue-100 shadow-sm">
-                  <FaUserMd className="w-7 h-7" />
-                </div>
-                <div>
-                  <h4 className="font-raleway font-bold text-xl md:text-2xl text-slate-900">Dr Syed Abdi</h4>
-                  <p className="text-xs text-slate-500 font-bold uppercase tracking-wider font-inter mt-1">Medical Director • GMC 6083294</p>
-                </div>
-              </div>
-              
-              <blockquote className="text-slate-600 italic font-inter text-base md:text-lg leading-relaxed mb-8 border-l-4 border-[#4041d1]/20 pl-6">
-                &ldquo;Erectile dysfunction is often linked to vascular, metabolic, hormonal, or lifestyle factors. Our aim is to assess the wider picture and create a treatment plan tailored to the individual.&rdquo;
-              </blockquote>
-              
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl md:text-3xl font-raleway font-bold text-slate-900 mb-4">
+              Treatment With Dr Syed Abdi
+            </h2>
+            <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6">
+              Your consultation and treatment are carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor with extensive experience in regenerative medicine, medical ozone therapy, aesthetics, and non-surgical intimate health procedures. The appointment is discreet, private and focused on understanding the root cause of your symptoms to create a personalised, evidence-based treatment plan.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center gap-6 justify-center md:justify-start">
               <Link 
-                href={`${prefix}/our-doctor`}
+                href="/our-doctor"
                 className="inline-flex items-center gap-2 text-sm font-bold text-[#4041d1] hover:text-[#2a2bb8] transition-colors font-inter group"
               >
                 Meet Dr Syed Abdi <FaArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
               </Link>
-            </motion.div>
-
-            {/* Subtle Background Blobs for depth */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#4041d1]/5 rounded-full blur-3xl" />
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl" />
+              <a 
+                href="https://www.linkedin.com/in/syed-abdi-056b28b9" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#0A66C2] hover:text-[#004182] transition-colors font-inter"
+              >
+                <FaLinkedin className="w-4 h-4" /> Connect on LinkedIn
+              </a>
+            </div>
           </div>
-
-        </div>
+        </motion.div>
       </div>
     </section>
   );

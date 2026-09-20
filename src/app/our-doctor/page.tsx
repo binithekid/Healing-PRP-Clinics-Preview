@@ -1,70 +1,124 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { FaUserMd, FaArrowLeft, FaEnvelope } from "react-icons/fa";
-import Footer from "@/components/Footer";
+import OurDoctorClient from "@/components/pages/OurDoctorClient";
+
+// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
+// Next.js recommends replacing "<" with "\u003c".
+const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
 
 export const metadata: Metadata = {
-  title: "Meet Your Doctor | Healing-PRP Clinics",
-  description: "Full clinical profile coming soon.",
-  robots: {
-    index: false, // Tells Google not to heavily index this temporary page yet
-    follow: true,
-  }
+  title: {
+    absolute: "Dr Syed Abdi | GP & Medical Director | Healing-PRP Clinics",
+  },
+  description:
+    "Meet Dr Syed Abdi, GMC-registered GP and Medical Director of Healing-PRP Clinics, with experience in regenerative medicine and intimate health.",
+  alternates: {
+    canonical: "https://www.healing-prp.co.uk/our-doctor",
+  },
+  openGraph: {
+    title: "Dr Syed Abdi | GP & Medical Director | Healing-PRP Clinics",
+    description:
+      "Meet Dr Syed Abdi, GMC-registered GP and Medical Director of Healing-PRP Clinics, with experience in regenerative medicine and intimate health.",
+    url: "https://www.healing-prp.co.uk/our-doctor",
+    siteName: "Healing-PRP Clinics",
+    locale: "en_GB",
+    type: "profile",
+    images: [
+      {
+        url: "/DrAbdi.webp",
+        width: 800,
+        height: 800,
+        alt: "Dr Syed Abdi - Medical Director of Healing-PRP Clinics",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dr Syed Abdi | GP & Medical Director",
+    description:
+      "GMC-registered GP and Medical Director of Healing-PRP Clinics, with experience in regenerative medicine and intimate health.",
+    images: ["/DrAbdi.webp"],
+  },
 };
 
-export default function OurDoctorComingSoon() {
+// --- E-E-A-T DOCTOR PROFILE SCHEMA ---
+const doctorSchema = {
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "@id": "https://www.healing-prp.co.uk/our-doctor#dr-syed-abdi",
+  "name": "Dr Syed Abdi",
+  "jobTitle": "Medical Director",
+  "medicalSpecialty": ["Intimate Health", "Regenerative Medicine", "General Practice", "Orthopaedics"],
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "GMC Registration Number",
+      "value": "6083294"
+    }
+  ],
+  "sameAs": [
+    "https://www.gmc-uk.org/registrants/6083294",
+    "https://www.linkedin.com/in/syed-abdi-056b28b9"
+  ],
+  "worksFor": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Healing-PRP Clinics",
+      "url": "https://www.healing-prp.co.uk"
+    },
+    {
+      "@type": "Hospital",
+      "name": "East & North Herts NHS Trust"
+    }
+  ],
+  "knowsAbout": [
+    "Erectile Dysfunction", 
+    "Peyronie's Disease",
+    "Penis Filler",
+    "Vaginal Dryness",
+    "PRP Joint Injections", 
+    "Medical Ozone Therapy", 
+    "Shockwave Therapy", 
+    "Hair Restoration"
+  ]
+};
+
+// --- BREADCRUMB SCHEMA ---
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.healing-prp.co.uk/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Our Doctor",
+      "item": "https://www.healing-prp.co.uk/our-doctor"
+    }
+  ]
+};
+
+export default function OurDoctorPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0A1128]">
-      <main className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-24">
-        <div className="max-w-3xl w-full text-center space-y-8">
-          
-          {/* Top Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-blue-400/30 rounded-full bg-blue-900/20 backdrop-blur-sm">
-            <FaUserMd className="text-blue-300" />
-            <span className="text-blue-200 text-xs font-bold tracking-widest uppercase font-inter">
-              Medical Director
-            </span>
-          </div>
+    <main>
+      {/* 1. Inject Profile Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(doctorSchema) }}
+      />
 
-          {/* Main Headings */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-raleway font-bold text-white tracking-tight">
-            Coming Soon
-          </h1>
-          
-          <div className="w-16 h-1 bg-[#4041d1] mx-auto rounded-full"></div>
-
-          <h2 className="text-xl md:text-2xl font-inter font-medium text-slate-300">
-            Clinical Profile Currently Being Updated
-          </h2>
-
-          {/* Explanation Text */}
-          <p className="text-base md:text-lg text-slate-400 font-inter leading-relaxed max-w-2xl mx-auto">
-            We are currently integrating our new private practice platform. GMC-registered doctor with over 10 years of clinical experience, serving as our Medical Director across all locations. 
-            <br className="hidden md:block" />
-            His full clinical profile, NHS background, and regenerative medicine credentials will be available here shortly.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/"
-              className="px-8 py-3.5 w-full sm:w-auto flex items-center justify-center text-sm border border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-all active:scale-95 gap-2 font-inter"
-            >
-              <FaArrowLeft className="w-3.5 h-3.5" /> Return to Home
-            </Link>
-            
-            <Link
-              href="/#contact-form-section"
-              className="px-8 py-3.5 w-full sm:w-auto flex items-center justify-center text-sm bg-[#4041d1] hover:bg-[#2a2bb8] text-white rounded-xl font-bold transition-all shadow-lg active:scale-95 gap-2 font-inter"
-            >
-              <FaEnvelope className="w-3.5 h-3.5" /> Book a Consultation
-            </Link>
-          </div>
-
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+      {/* 2. Inject Breadcrumb Schema safely */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+      
+      {/* 3. Render Client Component */}
+      <OurDoctorClient />
+    </main>
   );
 }
