@@ -36,7 +36,7 @@ export default function EDFeatureBlock() {
               Treatment With Dr Syed Abdi
             </h2>
             <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6">
-              Your consultation and treatment are carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor with extensive experience in regenerative medicine, medical ozone therapy, aesthetics, and non-surgical intimate health procedures. The appointment is discreet, private and focused on understanding the root cause of your symptoms to create a personalised, evidence-based treatment plan.
+              Your consultation and treatment are carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor with experience in regenerative medicine and non-surgical intimate health procedures. The appointment is discreet, private and focused on understanding the root cause of your symptoms to create a personalised, evidence-based treatment plan.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-6 justify-center md:justify-start">
               <Link 
