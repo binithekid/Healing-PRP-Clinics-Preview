@@ -46,52 +46,60 @@ export const metadata: Metadata = {
 // --- SEO RICH FAQS (Birmingham & West Midlands Focus) ---
 const birminghamFaqs = [
   {
-    question: "What is penis filler treatment in Birmingham?",
-    answer: "Penis filler treatment in Birmingham is a non-surgical procedure using hyaluronic acid (HA) filler to increase penile girth. At our Healing PRP Edgbaston clinic, treatment is doctor-led, discreet, and planned strictly around your anatomy, goals, and suitability.",
+  question: "What is penis filler treatment in Birmingham?",
+  answer: "Penis filler treatment in Birmingham is a non-surgical procedure using hyaluronic acid (HA) dermal filler to add volume and support penile girth enhancement. At our Healing PRP Edgbaston clinic, treatment is doctor-led, discreet, and planned around your anatomy, goals, medical history and suitability.",
   },
   {
-    question: "Is penis filler the same as non-surgical penis enlargement?",
-    answer: "Yes. Penis filler, also known as penile filler or penile dermal filler, is a highly effective form of non-surgical penis enlargement. It does not involve surgery, implants, or fat transfer. Instead, premium HA filler is carefully placed beneath the skin of the penile shaft to support proportionate girth enhancement.",
+    question: "Is penis filler the same as penile filler or non-surgical penis enlargement?",
+    answer: "Yes. Penis filler may also be called penile filler, penile dermal filler, HA penile filler or non-surgical penis enlargement. It does not involve implants, fat transfer or surgery. Instead, hyaluronic acid filler is carefully placed beneath the skin of the penile shaft to support proportionate girth enhancement where suitable.",
   },
   {
     question: "Do you offer penis filler for men across the West Midlands?",
-    answer: "Yes. Our discreet Edgbaston clinic is convenient for men from across Birmingham and the wider West Midlands, including Solihull, Sutton Coldfield, Wolverhampton, Coventry, and surrounding areas. All consultations are strictly private and confidential.",
+    answer: "Yes. Our Edgbaston clinic is convenient for men from Birmingham and the wider West Midlands, including Solihull, Sutton Coldfield, Wolverhampton, Coventry, Walsall and surrounding areas. Appointments are handled discreetly and confidentially.",
   },
   {
     question: "Is the Birmingham clinic easily accessible?",
-    answer: "Yes. Located in Edgbaston, the clinic is easily accessible by road and rail for men travelling from across the Midlands and beyond. Many patients prefer our discreet, premium clinical setting as it offers a private medical environment away from busy city-centre high streets.",
+    answer: "Yes. The clinic is located in Edgbaston, Birmingham, and is accessible by road and rail for patients travelling from across the Midlands and beyond. Many men choose our clinic because it offers a discreet medical setting away from busy high-street environments.",
   },
   {
     question: "Who is suitable for penile filler at the Birmingham clinic?",
-    answer: "Penile filler may be suitable for men seeking discreet girth enhancement without the downtime of surgery. Suitability depends on your medical history, anatomy, expectations, and examination findings. Dr Abdi will assess this carefully during your private consultation before advising whether treatment is appropriate.",
+    answer: "Penile filler may be suitable for selected men looking for discreet, non-surgical girth enhancement. Suitability depends on your medical history, anatomy, expectations, examination findings and the volume of filler being considered. Dr Syed Abdi will assess this carefully during your private consultation before advising whether treatment is appropriate.",
   },
   {
     question: "Is the penis filler procedure painful?",
-    answer: "Patient comfort is a priority throughout the appointment. A strong local anaesthetic is applied before treatment begins, and most men describe the procedure as very tolerable, experiencing a feeling of pressure rather than significant pain.",
+    answer: "Most patients tolerate penis filler treatment well. A numbing approach is used to make the procedure as comfortable as possible, and the hyaluronic acid filler used may also contain local anaesthetic. You may feel pressure, movement or brief discomfort during treatment, but your comfort will be monitored throughout.",
   },
   {
     question: "How long does penis filler treatment take in Birmingham?",
-    answer: "The appointment usually takes around 45 to 60 minutes, which includes your consultation, preparation, the treatment itself, and aftercare advice. As this is a walk-in, walk-out non-surgical treatment, most patients can return to normal daily activities shortly afterwards.",
+    answer: "The appointment usually takes around 45 to 60 minutes, including consultation, preparation, treatment and aftercare advice. Penis filler is a non-surgical treatment, and most patients are able to leave the clinic shortly afterwards with clear aftercare instructions.",
   },
   {
     question: "How long do HA penis filler results last?",
-    answer: "Results typically last around 12 to 18 months, although this varies from person to person. Factors such as your natural metabolism, lifestyle, starting anatomy, the volume of filler used, and your individual response can all affect longevity. Top-up maintenance treatments can be considered over time.",
+    answer: "HA penis filler results commonly last around 12 to 18 months, although this varies between patients. Longevity can depend on your natural metabolism, lifestyle, starting anatomy, the volume of filler used and your individual response. Maintenance or top-up treatment can be discussed if suitable.",
   },
   {
     question: "Can penis filler be adjusted or dissolved?",
-    answer: "One of the major clinical advantages of using premium hyaluronic acid (HA) filler is that it is 100% reversible. It can be safely adjusted, refined, or completely dissolved in appropriate circumstances using a specific medical enzyme (hyaluronidase).",
+    answer: "A clinical advantage of hyaluronic acid filler is that it can usually be adjusted or dissolved in appropriate circumstances using hyaluronidase, a medical enzyme. This is assessed on a case-by-case basis and depends on the concern, timing, anatomy and clinical findings.",
   },
   {
-    question: "How does HA filler compare with surgical penis enlargement?",
-    answer: "HA filler is a non-surgical option that avoids the need for liposuction, silicone implants, general anaesthesia, and a lengthy surgical recovery period. It allows for highly controlled volume placement. Surgical options, such as fat transfer, often involve significant downtime, swelling, and a much higher risk of permanent lumps or irregularities.",
+    question: "How does HA penile filler compare with surgical penis enlargement?",
+    answer: "HA penile filler is a non-surgical option for selected men seeking girth enhancement. It avoids general anaesthetic, implants and surgical incisions. Surgical options such as fat transfer or implants involve different risks, recovery times and suitability considerations. Dr Syed Abdi will discuss realistic expectations and whether non-surgical treatment is appropriate for you.",
   },
   {
     question: "What aftercare is needed after penile filler?",
-    answer: "Proper aftercare is essential for achieving smooth, even results. You will be advised to avoid sexual activity, masturbation, heavy exercise, hot baths, saunas, and alcohol for a temporary period. You will also be instructed on how to perform daily gentle massage. Your exact aftercare plan will be explained in detail after your treatment.",
+    answer: "Aftercare is important after penile filler treatment. You will usually be advised to avoid sexual activity, masturbation, heavy exercise, hot baths, saunas and alcohol for a temporary period. You will also be shown how to perform gentle massage if this is appropriate for your treatment plan. Your exact aftercare instructions will be explained before you leave the clinic.",
   },
   {
     question: "How much does penis filler cost in Birmingham?",
-    answer: "The cost depends entirely on the volume (in millilitres) of premium HA filler required to meet the treatment plan agreed upon during your consultation. At Healing PRP Birmingham, pricing starts from £1149, and all costs are discussed transparently with you before any procedure takes place.",
+    answer: "Penis filler cost in Birmingham depends on the volume of hyaluronic acid filler used and the treatment plan agreed during consultation. At Healing PRP Birmingham, pricing starts from £995, and all costs are discussed clearly before any treatment takes place.",
+  },
+  {
+    question: "Do you offer penile filler before and after examples?",
+    answer: "Before and after expectations can be discussed during consultation. Results vary between patients depending on starting anatomy, filler volume, swelling, aftercare and how the filler settles. Dr Syed Abdi will explain realistic outcomes before treatment so that you can make an informed decision.",
+  },
+  {
+    question: "Is hyaluronic acid penile filler permanent?",
+    answer: "No. Hyaluronic acid penile filler is not permanent. It gradually breaks down over time, and results typically reduce gradually. This is one reason why some patients consider maintenance or top-up treatment after a period of time, depending on their goals and suitability.",
   },
 ];
 
@@ -104,7 +112,7 @@ const enlargementSchemaBirmingham = {
       "@id": "https://www.healing-prp.co.uk/birmingham/penis-enlargement#clinic",
       "name": "Healing-PRP Clinics Birmingham",
       "url": "https://www.healing-prp.co.uk/birmingham/penis-enlargement",
-      "description": "Doctor-led private clinic in Edgbaston, Birmingham providing non-surgical penis enlargement using premium hyaluronic acid (HA) fillers.",
+      "description": "Doctor-led private clinic in Edgbaston, Birmingham offering penile filler and non-surgical girth enhancement using hyaluronic acid (HA) dermal filler for suitable patients.",
       "telephone": "+447990364147",
       "address": {
         "@type": "PostalAddress",
@@ -115,8 +123,12 @@ const enlargementSchemaBirmingham = {
         "addressCountry": "GB"
       },
       "areaServed": [
+        areaServed": [
         { "@type": "City", "name": "Birmingham" },
         { "@type": "City", "name": "Edgbaston" },
+        { "@type": "City", "name": "Solihull" },
+        { "@type": "City", "name": "Wolverhampton" },
+        { "@type": "City", "name": "Coventry" },
         { "@type": "AdministrativeArea", "name": "West Midlands" }
       ],
       "medicalSpecialty": "Urologic",
@@ -151,23 +163,26 @@ const enlargementSchemaBirmingham = {
       "@id": "https://www.healing-prp.co.uk/birmingham/penis-enlargement#therapy",
       "name": "Penis Filler Birmingham",
       "alternateName": [
-        "Penile Filler Birmingham",
+        "Penis Filler Birmingham",
         "HA Penis Filler",
+        "HA Penile Filler",
+        "Hyaluronic Acid Penile Filler",
         "Penile Dermal Filler",
         "Penile Girth Enhancement",
+        "Non-Surgical Girth Enhancement",
         "Non-Surgical Penis Enlargement",
-        "Non-Surgical Penoplasty",
+        "Penile Enlargement With Fillers",
         "Penile Enhancement Birmingham",
         "Penis Fillers Birmingham"
       ],
       "url": "https://www.healing-prp.co.uk/birmingham/penis-enlargement",
-      "description": "Doctor-led penis filler treatment in Edgbaston, Birmingham using premium hyaluronic acid (HA) filler for men seeking discreet, non-surgical penile girth enhancement. Suitable for patients from Birmingham, the West Midlands and surrounding Midlands areas.",
-      "relevantSpecialty": "Urologic",
+      "description": "Doctor-led penile filler treatment in Edgbaston, Birmingham using hyaluronic acid dermal filler for selected men seeking discreet, non-surgical girth enhancement. Suitability, risks, aftercare and fees are discussed before treatment.",
       "bodyLocation": "Penis",
       "procedureType": "Non-surgical",
       "offers": {
         "@type": "Offer",
         "priceCurrency": "GBP",
+        "price": "1149",
         "url": "https://www.healing-prp.co.uk/birmingham/prices",
         "availability": "https://schema.org/InStock"
       }
