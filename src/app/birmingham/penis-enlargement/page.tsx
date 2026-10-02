@@ -6,18 +6,20 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Penis Filler Birmingham | Doctor-Led HA Treatment",
+    absolute: "Penile Filler Birmingham | HA Penis Filler Treatment",
   },
-    description: "Private doctor-led penis filler in Birmingham using premium HA filler for girth enhancement. Discreet consultation, pricing from £995.",
-  
+
+  description:
+    "Private doctor-led penile filler in Birmingham using premium hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation, pricing from £1149.",
+
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham/penis-enlargement",
   },
-    
-    openGraph: {
-    title: "Penis Filler Birmingham | Doctor-Led HA Treatment",
+
+  openGraph: {
+    title: "Penile Filler Birmingham | HA Penis Filler Treatment",
     description:
-      "Private doctor-led penis filler in Birmingham using premium HA filler for girth enhancement. Discreet consultation, pricing from £995.",
+      "Private doctor-led penile filler in Birmingham using premium hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation, pricing from £1149.",
     url: "https://www.healing-prp.co.uk/birmingham/penis-enlargement",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -27,15 +29,16 @@ export const metadata: Metadata = {
         url: "/hero_img.png",
         width: 1200,
         height: 630,
-        alt: "Non-Surgical Penis Enlargement Birmingham | Healing-PRP Clinics",
+        alt: "Penile filler and non-surgical girth enhancement in Birmingham",
       },
     ],
   },
-  
+
   twitter: {
     card: "summary_large_image",
-    title: "Penis Filler Birmingham | Doctor-Led HA Treatment",
-    description: "Private doctor-led penis filler in Birmingham using premium HA filler for girth enhancement. Discreet consultation, pricing from £995.",
+    title: "Penile Filler Birmingham | HA Penis Filler Treatment",
+    description:
+      "Private doctor-led penile filler in Birmingham using premium hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation, pricing from £1149.",
     images: ["/hero_img.png"],
   },
 };
@@ -88,7 +91,7 @@ const birminghamFaqs = [
   },
   {
     question: "How much does penis filler cost in Birmingham?",
-    answer: "The cost depends entirely on the volume (in millilitres) of premium HA filler required to meet the treatment plan agreed upon during your consultation. At Healing PRP Birmingham, pricing starts from £995, and all costs are discussed transparently with you before any procedure takes place.",
+    answer: "The cost depends entirely on the volume (in millilitres) of premium HA filler required to meet the treatment plan agreed upon during your consultation. At Healing PRP Birmingham, pricing starts from £1149, and all costs are discussed transparently with you before any procedure takes place.",
   },
 ];
 
