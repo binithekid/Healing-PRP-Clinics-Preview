@@ -123,7 +123,6 @@ const enlargementSchemaBirmingham = {
         "addressCountry": "GB"
       },
       "areaServed": [
-        areaServed": [
         { "@type": "City", "name": "Birmingham" },
         { "@type": "City", "name": "Edgbaston" },
         { "@type": "City", "name": "Solihull" },
