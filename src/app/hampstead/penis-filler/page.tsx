@@ -6,19 +6,18 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Penis Filler Hampstead, London | Non-Surgical Girth Enhancement",
+    absolute: "Penile Filler Hampstead, London | HA Penis Filler",
   },
   description:
-    "Doctor-led penis filler treatment in Hampstead, London using hyaluronic acid filler. Discreet private consultation in North West London. Fees apply.",
-  
+    "Private doctor-led penile filler in Hampstead, London using hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation in North West London. Fees apply.",
   alternates: {
     canonical: "https://www.healing-prp.co.uk/hampstead/penis-filler",
   },
     
   openGraph: {
-    title: "Penis Filler Hampstead, London | Non-Surgical Girth Enhancement",
+    title: "Penile Filler Hampstead, London | HA Penis Filler",
     description:
-      "Doctor-led penis filler treatment in Hampstead, London using hyaluronic acid filler. Discreet private consultation in North West London. Fees apply.",
+      "Private doctor-led penile filler in Hampstead, London using hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation in North West London. Fees apply.",
     url: "https://www.healing-prp.co.uk/hampstead/penis-filler",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -35,8 +34,8 @@ export const metadata: Metadata = {
   
   twitter: {
     card: "summary_large_image",
-    title: "Penis Filler Hampstead, London | Non-Surgical Girth Enhancement",
-    description: "Doctor-led penis filler treatment in Hampstead, London using hyaluronic acid filler. Discreet private consultation in North West London. Fees apply.",
+    title: "Penile Filler Hampstead, London | HA Penis Filler",
+    description: "Private doctor-led penile filler in Hampstead, London using hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation in North West London. Fees apply.",
     images: ["/hero_img.png"],
   },
 };
@@ -151,7 +150,7 @@ const enlargementSchemaHampstead = {
       "@id": "https://www.healing-prp.co.uk/hampstead/penis-filler#therapy",
       "name": "Penis Filler Hampstead",
       "alternateName": [
-        "Penile Filler Hampstead",
+        "Penile Filler London",
         "HA Penis Filler",
         "Penile Dermal Filler",
         "Penile Girth Enhancement",
