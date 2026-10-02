@@ -88,7 +88,7 @@ const hampsteadFaqs = [
   },
   {
     question: "How much does penis filler cost in Hampstead?",
-    answer: "The cost depends entirely on the volume (in millilitres) of premium HA filler required to meet your goals. Pricing starts from £995 for 10ml. All costs will be confirmed with you in writing before any procedure takes place, and all treatment is subject to consultation.",
+    answer: "The cost depends entirely on the volume (in millilitres) of premium HA filler required to meet your goals. Pricing starts from £1149 for 10ml. All costs will be confirmed with you in writing before any procedure takes place, and all treatment is subject to consultation.",
   },
 ];
 
