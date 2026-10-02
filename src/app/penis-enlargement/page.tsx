@@ -6,20 +6,21 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Penis Filler Clinic | Doctor-Led HA Girth Enhancement",
+    absolute: "Penile Filler Hertfordshire | St Albans HA Penis Filler",
   },
 
   description:
-    "Private doctor-led penis filler using premium HA filler for non-surgical girth enhancement. Discreet consultations and tailored treatment plans.",
+    "Private penile filler in St Albans, Hertfordshire for men from Luton, Watford, Hemel Hempstead and Berkhamsted. HA filler from £1,149 for 10ml. Fees apply.",
 
   alternates: {
     canonical: "https://www.healing-prp.co.uk/penis-enlargement",
   },
 
   openGraph: {
-    title: "Penis Filler Clinic | Doctor-Led HA Girth Enhancement",
+    title: "Penile Filler Hertfordshire | St Albans HA Penis Filler",
     description:
-      "Private doctor-led penis filler using premium HA filler for non-surgical girth enhancement. Discreet consultations and tailored treatment plans.",
+      "Private doctor-led penile filler in St Albans, Hertfordshire for men from Watford, Hemel Hempstead, Berkhamsted, Luton and nearby areas. HA girth enhancement from £1,149 for 10ml. Fees apply.",
+    url: "https://www.healing-prp.co.uk/penis-enlargement",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
     type: "website",
@@ -28,16 +29,16 @@ export const metadata: Metadata = {
         url: "/hero_img.png",
         width: 1200,
         height: 630,
-        alt: "Non-Surgical Penis Enlargement St Albans | Healing-PRP Clinics",
+        alt: "Penile filler and non-surgical girth enhancement in Hertfordshire",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Penis Filler Clinic | Doctor-Led HA Girth Enhancement",
+    title: "Penile Filler Hertfordshire | St Albans HA Penis Filler",
     description:
-      "Private doctor-led penis filler using premium HA filler for non-surgical girth enhancement. Discreet consultations and tailored treatment plans.",
+      "Private doctor-led penile filler in St Albans, Hertfordshire for men from Watford, Hemel Hempstead, Berkhamsted, Luton and nearby areas. HA girth enhancement from £1,149 for 10ml. Fees apply.",
     images: ["/hero_img.png"],
   },
 };
