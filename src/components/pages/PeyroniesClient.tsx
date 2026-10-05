@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import EDFeatureBlock from "@/components/EDFeatureBlock"; // <-- Import added
 import {
   FaPlus,
   FaMinus,
@@ -250,6 +251,9 @@ export default function PeyroniesClient({
           </div>
         </div>
       </div>
+
+      {/* --- DOCTOR-LED TRUST SECTION (MOVED UP) --- */}
+      <EDFeatureBlock />
 
       {/* --- UNDERSTANDING PD --- */}
       <section className="py-20 bg-white font-inter">
