@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import EDFeatureBlock from "@/components/EDFeatureBlock"; // <-- Import added
 import {
   FaPlus,
   FaMinus,
@@ -323,6 +324,9 @@ export default function OShotClient({
           </div>
         </div>
       </div>
+
+      {/* --- DOCTOR-LED TRUST SECTION (MOVED UP) --- */}
+      <EDFeatureBlock />
 
       {/* --- BENEFITS SECTION --- */}
       <section className="py-24 bg-slate-50 font-inter relative z-30">
