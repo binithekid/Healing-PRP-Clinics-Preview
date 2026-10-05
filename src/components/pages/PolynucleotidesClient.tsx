@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import EDFeatureBlock from "@/components/EDFeatureBlock"; // <-- Import added
 import {
   FaPlus,
   FaMinus,
@@ -328,6 +329,9 @@ export default function PolynucleotidesClient({
           </div>
         </div>
       </div>
+
+     {/* --- DOCTOR-LED TRUST SECTION (MOVED UP) --- */}
+     <EDFeatureBlock />
       
      {/* --- LIGHT SECTION 1: What Makes Us Different & The Concept --- */}
       <section className="py-20 bg-white font-inter">
