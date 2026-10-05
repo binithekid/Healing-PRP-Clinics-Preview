@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import dynamic from "next/dynamic";
+import EDFeatureBlock from "@/components/EDFeatureBlock"; // <-- Import added
 import {
   FaPlus,
   FaMinus,
