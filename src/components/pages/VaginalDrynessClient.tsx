@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import EDFeatureBlock from "@/components/EDFeatureBlock"; // <-- Import added
 import {
   FaUserMd,
   FaLeaf,
@@ -279,6 +280,9 @@ export default function VaginalDrynessClient({
           </div>
         </div>
       </div>
+
+      {/* --- DOCTOR-LED TRUST SECTION (MOVED UP) --- */}
+      <EDFeatureBlock />
 
       {/* --- INTRO SECTION --- */}
       <section className="py-20 bg-white font-inter">
