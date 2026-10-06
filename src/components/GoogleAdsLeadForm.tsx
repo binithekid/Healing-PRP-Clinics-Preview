@@ -93,12 +93,15 @@ export default function GoogleAdsLeadForm({
     window.open(waUrl, "_blank");
   };
 
-  const handlePhoneClick = () => {
+   const handlePhoneClick = () => {
+    const tracking = getTrackingParams();
+  
     // --- GA4 Tracking for Phone Click ---
     if (typeof window !== "undefined") {
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
+  
       if (w.gtag) {
-        w.gtag("event", "callback_request_submitted", {
+        w.gtag("event", "phone_click", {
           event_category: "lead",
           event_label: defaultTreatment,
           location: defaultLocation,
@@ -111,17 +114,16 @@ export default function GoogleAdsLeadForm({
           gclid: tracking.gclid,
           device: tracking.device,
         });
-
-        // --- NEW: Fire Google Ads Conversion on Phone Click ---
+  
+        // Fire Google Ads Conversion on Phone Click
         if (conversionLabel) {
           w.gtag("event", "conversion", { send_to: conversionLabel });
         }
       }
     }
-
+  
     window.location.href = `tel:${CLINIC_PHONE_NUMBER}`;
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
