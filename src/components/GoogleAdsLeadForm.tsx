@@ -28,6 +28,41 @@ export default function GoogleAdsLeadForm({
   const CLINIC_PHONE_NUMBER = "07990364147";
   const CLINIC_WHATSAPP_NUMBER = "447990364147";
 
+  const getTrackingParams = () => {
+  if (typeof window === "undefined") {
+    return {
+      page_url: "",
+      page_path: "",
+      query_string: "",
+      utm_source: "",
+      utm_medium: "",
+      utm_campaign: "",
+      utm_content: "",
+      utm_term: "",
+      device: "",
+      gclid: "",
+      referrer: "",
+    };
+  }
+
+  const url = new URL(window.location.href);
+  const params = url.searchParams;
+
+  return {
+    page_url: url.href,
+    page_path: url.pathname,
+    query_string: url.search,
+    utm_source: params.get("utm_source") || "",
+    utm_medium: params.get("utm_medium") || "",
+    utm_campaign: params.get("utm_campaign") || "",
+    utm_content: params.get("utm_content") || "",
+    utm_term: params.get("utm_term") || "",
+    device: params.get("device") || "",
+    gclid: params.get("gclid") || "",
+    referrer: document.referrer || "",
+  };
+};
+
   const handleWhatsAppClick = () => {
     // --- GA4 Tracking for WhatsApp Click ---
     if (typeof window !== "undefined") {
@@ -63,11 +98,18 @@ export default function GoogleAdsLeadForm({
     if (typeof window !== "undefined") {
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
       if (w.gtag) {
-        w.gtag("event", "phone_click", {
+        w.gtag("event", "callback_request_submitted", {
           event_category: "lead",
           event_label: defaultTreatment,
           location: defaultLocation,
-          page_path: window.location.pathname,
+          page_path: tracking.page_path,
+          page_url: tracking.page_url,
+          utm_source: tracking.utm_source,
+          utm_medium: tracking.utm_medium,
+          utm_campaign: tracking.utm_campaign,
+          utm_term: tracking.utm_term,
+          gclid: tracking.gclid,
+          device: tracking.device,
         });
 
         // --- NEW: Fire Google Ads Conversion on Phone Click ---
@@ -98,18 +140,47 @@ export default function GoogleAdsLeadForm({
     }
 
     try {
+      const tracking = getTrackingParams();
       emailjs.init(publicKey);
       await emailjs.send(serviceId, templateId, {
         from_name: name,
-        from_email: email || "Not provided", 
+        from_email: email || "Not provided",
         phone: phone,
         treatment: defaultTreatment,
         clinic_location: defaultLocation || "Not specified",
-        message: `New callback request\n\nName: ${name}\nEmail: ${email || "Not provided"}\nPhone: ${phone}\nBrief symptoms / concern: ${
-          concern.trim() ? concern : "Not provided"
-        }\nTreatment: ${defaultTreatment}\nLocation: ${defaultLocation}\nSource page: ${sourcePage}\nPage path: ${
-          window.location.pathname
-        }`,
+      
+        page_url: tracking.page_url,
+        page_path: tracking.page_path,
+        query_string: tracking.query_string,
+        utm_source: tracking.utm_source,
+        utm_medium: tracking.utm_medium,
+        utm_campaign: tracking.utm_campaign,
+        utm_content: tracking.utm_content,
+        utm_term: tracking.utm_term,
+        device: tracking.device,
+        gclid: tracking.gclid,
+        referrer: tracking.referrer,
+      
+        message: `New callback request
+      
+      Name: ${name}
+      Email: ${email || "Not provided"}
+      Phone: ${phone}
+      Brief symptoms / concern: ${concern.trim() ? concern : "Not provided"}
+      Treatment: ${defaultTreatment}
+      Location: ${defaultLocation}
+      Source page: ${sourcePage}
+      Page URL: ${tracking.page_url}
+      Page path: ${tracking.page_path}
+      Query string: ${tracking.query_string}
+      UTM source: ${tracking.utm_source}
+      UTM medium: ${tracking.utm_medium}
+      UTM campaign: ${tracking.utm_campaign}
+      UTM content: ${tracking.utm_content}
+      UTM term / keyword: ${tracking.utm_term}
+      Device: ${tracking.device}
+      GCLID: ${tracking.gclid}
+      Referrer: ${tracking.referrer}`,
       });
 
      // --- GA4 & GOOGLE ADS TRACKING ON SUCCESSFUL SUBMIT ---
@@ -138,7 +209,7 @@ export default function GoogleAdsLeadForm({
             event_category: "lead",
             event_label: defaultTreatment,
             location: defaultLocation,
-            page_path: window.location.pathname,
+            page_path: tracking.page_path, page_url: tracking.page_url, utm_source: tracking.utm_source, utm_medium: tracking.utm_medium, utm_campaign: tracking.utm_campaign, utm_term: tracking.utm_term, gclid: tracking.gclid, device: tracking.device,
           });
 
           // Fire Google Ads Conversion on Form Submit
