@@ -713,7 +713,7 @@ export default function PenisEnlargementClient({
                <div>
                  <h3 className="font-bold font-raleway text-slate-900 mb-2 text-lg">Visiting our Edgbaston Clinic</h3>
                  <p className="text-slate-600 text-sm leading-relaxed">
-                   Located at 38 Harborne Rd, Edgbaston, our Birmingham clinic offers a highly discreet environment with private consultation rooms. We provide clear directions and parking instructions prior to your appointment to ensure your arrival is stress-free and entirely confidential.
+                   Located at 38 Harborne Road, Edgbaston, our Birmingham clinic offers a discreet medical setting with private consultation rooms and a large on-site car park. We provide clear directions and parking instructions prior to your appointment to ensure your arrival is stress-free and entirely confidential.
                  </p>
                </div>
             </div>
@@ -728,6 +728,62 @@ export default function PenisEnlargementClient({
                    Our Hampstead clinic provides a discreet North West London setting for private men’s health and penile filler consultations. The clinic is convenient for patients from Belsize Park, West Hampstead, Highgate, Golders Green, St John’s Wood, Swiss Cottage, Camden and surrounding areas.
                  </p>
                </div>
+            </div>
+          )}
+
+          {/* Travelling for Birmingham Penis Filler */}
+          {isBirmingham && (
+            <div className="max-w-3xl mx-auto mb-16 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-left">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="w-12 h-12 rounded-2xl bg-[#4041d1]/10 flex items-center justify-center shrink-0">
+                  <FaMapMarkerAlt className="text-[#4041d1] text-xl" aria-hidden="true" />
+                </div>
+          
+                <div>
+                  <h3 className="font-bold font-raleway text-slate-900 mb-3 text-xl">
+                    Travelling for penis filler in Birmingham?
+                  </h3>
+          
+                  <p className="text-slate-600 text-sm md:text-base leading-relaxed font-inter">
+                    Some men travel to our Edgbaston clinic from across the Midlands and from
+                    further afield, including Staffordshire, Stoke-on-Trent, Oxfordshire and
+                    Manchester. Treatment is subject to consultation, suitability assessment
+                    and clear discussion of pricing and aftercare.
+                  </p>
+                </div>
+              </div>
+          
+              <div className="border-t border-slate-100 pt-6">
+                <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 font-inter">
+                  Read more
+                </p>
+          
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <Link
+                    href="/blog/penis-filler-near-manchester-doctor-experience"
+                    className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-bold text-slate-800 hover:border-[#4041d1]/30 hover:bg-[#4041d1]/5 hover:text-[#4041d1] transition-all duration-300 font-inter"
+                  >
+                    <span>Penis Filler Near Manchester</span>
+                    <FaArrowRight className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+          
+                  <Link
+                    href="/blog/penis-filler-staffordshire-stoke-birmingham"
+                    className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-bold text-slate-800 hover:border-[#4041d1]/30 hover:bg-[#4041d1]/5 hover:text-[#4041d1] transition-all duration-300 font-inter"
+                  >
+                    <span>Penis Filler Staffordshire & Stoke</span>
+                    <FaArrowRight className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+          
+                  <Link
+                    href="/blog/penis-filler-oxford-oxfordshire-birmingham"
+                    className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-bold text-slate-800 hover:border-[#4041d1]/30 hover:bg-[#4041d1]/5 hover:text-[#4041d1] transition-all duration-300 font-inter"
+                  >
+                    <span>Penis Filler Oxford & Oxfordshire</span>
+                    <FaArrowRight className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </div>
             </div>
           )}
 
