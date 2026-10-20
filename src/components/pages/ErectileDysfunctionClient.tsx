@@ -207,6 +207,83 @@ export default function ErectileDysfunctionClient({
     { number: 5, icon: FaCheckCircle, title: "Recovery Over Time", description: "A structured follow-up plan for gradual, natural improvement." },
   ];
 
+  // Published ED articles. Keep links directly to the live blog URLs.
+  // Regional guides come first; general ED resources fill remaining slots.
+  const sharedEdGuides = [
+    {
+      title: "Why ED Treatments Fail: 9 Fixable Reasons",
+      description: "Explore why tablets or other treatments may not work as expected, from medication timing to diabetes, hormones and stress.",
+      href: "/blog/why-ed-treatments-fail-birmingham",
+      category: "Understanding ED",
+    },
+    {
+      title: "Advanced Erectile Dysfunction Treatment: The Bigger Picture",
+      description: "Why effective ED care starts with assessment, realistic expectations and a tailored treatment plan rather than one procedure.",
+      href: "/blog/advanced-erectile-dysfunction-treatment-strategy",
+      category: "Treatment Planning",
+    },
+    {
+      title: "Impotence Clinic: When to Seek a Private ED Assessment",
+      description: "Understand when recurring erection difficulties deserve medical advice and what a confidential assessment can involve.",
+      href: "/blog/impotence-clinic-ed-assessment-treatment-options",
+      category: "Doctor-Led Advice",
+    },
+  ];
+
+  const regionalEdGuides = isBirmingham
+    ? [
+        {
+          title: "High Blood Pressure, Diabetes and Erectile Dysfunction",
+          description: "How diabetes, hypertension and cardiovascular health can influence erections, with advice for men in Birmingham.",
+          href: "/blog/high-blood-pressure-diabetes-ed-birmingham",
+          category: "ED Causes",
+        },
+        {
+          title: "P-Shot for Erectile Dysfunction in Birmingham: Can It Help?",
+          description: "A doctor-led look at PRP treatment for ED, current evidence, suitability and realistic expectations.",
+          href: "/blog/p-shot-erectile-dysfunction-birmingham",
+          category: "P-Shot / PRP",
+        },
+        {
+          title: "Focused Shockwave Therapy for ED in Birmingham",
+          description: "Learn how focused shockwave therapy is used, who may be suitable and why assessment matters.",
+          href: "/blog/focused-shockwave-therapy-for-erectile-dysfunction-birmingham",
+          category: "Shockwave Therapy",
+        },
+        {
+          title: "ED Treatment Near Oxford and Gloucestershire",
+          description: "Information for men considering travelling to the Birmingham clinic for private erectile dysfunction assessment.",
+          href: "/blog/ed-treatment-near-oxford-gloucestershire",
+          category: "Travelling for Care",
+        },
+      ]
+    : isHampstead
+      ? [
+          {
+            title: "ED Doctor in Hampstead, London: When to Seek Help",
+            description: "What to expect from a private erectile dysfunction consultation in Hampstead and when to seek assessment.",
+            href: "/blog/ed-doctor-hampstead-london-private-assessment",
+            category: "Hampstead / London",
+          },
+        ]
+      : [
+          {
+            title: "Focused Shockwave Therapy for ED in St Albans",
+            description: "A practical guide to focused shockwave treatment, patient suitability and the importance of a medical review.",
+            href: "/blog/focused-shockwave-therapy-for-erectile-dysfunction-st-albans",
+            category: "Shockwave Therapy",
+          },
+          {
+            title: "P-Shot for Erectile Dysfunction in St Albans",
+            description: "An introduction to platelet-rich plasma treatment and the role of doctor-led assessment for ED.",
+            href: "/blog/p-shot-erectile-dysfunction-st-albans-birmingham",
+            category: "P-Shot / PRP",
+          },
+        ];
+
+  // Curate rather than crowd the main treatment page; add future blogs here.
+  const edBlogGuides = [...regionalEdGuides, ...sharedEdGuides].slice(0, 6);
+
   const displayedFaqs = showAllFaqs ? faqs : faqs.slice(0, 5);
 
   return (
@@ -659,7 +736,7 @@ export default function ErectileDysfunctionClient({
           </div>
         </div>
       </section>
-
+      
       {/* --- LIGHTWEIGHT ED BLOG LINKS: STATIC HTML, NO IMAGES OR PREFETCH --- */}
       <section
         aria-labelledby="ed-guides-heading"
@@ -708,7 +785,7 @@ export default function ErectileDysfunctionClient({
           </div>
         </div>
       </section>
-      
+
       {/* --- FAQs --- */}
       <section id="faqs" className="py-24 bg-slate-50 font-inter border-t border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
