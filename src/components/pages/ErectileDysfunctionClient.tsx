@@ -659,6 +659,55 @@ export default function ErectileDysfunctionClient({
           </div>
         </div>
       </section>
+
+      {/* --- LIGHTWEIGHT ED BLOG LINKS: STATIC HTML, NO IMAGES OR PREFETCH --- */}
+      <section
+        aria-labelledby="ed-guides-heading"
+        className="border-y border-slate-200 bg-slate-50 py-16 font-inter md:py-20"
+      >
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2
+              id="ed-guides-heading"
+              className="mb-4 font-raleway text-3xl font-bold text-slate-900 md:text-4xl"
+            >
+              Erectile Dysfunction: Doctor-Written Guides
+            </h2>
+            <p className="text-base leading-relaxed text-slate-600">
+              Explore articles by Dr Syed Abdi about erectile dysfunction,
+              possible causes, and treatment options. These guides are for
+              education and do not replace an individual medical assessment.
+            </p>
+          </div>
+
+          {/* Links remain in the server-rendered HTML. No images, extra JS,
+              animations, lazy fetching, or automatic Next.js prefetching. */}
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
+            {edBlogGuides.map((article) => (
+              <article key={article.href} className="rounded-2xl border border-slate-200 bg-white">
+                <Link
+                  href={article.href}
+                  prefetch={false}
+                  className="block h-full rounded-2xl p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4041d1]"
+                >
+                  <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-[#4041d1]">
+                    {article.category}
+                  </span>
+                  <h3 className="mb-2 font-raleway text-lg font-bold leading-snug text-slate-900">
+                    {article.title}
+                  </h3>
+                  <p className="mb-3 text-sm leading-relaxed text-slate-600">
+                    {article.description}
+                  </p>
+                  <span className="text-sm font-semibold text-[#4041d1]">
+                    Read article <span aria-hidden="true">→</span>
+                  </span>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
       
       {/* --- FAQs --- */}
       <section id="faqs" className="py-24 bg-slate-50 font-inter border-t border-slate-200">
