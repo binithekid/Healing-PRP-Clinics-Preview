@@ -659,59 +659,6 @@ export default function ErectileDysfunctionClient({
           </div>
         </div>
       </section>
-     
-      {/* --- ED EDUCATIONAL BLOG GUIDES: BEFORE FAQS --- */}
-      <section
-        aria-labelledby="ed-guides-heading"
-        className="py-20 md:py-24 bg-[#F6F7FF] font-inter border-y border-slate-200"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <span className="inline-block px-4 py-2 mb-5 bg-white border border-indigo-100 rounded-full text-xs font-bold uppercase tracking-[0.12em] text-[#4041d1]">
-              Erectile Dysfunction Resources
-            </span>
-            <h2
-              id="ed-guides-heading"
-              className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-5"
-            >
-              Erectile Dysfunction: Doctor-Written Guides
-            </h2>
-            <p className="text-base md:text-lg leading-relaxed text-slate-600">
-              Explore practical articles from Dr Syed Abdi about erectile dysfunction,
-              common health-related causes and treatment options. These guides are
-              educational and do not replace an individual medical assessment.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {edBlogGuides.map((article) => (
-              <article key={article.href} className="h-full">
-                <Link
-                  href={article.href}
-                  className="group flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4041d1]"
-                >
-                  <div className="flex items-center justify-between gap-3 mb-6">
-                    <span className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1.5 text-xs font-bold text-[#4041d1]">
-                      {article.category}
-                    </span>
-                    <FaFileAlt aria-hidden="true" className="text-[#4041d1] text-lg shrink-0" />
-                  </div>
-                  <h3 className="font-raleway text-lg md:text-xl leading-snug font-bold text-slate-900 mb-3 group-hover:text-[#4041d1] transition-colors">
-                    {article.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-600 mb-6 flex-grow">
-                    {article.description}
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-sm font-bold text-[#4041d1]">
-                    Read article
-                    <FaArrowRight aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
       
       {/* --- FAQs --- */}
       <section id="faqs" className="py-24 bg-slate-50 font-inter border-t border-slate-200">
