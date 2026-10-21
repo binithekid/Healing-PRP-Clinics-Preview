@@ -4,6 +4,15 @@ import { useState } from "react";
 import { FaWhatsapp, FaLock, FaPhoneAlt, FaCheckCircle } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 
+// Only the Birmingham ED Google Ads landing page sends the dedicated
+// WhatsApp-click conversion. Other pages still record anonymous GA4 clicks.
+const ED_ADS_LANDING_PATH = "/birmingham/erectile-dysfunction-treatment";
+const ED_WHATSAPP_CONVERSION = "AW-18130686557/XHpOCNj-1KQdEN2kscVD";
+
+const isEdAdsLandingPage = () =>
+  typeof window !== "undefined" &&
+  window.location.pathname.replace(/\/+$/, "") === ED_ADS_LANDING_PATH;
+
 interface GoogleAdsLeadFormProps {
   defaultTreatment?: string;
   defaultLocation?: string;
@@ -64,25 +73,22 @@ export default function GoogleAdsLeadForm({
 };
 
   const handleWhatsAppClick = () => {
-    // --- GA4 Tracking for WhatsApp Click ---
     if (typeof window !== "undefined") {
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
-      if (w.gtag) {
-        w.gtag("event", "whatsapp_click", {
-          event_category: "lead",
-          event_label: defaultTreatment,
-          location: defaultLocation,
-          page_path: window.location.pathname,
-        });
 
-        // Fire Google Ads Conversion on WA Click if label provided
-        if (conversionLabel) {
-          w.gtag("event", "conversion", { send_to: conversionLabel });
-        }
+      // Anonymous click measurement only. This does not confirm a sent message.
+      w.gtag?.("event", "whatsapp_click", { button_location: "lead_form" });
+
+      // Dedicated Google Ads WhatsApp click conversion on this landing page only.
+      // Never send a WhatsApp click to the callback-form conversion label.
+      if (isEdAdsLandingPage()) {
+        w.gtag?.("event", "conversion", {
+          send_to: ED_WHATSAPP_CONVERSION,
+        });
       }
     }
 
-    // Dynamic WhatsApp Message
+    // Preserve the existing WhatsApp message and button behaviour.
     const whatsappMessage = `Hello, I would like to enquire about ${defaultTreatment}${
       defaultLocation ? ` in ${defaultLocation}` : ""
     }.`;
@@ -93,37 +99,18 @@ export default function GoogleAdsLeadForm({
     window.open(waUrl, "_blank");
   };
 
-   const handlePhoneClick = () => {
-    const tracking = getTrackingParams();
-  
-    // --- GA4 Tracking for Phone Click ---
+  const handlePhoneClick = () => {
     if (typeof window !== "undefined") {
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
-  
-      if (w.gtag) {
-        w.gtag("event", "phone_click", {
-          event_category: "lead",
-          event_label: defaultTreatment,
-          location: defaultLocation,
-          page_path: tracking.page_path,
-          page_url: tracking.page_url,
-          utm_source: tracking.utm_source,
-          utm_medium: tracking.utm_medium,
-          utm_campaign: tracking.utm_campaign,
-          utm_term: tracking.utm_term,
-          gclid: tracking.gclid,
-          device: tracking.device,
-        });
-  
-        // Fire Google Ads Conversion on Phone Click
-        if (conversionLabel) {
-          w.gtag("event", "conversion", { send_to: conversionLabel });
-        }
-      }
+
+      // A phone click is not proof that a telephone call connected.
+      w.gtag?.("event", "phone_click", { button_location: "lead_form" });
+      // Do not fire the callback form's Google Ads conversion here.
     }
-  
+
     window.location.href = `tel:${CLINIC_PHONE_NUMBER}`;
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
@@ -185,39 +172,26 @@ export default function GoogleAdsLeadForm({
       Referrer: ${tracking.referrer}`,
       });
 
-     // --- GA4 & GOOGLE ADS TRACKING ON SUCCESSFUL SUBMIT ---
+      // Track only AFTER EmailJS confirms the request was successfully sent.
       if (typeof window !== "undefined") {
-        
-        // 1. Tell TypeScript about both gtag and dataLayer on the window object
-        const w = window as Window & { 
+        const w = window as Window & {
           gtag?: (...args: unknown[]) => void;
-          dataLayer?: Record<string, unknown>[]; 
+          dataLayer?: Record<string, unknown>[];
         };
 
-        // 2. Explicit DataLayer Push for Enhanced Conversions (Using 'w' instead of 'window')
+        // Preserve an anonymous dataLayer event for any existing GTM listeners.
+        // Never put a patient's email, telephone number or medical information
+        // into Google Analytics, Google Ads or Enhanced Conversions user_data.
         w.dataLayer = w.dataLayer || [];
-        w.dataLayer.push({
-          event: "callback_request_submitted",
-          user_data: {
-            phone_number: phone,
-            // Only attach the email to user_data if the patient actually typed one in
-            ...(email.trim() ? { email: email.trim().toLowerCase() } : {}),
-          },
+        w.dataLayer.push({ event: "callback_request_submitted" });
+
+        w.gtag?.("event", "callback_request_submitted", {
+          form_type: "callback",
         });
 
-        // 3. Fire standard gtag events
-        if (w.gtag) {
-          w.gtag("event", "callback_request_submitted", {
-            event_category: "lead",
-            event_label: defaultTreatment,
-            location: defaultLocation,
-            page_path: tracking.page_path, page_url: tracking.page_url, utm_source: tracking.utm_source, utm_medium: tracking.utm_medium, utm_campaign: tracking.utm_campaign, utm_term: tracking.utm_term, gclid: tracking.gclid, device: tracking.device,
-          });
-
-          // Fire Google Ads Conversion on Form Submit
-          if (conversionLabel) {
-            w.gtag("event", "conversion", { send_to: conversionLabel });
-          }
+        // The existing Google Ads label applies ONLY to successful form submits.
+        if (conversionLabel) {
+          w.gtag?.("event", "conversion", { send_to: conversionLabel });
         }
       }
 
