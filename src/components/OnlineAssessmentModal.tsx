@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaTimes, FaArrowLeft, FaCheckCircle, FaUserMd, FaUser, FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaTimes, FaArrowLeft, FaUserMd, FaUser, FaEnvelope, FaPhone } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 import { useRouter } from "next/navigation";
 
@@ -20,11 +20,22 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
   // Lead Capture State
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const submissionLocked = useRef(false);
+  const submissionSucceeded = useRef(false);
+  const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const redirectTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Lock body scroll when open
   useEffect(() => {
-    if (isOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "unset";
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      // Reset the submission lock when the assessment is opened anew.
+      submissionLocked.current = false;
+      submissionSucceeded.current = false;
+    } else {
+      document.body.style.overflow = "unset";
+    }
     return () => { document.body.style.overflow = "unset"; };
   }, [isOpen]);
 
@@ -84,9 +95,12 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
   ];
 
   const handleSelect = (answer: string | number) => {
+    // Avoid skipping questions if a patient taps an option multiple times.
+    if (advanceTimer.current !== null) return;
     setAnswers((prev) => ({ ...prev, [step]: answer }));
-    
-    setTimeout(() => {
+
+    advanceTimer.current = setTimeout(() => {
+      advanceTimer.current = null;
       if (step < questions.length - 1) {
         setStep((prev) => prev + 1);
       } else {
@@ -96,17 +110,31 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
   };
 
   const handleBack = () => {
+    if (advanceTimer.current !== null) {
+      clearTimeout(advanceTimer.current);
+      advanceTimer.current = null;
+    }
     if (step > 0) setStep((prev) => prev - 1);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  // Clear any scheduled transitions if the component unmounts.
+  useEffect(() => () => {
+    if (advanceTimer.current !== null) clearTimeout(advanceTimer.current);
+    if (redirectTimer.current !== null) clearTimeout(redirectTimer.current);
+  }, []);
 
   const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSubmitting) return;
+    // useRef prevents rapid double-clicks before React updates disabled state.
+    if (submissionLocked.current || submissionSucceeded.current) return;
+    submissionLocked.current = true;
     setIsSubmitting(true);
+    setSubmitError("");
 
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -114,18 +142,20 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
 
     if (!serviceId || !templateId || !publicKey) {
       console.error("EmailJS credentials missing.");
-      alert("Configuration error. Please use our standard contact form.");
+      setSubmitError("The assessment service is currently unavailable. Please use the contact form or call the clinic.");
+      submissionLocked.current = false;
       setIsSubmitting(false);
       return;
     }
 
+    // ?? is essential: a numeric answer of 0 is a valid answer, not missing.
     let formattedAssessment = "=== ONLINE ED ASSESSMENT RESULTS ===\n\n";
     questions.forEach((q, index) => {
       formattedAssessment += `Q${index + 1}: ${q.title}\n`;
-      formattedAssessment += `Answer: ${answers[index] || "Not answered"}\n\n`;
+      formattedAssessment += `Answer: ${answers[index] ?? "Not answered"}\n\n`;
     });
 
-    const isBirmingham = window.location.pathname?.startsWith("/birmingham");
+    const isBirmingham = window.location.pathname.startsWith("/birmingham");
     const clinicLocation = isBirmingham ? "Birmingham (Edgbaston)" : "St Albans";
 
     try {
@@ -134,44 +164,62 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
-        treatment: "Personalised ED Medication (Online Assessment Completed)",
+        treatment: "ED Online Assessment Request",
         message: formattedAssessment,
         clinic_location: clinicLocation,
       });
 
-      // --- GOOGLE ADS CONVERSION TRACKING ---
-      if (typeof window !== "undefined") {
-        const w = window as Window & { gtag?: (...args: unknown[]) => void };
-        if (w.gtag) {
-          w.gtag('event', 'conversion', {
-            'send_to': 'AW-18130686557/hY3YCIONsKUcEN2kscVD'
-          });
+      // Only fire after successful EmailJS delivery. Nothing identifying or
+      // medical is supplied to Google Ads or to Enhanced Conversions.
+      // The modal is shared by organic ED, P-Shot, personalised-medication,
+      // and Hero pages. Only the Birmingham ED Ads landing page should send
+      // this particular Google Ads assessment conversion.
+      const isBirminghamEDAdsLandingPage =
+        window.location.pathname.replace(/\/+$/, "") ===
+        "/birmingham/erectile-dysfunction-treatment";
+      submissionSucceeded.current = true;
+      const w = window as Window & { gtag?: (...args: unknown[]) => void };
+      const THANK_YOU_URL = isBirmingham ? "/birmingham/thank-you" : "/thank-you";
+      let navigationStarted = false;
+      const finish = () => {
+        if (navigationStarted) return;
+        navigationStarted = true;
+        if (redirectTimer.current !== null) {
+          clearTimeout(redirectTimer.current);
+          redirectTimer.current = null;
         }
-      }
-      // ---------------------------------------
-
-      // DELAY THE REDIRECT BY 400ms TO ENSURE GOOGLE ADS CATCHES THE CONVERSION
-      setTimeout(() => {
-        if (isBirmingham) {
-          router.push("/birmingham/thank-you");
-        } else {
-          router.push("/thank-you");
-        }
-        
-        // Close modal and reset state AFTER the redirect begins
+        router.push(THANK_YOU_URL);
         onClose();
-        setTimeout(() => {
-          setStep(0);
-          setIsComplete(false);
-          setAnswers({});
-          setFormData({ name: "", email: "", phone: "" });
-        }, 100);
-      }, 400);
+        setStep(0);
+        setIsComplete(false);
+        setAnswers({});
+        setFormData({ name: "", email: "", phone: "" });
+        setIsSubmitting(false);
+        // Keep the ref guard in place until the modal is reopened.
+      };
 
+      if (isBirminghamEDAdsLandingPage && typeof w.gtag === "function") {
+        // Fallback avoids trapping the patient if tracking is blocked.
+        // The redirect guard prevents duplicate navigation.
+        redirectTimer.current = setTimeout(finish, 900);
+        try {
+          w.gtag("event", "conversion", {
+            send_to: "AW-18130686557/hY3YCIONsKUcEN2kscVD",
+            event_callback: finish,
+          });
+        } catch (trackingError) {
+          console.warn("Assessment conversion tag did not run:", trackingError);
+          finish();
+        }
+      } else {
+        // Assessment submission still succeeds on all other pages.
+        // We do not send the Birmingham ED Ads conversion on those pages.
+        finish();
+      }
     } catch (error) {
       console.error("Failed to send assessment:", error);
-      alert("There was an issue sending your assessment. Please try calling us directly.");
-    } finally {
+      setSubmitError("There was an issue sending your assessment. Please try again or contact the clinic directly.");
+      submissionLocked.current = false;
       setIsSubmitting(false);
     }
   };
@@ -302,7 +350,7 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
                       Assessment Complete
                     </h2>
                     <p className="text-slate-600 font-inter leading-relaxed max-w-md mx-auto">
-                      Based on your answers, you are an excellent candidate for treatment. Enter your details below so our doctor can review your profile.
+                      Thank you for completing the questions. Enter your contact details so our clinical team can review your answers and discuss possible next steps. This questionnaire does not determine treatment suitability.
                     </p>
                   </div>
 
@@ -358,8 +406,13 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
                         "Submit to Doctor"
                       )}
                     </button>
+                    {submitError && (
+                      <p role="alert" className="text-center text-xs text-rose-600 mt-4 font-inter">
+                        {submitError}
+                      </p>
+                    )}
                     <p className="text-center text-xs text-slate-400 mt-4 font-inter">
-                      Your details are strictly confidential and completely secure.
+                      Your answers include health information and will be sent to the clinic for review. Please see our Privacy Policy for details about how we handle your information.
                     </p>
                   </form>
                 </motion.div>
