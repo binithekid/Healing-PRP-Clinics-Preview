@@ -104,27 +104,36 @@ export default function ContactCTASection({ defaultTreatment = "Erectile Dysfunc
     }
 
     try {
+      // Include the form's actual page in the clinic email. This is where
+      // the patient submitted the enquiry, not necessarily their acquisition source.
+      const sourcePage = `${window.location.origin}${window.location.pathname}`;
+
       emailjs.init(publicKey);
       await emailjs.send(serviceId, templateId, {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
         treatment: formData.treatment,
-        message: formData.message,
+        message: `${formData.message}\n\n--- ENQUIRY SOURCE ---\nSource Page: ${sourcePage}`,
+        source_page: sourcePage,
         // ADDED: Hampstead handling for email output
         clinic_location: activeClinic === "birmingham" ? "Birmingham (Edgbaston)" : activeClinic === "hampstead" ? "Hampstead (London)" : "St Albans",
       });
 
-    // --- GOOGLE ADS CONVERSION TRACKING ---
-      if (typeof window !== "undefined") {
-        const w = window as Window & { gtag?: (...args: unknown[]) => void };
-        if (w.gtag) {
-          w.gtag('event', 'conversion', {
-            'send_to': 'AW-18130686557/hY3YCIONsKUcEN2kscVD' 
+      // Track a successful form submission, NOT a click to open the form.
+      // No names, emails, phone numbers, treatment names or medical details
+      // are sent to GA4 or Google Ads.
+      const w = window as Window & { gtag?: (...args: unknown[]) => void };
+      if (typeof w.gtag === "function") {
+        try {
+          w.gtag("event", "generate_lead", {
+            send_to: "G-PB0GD280PD",
+            form_type: "organic_contact",
           });
+        } catch (trackingError) {
+          console.warn("GA4 contact-form tracking failed:", trackingError);
         }
-      }
-      // ---------------------------------------
+      } 
 
       // Clear form in the background immediately
       setFormData({ name: "", email: "", phone: "", treatment: defaultTreatment, message: "" });
