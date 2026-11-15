@@ -57,7 +57,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/hampstead/p-shot", priority: 0.9 },
     { url: "/hampstead/o-shot", priority: 0.9 }, 
     { url: "/hampstead/vaginal-dryness", priority: 0.9 },
-    { url: "/hampstead/penis-enlargement", priority: 0.9 },
     { url: "/hampstead/penis-filler", priority: 0.85 }, // Included based on your recent folder structure
     { url: "/hampstead/erectile-dysfunction", priority: 0.9 }, 
     { url: "/hampstead/peyronies-disease", priority: 0.85 },
