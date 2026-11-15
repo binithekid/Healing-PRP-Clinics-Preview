@@ -161,6 +161,8 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
       ""
     );
     
+    const isBirmingham = pagePath.startsWith("/birmingham");
+    
     const clinicLocation = pagePath.startsWith("/birmingham")
       ? "Birmingham (Edgbaston)"
       : pagePath.startsWith("/hampstead")
