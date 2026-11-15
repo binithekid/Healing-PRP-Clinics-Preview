@@ -155,8 +155,20 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
       formattedAssessment += `Answer: ${answers[index] ?? "Not answered"}\n\n`;
     });
 
-    const isBirmingham = window.location.pathname.startsWith("/birmingham");
-    const clinicLocation = isBirmingham ? "Birmingham (Edgbaston)" : "St Albans";
+    
+    const pagePath = window.location.pathname.replace(
+      /^\/uk(?=\/|$)/,
+      ""
+    );
+    
+    const clinicLocation = pagePath.startsWith("/birmingham")
+      ? "Birmingham (Edgbaston)"
+      : pagePath.startsWith("/hampstead")
+        ? "Hampstead (London)"
+        : "St Albans";
+    
+    const sourcePage =
+      `${window.location.origin}${window.location.pathname}`;
 
     try {
       emailjs.init(publicKey);
@@ -165,8 +177,12 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
         from_email: formData.email,
         phone: formData.phone,
         treatment: "ED Online Assessment Request",
-        message: formattedAssessment,
+        message: `${formattedAssessment}
+      === ENQUIRY SOURCE ===
+      Source Page: ${sourcePage}
+      Clinic Location: ${clinicLocation}`,
         clinic_location: clinicLocation,
+        source_page: sourcePage,  
       });
 
       // Only fire after successful EmailJS delivery. Nothing identifying or
