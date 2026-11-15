@@ -179,6 +179,20 @@ export default function OnlineAssessmentModal({ isOpen, onClose }: OnlineAssessm
         "/birmingham/erectile-dysfunction-treatment";
       submissionSucceeded.current = true;
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
+
+      // Track a real ED assessment lead in GA4 only AFTER EmailJS succeeds.
+      // Keep all patient details and medical answers out of analytics.
+      // This is distinct from the existing Google Ads conversion below.
+      try {
+        w.gtag?.("event", "generate_lead", {
+          send_to: "G-PB0GD280PD",
+          form_type: "ed_assessment",
+        });
+      } catch (trackingError) {
+        // Tracking must never block a successfully delivered assessment.
+        console.warn("GA4 assessment tracking did not run:", trackingError);
+      }
+
       const THANK_YOU_URL = isBirmingham ? "/birmingham/thank-you" : "/thank-you";
       let navigationStarted = false;
       const finish = () => {
