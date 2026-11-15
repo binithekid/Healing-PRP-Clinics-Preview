@@ -401,7 +401,7 @@ export default function PenisEnlargementClient({
       </div>
 
       {/* --- DOCTOR-LED TRUST SECTION (MOVED UP) --- */}
-      <EDFeatureBlock />
+      <EDFeatureBlock variant="penis-filler" />
 
       {/* --- INTRODUCTION & SYNONYM BRIDGE --- */}
       <section className="py-16 md:py-24 bg-white relative z-30 border-b border-slate-100">
