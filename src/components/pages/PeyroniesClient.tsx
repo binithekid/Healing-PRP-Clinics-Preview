@@ -253,7 +253,7 @@ export default function PeyroniesClient({
       </div>
 
       {/* --- DOCTOR-LED TRUST SECTION (MOVED UP) --- */}
-      <EDFeatureBlock />
+      <EDFeatureBlock variant="peyronies" />
 
       {/* --- UNDERSTANDING PD --- */}
       <section className="py-20 bg-white font-inter">
