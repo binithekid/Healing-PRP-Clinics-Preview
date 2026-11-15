@@ -212,12 +212,18 @@ export default function PenisEnlargementClient({
         <div className="absolute inset-0 z-0 bg-[#0A1128]">
           <div className="absolute inset-0 bg-black/60 z-10" /> 
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80 z-10" />
-          <Image 
-            src="/PEnlargement.webp" 
-            alt="Doctor-Led Penis Filler in Birmingham" 
+          <Image
+            src="/PEnlargement.webp"
+            alt={
+              isBirmingham
+                ? "Doctor-led penile filler treatment in Birmingham"
+                : isHampstead
+                  ? "Doctor-led penile filler treatment in Hampstead, London"
+                  : "Doctor-led penile filler treatment in St Albans, Hertfordshire"
+            }
             fill
             priority
-            fetchPriority="high" 
+            fetchPriority="high"
             quality={70}
             sizes="100vw"
             className="object-cover opacity-90"
@@ -411,8 +417,23 @@ export default function PenisEnlargementClient({
               While historically associated with surgical &quot;penis enlargement,&quot; modern advancements mean that achieving a proportionate, natural-looking increase in girth and a fuller flaccid appearance is now possible through a quick, minimally invasive procedure. Treatment is carried out by Dr Abdi in a discreet clinical setting, supporting a high standard of safety, discretion and tailored volume planning.
             </p>
             <div className="bg-blue-50/50 border border-blue-100 rounded-2xl p-6 inline-block text-sm text-left shadow-sm">
-              <strong className="text-slate-900">Looking to improve erectile function or blood flow?</strong><br/>
-              Read about our <Link href="/p-shot" className="text-[#4041d1] hover:underline font-bold">P-Shot treatment here</Link>.
+              <strong className="text-slate-900">
+                Looking to improve erectile function or blood flow?
+              </strong>
+              <br />
+              Learn more about our{" "}
+              <Link
+                href={
+                  isBirmingham
+                    ? "/birmingham/p-shot"
+                    : isHampstead
+                      ? "/hampstead/p-shot"
+                      : "/p-shot"
+                }
+                className="text-[#4041d1] hover:underline font-bold"
+              >
+                P-Shot treatment
+              </Link>.
             </div>
           </div>
         </div>
