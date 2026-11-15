@@ -34,6 +34,7 @@ import {
 import LocationSection from "@/components/LocationSection";
 import GoogleAdsLeadForm from "@/components/GoogleAdsLeadForm";
 import TrustReviews from "@/components/TrustReviews";
+import EDLandingStickyCTAs from "@/components/EDLandingStickyCTAs";
 
 // --- LAZY LOADED COMPONENTS ---
 const OnlineAssessmentModal = dynamic(() => import('@/components/OnlineAssessmentModal'), { ssr: false });
@@ -238,6 +239,8 @@ export default function ErectileDysfunctionTreatmentClient({
   
   return (
     <>
+      {/* Dedicated sticky buttons for Birmingham ED Ads only */}
+      <EDLandingStickyCTAs />
       {/* --- CSS OVERRIDES --- */}
       <style dangerouslySetInnerHTML={{ __html: `
         /* Hide global header */
