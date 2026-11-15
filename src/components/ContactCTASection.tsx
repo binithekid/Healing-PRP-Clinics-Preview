@@ -1,8 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaWhatsapp, FaTimes, FaCheckCircle, FaPaperPlane, FaInfoCircle, FaPhoneAlt, FaChevronDown } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  FaChevronDown,
+  FaInfoCircle,
+  FaPaperPlane,
+  FaPhoneAlt,
+  FaTimes,
+} from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import emailjs from "@emailjs/browser";
@@ -11,189 +18,254 @@ interface ContactCTASectionProps {
   defaultTreatment?: string;
 }
 
-export default function ContactCTASection({ defaultTreatment = "Erectile Dysfunction" }: ContactCTASectionProps) {
-  const pathname = usePathname();
-  const router = useRouter(); 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false); // Used for QR Logic
-  
-  // ADDED: Hampstead to the clinic state logic
-  const [activeClinic, setActiveClinic] = useState<"st-albans" | "birmingham" | "hampstead">(
-    pathname?.startsWith("/birmingham") 
-      ? "birmingham" 
-      : pathname?.startsWith("/hampstead") 
-      ? "hampstead" 
-      : "st-albans"
-  );
+type Clinic = "st-albans" | "birmingham" | "hampstead";
 
+const GA4_MEASUREMENT_ID = "G-PB0GD280PD";
+
+const TREATMENT_OPTIONS = [
+  "Penis Filler / Girth Enhancement",
+  "Erectile Dysfunction",
+  "Shockwave Therapy for ED",
+  "P-Shot / PRP for ED",
+  "Peyronie's Disease",
+  "O-Shot",
+  "Vaginal Dryness Treatment",
+  "Hair Restoration",
+  "Joint Pain Relief",
+  "Facial Aesthetics",
+  "Other",
+];
+
+function normalisePath(pathname: string): string {
+  const clean = pathname.toLowerCase().replace(/\/+$/, "") || "/";
+  // St Albans uses /, not a /st-albans prefix.
+  return clean.replace(/^\/uk(?=\/|$)/, "") || "/";
+}
+
+function clinicFromPath(path: string): Clinic {
+  if (path === "/birmingham" || path.startsWith("/birmingham/")) {
+    return "birmingham";
+  }
+  if (path === "/hampstead" || path.startsWith("/hampstead/")) {
+    return "hampstead";
+  }
+  return "st-albans";
+}
+
+function clinicLabel(clinic: Clinic): string {
+  if (clinic === "birmingham") return "Birmingham (Edgbaston)";
+  if (clinic === "hampstead") return "Hampstead (London)";
+  return "St Albans";
+}
+
+function treatmentFromPage(path: string): string | null {
+  // Specific treatments come before broader erectile-dysfunction matching.
+  if (/\/(?:o-shot|oshot)(?:\/|$|-)/.test(path)) return "O-Shot";
+  if (/\/(?:p-shot|pshot)(?:\/|$|-)/.test(path)) return "P-Shot / PRP for ED";
+  if (path.includes("peyronie")) return "Peyronie's Disease";
+  if (
+    path.includes("penis-enlargement") ||
+    path.includes("penile-enlargement") ||
+    path.includes("penis-filler") ||
+    path.includes("penile-filler") ||
+    path.includes("girth-enhancement")
+  ) {
+    return "Penis Filler / Girth Enhancement";
+  }
+  if (path.includes("shockwave")) return "Shockwave Therapy for ED";
+  if (
+    path.includes("erectile-dysfunction") ||
+    path.includes("impotence") ||
+    path.includes("ed-treatment")
+  ) {
+    return "Erectile Dysfunction";
+  }
+  if (path.includes("vaginal-dryness")) return "Vaginal Dryness Treatment";
+  if (path.includes("hair-restoration") || path.includes("hair-loss")) {
+    return "Hair Restoration";
+  }
+  if (path.includes("joint-pain") || path.includes("joint-injection")) {
+    return "Joint Pain Relief";
+  }
+  if (path.includes("facial-aesthetic")) return "Facial Aesthetics";
+  return null;
+}
+
+function isGeneralPage(path: string): boolean {
+  return (
+    path === "/" ||
+    path === "/birmingham" ||
+    path === "/hampstead" ||
+    /\/(?:contact|prices|pricing|blog|about)(?:\/|$)/.test(path)
+  );
+}
+
+export default function ContactCTASection({
+  defaultTreatment,
+}: ContactCTASectionProps) {
+  const pathname = usePathname() ?? "/";
+  const path = normalisePath(pathname);
+  const router = useRouter();
+
+  // On recognised treatment pages there is no unnecessary dropdown.
+  // General/unrecognised pages require a deliberate treatment selection.
+  const identifiedTreatment = isGeneralPage(path)
+    ? null
+    : treatmentFromPage(path) || defaultTreatment?.trim() || null;
+
+  const [selectedTreatment, setSelectedTreatment] = useState("");
+  const [activeClinic, setActiveClinic] = useState<Clinic>(() => clinicFromPath(path));
+  const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    treatment: defaultTreatment,
     message: "",
   });
-  
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: "success" | "error" | null;
-    message: string;
-  }>({ type: null, message: "" });
+  const [submitError, setSubmitError] = useState("");
+  const submissionLocked = useRef(false);
 
-  // Handle drawer open events
+  // Keep the suggested clinic aligned with client-side navigation, while
+  // still allowing patients to manually choose another clinic.
   useEffect(() => {
-    const handleOpenEvent = () => setIsOpen(true);
-    window.addEventListener("open-contact-drawer", handleOpenEvent);
-    return () => window.removeEventListener("open-contact-drawer", handleOpenEvent);
+    setActiveClinic(clinicFromPath(path));
+    setSelectedTreatment("");
+  }, [path]);
+
+  useEffect(() => {
+    const openDrawer = () => setIsOpen(true);
+    window.addEventListener("open-contact-drawer", openDrawer);
+    return () => window.removeEventListener("open-contact-drawer", openDrawer);
   }, []);
 
-  // Check screen size for QR logic
-  useEffect(() => {
-    const checkDesktop = () => setIsDesktop(window.innerWidth >= 768);
-    checkDesktop(); // Run immediately
-    window.addEventListener("resize", checkDesktop);
-    return () => window.removeEventListener("resize", checkDesktop);
-  }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (submitStatus.type) setSubmitStatus({ type: null, message: "" });
+    if (submitError) setSubmitError("");
   };
 
-  // --- Call & WhatsApp tracking handlers ---
   const handlePhoneClick = () => {
-    if (typeof window !== "undefined") {
-      const w = window as Window & { gtag?: (...args: unknown[]) => void };
-      if (w.gtag) {
-        w.gtag("event", "phone_click", {
-          event_category: "contact",
-          event_label: "phone_number_clicked",
-          page_path: window.location.pathname,
-        });
-      }
-    }
+    const w = window as Window & { gtag?: (...args: unknown[]) => void };
+    w.gtag?.("event", "phone_click", {
+      event_category: "contact",
+      event_label: "phone_number_clicked",
+      page_path: window.location.pathname,
+    });
   };
 
-  const handleWhatsAppClick = () => {
-    if (typeof window !== "undefined") {
-      const w = window as Window & { gtag?: (...args: unknown[]) => void };
-      if (w.gtag) {
-        w.gtag("event", "whatsapp_click", {
-          event_category: "contact",
-          event_label: "whatsapp_button_clicked",
-          page_path: window.location.pathname,
-        });
-      }
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isSubmitting) return; 
+    if (submissionLocked.current) return;
+
+    const treatment = identifiedTreatment || selectedTreatment;
+    if (!treatment) {
+      setSubmitError("Please select a treatment before submitting.");
+      return;
+    }
+
+    submissionLocked.current = true;
     setIsSubmitting(true);
-    
+    setSubmitError("");
+
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
-      setSubmitStatus({ type: "error", message: "Email service unconfigured." });
+      setSubmitError("The email service is unavailable. Please call the clinic.");
       setIsSubmitting(false);
+      submissionLocked.current = false;
       return;
     }
 
     try {
-      // Include the form's actual page in the clinic email. This is where
-      // the patient submitted the enquiry, not necessarily their acquisition source.
       const sourcePage = `${window.location.origin}${window.location.pathname}`;
-
       emailjs.init(publicKey);
       await emailjs.send(serviceId, templateId, {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
-        treatment: formData.treatment,
+        treatment,
         message: `${formData.message}\n\n--- ENQUIRY SOURCE ---\nSource Page: ${sourcePage}`,
         source_page: sourcePage,
-        // ADDED: Hampstead handling for email output
-        clinic_location: activeClinic === "birmingham" ? "Birmingham (Edgbaston)" : activeClinic === "hampstead" ? "Hampstead (London)" : "St Albans",
+        clinic_location: clinicLabel(activeClinic),
       });
 
-      // Track a successful form submission, NOT a click to open the form.
-      // No names, emails, phone numbers, treatment names or medical details
-      // are sent to GA4 or Google Ads.
+      // Successful EmailJS submission only. No personal or clinical data
+      // is included in GA4; the form type is an anonymous identifier.
       const w = window as Window & { gtag?: (...args: unknown[]) => void };
-      if (typeof w.gtag === "function") {
-        try {
-          w.gtag("event", "generate_lead", {
-            send_to: "G-PB0GD280PD",
-            form_type: "organic_contact",
-          });
-        } catch (trackingError) {
-          console.warn("GA4 contact-form tracking failed:", trackingError);
-        }
-      } 
+      try {
+        w.gtag?.("event", "generate_lead", {
+          send_to: GA4_MEASUREMENT_ID,
+          form_type: "organic_contact",
+        });
+      } catch (trackingError) {
+        console.warn("GA4 contact-form tracking failed:", trackingError);
+      }
 
-      // Clear form in the background immediately
-      setFormData({ name: "", email: "", phone: "", treatment: defaultTreatment, message: "" });
+      // The old shared ED Google Ads conversion is deliberately NOT sent
+      // here. The dedicated Ads lead form and ED assessment retain their
+      // separate existing tracking in their own components.
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      setSelectedTreatment("");
 
-      // DELAY THE REDIRECT BY 400ms TO ENSURE GOOGLE ADS CATCHES THE CONVERSION
-      setTimeout(() => {
-        if (activeClinic === "birmingham") {
-          router.push("/birmingham/thank-you");
-        } else if (activeClinic === "hampstead") {
-          router.push("/hampstead/thank-you");
-        } else {
-          router.push("/thank-you");
-        }
-      }, 400);
+      const thankYouUrl =
+        activeClinic === "birmingham"
+          ? "/birmingham/thank-you"
+          : activeClinic === "hampstead"
+            ? "/hampstead/thank-you"
+            : "/thank-you";
 
-    } catch (err) {
-      console.error("EmailJS Error:", err);
-      setSubmitStatus({ type: "error", message: "Failed to send. Please try WhatsApp." });
-    } finally {
+      // Preserve the short delay used by the existing form to allow the
+      // GA4 event to dispatch before navigating.
+      setTimeout(() => router.push(thankYouUrl), 400);
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setSubmitError("Failed to send. Please try again or call the clinic.");
+      submissionLocked.current = false;
       setIsSubmitting(false);
     }
   };
-  
+
   return (
-    <section id="contact-form-section" className="relative py-12 bg-white font-inter scroll-mt-24">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        
-        {/* Main Collapsed Header / Trigger */}
-        <div className="text-center mb-6">
-          <div className="inline-block px-4 py-1.5 bg-[var(--brand-blue-50)] text-[#4041d1] rounded-full text-[11px] font-bold uppercase tracking-[0.2em] mb-4 border border-slate-100">
+    <section
+      id="contact-form-section"
+      className="relative bg-white py-12 font-inter scroll-mt-24"
+    >
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <div className="mb-6 text-center">
+          <div className="mb-4 inline-block rounded-full border border-slate-100 bg-[var(--brand-blue-50)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#4041d1]">
             Get In Touch
           </div>
-          <h2 className="text-2xl md:text-3xl font-raleway font-semibold text-slate-900 mb-4">
+          <h2 className="mb-4 font-raleway text-2xl font-semibold text-slate-900 md:text-3xl">
             Speak with Dr Syed Abdi
           </h2>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+          <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
             {!isOpen && (
               <button
+                type="button"
                 onClick={() => setIsOpen(true)}
-                className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-4 bg-[#4041d1] text-white rounded-2xl font-bold text-sm hover:bg-[#2a2bb8] transition-all shadow-xl shadow-blue-500/20 group"
+                className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-[#4041d1] px-10 py-4 text-sm font-bold text-white shadow-xl shadow-blue-500/20 transition-all hover:bg-[#2a2bb8] sm:w-auto"
               >
-                <FaPaperPlane className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <FaPaperPlane className="h-3.5 w-3.5" />
                 Book Private Consultation
                 <FaChevronDown className="ml-2 opacity-50" />
               </button>
             )}
-
-            <a 
+            <a
               href="tel:07990364147"
               onClick={handlePhoneClick}
-              className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-2xl font-bold text-sm hover:bg-slate-50 transition-all"
+              className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-8 py-4 text-sm font-bold text-slate-900 transition-all hover:bg-slate-50 sm:w-auto"
             >
-              <FaPhoneAlt className="text-[#4041d1] w-3.5 h-3.5" />
+              <FaPhoneAlt className="h-3.5 w-3.5 text-[#4041d1]" />
               07990 364 147
             </a>
           </div>
         </div>
 
-        {/* The Sliding Form Drawer */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -203,166 +275,170 @@ export default function ContactCTASection({ defaultTreatment = "Erectile Dysfunc
               className="overflow-hidden"
             >
               <div className="pt-8 pb-12">
-                <div className="bg-slate-50 p-6 md:p-10 rounded-[2.5rem] border border-slate-100 relative shadow-sm">
-                  <button 
+                <div className="relative rounded-[2.5rem] border border-slate-100 bg-slate-50 p-6 shadow-sm md:p-10">
+                  <button
+                    type="button"
                     onClick={() => setIsOpen(false)}
-                    className="absolute top-6 right-8 text-slate-400 hover:text-slate-600 transition-colors"
+                    className="absolute right-6 top-6 text-slate-400 transition-colors hover:text-slate-600"
+                    aria-label="Close contact form"
                   >
                     <FaTimes size={20} />
                   </button>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    
-                    {/* LEFT: THE FORM */}
-                    <div className="lg:col-span-7">
-                      <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
-                        <div className="md:col-span-2 mb-2">
-                          <div className="flex flex-wrap gap-1 p-1 bg-slate-200/50 rounded-2xl w-fit">
-                            {/* ADDED: Hampstead to the map array */}
-                            {(["st-albans", "birmingham", "hampstead"] as const).map((clinic) => (
-                              <button
-                                key={clinic}
-                                type="button"
-                                onClick={() => setActiveClinic(clinic)}
-                                className={`px-4 sm:px-6 py-2 rounded-xl text-[11px] font-bold transition-all ${
-                                  activeClinic === clinic ? "bg-white text-[#4041d1] shadow-sm" : "text-slate-500 hover:text-slate-700"
-                                }`}
-                              >
-                                {clinic === "st-albans" ? "St Albans" : clinic === "birmingham" ? "Birmingham" : "Hampstead"}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Form Fields */}
-                        <div className="md:col-span-2 space-y-1">
-                          <label className="text-[10px] font-bold uppercase text-slate-500 ml-1 tracking-widest">Full Name</label>
-                          <input 
-                            type="text" 
-                            name="name" 
-                            autoComplete="name"
-                            required 
-                            value={formData.name} 
-                            onChange={handleInputChange} 
-                            className="w-full px-5 py-3 rounded-2xl border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-[#4041d1] transition-shadow bg-white text-sm" 
-                            placeholder="Full Name" 
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold uppercase text-slate-500 ml-1 tracking-widest">Email</label>
-                          <input 
-                            type="email" 
-                            name="email" 
-                            autoComplete="email"
-                            required 
-                            value={formData.email} 
-                            onChange={handleInputChange} 
-                            className="w-full px-5 py-3 rounded-2xl border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-[#4041d1] transition-shadow bg-white text-sm" 
-                            placeholder="email@example.com" 
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] font-bold uppercase text-slate-500 ml-1 tracking-widest">Phone</label>
-                          <input 
-                            type="tel" 
-                            name="phone" 
-                            autoComplete="tel"
-                            required 
-                            value={formData.phone} 
-                            onChange={handleInputChange} 
-                            className="w-full px-5 py-3 rounded-2xl border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-[#4041d1] transition-shadow bg-white text-sm" 
-                            placeholder="07xxx xxxxxx" 
-                          />
-                        </div>
-                        <div className="md:col-span-2 space-y-1">
-                          <label className="text-[10px] font-bold uppercase text-slate-500 ml-1 tracking-widest">Treatment</label>
-                          <select name="treatment" value={formData.treatment} onChange={handleInputChange} className="w-full px-5 py-3 rounded-2xl border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-[#4041d1] transition-shadow bg-white text-slate-600 appearance-none text-sm">
-                            <option>Penis Filler / Girth Enhancement</option>
-                            <option>Erectile Dysfunction</option>
-                            <option>Shockwave Therapy for ED</option>
-                            <option>P-Shot / PRP for ED</option>
-                            <option>Peyronie&apos;s Disease</option>
-                            <option>Vaginal Dryness Treatment</option>
-                            <option>Hair Restoration</option>
-                            <option>Joint Pain Relief</option>
-                            <option>Facial Aesthetics</option>
-                            <option>Other</option>
-                          </select>
-                        </div>
-                        <div className="md:col-span-2 space-y-1">
-                          <label className="text-[10px] font-bold uppercase text-slate-500 ml-1 tracking-widest">Message</label>
-                          <textarea name="message" required rows={3} value={formData.message} onChange={handleInputChange} className="w-full px-5 py-3 rounded-2xl border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-[#4041d1] transition-shadow bg-white text-sm" placeholder="How can we help?"></textarea>
-                        </div>
-
-                        {submitStatus.type && (
-                          <div className={`md:col-span-2 p-4 rounded-xl border ${submitStatus.type === "success" ? "bg-green-50 border-green-100" : "bg-red-50 border-red-100"}`}>
-                            <p className="text-xs font-bold text-slate-800">{submitStatus.message}</p>
-                          </div>
-                        )}
-
-                        <button disabled={isSubmitting} className="md:col-span-2 w-full py-4 bg-[#4041d1] text-white rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-[#2a2bb8] transition-all shadow-xl shadow-blue-600/20 disabled:bg-slate-300 text-sm">
-                          {isSubmitting ? "Sending..." : "Send My Enquiry"}
-                        </button>
-                      </form>
-                    </div>
-
-                    {/* RIGHT SIDE: QUICK CONTACTS */}
-                    <div className="lg:col-span-5 space-y-3">
-                      <div className="w-full bg-white rounded-2xl border border-slate-100 p-6 text-center shadow-sm">
-                        <div className="inline-flex items-center gap-2 text-green-600 mb-4 bg-green-50 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                          <FaWhatsapp className="w-3 h-3" /> Quick Chat
-                        </div>
-                        
-                        {isDesktop ? (
-                          <>
-                            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 inline-block mb-4">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img src="/qrcode.png" alt="WhatsApp QR" className="w-32 h-32 mx-auto mix-blend-multiply" />
-                            </div>
-                            <div className="space-y-1">
-                              <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Scan to Chat</p>
-                              <div className="text-lg font-raleway font-bold text-[#4041d1]">
-                                +44 7990 364 147
-                              </div>
-                            </div>
-                          </>
-                        ) : (
-                          <div className="py-4">
-                             <a 
-                               href="https://wa.me/447990364147" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
-                               onClick={handleWhatsAppClick}
-                               className="flex items-center justify-center gap-3 w-full py-4 bg-[#25D366] text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
-                             >
-                               <FaWhatsapp className="w-6 h-6" /> Open WhatsApp
-                             </a>
-                             <p className="mt-4 text-[10px] text-slate-400">
-                               Typically replies in &lt; 1 hour
-                             </p>
-                          </div>
+                  <form
+                    onSubmit={handleSubmit}
+                    className="grid grid-cols-1 gap-4 md:grid-cols-2"
+                  >
+                    <div className="mb-2 md:col-span-2">
+                      <div className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                        Preferred clinic
+                      </div>
+                      <div className="flex w-fit flex-wrap gap-1 rounded-2xl bg-slate-200/50 p-1">
+                        {(["st-albans", "birmingham", "hampstead"] as const).map(
+                          (clinic) => (
+                            <button
+                              key={clinic}
+                              type="button"
+                              onClick={() => setActiveClinic(clinic)}
+                              aria-pressed={activeClinic === clinic}
+                              className={`rounded-xl px-4 py-2 text-[11px] font-bold transition-all sm:px-6 ${
+                                activeClinic === clinic
+                                  ? "bg-white text-[#4041d1] shadow-sm"
+                                  : "text-slate-500 hover:text-slate-700"
+                              }`}
+                            >
+                              {clinic === "st-albans"
+                                ? "St Albans"
+                                : clinic === "birmingham"
+                                  ? "Birmingham"
+                                  : "Hampstead"}
+                            </button>
+                          )
                         )}
                       </div>
+                    </div>
 
-                      <Link href="/contact" className="w-full flex items-center gap-4 p-4 bg-white rounded-2xl border border-slate-100 hover:shadow-md transition-all">
-                        <div className="w-10 h-10 bg-[var(--brand-blue-50)] text-[#4041d1] rounded-xl flex items-center justify-center text-lg"><FaInfoCircle /></div>
-                        <div>
-                          <h4 className="text-sm font-bold text-slate-900">Clinic Info</h4>
-                          <p className="text-[10px] text-slate-500">Maps & Opening Hours</p>
+                    <div className="space-y-1 md:col-span-2">
+                      <label htmlFor="organic-contact-name" className="ml-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                        Full name
+                      </label>
+                      <input
+                        id="organic-contact-name"
+                        type="text"
+                        name="name"
+                        autoComplete="name"
+                        required
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Full name"
+                        className="w-full rounded-2xl border-none bg-white px-5 py-3 text-sm ring-1 ring-slate-200 transition-shadow focus:ring-2 focus:ring-[#4041d1]"
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label htmlFor="organic-contact-email" className="ml-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                        Email
+                      </label>
+                      <input
+                        id="organic-contact-email"
+                        type="email"
+                        name="email"
+                        autoComplete="email"
+                        required
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="email@example.com"
+                        className="w-full rounded-2xl border-none bg-white px-5 py-3 text-sm ring-1 ring-slate-200 transition-shadow focus:ring-2 focus:ring-[#4041d1]"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="organic-contact-phone" className="ml-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                        Phone
+                      </label>
+                      <input
+                        id="organic-contact-phone"
+                        type="tel"
+                        name="phone"
+                        autoComplete="tel"
+                        required
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="07xxx xxxxxx"
+                        className="w-full rounded-2xl border-none bg-white px-5 py-3 text-sm ring-1 ring-slate-200 transition-shadow focus:ring-2 focus:ring-[#4041d1]"
+                      />
+                    </div>
+
+                    <div className="space-y-1 md:col-span-2">
+                      <div className="ml-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                        Treatment
+                      </div>
+                      {identifiedTreatment ? (
+                        <div className="rounded-2xl bg-white px-5 py-3 text-sm font-medium text-slate-700 ring-1 ring-slate-200">
+                          {identifiedTreatment}
+                          <span className="ml-2 text-xs font-normal text-slate-400">
+                            (from this page)
+                          </span>
                         </div>
-                      </Link>
-
-                      <div className="p-5 bg-slate-100/50 rounded-2xl border border-slate-200/50">
-                        <h4 className="text-[9px] font-bold text-[#4041d1] uppercase tracking-widest mb-3">Standards</h4>
-                        <ul className="space-y-2">
-                          {["Private 1:1 Medical", "Doctor-Led Care", "No Referral Needed"].map((text, i) => (
-                            <li key={i} className="flex items-center gap-2 text-slate-700 text-[11px] font-semibold">
-                              <FaCheckCircle className="text-[#4041d1] w-3 h-3" /> {text}
-                            </li>
+                      ) : (
+                        <select
+                          value={selectedTreatment}
+                          onChange={(e) => {
+                            setSelectedTreatment(e.target.value);
+                            if (submitError) setSubmitError("");
+                          }}
+                          required
+                          aria-label="Select treatment"
+                          className="w-full rounded-2xl border-none bg-white px-5 py-3 text-sm text-slate-700 ring-1 ring-slate-200 focus:ring-2 focus:ring-[#4041d1]"
+                        >
+                          <option value="" disabled>
+                            Select a treatment
+                          </option>
+                          {TREATMENT_OPTIONS.map((treatment) => (
+                            <option key={treatment} value={treatment}>
+                              {treatment}
+                            </option>
                           ))}
-                        </ul>
-                      </div>
+                        </select>
+                      )}
                     </div>
+
+                    <div className="space-y-1 md:col-span-2">
+                      <label htmlFor="organic-contact-message" className="ml-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                        Message
+                      </label>
+                      <textarea
+                        id="organic-contact-message"
+                        name="message"
+                        required
+                        rows={3}
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        placeholder="How can we help?"
+                        className="w-full rounded-2xl border-none bg-white px-5 py-3 text-sm ring-1 ring-slate-200 focus:ring-2 focus:ring-[#4041d1]"
+                      />
+                    </div>
+
+                    {submitError && (
+                      <p role="alert" className="text-sm text-rose-600 md:col-span-2">
+                        {submitError}
+                      </p>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="flex w-full items-center justify-center gap-3 rounded-2xl bg-[#4041d1] py-4 text-sm font-bold text-white shadow-xl shadow-blue-600/20 transition-all hover:bg-[#2a2bb8] disabled:bg-slate-300 md:col-span-2"
+                    >
+                      {isSubmitting ? "Sending..." : "Send My Enquiry"}
+                    </button>
+                  </form>
+
+                  <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500">
+                    <span>Private, doctor-led care</span>
+                    <span>No GP referral needed</span>
+                    <Link href="/contact" className="inline-flex items-center gap-1 text-[#4041d1] hover:underline">
+                      <FaInfoCircle /> Clinic information
+                    </Link>
                   </div>
                 </div>
               </div>
