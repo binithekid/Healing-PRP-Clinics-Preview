@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import EDFeatureBlock from "@/components/EDFeatureBlock"; // <-- Import added
 import {
   FaCheck,
   FaChevronDown,
@@ -172,6 +173,8 @@ export default function HairRestorationClient({
           </div>
         </div>
       </section>
+      
+      <EDFeatureBlock variant="hair-restoration" />
 
       {/* Treatments Section */}
       <section id="treatments" className="py-20 bg-white">
