@@ -19,11 +19,11 @@ interface MenuItem {
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  
+  const isBlogPage = pathname?.startsWith("/blog");
   // Location variables
   const isBirmingham = pathname?.startsWith("/birmingham");
   const isHampstead = pathname?.startsWith("/hampstead");
-  const isStAlbans = !isBirmingham && !isHampstead;
+  const isStAlbans = !isBlogPage && !isBirmingham && !isHampstead;
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -103,34 +103,56 @@ const Header = () => {
             
             {/* Logo & Location Badge Section */}
             <div className="flex-shrink-0">
-              <Link href={isBirmingham ? "/birmingham" : isHampstead ? "/hampstead" : "/"} onClick={() => setIsMenuOpen(false)}>
+              <Link
+                href={isBirmingham ? "/birmingham" : isHampstead ? "/hampstead" : "/"}
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <div className="flex items-center gap-3">
                   <div className="relative h-10 w-10 md:h-11 md:w-11 flex-shrink-0">
-                    <Image src="/Logo2.png" alt="Healing-PRP Logo" fill className="object-contain" priority />
+                    <Image
+                      src="/Logo2.png"
+                      alt="Healing-PRP Clinics"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
                   </div>
+            
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <h1 className="text-xl md:text-2xl font-raleway font-semibold text-white tracking-tight whitespace-nowrap">
+                    <span className="text-xl md:text-2xl font-raleway font-semibold text-white tracking-tight whitespace-nowrap">
                       Healing-PRP Clinics
-                    </h1>
-                    <span className="bg-[#4041d1] text-white text-[9px] sm:text-[10px] md:text-xs px-2.5 py-0.5 sm:py-1 rounded-full font-bold uppercase tracking-widest shadow-sm w-fit">
-                      {isBirmingham ? "Birmingham Website" : isHampstead ? "Hampstead Website" : "St Albans Website"}
                     </span>
+            
+                    {!isBlogPage && (
+                      <span className="bg-[#4041d1] text-white text-[9px] sm:text-[10px] md:text-xs px-2.5 py-0.5 sm:py-1 rounded-full font-bold uppercase tracking-widest shadow-sm w-fit">
+                        {isBirmingham
+                          ? "Birmingham Website"
+                          : isHampstead
+                            ? "Hampstead Website"
+                            : "St Albans Website"}
+                      </span>
+                    )}
                   </div>
                 </div>
               </Link>
             </div>
-
+            
             {/* Header Right Side */}
             <div className="flex items-center gap-4 md:gap-8">
               {/* Desktop Clinic Info + Phone */}
               <div className="hidden lg:flex flex-col items-end">
-                <div className="flex items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest gap-1.5 mb-1 font-inter">
-                  <FaMapMarkerAlt className="w-3 h-3 text-[#4041d1]" />
-                  <span className="text-slate-300">
-                    {isBirmingham ? "Birmingham Clinic" : isHampstead ? "Hampstead Clinic" : "St Albans Clinic"}
-                  </span>
-                </div>
-                
+                {!isBlogPage && (
+                  <div className="flex items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest gap-1.5 mb-1 font-inter">
+                    <FaMapMarkerAlt className="w-3 h-3 text-[#4041d1]" />
+                    <span className="text-slate-300">
+                      {isBirmingham
+                        ? "Birmingham Clinic"
+                        : isHampstead
+                          ? "Hampstead Clinic"
+                          : "St Albans Clinic"}
+                    </span>
+                  </div>
+                )}
                 <a 
                   href="tel:07990364147" 
                   className="flex items-center gap-2 text-sm font-bold text-white hover:text-[#4041d1] transition-colors tracking-wider group font-inter"
