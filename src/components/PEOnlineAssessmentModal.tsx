@@ -126,10 +126,14 @@ export default function PEOnlineAssessmentModal({ isOpen, onClose }: PEOnlineAss
       formattedAssessment += `Answer: ${answers[index] || "Not answered"}\n\n`;
     });
 
-    const clinicLocation = window.location.pathname?.startsWith("/birmingham") 
-      ? "Birmingham (Edgbaston)" 
-      : "St Albans";
-
+    const pagePath = window.location.pathname;
+    
+    const clinicLocation = pagePath.startsWith("/birmingham")
+      ? "Birmingham (Edgbaston)"
+      : pagePath.startsWith("/hampstead")
+        ? "Hampstead (London)"
+        : "St Albans";
+    
     try {
       // 4. DYNAMIC IMPORT: Only load EmailJS when the user actually hits submit.
       // This saves ~30kb of JavaScript parsing on initial page load.
@@ -145,9 +149,27 @@ export default function PEOnlineAssessmentModal({ isOpen, onClose }: PEOnlineAss
         clinic_location: clinicLocation,
       });
 
+      // EmailJS has successfully sent the assessment
       setIsSubmitted(true);
-      
-      // Close modal after seeing success screen
+
+      // Record a successful assessment submission in GA4
+      // No patient details or clinical answers are transmitted
+      try {
+        const w = window as Window & {
+          gtag?: (...args: unknown[]) => void;
+        };
+
+        w.gtag?.("event", "generate_lead", {
+          send_to: "G-PB0GD280PD",
+          form_type: "online_assessment",
+          clinic_location: clinicLocation,
+        });
+      } catch (trackingError) {
+        // Analytics must not affect a successful submission
+        console.warn("GA4 tracking unavailable:", trackingError);
+      }
+
+      // Close modal after showing the success screen
       timeoutRef.current = setTimeout(() => {
         onClose();
       }, 3000);
