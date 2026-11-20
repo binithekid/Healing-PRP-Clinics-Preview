@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import EDFeatureBlock from "@/components/EDFeatureBlock";
-import ServiceOverview from "@/components/ServiceOverview";
+import BirminghamServiceOverview from "@/components/BirminghamServiceOverview";
 import PRPExplanationSection from "@/components/PRPExplanationSection";
 import DynamicFAQ from "@/components/DynamicFAQ";
 import ContactCTASection from "@/components/ContactCTASection";
@@ -33,7 +33,7 @@ export default function BirminghamHomeClient({ faqs }: BirminghamClientProps) {
 
       {/* 3. Smart Services Grid (Automatically routes to /birmingham links) */}
       <div id="treatments">
-        <ServiceOverview />
+        <BirminghamServiceOverview />
       </div>
 
       {/* 4. PRP Explanation Section */}
