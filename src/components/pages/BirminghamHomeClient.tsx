@@ -4,7 +4,7 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import EDFeatureBlock from "@/components/EDFeatureBlock";
 import BirminghamServiceOverview from "@/components/BirminghamServiceOverview";
-import PRPExplanationSection from "@/components/PRPExplanationSection";
+import BirminghamClinicalInsights from "@/components/BirminghamClinicalInsights";
 import DynamicFAQ from "@/components/DynamicFAQ";
 import ContactCTASection from "@/components/ContactCTASection";
 import LocationSection from "@/components/LocationSection";
@@ -37,7 +37,7 @@ export default function BirminghamHomeClient({ faqs }: BirminghamClientProps) {
       </div>
 
       {/* 4. PRP Explanation Section */}
-      <PRPExplanationSection />
+      <BirminghamClinicalInsights />
 
       {/* --- CTA BAR --- */}
       <section className="py-12 bg-white border-t border-slate-50">
