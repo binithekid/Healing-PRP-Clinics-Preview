@@ -29,7 +29,7 @@ export default function BirminghamHomeClient({ faqs }: BirminghamClientProps) {
       <Hero />
       
       {/* 2. Doctor Authority Block */}
-      <EDFeatureBlock />
+      <EDFeatureBlock variant="birmingham-home" />
 
       {/* 3. Smart Services Grid (Automatically routes to /birmingham links) */}
       <div id="treatments">
