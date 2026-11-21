@@ -6,6 +6,7 @@ import { FaArrowRight, FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 type EDFeatureVariant =
+  | "birmingham-home"
   | "ed"
   | "penis-filler"
   | "intimate-health"
@@ -23,6 +24,12 @@ const featureContent: Record<
     description: string;
   }
 > = {
+  "birmingham-home": {
+    heading: "Treatment With Dr Syed Abdi",
+    description:
+      "Your consultation and treatment are led by Dr Syed Abdi, GMC No. 6083294, a UK-trained, GMC-registered GP with a special interest in men's and women's intimate health. Each appointment focuses on understanding your concerns, reviewing your medical history and discussing appropriate options, potential risks, realistic expectations and aftercare in a private, discreet setting.",
+  },
+
   ed: {
     heading: "Treatment With Dr Syed Abdi",
     description:
@@ -41,10 +48,10 @@ const featureContent: Record<
       "Your consultation and treatment are carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor with experience in non-surgical intimate health procedures. We provide discreet, individualised assessment for women's intimate health concerns, including vaginal dryness and changes affecting comfort or wellbeing. Your medical history, symptoms and treatment goals are reviewed before suitable options are discussed. Recommendations are based on clinical assessment, informed consent and realistic expectations.",
   },
 
-  "peyronies": {
-  heading: "Doctor-Led Peyronie's Disease Treatment",
-  description:
-    "Your Peyronie's disease consultation is carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor with experience in non-surgical intimate health procedures. Your assessment considers penile curvature, plaque formation, discomfort and erectile function. Depending on the stage of the condition and clinical suitability, options discussed may include hyaluronic acid (HA) plaque injections, platelet-rich plasma (PRP/P-Shot) and shockwave therapy. Evidence for HA and PRP treatments remains limited, while shockwave therapy may help pain but has not been shown to correct curvature. Treatment planning is individualised, with realistic expectations and informed consent.",
+  peyronies: {
+    heading: "Doctor-Led Peyronie's Disease Treatment",
+    description:
+      "Your Peyronie's disease consultation is carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor with experience in non-surgical intimate health procedures. Your assessment considers penile curvature, plaque formation, discomfort and erectile function. Depending on the stage of the condition and clinical suitability, options discussed may include hyaluronic acid (HA) plaque injections, platelet-rich plasma (PRP/P-Shot) and shockwave therapy. Evidence for HA and PRP treatments remains limited, while shockwave therapy may help pain but has not been shown to correct curvature. Treatment planning is individualised, with realistic expectations and informed consent.",
   },
 
   "hair-restoration": {
@@ -58,41 +65,65 @@ export default function EDFeatureBlock({
   variant = "ed",
 }: EDFeatureBlockProps) {
   const content = featureContent[variant];
+  const isBirminghamHome = variant === "birmingham-home";
 
   return (
-    <section className="py-24 bg-white font-inter border-b border-slate-100">
+    <section
+      className={`bg-white font-inter border-b border-slate-100 ${
+        isBirminghamHome ? "py-12 md:py-16" : "py-24"
+      }`}
+    >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isBirminghamHome ? false : { opacity: 0, y: 20 }}
+          whileInView={isBirminghamHome ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-8 md:gap-12"
+          className={`bg-slate-50 rounded-3xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center ${
+            isBirminghamHome
+              ? "p-6 md:p-8 gap-5 md:gap-8"
+              : "p-8 md:p-12 gap-8 md:gap-12"
+          }`}
         >
-          {/* Doctor photograph */}
+          {/* Keep the doctor portrait, but reduce repetition below the Birmingham hero. */}
           <div className="shrink-0 relative">
             <Image
               src="/dr-syed-abdi.webp"
               alt="Dr Syed Abdi, GMC-registered doctor at Healing PRP Clinics"
               width={192}
               height={192}
-              className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover shadow-md mx-auto md:mx-0 border-4 border-white"
+              className={`rounded-full object-cover shadow-md mx-auto md:mx-0 border-4 border-white ${
+                isBirminghamHome
+                  ? "w-24 h-24 md:w-28 md:h-28"
+                  : "w-32 h-32 md:w-48 md:h-48"
+              }`}
               loading="lazy"
               quality={85}
             />
           </div>
 
-          {/* Treatment-specific content */}
-          <div className="text-center md:text-left">
-            <h2 className="text-2xl md:text-3xl font-raleway font-bold text-slate-900 mb-4">
+          <div className="text-center md:text-left min-w-0">
+            <h2
+              className={`font-raleway font-bold text-slate-900 ${
+                isBirminghamHome
+                  ? "text-2xl md:text-[1.7rem] mb-3"
+                  : "text-2xl md:text-3xl mb-4"
+              }`}
+            >
               {content.heading}
             </h2>
 
-            <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6">
+            <p
+              className={`text-slate-600 leading-relaxed ${
+                isBirminghamHome
+                  ? "text-sm sm:text-base mb-5"
+                  : "text-base md:text-lg mb-6"
+              }`}
+            >
               {content.description}
             </p>
 
-            {/* Existing doctor profile links */}
-            <div className="flex flex-col sm:flex-row items-center gap-6 justify-center md:justify-start">
+            {/* Preserve both professional verification links on every variant. */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center md:justify-start">
               <Link
                 href="/our-doctor"
                 className="inline-flex items-center gap-2 text-sm font-bold text-[#4041d1] hover:text-[#2a2bb8] transition-colors font-inter group"
