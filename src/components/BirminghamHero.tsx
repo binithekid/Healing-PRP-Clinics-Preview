@@ -19,7 +19,7 @@ const OnlineAssessmentModal = dynamic(
 );
 
 const treatmentLinks = [
-  { label: "Penile filler", href: "/birmingham/penis-enlargement" },
+  { label: "Penis filler", href: "/birmingham/penis-enlargement" },
   { label: "Erectile dysfunction", href: "/birmingham/erectile-dysfunction" },
   { label: "Peyronie's disease", href: "/birmingham/peyronies-disease" },
   { label: "P-Shot (PRP)", href: "/birmingham/p-shot" },
