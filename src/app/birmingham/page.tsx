@@ -1,51 +1,72 @@
+
 import type { Metadata } from "next";
 import BirminghamHomeClient from "@/components/pages/BirminghamHomeClient";
 
-// Helper recommended pattern: sanitize JSON-LD to mitigate XSS vectors.
-// Next.js recommends replacing "<" with "\u003c".
-const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c");
+// Escape HTML-significant characters when outputting JSON-LD.
+const safeJsonLd = (obj: unknown) =>
+  JSON.stringify(obj).replace(/</g, "\\u003c");
 
-// --- SEO RICH FAQS (Birmingham Focus & Parking) ---
+// Birmingham homepage FAQs.
 const birminghamFaqs = [
   {
-    question: "Do I need a GP referral for treatment at your Birmingham clinic?",
-    answer: "No, a GP referral is not required. You can book a private, confidential consultation directly with Dr Syed Abdi at our Birmingham clinic for any of our regenerative treatments."
+    question: "Do I need a GP referral to visit your Birmingham clinic?",
+    answer:
+      "No. You can contact Healing PRP Clinics directly to arrange a private consultation in Edgbaston, Birmingham. A medical assessment is carried out before any treatment is recommended.",
   },
   {
-    question: "Who will perform my consultation and treatment in Birmingham?",
-    answer: "All consultations and treatments are performed exclusively by Dr Syed Abdi, our GMC-registered Medical Director who brings over 10 years of NHS and private clinical experience."
+    question: "Who carries out consultations and treatments at the Birmingham clinic?",
+    answer:
+      "Consultations and treatments are led by Dr Syed Abdi, a UK-trained, GMC-registered GP and Medical Director of Healing PRP Clinics (GMC number 6083294). Your medical history, concerns, treatment options and suitability are reviewed individually.",
   },
   {
-    question: "Is the P-Shot available at the Birmingham location?",
-    answer: "Yes, the P-Shot and O-Shot are fully available at our Birmingham clinic. These advanced regenerative procedures are performed exclusively by Dr Abdi, our GMC-registered Medical Director, ensuring the highest standards of private clinical care."
+    question: "Do you offer penis filler treatment in Birmingham?",
+    answer:
+      "Yes. We offer doctor-led hyaluronic acid (HA) penis filler, also called penile filler, for selected adults seeking non-surgical penile girth enhancement. The aim is to increase girth rather than length. Dr Syed Abdi discusses suitability, realistic expectations, risks, aftercare and costs before treatment.",
   },
   {
-    question: "How long does a PRP procedure take?",
-    answer: "Most PRP treatments, including the P-Shot and joint injections, take between 45 to 60 minutes. This includes a thorough medical review, blood draw, premium double-spin centrifugation, and the treatment itself."
+    question: "Can I have a private assessment for erectile dysfunction in Birmingham?",
+    answer:
+      "Yes. Dr Syed Abdi provides private erectile dysfunction (ED) assessments, including review of symptoms, medical history, medications and possible contributing health factors. Suitable treatment options are discussed after assessment; no particular treatment or outcome is guaranteed.",
   },
   {
-    question: "Where exactly is your Birmingham clinic located, and is there parking?",
-    answer: "Our clinic is located at 38 Harborne Rd in Edgbaston (B15 3EB). We offer a highly discreet, private setting with free patient parking available on-site, ensuring your visit from anywhere in the West Midlands is completely stress-free and confidential."
-  }
+    question: "Do you assess Peyronie's disease at your Birmingham clinic?",
+    answer:
+      "Yes. Consultations can assess concerns such as penile curvature, plaque, discomfort and erectile difficulties. Dr Syed Abdi discusses appropriate management options, their potential risks and the limitations of the available evidence, including for emerging injection treatments.",
+  },
+  {
+    question: "Are P-Shot and shockwave therapy available in Birmingham?",
+    answer:
+      "Yes. P-Shot (platelet-rich plasma) and shockwave therapy are offered at our Birmingham clinic following individual assessment. They are not suitable for everyone, and evidence for PRP injections for erectile dysfunction remains limited. Any potential benefits, uncertainties, alternatives and costs are explained before treatment.",
+  },
+  {
+    question: "Do you provide women's intimate health consultations in Birmingham?",
+    answer:
+      "Yes. We provide confidential assessments for selected women's intimate health concerns, including vaginal dryness and discomfort. Treatment options, including whether PRP-based or hyaluronic acid procedures are appropriate, are discussed with attention to the available evidence, risks and individual suitability.",
+  },
+  {
+    question: "Where is your Birmingham clinic, and is free parking available?",
+    answer:
+      "Healing PRP Clinics is located at 38 Harborne Road, Edgbaston, Birmingham, B15 3EB, in the Edgbaston Medical Quarter. A large, free on-site car park is available for patients travelling from Birmingham, Solihull, Coventry, Wolverhampton and elsewhere in the West Midlands.",
+  },
 ];
 
+// --- BIRMINGHAM HOMEPAGE METADATA ---
 export const metadata: Metadata = {
   title: {
-    // 59 Characters: Perfect length, captures intent without keyword stuffing
-    absolute: "Doctor-Led ED, PRP & Intimate Health Clinic in Birmingham",
+    absolute: "Intimate Health Clinic Birmingham | ED & Penis Filler",
   },
-  
+
   description:
-    "Private, doctor-led clinic in Birmingham. Expert treatments for Erectile Dysfunction (ED), P-Shot (PRP), joint injections, and hair restoration in Edgbaston.",
-  
+    "Doctor-led intimate health in Birmingham. Private ED, penis filler, Peyronie's and women's intimate health consultations in Edgbaston, West Midlands.",
+
   alternates: {
     canonical: "https://www.healing-prp.co.uk/birmingham",
   },
-  
+
   openGraph: {
-    title: "Doctor-Led ED, PRP & Intimate Health Clinic in Birmingham",
+    title: "Intimate Health Clinic Birmingham | ED & Penis Filler",
     description:
-      "Doctor-led regenerative treatments and Erectile Dysfunction (ED) solutions in Birmingham. Serving Solihull, Sutton Coldfield & West Midlands.",
+      "Doctor-led intimate health in Birmingham. Private ED, penis filler, Peyronie's and women's intimate health consultations in Edgbaston, West Midlands.",
     url: "https://www.healing-prp.co.uk/birmingham",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -62,174 +83,162 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Doctor-Led ED, PRP & Intimate Health Clinic in Birmingham",
-    description: "Doctor-led regenerative treatments and Erectile Dysfunction (ED) solutions in Edgbaston, Birmingham.",
+    title: "Intimate Health Clinic Birmingham | ED & Penis Filler",
+    description:
+      "Doctor-led intimate health in Birmingham. Private ED, penis filler, Peyronie's and women's intimate health consultations in Edgbaston, West Midlands.",
     images: ["/hero_img.png"],
   },
 };
 
-// --- UPGRADED JSON-LD SCHEMA: Master Medical Clinic (Birmingham) ---
+// --- BIRMINGHAM MEDICAL CLINIC STRUCTURED DATA ---
 const birminghamHomeSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "MedicalClinic",
       "@id": "https://www.healing-prp.co.uk/birmingham#clinic",
-      "name": "Healing-PRP Clinics Birmingham",
-      "alternateName": "Healing-PRP Birmingham",
-      "description": "Leading private doctor-led clinic in Birmingham specialising in regenerative medicine, PRP, Erectile Dysfunction, Joint Injections, and Hair Restoration.",
-      "url": "https://www.healing-prp.co.uk/birmingham",
-      "logo": "https://www.healing-prp.co.uk/Logo2.png",
-      "image": "https://www.healing-prp.co.uk/hero_img.png",
-      "telephone": "+44 7990 364147", 
-      "address": {
+      name: "Healing-PRP Clinics Birmingham",
+      alternateName: "Healing-PRP Birmingham",
+      description:
+        "Private doctor-led clinic in Edgbaston, Birmingham, providing men's and women's intimate health consultations, penile filler, erectile dysfunction assessment and selected non-surgical treatments.",
+      url: "https://www.healing-prp.co.uk/birmingham",
+      logo: "https://www.healing-prp.co.uk/Logo2.png",
+      image: "https://www.healing-prp.co.uk/hero_img.png",
+      telephone: "+447990364147",
+
+      address: {
         "@type": "PostalAddress",
-        "streetAddress": "38 Harborne Rd",
-        "addressLocality": "Birmingham",
-        "postalCode": "B15 3EB",
-        "addressRegion": "West Midlands",
-        "addressCountry": "GB"
+        streetAddress: "38 Harborne Road",
+        addressLocality: "Birmingham",
+        addressRegion: "West Midlands",
+        postalCode: "B15 3EB",
+        addressCountry: "GB",
       },
-      // --- ADDED OPENING HOURS SECTION BELOW ---
-      "openingHoursSpecification": [
+
+      areaServed: [
+        { "@type": "City", name: "Birmingham" },
+        { "@type": "AdministrativeArea", name: "West Midlands" },
+        { "@type": "Place", name: "Edgbaston" },
+      ],
+
+      employee: [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:00",
-          "closes": "18:00"
+          "@id": "https://www.healing-prp.co.uk/birmingham#dr",
         },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
-          "opens": "10:00",
-          "closes": "16:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "10:00",
-          "closes": "15:00"
-        }
       ],
-      // --- END OF OPENING HOURS ---
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 52.4674,
-        "longitude": -1.9275
-      },
-      "areaServed": [
-        { "@type": "City", "name": "Birmingham" },
-        { "@type": "AdministrativeArea", "name": "West Midlands" },
-        { "@type": "Neighborhood", "name": "Edgbaston" }
-      ],
-      "medicalSpecialty": ["Urologic", "Orthopedic", "Dermatologic"],
-      "employee": [
-        {
-          "@id": "https://www.healing-prp.co.uk/birmingham#dr"
-        }
-      ],
-      // Focused core services array for Birmingham hub authority
-      "availableService": [
+
+      availableService: [
         {
           "@type": "MedicalTherapy",
-          "name": "Erectile Dysfunction Treatment",
-          "alternateName": "P-Shot & Shockwave Therapy",
-          "url": "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
-          "description": "Doctor-led restorative treatments for ED including Li-ESWT and PRP (P-Shot) in Birmingham.",
-          "relevantSpecialty": "Urologic"
+          name: "Penis Filler (Hyaluronic Acid Penile Filler)",
+          url: "https://www.healing-prp.co.uk/birmingham/penis-enlargement",
+          description:
+            "Doctor-led consultation and HA filler treatment for selected adults considering non-surgical penile girth enhancement.",
         },
         {
           "@type": "MedicalTherapy",
-          "name": "P-Shot (Priapus Shot)",
-          "url": "https://www.healing-prp.co.uk/birmingham/p-shot",
-          "description": "Doctor-led P-Shot (Platelet-Rich Plasma) treatment for erectile dysfunction and male enhancement in Birmingham.",
-          "relevantSpecialty": "Urologic"
+          name: "Erectile Dysfunction Assessment and Treatment",
+          url: "https://www.healing-prp.co.uk/birmingham/erectile-dysfunction",
+          description:
+            "Private, doctor-led assessment of erectile dysfunction and discussion of suitable management options.",
         },
         {
           "@type": "MedicalTherapy",
-          "name": "PRP & HA Joint Injections",
-          "url": "https://www.healing-prp.co.uk/birmingham/joint-injections",
-          "description": "Non-surgical PRP, Hyaluronic Acid (HA), and steroid injections for arthritis and sports injuries in Birmingham.",
-          "relevantSpecialty": "Orthopedic"
-        }
-      ]
+          name: "Peyronie's Disease Assessment",
+          url: "https://www.healing-prp.co.uk/birmingham/peyronies-disease",
+          description:
+            "Assessment and discussion of treatment options for penile curvature, plaque and related symptoms.",
+        },
+        {
+          "@type": "MedicalTherapy",
+          name: "P-Shot (Platelet-Rich Plasma)",
+          url: "https://www.healing-prp.co.uk/birmingham/p-shot",
+          description:
+            "PRP-based procedure discussed following suitability assessment, with explanation of limited evidence for erectile dysfunction.",
+        },
+        {
+          "@type": "MedicalTherapy",
+          name: "Shockwave Therapy for Erectile Dysfunction",
+          url: "https://www.healing-prp.co.uk/birmingham/shockwave-therapy-erectile-dysfunction",
+          description:
+            "Low-intensity shockwave therapy considered for selected patients after doctor-led assessment.",
+        },
+        {
+          "@type": "MedicalTherapy",
+          name: "Women's Intimate Health Consultations",
+          url: "https://www.healing-prp.co.uk/birmingham/o-shot",
+          description:
+            "Confidential assessment and discussion of selected women's intimate health concerns and treatment options.",
+        },
+      ],
     },
     {
       "@type": "Person",
       "@id": "https://www.healing-prp.co.uk/birmingham#dr",
-      "name": "Dr Syed Abdi",
-      "jobTitle": "Medical Director",
-      "telephone": "+44 7990 364147",
-      "identifier": {
+      name: "Dr Syed Abdi",
+      jobTitle: "GP and Medical Director",
+      telephone: "+447990364147",
+
+      identifier: {
         "@type": "PropertyValue",
-        "propertyID": "GMC Reference Number",
-        "value": "6083294"
+        propertyID: "GMC Reference Number",
+        value: "6083294",
       },
-      "url": "https://www.healing-prp.co.uk/our-doctor",
-      "sameAs": [
-        "https://www.gmc-uk.org/registrants/6083294"
+
+      url: "https://www.healing-prp.co.uk/our-doctor",
+
+      sameAs: [
+        "https://www.gmc-uk.org/registrants/6083294",
       ],
-      "worksFor": {
-        "@id": "https://www.healing-prp.co.uk/birmingham#clinic"
-      }
-    }
-  ]
+
+      worksFor: {
+        "@id": "https://www.healing-prp.co.uk/birmingham#clinic",
+      },
+    },
+  ],
 };
 
 // --- BREADCRUMB SCHEMA ---
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [
+  itemListElement: [
     {
       "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://www.healing-prp.co.uk/"
+      position: 1,
+      name: "Home",
+      item: "https://www.healing-prp.co.uk/",
     },
     {
       "@type": "ListItem",
-      "position": 2,
-      "name": "Birmingham Clinic",
-      "item": "https://www.healing-prp.co.uk/birmingham"
-    }
-  ]
+      position: 2,
+      name: "Birmingham Clinic",
+      item: "https://www.healing-prp.co.uk/birmingham",
+    },
+  ],
 };
 
+// --- BIRMINGHAM HOMEPAGE ---
 export default function BirminghamPage() {
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": birminghamFaqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer,
-      },
-    })),
-  };
-
   return (
     <>
-      {/* 1. Inject Medical Entity Schema safely */}
+      {/* Medical clinic and doctor structured data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(birminghamHomeSchema) }}
-      />
-      
-      {/* 2. Inject FAQ Schema safely */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: safeJsonLd(birminghamHomeSchema),
+        }}
       />
 
-      {/* 3. Inject Breadcrumb Schema safely */}
+      {/* Breadcrumb structured data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: safeJsonLd(breadcrumbSchema),
+        }}
       />
-      
+
+      {/* Existing homepage with updated FAQs */}
       <BirminghamHomeClient faqs={birminghamFaqs} />
     </>
   );
