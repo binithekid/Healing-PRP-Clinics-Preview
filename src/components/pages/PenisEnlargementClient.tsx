@@ -499,14 +499,14 @@ export default function PenisEnlargementClient({
       
               <div className="flex flex-col gap-4">
                 <Link
-                  href="/blog/does-penile-filler-feel-natural-birmingh"
+                  href="/blog/does-penile-filler-feel-natural-birmingham"
                   className="font-bold text-[#4041d1] hover:underline"
                 >
                   Will Penile Filler Look and Feel Natural?
                 </Link>
       
                 <Link
-                  href="/blog/penile-filler-before-after-birmingh"
+                  href="/blog/penile-filler-before-after-birmingham"
                   className="font-bold text-[#4041d1] hover:underline"
                 >
                   Penile Filler Before and After: What to Expect
