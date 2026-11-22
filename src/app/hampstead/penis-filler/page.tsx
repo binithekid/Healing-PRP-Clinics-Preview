@@ -6,18 +6,18 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Penile Filler Hampstead, London | HA Penis Filler",
+    absolute: "Penis Filler Hampstead, London | HA Penis Filler",
   },
   description:
-    "Private doctor-led penile filler in Hampstead, London using hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation in North West London. Fees apply.",
+    "Private doctor-led Penis filler in Hampstead, London using hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation in North West London. Fees apply.",
   alternates: {
     canonical: "https://www.healing-prp.co.uk/hampstead/penis-filler",
   },
     
   openGraph: {
-    title: "Penile Filler Hampstead, London | HA Penis Filler",
+    title: "Penis Filler Hampstead, London | HA Penis Filler",
     description:
-      "Private doctor-led penile filler in Hampstead, London using hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation in North West London. Fees apply.",
+      "Private doctor-led Penis filler in Hampstead, London using hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation in North West London. Fees apply.",
     url: "https://www.healing-prp.co.uk/hampstead/penis-filler",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   
   twitter: {
     card: "summary_large_image",
-    title: "Penile Filler Hampstead, London | HA Penis Filler",
-    description: "Private doctor-led penile filler in Hampstead, London using hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation in North West London. Fees apply.",
+    title: "Penis Filler Hampstead, London | HA Penis Filler",
+    description: "Private doctor-led Penis filler in Hampstead, London using hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation in North West London. Fees apply.",
     images: ["/hero_img.png"],
   },
 };
@@ -44,11 +44,11 @@ export const metadata: Metadata = {
 const hampsteadFaqs = [
   {
     question: "What is penis filler treatment in Hampstead?",
-    answer: "Penis filler treatment is a non-surgical procedure using hyaluronic acid (HA) filler to increase penile girth. At our Hampstead clinic, treatment is strictly doctor-led, discreet, and planned around your anatomy, goals, and medical suitability.",
+    answer: "Penis filler treatment is a non-surgical procedure using hyaluronic acid (HA) filler to increase Penis girth. At our Hampstead clinic, treatment is strictly doctor-led, discreet, and planned around your anatomy, goals, and medical suitability.",
   },
   {
     question: "Is penis filler the same as non-surgical penis enlargement?",
-    answer: "Yes. Penis filler, also known as penile dermal filler or non-surgical penoplasty, is an option for non-surgical girth enhancement. It avoids surgery, implants, or fat transfer. Instead, dissolvable HA filler is carefully placed beneath the skin of the penile shaft.",
+    answer: "Yes. Penis filler, also known as Penis dermal filler or non-surgical penoplasty, is an option for non-surgical girth enhancement. It avoids surgery, implants, or fat transfer. Instead, dissolvable HA filler is carefully placed beneath the skin of the Penis shaft.",
   },
   {
     question: "Do you offer penis filler for men across North West London?",
@@ -59,8 +59,8 @@ const hampsteadFaqs = [
     answer: "Yes. Located in North West London, the clinic is easily accessible by road and public transport. Many patients prefer our discreet clinical setting as it offers a highly private medical environment suitable for intimate health treatments.",
   },
   {
-    question: "Who is suitable for penile filler?",
-    answer: "Penile filler may be suitable for men seeking discreet girth enhancement without the longer recovery associated with surgery. Suitability depends on your medical history, anatomy, and examination findings. Dr Abdi will assess this carefully during your private consultation.",
+    question: "Who is suitable for Penis filler?",
+    answer: "Penis filler may be suitable for men seeking discreet girth enhancement without the longer recovery associated with surgery. Suitability depends on your medical history, anatomy, and examination findings. Dr Abdi will assess this carefully during your private consultation.",
   },
   {
     question: "Is the penis filler procedure painful?",
@@ -150,16 +150,16 @@ const enlargementSchemaHampstead = {
       "@id": "https://www.healing-prp.co.uk/hampstead/penis-filler#therapy",
       "name": "Penis Filler Hampstead",
       "alternateName": [
-        "Penile Filler London",
+        "Penis Filler London",
         "HA Penis Filler",
-        "Penile Dermal Filler",
-        "Penile Girth Enhancement",
+        "Penis Dermal Filler",
+        "Penis Girth Enhancement",
         "Non-Surgical Penis Enlargement",
         "Non-Surgical Penoplasty",
-        "Penile Enhancement London"
+        "Penis Enhancement London"
       ],
       "url": "https://www.healing-prp.co.uk/hampstead/penis-filler",
-      "description": "Doctor-led penis filler treatment in Hampstead, London using premium hyaluronic acid (HA) filler for men seeking discreet, non-surgical penile girth enhancement. Suitable for patients from North West London and surrounding areas.",
+      "description": "Doctor-led penis filler treatment in Hampstead, London using premium hyaluronic acid (HA) filler for men seeking discreet, non-surgical Penis girth enhancement. Suitable for patients from North West London and surrounding areas.",
       "relevantSpecialty": "Urologic",
       "bodyLocation": "Penis",
       "procedureType": "Non-surgical",
