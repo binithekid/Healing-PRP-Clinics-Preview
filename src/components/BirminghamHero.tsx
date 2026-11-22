@@ -1,5 +1,6 @@
 "use client";
 
+import { createPortal } from "react-dom";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -43,7 +44,8 @@ export default function BirminghamHero() {
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  return (
+ return (
+  <>
     <section
       id="birmingham-hero"
       aria-labelledby="birmingham-hero-heading"
@@ -264,12 +266,18 @@ export default function BirminghamHero() {
         </div>
       </div>
 
-      {isAssessmentOpen && (
+    </section>
+
+    {/* Render modal outside the Hero stacking context */}
+    {isAssessmentOpen &&
+      typeof document !== "undefined" &&
+      createPortal(
         <OnlineAssessmentModal
           isOpen={isAssessmentOpen}
           onClose={() => setIsAssessmentOpen(false)}
-        />
+        />,
+        document.body
       )}
-    </section>
-  );
+  </>
+);
 }
