@@ -216,10 +216,10 @@ export default function PenisEnlargementClient({
             src="/PEnlargement.webp"
             alt={
               isBirmingham
-                ? "Doctor-led penile filler treatment in Birmingham"
+                ? "Doctor-led penis filler treatment in Birmingham"
                 : isHampstead
-                  ? "Doctor-led penile filler treatment in Hampstead, London"
-                  : "Doctor-led penile filler treatment in St Albans, Hertfordshire"
+                  ? "Penis filler in London | Doctor-led"
+                  : "Penis filler treatment in St Albans, Hertfordshire"
             }
             fill
             priority
@@ -253,12 +253,30 @@ export default function PenisEnlargementClient({
             variants={fadeUpVariants}
             className="text-3xl md:text-4xl lg:text-5xl font-bold font-raleway text-white leading-tight mb-4 tracking-tight"
           >
-            {isHampstead ? "Doctor-Led Penis Filler" : "Doctor-Led Penile Filler"} <br />
-            {/* SAFELY ADDED LONDON CONDITIONALLY */}
-            <span className="text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2 inline-block">
-              in {isHampstead ? "Hampstead, London" : locationName}
-            </span>
+            {isBirmingham ? (
+              <>
+                Penis Filler Birmingham
+                <span className="block text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2">
+                  Doctor-Led HA Treatment
+                </span>
+              </>
+            ) : isHampstead ? (
+              <>
+                Penis Filler in London
+                <span className="block text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2">
+                  Doctor-Led Treatment in Hampstead
+                </span>
+              </>
+            ) : (
+              <>
+                Penis Filler Treatment
+                <span className="block text-xl md:text-3xl lg:text-4xl text-blue-100 mt-2">
+                  St Albans, Hertfordshire
+                </span>
+              </>
+            )}
           </motion.h1>
+
           
           <motion.p 
             custom={2}
@@ -268,8 +286,8 @@ export default function PenisEnlargementClient({
             className="mt-4 text-sm md:text-base text-blue-50/90 font-inter leading-relaxed max-w-2xl mx-auto mb-6 font-medium"
           >
             {isHampstead 
-              ? "Private hyaluronic acid filler treatment for men seeking discreet, non-surgical girth enhancement in Hampstead, North West London." 
-              : "Premium hyaluronic acid (HA) filler for men seeking discreet, non-surgical penile girth enhancement in a clinical setting."}
+              ? "Private hyaluronic acid Penis filler treatment for men seeking discreet, non-surgical girth enhancement in Hampstead, North West London." 
+              : "Premium hyaluronic acid (HA) Penis filler for men seeking discreet, non-surgical penile girth enhancement in a clinical setting."}
           </motion.p>
 
           {/* Trust Signals Above Fold */}
@@ -720,7 +738,7 @@ export default function PenisEnlargementClient({
 
           <div className="prose prose-lg prose-slate mx-auto mb-16">
             <p className="text-slate-600 font-inter text-lg leading-relaxed mb-6">
-              We understand that discussing penile filler is highly personal. 
+              We understand that discussing penis filler is highly personal. 
               Our clinics provide a discreet, confidential, and judgement-free 
               medical environment, where concerns are addressed professionally 
               and with absolute respect.
@@ -746,7 +764,7 @@ export default function PenisEnlargementClient({
                <div>
                  <h3 className="font-bold font-raleway text-slate-900 mb-2 text-lg">Visiting our Hampstead Clinic</h3>
                  <p className="text-slate-600 text-sm leading-relaxed">
-                   Our Hampstead clinic provides a discreet North West London setting for private men’s health and penile filler consultations. The clinic is convenient for patients from Belsize Park, West Hampstead, Highgate, Golders Green, St John’s Wood, Swiss Cottage, Camden and surrounding areas.
+                   Our Hampstead clinic provides a discreet North West London setting for private men’s health and penis filler consultations. The clinic is convenient for patients from Belsize Park, West Hampstead, Highgate, Golders Green, St John’s Wood, Swiss Cottage, Camden and surrounding areas.
                  </p>
                </div>
             </div>
