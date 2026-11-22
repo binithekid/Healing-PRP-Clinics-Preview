@@ -6,20 +6,20 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Penile Filler Hertfordshire | St Albans HA Penis Filler",
+    absolute: "Penis Filler Hertfordshire | St Albans HA Penis Filler",
   },
 
   description:
-    "Private penile filler in St Albans, Hertfordshire for men from Luton, Watford, Hemel Hempstead and Berkhamsted. HA filler from £1,149 for 10ml. Fees apply.",
+    "Private Penis filler in St Albans, Hertfordshire for men from Luton, Watford, Hemel Hempstead and Berkhamsted. HA filler from £1,149 for 10ml. Fees apply.",
 
   alternates: {
     canonical: "https://www.healing-prp.co.uk/penis-enlargement",
   },
 
   openGraph: {
-    title: "Penile Filler Hertfordshire | St Albans HA Penis Filler",
+    title: "Penis Filler Hertfordshire | St Albans HA Penis Filler",
     description:
-      "Private doctor-led penile filler in St Albans, Hertfordshire for men from Watford, Hemel Hempstead, Berkhamsted, Luton and nearby areas. HA girth enhancement from £1,149 for 10ml. Fees apply.",
+      "Private doctor-led Penis filler in St Albans, Hertfordshire for men from Watford, Hemel Hempstead, Berkhamsted, Luton and nearby areas. HA girth enhancement from £1,149 for 10ml. Fees apply.",
     url: "https://www.healing-prp.co.uk/penis-enlargement",
     siteName: "Healing-PRP Clinics",
     locale: "en_GB",
@@ -29,16 +29,16 @@ export const metadata: Metadata = {
         url: "/hero_img.png",
         width: 1200,
         height: 630,
-        alt: "Penile filler and non-surgical girth enhancement in Hertfordshire",
+        alt: "Penis filler and non-surgical girth enhancement in Hertfordshire",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Penile Filler Hertfordshire | St Albans HA Penis Filler",
+    title: "Penis Filler Hertfordshire | St Albans HA Penis Filler",
     description:
-      "Private doctor-led penile filler in St Albans, Hertfordshire for men from Watford, Hemel Hempstead, Berkhamsted, Luton and nearby areas. HA girth enhancement from £1,149 for 10ml. Fees apply.",
+      "Private doctor-led Penis filler in St Albans, Hertfordshire for men from Watford, Hemel Hempstead, Berkhamsted, Luton and nearby areas. HA girth enhancement from £1,149 for 10ml. Fees apply.",
     images: ["/hero_img.png"],
   },
 };
@@ -47,11 +47,11 @@ export const metadata: Metadata = {
 const stAlbansFaqs = [
   {
     question: "What is penis filler treatment in St Albans?",
-    answer: "Penis filler treatment in St Albans is a non-surgical procedure using hyaluronic acid (HA) filler to increase penile girth. At Healing PRP in Hertfordshire, treatment is doctor-led, discreet and planned around your anatomy, goals and suitability.",
+    answer: "Penis filler treatment in St Albans is a non-surgical procedure using hyaluronic acid (HA) filler to increase Penis girth. At Healing PRP in Hertfordshire, treatment is doctor-led, discreet and planned around your anatomy, goals and suitability.",
   },
   {
     question: "Is penis filler the same as non-surgical penis enlargement?",
-    answer: "Yes. Penis filler, also known as penile filler or penile dermal filler, is a form of non-surgical penis enlargement. It does not involve surgery, implants or fat transfer. Instead, HA filler is carefully placed beneath the skin of the penile shaft to support girth enhancement.",
+    answer: "Yes. Penis filler, also known as Penis filler or Penis dermal filler, is a form of non-surgical penis enlargement. It does not involve surgery, implants or fat transfer. Instead, HA filler is carefully placed beneath the skin of the Penis shaft to support girth enhancement.",
   },
   {
     question: "Do you offer penis filler for men across Hertfordshire?",
@@ -62,8 +62,8 @@ const stAlbansFaqs = [
     answer: "Yes. St Albans is easily accessible from parts of North London and nearby Hertfordshire towns by road and rail. Many patients prefer a discreet clinic outside central London while still receiving doctor-led care in a private clinical setting.",
   },
   {
-    question: "Who is suitable for penile filler in Hertfordshire?",
-    answer: "Penile filler may be suitable for men who want discreet girth enhancement without surgery. Suitability depends on your medical history, anatomy, expectations and examination findings. Dr Abdi will assess this carefully during your private consultation before advising whether treatment is appropriate.",
+    question: "Who is suitable for Penis filler in Hertfordshire?",
+    answer: "Penis filler may be suitable for men who want discreet girth enhancement without surgery. Suitability depends on your medical history, anatomy, expectations and examination findings. Dr Abdi will assess this carefully during your private consultation before advising whether treatment is appropriate.",
   },
   {
     question: "Is the penis filler procedure painful?",
@@ -86,7 +86,7 @@ const stAlbansFaqs = [
     answer: "HA filler is a non-surgical option that avoids liposuction, implants, general anaesthetic and a surgical recovery period. It allows controlled volume placement and may be adjusted if required. Surgical options may involve more downtime, swelling and a different risk profile.",
   },
   {
-    question: "What aftercare is needed after penile filler?",
+    question: "What aftercare is needed after Penis filler?",
     answer: "Aftercare is important for smooth and even results. You may be advised to avoid sex, masturbation, heavy exercise, hot baths, saunas and alcohol for a short period. You may also be shown how to perform gentle massage if appropriate. Your exact aftercare plan will be explained after treatment.",
   },
   {
@@ -151,16 +151,16 @@ const enlargementSchema = {
       "@id": "https://www.healing-prp.co.uk/penis-enlargement#therapy",
       "name": "Penis Filler St Albans",
       "alternateName": [
-        "Penile Filler St Albans",
+        "Penis Filler St Albans",
         "HA Penis Filler",
-        "Penile Dermal Filler",
+        "Penis Dermal Filler",
         "Non-Surgical Penis Enlargement",
         "Non-Surgical Penoplasty",
-        "Penile Girth Enhancement",
-        "Penile Enhancement St Albans"
+        "Penis Girth Enhancement",
+        "Penis Enhancement St Albans"
       ],
       "url": "https://www.healing-prp.co.uk/penis-enlargement",
-      "description": "Doctor-led penis filler treatment in St Albans using premium hyaluronic acid (HA) filler for men seeking discreet, non-surgical penile girth enhancement. Suitable for patients from Hertfordshire, North London and surrounding areas.",
+      "description": "Doctor-led penis filler treatment in St Albans using premium hyaluronic acid (HA) filler for men seeking discreet, non-surgical Penis girth enhancement. Suitable for patients from Hertfordshire, North London and surrounding areas.",
       "relevantSpecialty": "Urologic",
       "bodyLocation": "Penis",
       "procedureType": "Non-surgical",
