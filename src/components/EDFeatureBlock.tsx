@@ -37,7 +37,7 @@ const featureContent: Record<
   },
 
   "penis-filler": {
-    heading: "Doctor-Led Penile Filler Treatment",
+    heading: "Doctor-Led Penis Filler Treatment",
     description:
       "Penile girth enhancement at Healing PRP Clinics is carried out by Dr Syed Abdi, GMC No. 6083294, a UK-trained and GMC-registered doctor experienced in non-surgical intimate health procedures. Your private consultation includes a review of your medical history, anatomy, expectations and treatment goals. Where suitable, hyaluronic acid filler is carefully administered using a planned approach to support proportionate girth enhancement. Treatment includes discussion of potential risks, realistic outcomes and personalised aftercare to support safe recovery and appropriate follow-up.",
   },
