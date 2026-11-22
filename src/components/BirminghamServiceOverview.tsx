@@ -31,11 +31,11 @@ type AdditionalTreatment = {
 
 // Flagship treatment displayed as a wide horizontal card on desktop
 const flagshipTreatment: FeaturedTreatment = {
-  title: "Penile Filler",
+  title: "Penis Filler",
   image: "Pfiller.webp",
-  imageAlt: "Doctor-led hyaluronic acid penile filler treatment in Birmingham",
+  imageAlt: "Doctor-led hyaluronic acid Penis filler treatment in Birmingham",
   description:
-    "Doctor-led hyaluronic acid (HA) penile filler with individual assessment, proportionate volume planning, careful placement and structured aftercare.",
+    "Doctor-led hyaluronic acid (HA) Penis filler with individual assessment, proportionate volume planning, careful placement and structured aftercare.",
   href: "/birmingham/penis-enlargement",
 };
 
