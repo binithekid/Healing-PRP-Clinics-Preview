@@ -36,7 +36,7 @@ const safeJsonLd = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c"
 
   twitter: {
     card: "summary_large_image",
-    title: "Penis Filler Birmingham | Doctor-Led HA Treatment"",
+    title: "Penis Filler Birmingham | Doctor-Led HA Treatment",
     description:
       "Private doctor-led penis filler in Birmingham using premium hyaluronic acid filler for non-surgical girth enhancement. Discreet consultation, pricing from £1149.",
     images: ["/hero_img.png"],
