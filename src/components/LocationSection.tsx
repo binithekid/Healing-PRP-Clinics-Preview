@@ -1,6 +1,6 @@
 "use client";
 
-import { FaMapMarkerAlt, FaDirections, FaClock, FaExternalLinkAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaDirections, FaClock, FaExternalLinkAlt, FaCar } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
@@ -9,38 +9,38 @@ export default function LocationSection() {
   const isBirmingham = pathname?.startsWith("/birmingham");
   const isHampstead = pathname?.startsWith("/hampstead");
 
-  const clinic = isBirmingham 
-   ? {
+  const clinic = isBirmingham
+    ? {
         name: "Birmingham Clinic",
         district: "Edgbaston Medical Quarter",
         address: "38 Harborne Rd, Edgbaston, B15 3EB",
         hours: "Mon-Fri: 9am - 6pm | Sat: 10am - 4pm | Sun: 10am - 3pm",
-        mapLink: "https://www.google.com/maps/search/?api=1&query=38+Harborne+Rd,+Edgbaston,+Birmingham+B15+3EB", 
+        mapLink: "https://www.google.com/maps/search/?api=1&query=38+Harborne+Rd,+Edgbaston,+Birmingham+B15+3EB",
       }
-   : isHampstead
-   ? {
-        name: "Hampstead Clinic",
-        district: "North West London",
-        address: "2 Hampstead High St, London NW3 1PR",
-        hours: "Mon-Fri: 9am - 6pm | Sat: 10am - 4pm | Sun: 10am - 3pm",
-        mapLink: "https://www.google.com/maps/search/?api=1&query=2+Hampstead+High+St,+London+NW3+1PR", 
-      }
-   : {
-        name: "St Albans Clinic",
-        district: "City Centre",
-        address: "21 Victoria Street, St Albans, AL1 3JJ",
-        hours: "Mon-Fri: 9am - 6pm | Sat: 10am - 4pm | Sun: 10am - 3pm",
-        mapLink: "https://www.google.com/maps/search/?api=1&query=21+Victoria+Street,+St+Albans,+AL1+3JJ", 
-      };
+    : isHampstead
+      ? {
+          name: "Hampstead Clinic",
+          district: "North West London",
+          address: "2 Hampstead High St, London NW3 1PR",
+          hours: "Mon-Fri: 9am - 6pm | Sat: 10am - 4pm | Sun: 10am - 3pm",
+          mapLink: "https://www.google.com/maps/search/?api=1&query=2+Hampstead+High+St,+London+NW3+1PR",
+        }
+      : {
+          name: "St Albans Clinic",
+          district: "City Centre",
+          address: "21 Victoria Street, St Albans, AL1 3JJ",
+          hours: "Mon-Fri: 9am - 6pm | Sat: 10am - 4pm | Sun: 10am - 3pm",
+          mapLink: "https://www.google.com/maps/search/?api=1&query=21+Victoria+Street,+St+Albans,+AL1+3JJ",
+        };
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 mt-6 transform-gpu">
       <div className="bg-white border border-slate-100 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-md transition-all duration-500">
         <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-          
+
           {/* LEFT: CLINICAL DETAILS (Reduced Padding) */}
           <div className="lg:col-span-7 p-8 lg:p-10 flex flex-col justify-center bg-white relative z-10">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -71,7 +71,7 @@ export default function LocationSection() {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <div className="w-9 h-9 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center shrink-0 border border-slate-100">
                     <FaClock size={16} />
@@ -87,12 +87,27 @@ export default function LocationSection() {
                 </div>
               </div>
 
-              <a 
+              {/* Birmingham only: practical patient travel information */}
+              {isBirmingham && (
+                <div className="mb-6 flex items-start gap-3 rounded-xl border border-indigo-100 bg-indigo-50 px-4 py-3.5">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-[#4041d1]">
+                    <FaCar size={17} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900">Free On-Site Patient Parking</p>
+                    <p className="mt-0.5 text-xs leading-relaxed text-slate-600">
+                      Large car park available at our Edgbaston clinic.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <a
                 href={clinic.mapLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 // BRAND COLOR LOCK: #4041d1
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#4041d1] text-white rounded-xl font-bold text-xs hover:bg-[#2a2bb8] transition-all shadow-lg shadow-blue-200 group w-full sm:w-fit font-inter"              
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#4041d1] text-white rounded-xl font-bold text-xs hover:bg-[#2a2bb8] transition-all shadow-lg shadow-blue-200 group w-full sm:w-fit font-inter"
               >
                 <FaDirections className="group-hover:rotate-12 transition-transform" />
                 Get Directions
@@ -103,7 +118,7 @@ export default function LocationSection() {
 
           {/* RIGHT: FIXED CSS MAP (Ensures display without asset errors) */}
           <div className="lg:col-span-5 relative min-h-[220px] lg:min-h-full overflow-hidden bg-slate-50">
-            <a 
+            <a
               href={clinic.mapLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -112,7 +127,7 @@ export default function LocationSection() {
               {/* This CSS pattern mimics a clean medical map grid */}
               <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:20px_20px] opacity-40" />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent" />
-              
+
               {/* Map Centering Pin */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative">
