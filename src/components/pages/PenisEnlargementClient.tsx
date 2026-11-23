@@ -129,11 +129,18 @@ export default function PenisEnlargementClient({
   
   // --- VARIANTS ---
   const fadeUpVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: {
+      opacity: isBirmingham ? 1 : 0,
+      y: isBirmingham ? 0 : 15,
+    },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, delay: i * 0.15, ease: "easeOut" },
+      transition: {
+        duration: 0.8,
+        delay: i * 0.15,
+        ease: "easeOut",
+      },
     }),
   };
 
@@ -350,7 +357,7 @@ export default function PenisEnlargementClient({
         </div>
 
         {/* --- HERO TRUST BADGES --- */}
-        <div className={`absolute bottom-0 left-0 w-full z-30 bg-[#0A1128]/95 backdrop-blur-xl border-t border-white/10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <div className={`absolute bottom-0 left-0 w-full z-30 bg-[#0A1128]/95 backdrop-blur-xl border-t border-white/10 transition-all duration-1000  ${isBirmingham || isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="px-2 py-4 max-w-7xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-2 divide-none md:divide-x divide-white/10">
               
