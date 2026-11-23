@@ -26,7 +26,8 @@ import {
   FaHeart,
   FaHandsHelping,
   FaTimesCircle,
-  FaWhatsapp // <-- ADDED WHATSAPP ICON
+  FaWhatsapp,
+  FaLinkedin,
 } from "react-icons/fa";
 
 // --- DYNAMIC IMPORTS FOR PAGESPEED OPTIMISATION ---
@@ -418,11 +419,63 @@ export default function PenisEnlargementClient({
         </div>
       </div>
 
-      {/* --- DOCTOR-LED TRUST SECTION (MOVED UP) --- */}
-      <EDFeatureBlock variant="penis-filler" />
+      {/* --- DOCTOR-LED INTRODUCTION: BIRMINGHAM ONLY --- */}
+      {isBirmingham ? (
+        <section className="py-14 md:py-16 bg-white font-inter border-b border-slate-100">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-slate-50 rounded-3xl border border-slate-200 shadow-sm p-7 md:p-10 flex flex-col md:flex-row items-center gap-7 md:gap-10">
+              <div className="shrink-0 relative">
+                <Image
+                  src="/dr-syed-abdi.webp"
+                  alt="Dr Syed Abdi, GMC-registered GP providing penile filler consultations in Birmingham"
+                  width={192}
+                  height={192}
+                  loading="lazy"
+                  quality={85}
+                  className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-white shadow-md mx-auto"
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-[#4041d1] text-xs font-bold uppercase tracking-wider mb-3">
+                  Clinical Experience &amp; Approach
+                </p>
+                <h2 className="text-2xl md:text-3xl font-raleway font-bold text-slate-900 mb-4">
+                  Treatment With Dr Syed Abdi
+                </h2>
+                <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-4">
+                  Dr Syed Abdi is a GMC-registered GP with over a decade of UK GP experience and practical experience providing hyaluronic acid (HA) penile filler treatment. At Healing PRP Clinics in Birmingham, he personally assesses suitability and discusses each patient&apos;s goals, medical history and previous treatments.
+                </p>
+                <p className="text-slate-600 text-base leading-relaxed mb-5">
+                  His approach focuses on anatomy-led volume planning, suitable HA product selection, careful placement and proportionate results. He explains treatment limitations, potential complications, aftercare and follow-up before a patient decides whether to proceed. Individual results vary.
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 sm:gap-6">
+                  <Link
+                    href="/our-doctor"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-[#4041d1] hover:text-[#2a2bb8] transition-colors group"
+                  >
+                    Meet Dr Syed Abdi
+                    <FaArrowRight aria-hidden="true" className="w-3 h-3 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <a
+                    href="https://www.linkedin.com/in/syed-abdi-056b28b9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-[#0A66C2] hover:text-[#004182] transition-colors"
+                  >
+                    <FaLinkedin aria-hidden="true" className="w-4 h-4" />
+                    Connect on LinkedIn
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <EDFeatureBlock variant="penis-filler" />
+      )}
 
       {/* --- INTRODUCTION & SYNONYM BRIDGE --- */}
-      <section className="py-16 md:py-24 bg-white relative z-30 border-b border-slate-100">
+      <section className={`${isBirmingham ? "py-12 md:py-16" : "py-16 md:py-24"} bg-white relative z-30 border-b border-slate-100`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
             Non-Surgical Penis Enlargement {isHampstead ? "in Hampstead, London" : locationName ? `in ${locationName}` : ''}
@@ -459,7 +512,7 @@ export default function PenisEnlargementClient({
 
       {/* --- BIRMINGHAM PATIENT QUESTIONS --- */}
       {isBirmingham && (
-        <section className="py-16 md:py-20 bg-slate-50 border-b border-slate-100">
+        <section className="py-12 md:py-16 bg-[#EEF2FF] border-b border-[#DDE4FF]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
             <div className="text-center mb-8">
@@ -518,15 +571,15 @@ export default function PenisEnlargementClient({
         </section>
       )}
 
-      {/* --- BENEFITS SECTION --- */}
-      <section className="py-24 bg-slate-50 font-inter relative z-30">
+      {/* --- BENEFITS: NATIVE MOBILE SWIPE, FOUR-CARD DESKTOP GRID --- */}
+      <section className="py-16 md:py-20 bg-[#111B37] font-inter relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6"
+              className="text-3xl md:text-4xl font-raleway font-bold mb-6 text-white"
             >
               Why Men Choose HA Fillers
             </motion.h2>
@@ -535,12 +588,19 @@ export default function PenisEnlargementClient({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-slate-600 text-lg leading-relaxed font-inter"
+              className="text-slate-300 text-lg leading-relaxed font-inter"
             >
               A discreet, non-surgical option for men seeking a planned and proportionate increase in girth without surgical fat transfer.
             </motion.p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          {/* No carousel dependency: native touch scrolling and CSS scroll snapping. */}
+          <div
+            role="region"
+            aria-label="Benefits of HA penis filler — swipe to see all four"
+            tabIndex={0}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory overscroll-x-contain scroll-smooth pb-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:gap-5 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:snap-none lg:pb-0"
+          >
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
@@ -549,7 +609,7 @@ export default function PenisEnlargementClient({
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 hover:border-[#4041d1]/20 transition-all duration-300 flex flex-col h-full group cursor-default"
+                className="w-[78vw] max-w-[330px] shrink-0 snap-start bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 hover:border-[#4041d1]/20 transition-all duration-300 flex flex-col group cursor-default sm:w-[44%] lg:w-auto lg:max-w-none lg:shrink lg:p-8"
               >
                 <div
                   className={`w-14 h-14 rounded-2xl ${benefit.color} flex items-center justify-center mb-6 text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}
@@ -565,14 +625,85 @@ export default function PenisEnlargementClient({
               </motion.div>
             ))}
           </div>
+          <p className="mt-2 text-center text-xs font-medium tracking-wide text-slate-300 lg:hidden">
+            Swipe to explore more benefits <FaArrowRight aria-hidden="true" className="ml-1 inline-block" />
+          </p>
+        </div>
+      </section>
+
+      {/* --- WHY CHOOSE HEALING PRP: ALL PENIS FILLER LOCATIONS --- */}
+      <section className="py-12 md:py-16 bg-slate-50 font-inter border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-9 md:mb-12">
+            <p className="inline-block px-4 py-1.5 rounded-full bg-[#4041d1]/10 text-[#4041d1] text-xs font-bold uppercase tracking-wider mb-5">
+              What You Can Expect
+            </p>
+            <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-4">
+              Why Choose Healing PRP Clinics for Penis Filler{isBirmingham ? " in Birmingham" : isHampstead ? " in Hampstead" : " in St Albans"}?
+            </h2>
+            <p className="text-slate-600 text-base md:text-lg leading-relaxed">
+              More than the number of millilitres: careful assessment, informed choices and ongoing support are central to our approach.
+            </p>
+          </div>
+
+          <div
+            role="region"
+            aria-label="Why choose Healing PRP Clinics — swipe to see all four reasons"
+            tabIndex={0}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory overscroll-x-contain scroll-smooth pb-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4041d1] sm:gap-5 lg:grid lg:grid-cols-4 lg:overflow-visible lg:snap-none lg:pb-0"
+          >
+            {[
+              {
+                icon: FaUserMd,
+                title: "Direct Doctor-Led Care",
+                description: "Discuss suitability, expectations and consent with Dr Abdi, who also performs your treatment.",
+              },
+              {
+                icon: FaExpandArrowsAlt,
+                title: "Individual Volume Planning",
+                description: "Anatomy, previous filler and personal goals are considered before deciding whether a volume is appropriate.",
+              },
+              {
+                icon: FaSyringe,
+                title: "Considered HA Filler Selection",
+                description: "Product characteristics, possible limitations and treatment options are explained rather than focusing only on price per ml.",
+              },
+              {
+                icon: FaHandsHelping,
+                title: "Aftercare & Follow-Up",
+                description: "Receive tailored aftercare guidance and information about when and how to seek advice if concerns arise.",
+              },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.title}
+                  className="w-[78vw] max-w-[330px] shrink-0 snap-start rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:w-[44%] lg:w-auto lg:max-w-none lg:shrink"
+                >
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#4041d1]/10 text-[#4041d1]">
+                    <Icon aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                  <h3 className="font-raleway text-lg font-bold text-slate-900 mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-600">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-2 text-center text-xs font-medium tracking-wide text-slate-500 lg:hidden">
+            Swipe to see more about our approach <FaArrowRight aria-hidden="true" className="ml-1 inline-block" />
+          </p>
         </div>
       </section>
 
       {/* --- HA FILLERS VS SURGERY (COMPARISON) --- */}
-      <section className="py-24 bg-white font-inter border-t border-slate-100">
+      <section className={`${isBirmingham ? "py-16 md:py-20" : "py-24"} bg-white font-inter border-t border-slate-100`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className={`text-center max-w-3xl mx-auto ${isBirmingham ? "mb-10 md:mb-12" : "mb-16"}`}>
             <h2 className="text-3xl md:text-4xl font-raleway font-bold text-slate-900 mb-6">
               HA Fillers vs. Surgical Fat Transfer
             </h2>
@@ -590,13 +721,19 @@ export default function PenisEnlargementClient({
                 HA Fillers (Our Approach)
               </h3>
               <ul className="space-y-5">
-                {[
+                {(isBirmingham ? [
+                  "Hyaluronic Acid Gel: HA-based filler is used after discussing suitability, alternatives and procedure-related risks.",
+                  "Outpatient Procedure: Usually completed during one clinic visit, with recovery and aftercare instructions afterwards.",
+                  "Appearance & Feel: Product selection and placement aim for proportionate results, but individual outcomes vary.",
+                  "Potential Adjustment: HA filler can sometimes be dissolved when clinically appropriate; complete reversal is not guaranteed.",
+                  "Planned Volume: The amount of filler injected is documented, although the settled result can vary."
+                ] : [
                   "HA-Based & Bio-Compatible: Uses hyaluronic acid, a substance naturally found in the body.",
                   "Minimal Downtime: A walk-in, walk-out procedure taking under an hour.",
                   "Smooth Texture: Specially formulated to mimic natural tissue.",
                   "Adjustable & Dissolvable: HA filler can usually be dissolved if clinically appropriate.",
                   "Predictable Volume: You know exactly how much volume is being added."
-                ].map((item, i) => (
+                ]).map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <FaCheckCircle className="text-[#4041d1] mt-1 shrink-0" aria-hidden="true" />
                     <span className="text-slate-800 text-sm md:text-base font-medium leading-relaxed">
@@ -615,13 +752,19 @@ export default function PenisEnlargementClient({
                 Surgical Fat Transfer
               </h3>
               <ul className="space-y-5 opacity-70">
-                {[
+                {(isBirmingham ? [
+                  "Surgical Procedure: Fat transfer generally involves liposuction and associated surgical and anaesthetic risks.",
+                  "Recovery: Surgical treatment often requires a longer recovery period, although injection procedures also carry risks.",
+                  "Contour Changes: The shape and settling of transferred fat may be variable.",
+                  "Revision Considerations: Further surgery may be needed to address an unwanted result.",
+                  "Fat Retention: Some transferred fat may be reabsorbed over time."
+                ] : [
                   "Surgical Risks: Requires liposuction, general anaesthesia, and hospital time.",
                   "Longer Recovery: Surgical options usually involve more downtime, swelling and recovery.",
                   "Risk of Irregularity: Fat transfer can sometimes settle unevenly or unpredictably.",
                   "More Difficult to Adjust: Surgical results may be harder to revise compared with dissolvable HA filler.",
                   "Unpredictable: The body naturally reabsorbs a random percentage of the fat."
-                ].map((item, i) => (
+                ]).map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <FaTimesCircle className="mt-1 shrink-0 text-slate-400" aria-hidden="true" />
                     <span className="text-slate-600 text-sm md:text-base font-medium leading-relaxed">
