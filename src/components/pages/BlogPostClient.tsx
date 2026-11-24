@@ -35,6 +35,7 @@ interface RichTextData {
     fields?: {
       file?: { url?: string };
       title?: string;
+      description?: string;
     };
   };
 }
@@ -215,15 +216,16 @@ export default function BlogPostClient({ post, navigation }: { post: BlogPost; n
       
       const url = section.image.data?.target?.fields?.file?.url;
       const title = section.image.data?.target?.fields?.title || "Editorial Image";
+      const description = section.image.data?.target?.fields?.description;
       const imgUrl = getImageUrl(url);
-
+      
       return (
         <div key={index} className="w-full mb-16 md:mb-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 items-center">
-            
+      
             {/* IMAGE COLUMN (Natural Shape - No Cropping) */}
             <div className={`w-full ${isEven ? "md:order-2" : "md:order-1"} bg-slate-50 flex items-center justify-center`}>
-              {imgUrl && <img src={imgUrl} alt={title} className="w-full h-auto" />}
+              {imgUrl && <img src={imgUrl} alt={description || title} className="w-full h-auto" />}
             </div>
 
             {/* TEXT COLUMN (Carefully padded so it doesn't touch the edges) */}
@@ -342,19 +344,24 @@ export default function BlogPostClient({ post, navigation }: { post: BlogPost; n
         
         {/* Lead Cover Image (Natural Shape) */}
         {post.coverImage && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="max-w-7xl mx-auto w-full mb-16 md:px-6"
           >
             <div className="w-full bg-slate-50 flex justify-center">
-              <img 
-                src={getImageUrl(post.coverImage.url)} 
-                alt={post.coverImage.title || "Cover"} 
+              <img
+                src={getImageUrl(post.coverImage.url)}
+                alt={
+                  post.coverImage.description ||
+                  post.coverImage.title ||
+                  post.title
+                }
                 className="w-full h-auto"
               />
             </div>
           </motion.div>
         )}
+
 
         {/* Excerpt Lead Paragraph */}
         {post.excerpt && (
