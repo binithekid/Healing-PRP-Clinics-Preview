@@ -33,18 +33,22 @@ export interface BlogPost {
   seoDescription?: string;
 }
 
-// Helper function to safely extract Image URLs from Contentful's nested object structure
-const extractImageUrl = (imageField: unknown): { url: string; title: string } | undefined => {
+const extractImageUrl = (
+  imageField: unknown
+): { url: string; title: string; description?: string } | undefined => {
   if (!imageField) return undefined;
+
   try {
     const fields = (imageField as Record<string, unknown>).fields as Record<string, unknown>;
     const file = fields?.file as Record<string, unknown>;
     const url = file?.url as string;
+
     if (!url) return undefined;
-    
+
     return {
       url: url.startsWith("//") ? `https:${url}` : url,
       title: (fields?.title as string) || "Blog Image",
+      description: (fields?.description as string) || undefined,
     };
   } catch {
     return undefined;
@@ -105,7 +109,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
           headline: blockFields.headline as string | undefined,
           body: blockFields.body, // body stays unknown because it's rich text
           imageUrl: imageInfo?.url,
-          imageAlt: imageInfo?.title,
+          imageAlt: imageInfo?.description || imageInfo?.title,
           layoutStyle: (blockFields.layoutStyle as string | undefined) || "Image Left",
           buttonText: blockFields.buttonText as string | undefined,
           buttonLink: blockFields.buttonLink as string | undefined,
