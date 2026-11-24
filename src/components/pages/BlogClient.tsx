@@ -100,15 +100,21 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                   className="group bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2" 
                   variants={itemVariants}
                 >
+                  
                   {post.coverImage && (
                     <div className="aspect-[16/10] overflow-hidden border-b border-slate-50">
-                      <img 
-                        src={getImageUrl(post.coverImage.url)} 
-                        alt={post.coverImage.title} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                      <img
+                        src={getImageUrl(post.coverImage.url)}
+                        alt={
+                          post.coverImage.description ||
+                          post.coverImage.title ||
+                          post.title
+                        }
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                     </div>
                   )}
+
                   <div className="p-8">
                     <div className="text-[10px] font-bold text-[#4041d1] mb-3 uppercase tracking-widest font-inter">
                       {formatDate(post.date)}
