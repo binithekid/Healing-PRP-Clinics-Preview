@@ -257,7 +257,119 @@ export default function ErectileDysfunctionTreatmentClient({
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}} />
 
-      {/* --- HERO SECTION --- */}
+      {/* --- BIRMINGHAM ADS HERO: homepage-inspired, assessment-led --- */}
+      {isBirmingham ? (
+      <div className="relative overflow-hidden bg-[#0A1128] font-inter text-white">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#161B45] via-[#0A1128] to-[#070D1E]" />
+        <div className="pointer-events-none absolute -left-24 top-16 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
+
+        {/* Small branded top strip; the normal site header is intentionally hidden on Ads pages. */}
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 pt-7 sm:px-8 lg:px-10">
+          <div className="flex items-center gap-3">
+            <span className="font-raleway text-lg font-bold tracking-tight sm:text-xl">Healing-PRP Clinics</span>
+            <span className="rounded-full border border-indigo-400/40 bg-indigo-500/25 px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-indigo-100 sm:text-[10px]">
+              Birmingham clinic
+            </span>
+          </div>
+          <span className="text-xs font-medium text-indigo-200">Edgbaston Medical Quarter</span>
+        </div>
+
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 pb-12 pt-12 sm:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:px-10 lg:pb-20 lg:pt-16">
+          <div>
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-400/35 bg-indigo-500/10 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-indigo-200 sm:text-xs">
+              <FaStethoscope aria-hidden="true" className="shrink-0" />
+              Private doctor-led ED assessment
+            </div>
+
+            <h1 className="mb-6 font-raleway text-4xl font-bold leading-[1.09] tracking-tight sm:text-5xl lg:text-[3.6rem]">
+              Erectile Dysfunction Treatment in{' '}
+              <span className="text-[#A5B4FC]">Birmingham</span>
+            </h1>
+
+            <p className="mb-3 text-lg font-semibold leading-snug text-white sm:text-xl">
+              ED tablets not working as well as before?
+            </p>
+            <p className="max-w-xl text-sm leading-7 text-slate-200 sm:text-base">
+              Struggling with reduced firmness or erections that are less reliable?
+              Speak with Dr Syed Abdi, a GMC-registered GP, about possible causes,
+              previous treatment response and suitable next steps.
+            </p>
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button
+                type="button"
+                onClick={handleAction}
+                className="inline-flex min-h-13 items-center justify-center gap-3 rounded-xl bg-[#4041d1] px-6 py-4 text-sm font-bold text-white shadow-lg shadow-indigo-900/30 transition-colors hover:bg-[#3032b8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Request Confidential Callback
+                <FaArrowRight aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsAssessmentOpen(true)}
+                className="inline-flex min-h-13 items-center justify-center rounded-xl border border-white/30 bg-white/10 px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Start Free ED Questionnaire
+              </button>
+            </div>
+            <p className="mt-4 max-w-xl text-xs leading-5 text-slate-300">
+              No GP referral needed. Free initial discussion available; private medical
+              consultation, investigation and treatment fees are explained before booking.
+              The questionnaire is not a medical diagnosis.
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-2 text-xs font-semibold text-indigo-100">
+              {['GMC-registered GP', 'Face-to-face appointments', 'Confidential care'].map((item) => (
+                <span key={item} className="rounded-full border border-indigo-300/30 bg-indigo-500/20 px-3 py-2">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-[500px] lg:max-w-none">
+            <div className="relative aspect-[4/4.7] overflow-hidden rounded-[28px] border border-white/15 bg-slate-800 shadow-2xl shadow-black/40">
+              <Image
+                src="/dr-syed-abdi.webp"
+                alt="Dr Syed Abdi, GMC-registered GP and Medical Director of Healing-PRP Clinics"
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 42vw"
+                className="object-cover object-top"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-[#0A1128]/95 via-[#0A1128]/30 to-transparent" />
+              <div className="absolute inset-x-5 bottom-5 rounded-xl border border-white/20 bg-[#0A1128]/90 px-5 py-4 backdrop-blur-md">
+                <p className="font-raleway text-lg font-bold text-white">Dr Syed Abdi</p>
+                <p className="mt-1 text-xs text-slate-200">GMC-registered GP · Medical Director</p>
+                <p className="mt-2 text-xs font-medium text-indigo-200">Doctor-led ED assessment in Birmingham</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Homepage-style trust strip, without unverified ratings or outcome claims. */}
+        <div className="relative z-10 border-t border-white/10 bg-white/[0.04]">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-5 gap-y-5 px-5 py-6 sm:px-8 lg:grid-cols-4 lg:px-10">
+            {[
+              { label: 'Patient Reviews', detail: 'Real patient experiences', Icon: FaGoogle },
+              { label: '10+ Years of GP Experience', detail: 'UK clinical care', Icon: FaUserMd },
+              { label: 'GMC-Registered Doctor', detail: 'Medical assessment', Icon: FaStethoscope },
+              { label: 'Discreet Private Care', detail: 'Confidential appointments', Icon: FaLock },
+            ].map(({ label, detail, Icon }) => (
+              <div key={label} className="flex items-start gap-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-500/25 text-indigo-200">
+                  <Icon aria-hidden="true" className="text-sm" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold leading-5 text-white sm:text-sm">{label}</div>
+                  <div className="text-[11px] leading-4 text-slate-300">{detail}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      ) : (
       <div className="relative overflow-hidden flex flex-col items-center justify-center bg-[#0A1128] pt-12 pb-10 md:pt-20 md:pb-16">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-[#1e293b] via-[#0A1128] to-black" />
@@ -386,6 +498,7 @@ export default function ErectileDysfunctionTreatmentClient({
           </div>
         </div>
       </div>
+      )}
 
       {/* --- DOCTOR-LED TRUST SECTION --- */}
       <section className="py-24 bg-white font-inter border-b border-slate-100">
