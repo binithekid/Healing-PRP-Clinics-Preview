@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -708,12 +707,6 @@ export default function ErectileDysfunctionTreatmentClient({
                     Any additional investigation or treatment fees are explained in advance,
                     based on clinical suitability. There is no obligation to proceed.
                   </p>
-                  <Link
-                    href="/birmingham/prices"
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#4041d1] underline underline-offset-4 hover:text-[#3032b8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4041d1]"
-                  >
-                    View full treatment prices <FaArrowRight aria-hidden="true" />
-                  </Link>
                 </div>
               </div>
             </div>
