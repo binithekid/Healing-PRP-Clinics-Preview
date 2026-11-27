@@ -543,7 +543,7 @@ export default function ErectileDysfunctionTreatmentClient({
                   a medical review can help.
                 </h2>
                 <p className="mt-6 max-w-xl text-base leading-8 text-slate-600 md:text-lg">
-                  ED tablets such as sildenafil and tadalafil can help many men. If your response
+                  ED tablets can help many men achieve and maintain erections. If your response
                   has changed—or you have new erection difficulties—there may be several contributing
                   factors worth reviewing rather than simply changing treatment.
                 </p>
