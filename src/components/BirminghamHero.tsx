@@ -149,10 +149,10 @@ export default function BirminghamHero() {
             />
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0A1128]/75 via-transparent to-transparent"
+              className="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-[#0A1128]/75 via-transparent to-transparent lg:block"
             />
 
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 rounded-xl border border-white/20 bg-[#0A1128]/90 px-3.5 py-2 sm:bottom-5 sm:left-5 sm:right-5 sm:px-5 sm:py-3.5 lg:bottom-6 lg:left-6 lg:right-6 lg:py-4">
+            <div className="absolute bottom-2.5 left-2.5 right-2.5 hidden rounded-xl border border-white/20 bg-[#0A1128]/90 px-3.5 py-2 sm:bottom-5 sm:left-5 sm:right-5 sm:px-5 sm:py-3.5 lg:bottom-6 lg:left-6 lg:right-6 lg:block lg:py-4">
               <p className="font-raleway text-base font-bold text-white sm:text-lg">
                 Dr Syed Abdi
               </p>
@@ -168,6 +168,20 @@ export default function BirminghamHero() {
                 <FaArrowRight aria-hidden="true" className="h-3 w-3" />
               </Link>
             </div>
+          </div>
+
+          {/* On mobile and tablet, show doctor details below the image to keep the portrait unobstructed. */}
+          <div className="relative mt-3 rounded-xl border border-white/20 bg-[#0A1128]/90 px-4 py-3 lg:hidden">
+            <p className="font-raleway text-base font-bold text-white">Dr Syed Abdi</p>
+            <p className="mt-0.5 text-xs text-slate-200">Medical Director</p>
+            <Link
+              href="/our-doctor"
+              prefetch={false}
+              className="mt-2 inline-flex items-center gap-2 text-xs font-semibold text-[#BFC9FF] underline decoration-white/25 underline-offset-4 transition-colors hover:text-white"
+            >
+              Meet your doctor
+              <FaArrowRight aria-hidden="true" className="h-3 w-3" />
+            </Link>
           </div>
         </div>
 
