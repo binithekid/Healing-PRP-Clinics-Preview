@@ -82,7 +82,7 @@ export default function BirminghamHero() {
             health with Dr Syed Abdi, a GMC-registered GP.
           </p>
 
-          <div className="mt-5 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+          <div className="mt-5 hidden flex-col gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 lg:flex">
             <button
               type="button"
               onClick={handleConsultation}
@@ -192,6 +192,25 @@ export default function BirminghamHero() {
               <FaArrowRight aria-hidden="true" className="h-3 w-3" />
             </Link>
           </div>
+        </div>
+
+        {/* Mobile/tablet: the two primary actions follow the unobstructed doctor portrait. */}
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 lg:hidden">
+            <button
+              type="button"
+              onClick={handleConsultation}
+              className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl bg-[#4041d1] px-6 py-3.5 text-sm font-bold text-white shadow-[0_12px_36px_rgba(32,35,138,0.26)] transition-colors hover:bg-[#5152e6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
+            >
+              Request Private Consultation
+              <FaArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsAssessmentOpen(true)}
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-xl border border-white/30 bg-white/[0.07] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/[0.13] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto"
+            >
+              Take Free ED Assessment
+            </button>
         </div>
 
         {/* Mobile only: place the treatment links after the doctor photograph.
