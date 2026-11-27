@@ -602,7 +602,7 @@ export default function ErectileDysfunctionTreatmentClient({
                   A clear next step, without pressure.
                 </h2>
                 <p className="mt-4 text-base leading-8 text-slate-600">
-                  Whether you're seeking your first ED assessment or tablets have become less effective,
+                  Whether you&apos;re seeking your first ED assessment or tablets have become less effective,
                   the starting point is a conversation—not a pre-selected procedure.
                 </p>
               </div>
