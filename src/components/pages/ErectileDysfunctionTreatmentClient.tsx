@@ -277,7 +277,7 @@ export default function ErectileDysfunctionTreatmentClient({
         <div className="pointer-events-none absolute -left-24 top-16 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
 
         {/* Small branded top strip; the normal site header is intentionally hidden on Ads pages. */}
-        <div className="relative z-10 mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 pt-7 sm:px-8 lg:px-10">
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-5 pt-5 sm:gap-3 sm:px-8 sm:pt-7 lg:px-10">
           <div className="flex items-center gap-3">
             <span className="font-raleway text-lg font-bold tracking-tight sm:text-xl">Healing-PRP Clinics</span>
             <span className="rounded-full border border-indigo-400/40 bg-indigo-500/25 px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-indigo-100 sm:text-[10px]">
@@ -287,28 +287,27 @@ export default function ErectileDysfunctionTreatmentClient({
           <span className="text-xs font-medium text-indigo-200">Edgbaston Medical Quarter</span>
         </div>
 
-        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 pb-12 pt-12 sm:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:px-10 lg:pb-20 lg:pt-16">
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-5 px-5 pb-8 pt-7 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:px-10 lg:pb-20 lg:pt-16">
           <div>
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-400/35 bg-indigo-500/10 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-indigo-200 sm:text-xs">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-400/35 bg-indigo-500/10 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-indigo-200 sm:mb-5 sm:text-xs">
               <FaStethoscope aria-hidden="true" className="shrink-0" />
               Private doctor-led ED assessment
             </div>
 
-            <h1 className="mb-6 font-raleway text-4xl font-bold leading-[1.09] tracking-tight sm:text-5xl lg:text-[3.6rem]">
+            <h1 className="mb-4 font-raleway text-4xl font-bold leading-[1.09] tracking-tight sm:mb-6 sm:text-5xl lg:text-[3.6rem]">
               Erectile Dysfunction Treatment in{' '}
               <span className="text-[#A5B4FC]">Birmingham</span>
             </h1>
 
-            <p className="mb-3 text-lg font-semibold leading-snug text-white sm:text-xl">
+            <p className="mb-2 text-lg font-semibold leading-snug text-white sm:mb-3 sm:text-xl">
               ED tablets not working as well as before?
             </p>
             <p className="max-w-xl text-sm leading-7 text-slate-200 sm:text-base">
-              Struggling with reduced firmness or erections that are less reliable?
-              Speak with Dr Syed Abdi, a GMC-registered GP, about possible causes,
-              previous treatment response and suitable next steps.
+              Reduced firmness or unreliable erections? Speak with Dr Syed Abdi,
+              a GMC-registered GP, about possible causes and suitable next steps.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-5 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:items-center">
               <button
                 type="button"
                 onClick={handleAction}
@@ -325,13 +324,14 @@ export default function ErectileDysfunctionTreatmentClient({
                 Start Free ED Questionnaire
               </button>
             </div>
-            <p className="mt-4 max-w-xl text-xs leading-5 text-slate-300">
-              No GP referral needed. Free initial discussion available; private medical
-              consultation, investigation and treatment fees are explained before booking.
-              The questionnaire is not a medical diagnosis.
+            <p className="mt-3 max-w-xl text-xs leading-5 text-slate-300 sm:mt-4">
+              No GP referral needed. Free initial discussion available. Private
+              consultation and treatment fees are explained before booking. The questionnaire
+              is not a medical diagnosis.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-2 text-xs font-semibold text-indigo-100">
+            {/* Keep badges alongside the copy on desktop; move them after the portrait on mobile. */}
+            <div className="mt-7 hidden flex-wrap gap-2 text-xs font-semibold text-indigo-100 lg:flex">
               {['GMC-registered GP', 'Face-to-face appointments', 'Confidential care'].map((item) => (
                 <span key={item} className="rounded-full border border-indigo-300/30 bg-indigo-500/20 px-3 py-2">
                   {item}
@@ -356,6 +356,14 @@ export default function ErectileDysfunctionTreatmentClient({
                 <p className="mt-1 text-xs text-slate-200">GMC-registered GP · Medical Director</p>
                 <p className="mt-2 text-xs font-medium text-indigo-200">Doctor-led ED assessment in Birmingham</p>
               </div>
+            </div>
+            {/* Trust badges follow the photograph on mobile, improving its visibility above the fold. */}
+            <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-indigo-100 lg:hidden">
+              {['GMC-registered GP', 'Face-to-face appointments', 'Confidential care'].map((item) => (
+                <span key={item} className="rounded-full border border-indigo-300/30 bg-indigo-500/20 px-3 py-2">
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
         </div>
