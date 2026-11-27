@@ -287,8 +287,11 @@ export default function ErectileDysfunctionTreatmentClient({
           <span className="text-xs font-medium text-indigo-200">Edgbaston Medical Quarter</span>
         </div>
 
-        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-5 px-5 pb-8 pt-7 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:px-10 lg:pb-20 lg:pt-16">
-          <div>
+        {/* On mobile: introduction → doctor photo → consultation buttons.
+            On desktop: same split layout with copy and CTAs beside the portrait. */}
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-5 px-5 pb-8 pt-7 sm:gap-8 sm:px-8 sm:pb-12 sm:pt-12 lg:grid-cols-[1.08fr_0.92fr] lg:grid-rows-[auto_auto] lg:gap-x-12 lg:gap-y-0 lg:px-10 lg:pb-20 lg:pt-16">
+          {/* 1. Introduction – first on all screen sizes. */}
+          <div className="lg:col-start-1 lg:row-start-1 lg:self-end">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-400/35 bg-indigo-500/10 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-indigo-200 sm:mb-5 sm:text-xs">
               <FaStethoscope aria-hidden="true" className="shrink-0" />
               Private doctor-led ED assessment
@@ -306,8 +309,32 @@ export default function ErectileDysfunctionTreatmentClient({
               Reduced firmness or unreliable erections? Speak with Dr Syed Abdi,
               a GMC-registered GP, about possible causes and suitable next steps.
             </p>
+          </div>
 
-            <div className="mt-5 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:items-center">
+          {/* 2. On mobile, the real doctor photo appears immediately below the introduction.
+              On desktop it stays in the right-hand column. */}
+          <div className="relative mx-auto w-full max-w-[500px] lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:max-w-none lg:self-center">
+            <div className="relative h-[340px] overflow-hidden rounded-[28px] border border-white/15 bg-slate-800 shadow-2xl shadow-black/40 sm:h-[420px] lg:aspect-[4/4.7] lg:h-auto">
+              <Image
+                src="/dr-syed-abdi.webp"
+                alt="Dr Syed Abdi, GMC-registered GP and Medical Director of Healing-PRP Clinics"
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 42vw"
+                className="object-cover object-top"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-[#0A1128]/95 via-[#0A1128]/30 to-transparent" />
+              <div className="absolute inset-x-5 bottom-5 rounded-xl border border-white/20 bg-[#0A1128]/90 px-5 py-4 backdrop-blur-md">
+                <p className="font-raleway text-lg font-bold text-white">Dr Syed Abdi</p>
+                <p className="mt-1 text-xs text-slate-200">GMC-registered GP · Medical Director</p>
+                <p className="mt-2 text-xs font-medium text-indigo-200">Doctor-led ED assessment in Birmingham</p>
+              </div>
+            </div>
+          </div>
+
+          {/* 3. On mobile, buttons follow the photograph. On desktop, remain in left column. */}
+          <div className="lg:col-start-1 lg:row-start-2 lg:self-start">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:mt-5">
               <button
                 type="button"
                 onClick={handleAction}
@@ -330,35 +357,8 @@ export default function ErectileDysfunctionTreatmentClient({
               is not a medical diagnosis.
             </p>
 
-            {/* Keep badges alongside the copy on desktop; move them after the portrait on mobile. */}
-            <div className="mt-7 hidden flex-wrap gap-2 text-xs font-semibold text-indigo-100 lg:flex">
-              {['GMC-registered GP', 'Face-to-face appointments', 'Confidential care'].map((item) => (
-                <span key={item} className="rounded-full border border-indigo-300/30 bg-indigo-500/20 px-3 py-2">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-[500px] lg:max-w-none">
-            <div className="relative aspect-[4/4.7] overflow-hidden rounded-[28px] border border-white/15 bg-slate-800 shadow-2xl shadow-black/40">
-              <Image
-                src="/dr-syed-abdi.webp"
-                alt="Dr Syed Abdi, GMC-registered GP and Medical Director of Healing-PRP Clinics"
-                fill
-                priority
-                sizes="(max-width: 1024px) 90vw, 42vw"
-                className="object-cover object-top"
-              />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-[#0A1128]/95 via-[#0A1128]/30 to-transparent" />
-              <div className="absolute inset-x-5 bottom-5 rounded-xl border border-white/20 bg-[#0A1128]/90 px-5 py-4 backdrop-blur-md">
-                <p className="font-raleway text-lg font-bold text-white">Dr Syed Abdi</p>
-                <p className="mt-1 text-xs text-slate-200">GMC-registered GP · Medical Director</p>
-                <p className="mt-2 text-xs font-medium text-indigo-200">Doctor-led ED assessment in Birmingham</p>
-              </div>
-            </div>
-            {/* Trust badges follow the photograph on mobile, improving its visibility above the fold. */}
-            <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-indigo-100 lg:hidden">
+            {/* Trust badges now follow the photo and actions on mobile. */}
+            <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-indigo-100 lg:mt-7">
               {['GMC-registered GP', 'Face-to-face appointments', 'Confidential care'].map((item) => (
                 <span key={item} className="rounded-full border border-indigo-300/30 bg-indigo-500/20 px-3 py-2">
                   {item}
