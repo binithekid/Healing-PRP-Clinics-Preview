@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -641,21 +642,79 @@ export default function ErectileDysfunctionTreatmentClient({
                 ))}
               </div>
 
-              <div className="mt-9 flex flex-col gap-4 rounded-2xl border border-indigo-100 bg-indigo-50/60 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-                <div className="max-w-3xl">
-                  <p className="font-bold text-[#0A1128]">Clear information about fees</p>
-                  <p className="mt-1 text-sm leading-6 text-slate-600">
-                    An initial telephone discussion is available free of charge. A full medical consultation,
-                    investigations and any treatment may involve fees, which are explained before booking.
+            </div>
+          </section>
+
+          {/* Birmingham-only, transparent fees: no premature package-price selling. */}
+          <section
+            className="relative overflow-hidden bg-[#F7F9FF] py-14 font-inter md:py-20"
+            aria-labelledby="ed-fees-heading"
+          >
+            <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-indigo-100/60 blur-3xl" />
+            <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:px-10">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#4041d1]">
+                  Clear fees, before you decide
+                </span>
+                <h2
+                  id="ed-fees-heading"
+                  className="mt-4 font-raleway text-3xl font-bold tracking-tight text-[#0A1128] sm:text-4xl"
+                >
+                  Private ED Consultation &amp; Fees
+                </h2>
+                <p className="mt-5 max-w-xl text-base leading-8 text-slate-600">
+                  Start with a free, confidential telephone discussion to explain your concerns
+                  and find out what a private appointment involves.
+                </p>
+                <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
+                  A face-to-face assessment helps review your symptoms, medical history,
+                  previous treatments and appropriate next steps. You can decide whether
+                  to proceed after understanding the available options and costs.
+                </p>
+              </div>
+
+              <div className="overflow-hidden rounded-3xl border border-indigo-100 bg-white p-6 shadow-xl shadow-indigo-950/5 sm:p-8">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                  <div>
+                    <h3 className="font-raleway text-lg font-bold text-[#0A1128]">
+                      Initial telephone discussion
+                    </h3>
+                    <p className="mt-1 text-xs leading-5 text-slate-500">Confidential, introductory conversation</p>
+                  </div>
+                  <span className="text-lg font-bold text-[#4041d1]">Free</span>
+                </div>
+
+                <div className="border-b border-slate-100 py-6">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <h3 className="font-raleway text-lg font-bold text-[#0A1128]">
+                      Face-to-face ED consultation
+                    </h3>
+                    <span className="font-raleway text-3xl font-bold text-[#0A1128]">£150</span>
+                  </div>
+                  <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-2 text-xs font-bold text-[#4041d1]">
+                    <FaCheckCircle aria-hidden="true" /> Fully redeemable against treatment
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">
+                    If you decide to proceed with treatment, the £150 consultation fee is
+                    credited towards your treatment cost.
                   </p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setIsAssessmentOpen(true)}
-                  className="inline-flex shrink-0 items-center justify-center rounded-xl border border-[#4041d1]/25 bg-white px-5 py-3 text-sm font-bold text-[#4041d1] transition-colors hover:bg-indigo-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4041d1]"
-                >
-                  Start Free ED Questionnaire
-                </button>
+
+                <div className="pt-5">
+                  <h3 className="font-raleway text-base font-bold text-[#0A1128]">
+                    Investigations and treatment
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    Any additional investigation or treatment fees are explained in advance,
+                    based on clinical suitability. There is no obligation to proceed.
+                  </p>
+                  <Link
+                    href="/birmingham/prices"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#4041d1] underline underline-offset-4 hover:text-[#3032b8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4041d1]"
+                  >
+                    View full treatment prices <FaArrowRight aria-hidden="true" />
+                  </Link>
+                </div>
               </div>
             </div>
           </section>
@@ -676,22 +735,27 @@ export default function ErectileDysfunctionTreatmentClient({
                   What is appropriate depends on the likely causes, your preferences, previous treatment response and clinical suitability.
                 </p>
               </div>
-              <div className="mt-9 grid gap-4 md:grid-cols-3">
+              <div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 {[
                   {
                     Icon: FaPills,
-                    title: "Medication review",
-                    text: "Review existing ED medication, how it is taken, effectiveness and possible alternatives.",
+                    title: "ED medication review",
+                    text: "Review how existing tablets are used, whether they still help, possible side effects and other suitable medical options.",
                   },
                   {
                     Icon: FaHeartbeat,
-                    title: "Medical investigations",
-                    text: "Relevant blood tests and vascular assessment may be considered when they could change care.",
+                    title: "Blood tests & vascular review",
+                    text: "Assess relevant factors such as diabetes, cholesterol and testosterone. Penile Doppler may be considered if it would help guide care.",
                   },
                   {
                     Icon: FaWaveSquare,
-                    title: "Selected non-surgical options",
-                    text: "Shockwave therapy may be discussed for selected men, with uncertainty and limitations explained.",
+                    title: "Shockwave therapy",
+                    text: "A non-surgical option for selected men with blood-flow-related ED. Any potential benefit, uncertainty and limitations are explained.",
+                  },
+                  {
+                    Icon: FaStethoscope,
+                    title: "Other options & referral",
+                    text: "Depending on your circumstances, we can discuss vacuum devices, additional medical options or specialist referral when appropriate.",
                   },
                 ].map(({ Icon, title, text }) => (
                   <div key={title} className="rounded-2xl border border-white/15 bg-white/[0.07] p-6">
