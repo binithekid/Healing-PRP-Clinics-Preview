@@ -130,22 +130,31 @@ export default function BirminghamHero() {
           </div>
         </div>
 
-        {/* One genuine doctor portrait. Mobile 4:3 crop with extra headroom, portrait on larger screens. */}
-        <div className="relative mx-auto w-full max-w-[380px] sm:max-w-[440px] lg:mx-0 lg:max-w-none">
+        {/* Mobile photo matches the ED landing-page portrait; larger screens remain unchanged. */}
+        <div className="relative mx-auto w-full max-w-[500px] sm:max-w-[440px] lg:mx-0 lg:max-w-none">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -inset-3 rounded-[2.2rem] bg-[#4041d1]/15 blur-2xl sm:-inset-5"
           />
 
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-white/20 bg-[#1E293B] shadow-[0_26px_70px_rgba(0,0,0,0.28)] sm:aspect-[4/5] sm:rounded-[1.75rem]">
+          <div className="relative h-[340px] overflow-hidden rounded-[28px] border border-white/15 bg-[#1E293B] shadow-2xl shadow-black/40 sm:aspect-[4/5] sm:h-auto sm:rounded-[1.75rem] sm:border-white/20 sm:shadow-[0_26px_70px_rgba(0,0,0,0.28)]">
+            {/* Use exactly the ED page's photo and object-top crop on mobile. */}
+            <Image
+              src="/dr-syed-abdi.webp"
+              alt="Dr Syed Abdi, GMC-registered doctor and medical director of Healing PRP Clinics"
+              fill
+              priority
+              sizes="(max-width: 639px) calc(100vw - 32px), 1px"
+              className="object-cover object-top sm:hidden"
+            />
+            {/* Preserve the existing homepage photo on tablet and desktop. */}
             <Image
               src="birmingham-doctor-hero.webp"
               alt="Dr Syed Abdi, GMC-registered doctor and medical director of Healing PRP Clinics"
               fill
-              priority
-              sizes="(max-width: 639px) min(380px, calc(100vw - 32px)), (max-width: 1023px) 440px, 42vw"
+              sizes="(max-width: 639px) 1px, (max-width: 1023px) 440px, 42vw"
               quality={80}
-              className="object-cover object-[center_16%] sm:object-top lg:object-[center_22%]"
+              className="hidden object-cover sm:block sm:object-top lg:object-[center_22%]"
             />
             <div
               aria-hidden="true"
