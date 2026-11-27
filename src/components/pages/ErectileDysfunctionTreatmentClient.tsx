@@ -323,12 +323,18 @@ export default function ErectileDysfunctionTreatmentClient({
                 sizes="(max-width: 1024px) 90vw, 42vw"
                 className="object-cover object-top"
               />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-[#0A1128]/95 via-[#0A1128]/30 to-transparent" />
-              <div className="absolute inset-x-5 bottom-5 rounded-xl border border-white/20 bg-[#0A1128]/90 px-5 py-4 backdrop-blur-md">
+              {/* Keep the portrait completely clear on mobile. The desktop badge remains overlaid. */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-52 bg-gradient-to-t from-[#0A1128]/95 via-[#0A1128]/30 to-transparent lg:block" />
+              <div className="absolute inset-x-5 bottom-5 hidden rounded-xl border border-white/20 bg-[#0A1128]/90 px-5 py-4 backdrop-blur-md lg:block">
                 <p className="font-raleway text-lg font-bold text-white">Dr Syed Abdi</p>
                 <p className="mt-1 text-xs text-slate-200">GMC-registered GP · Medical Director</p>
                 <p className="mt-2 text-xs font-medium text-indigo-200">Doctor-led ED assessment in Birmingham</p>
               </div>
+            </div>
+            {/* On mobile, identify the doctor below—not on top of—the photograph. */}
+            <div className="mt-3 rounded-xl border border-white/20 bg-[#101A37] px-5 py-3.5 lg:hidden">
+              <p className="font-raleway text-base font-bold text-white">Dr Syed Abdi</p>
+              <p className="mt-1 text-xs text-slate-200">GMC-registered GP · Medical Director</p>
             </div>
           </div>
 
