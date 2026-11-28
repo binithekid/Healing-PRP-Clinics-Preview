@@ -14,6 +14,7 @@ import {
 export default function Footer() {
   const pathname = usePathname();
   const isBirmingham = pathname?.startsWith("/birmingham");
+  const isHampstead = pathname?.startsWith("/hampstead");
 
   // Trigger the Contact Drawer
   const handleContactClick = (e: React.MouseEvent) => {
@@ -24,11 +25,9 @@ export default function Footer() {
       "/facial-aesthetics", 
       "/hair-restoration", 
       "/joint-injections", 
-      "/sexual-rejuvenation",
       "/birmingham/facial-aesthetics",
       "/birmingham/hair-restoration",
       "/birmingham/joint-injections",
-      "/birmingham/sexual-rejuvenation",
       "/hampstead/penis-filler" // Added new Hampstead page
     ];
     
@@ -70,25 +69,36 @@ export default function Footer() {
     },
   ];
 
-  // --- NEW SEO LINK HUBS ---
-  const sexualWellnessLinks = [
-    { name: "Sexual Rejuvenation Hub", href: isBirmingham ? "/birmingham/sexual-rejuvenation" : "/sexual-rejuvenation" },
-    { name: "Erectile Dysfunction", href: isBirmingham ? "/birmingham/erectile-dysfunction" : "/erectile-dysfunction" },
-    { name: "Premature Ejaculation", href: isBirmingham ? "/birmingham/premature-ejaculation" : "/premature-ejaculation" },
-    { name: "Peyronie's Disease", href: isBirmingham ? "/birmingham/peyronies-disease" : "/peyronies-disease" },
-    { name: "P-Shot (Male Rejuvenation)", href: isBirmingham ? "/birmingham/p-shot" : "/p-shot" },
-    { name: "O-Shot (Women's Health)", href: isBirmingham ? "/birmingham/o-shot" : "/o-shot" },
-    { name: "Shockwave Therapy", href: isBirmingham ? "/birmingham/shockwave-therapy-erectile-dysfunction" : "/shockwave-therapy-erectile-dysfunction" },
-  ];
+  // --- LOCATION-AWARE FOOTER LINKS ---
+  const sexualWellnessLinks = isHampstead
+    ? [
+        { name: "Penis Filler / Enlargement", href: "/hampstead/penis-filler" },
+        { name: "Erectile Dysfunction", href: "/hampstead/erectile-dysfunction-treatment" },
+        { name: "P-Shot (Male Rejuvenation)", href: "/hampstead/p-shot" },
+        { name: "O-Shot (Women's Health)", href: "/hampstead/o-shot" },
+      ]
+    : [
+        { name: "Penis Filler / Enlargement", href: isBirmingham ? "/birmingham/penis-enlargement" : "/penis-enlargement" },
+        { name: "Erectile Dysfunction", href: isBirmingham ? "/birmingham/erectile-dysfunction" : "/erectile-dysfunction" },
+        { name: "Premature Ejaculation", href: isBirmingham ? "/birmingham/premature-ejaculation" : "/premature-ejaculation" },
+        { name: "Peyronie's Disease", href: isBirmingham ? "/birmingham/peyronies-disease" : "/peyronies-disease" },
+        { name: "P-Shot (Male Rejuvenation)", href: isBirmingham ? "/birmingham/p-shot" : "/p-shot" },
+        { name: "O-Shot (Women's Health)", href: isBirmingham ? "/birmingham/o-shot" : "/o-shot" },
+        { name: "Shockwave Therapy", href: isBirmingham ? "/birmingham/shockwave-therapy-erectile-dysfunction" : "/shockwave-therapy-erectile-dysfunction" },
+      ];
 
-  const clinicServicesLinks = [
-    { name: "Joint Injections", href: isBirmingham ? "/birmingham/joint-injections" : "/joint-injections" },
-    { name: "Facial Aesthetics", href: isBirmingham ? "/birmingham/facial-aesthetics" : "/facial-aesthetics" },
-    { name: "Hair Restoration", href: isBirmingham ? "/birmingham/hair-restoration" : "/hair-restoration" },
-    { name: "Treatment Prices", href: "/prices" },
-    { name: "Health Blog", href: "/blog" },
-    { name: "Contact Us", href: "/contact", isContact: true },
-  ];
+  const clinicServicesLinks = isHampstead
+    ? [
+        { name: "Health Blog", href: "/blog" },
+        { name: "Contact Us", href: "/hampstead", isContact: true },
+      ]
+    : [
+        { name: "Joint Injections", href: isBirmingham ? "/birmingham/joint-injections" : "/joint-injections" },
+        { name: "Hair Restoration", href: isBirmingham ? "/birmingham/hair-restoration" : "/hair-restoration" },
+        { name: "Treatment Prices", href: "/prices" },
+        { name: "Health Blog", href: "/blog" },
+        { name: "Contact Us", href: "/contact", isContact: true },
+      ];
   
   return (
     <footer className="bg-[#0f172a] text-white font-inter border-t border-white/5">
