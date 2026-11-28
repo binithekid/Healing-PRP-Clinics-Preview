@@ -73,7 +73,7 @@ export default function Footer() {
   const sexualWellnessLinks = isHampstead
     ? [
         { name: "Penis Filler / Enlargement", href: "/hampstead/penis-filler" },
-        { name: "Erectile Dysfunction", href: "/hampstead/erectile-dysfunction-treatment" },
+        { name: "Erectile Dysfunction", href: "/hampstead/erectile-dysfunction" },
         { name: "P-Shot (Male Rejuvenation)", href: "/hampstead/p-shot" },
         { name: "O-Shot (Women's Health)", href: "/hampstead/o-shot" },
       ]
