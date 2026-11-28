@@ -17,7 +17,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/personalised-ed-medication", priority: 0.95 },
     
     // ✅ CORE ST ALBANS MEN'S & WOMEN'S HEALTH (High Priority)
-    { url: "/sexual-rejuvenation", priority: 0.9 },
     { url: "/p-shot", priority: 0.95 },
     { url: "/o-shot", priority: 0.95 }, 
     { url: "/vaginal-dryness", priority: 0.95 }, // ✅ Added Vaginal Dryness
@@ -35,7 +34,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/joint-injections", priority: 0.8 },
     
     // 2. Birmingham Location Pages (Men's & Women's Health)
-    { url: "/birmingham/sexual-rejuvenation", priority: 0.85 },
     { url: "/birmingham/p-shot", priority: 0.9 },
     { url: "/birmingham/o-shot", priority: 0.9 }, 
     { url: "/birmingham/vaginal-dryness", priority: 0.9 }, // ✅ Added Vaginal Dryness
@@ -53,7 +51,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/birmingham/joint-injections", priority: 0.85 },
 
     // ✅ 4. NEW: Hampstead Location Pages (Men's & Women's Intimate Health Only)
-    { url: "/hampstead/sexual-rejuvenation", priority: 0.85 },
     { url: "/hampstead/p-shot", priority: 0.9 },
     { url: "/hampstead/o-shot", priority: 0.9 }, 
     { url: "/hampstead/vaginal-dryness", priority: 0.9 },
