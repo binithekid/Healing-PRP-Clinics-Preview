@@ -53,14 +53,12 @@ const Header = () => {
     { name: "Shockwave Therapy", href: link("/shockwave-therapy-erectile-dysfunction"), isSubItem: true },
     { name: "Premature Ejaculation", href: link("/premature-ejaculation"), isSubItem: true },
     { name: "Peyronie's Disease", href: link("/peyronies-disease"), isSubItem: true },
-    { name: "Personalised Medication", href: link("/personalised-ed-medication"), isSubItem: true },
     // Conditional routing for Penis Enlargement / Penis Filler
     { name: "Penis Enlargement", href: isHampstead ? "/hampstead/penis-filler" : link("/penis-enlargement"), isSubItem: true },
     
     { name: "Women's Health", isCategoryTitle: true, isSpacer: true },
     { name: "O-Shot Treatment", href: link("/o-shot"), isSubItem: true },
     { name: "Vaginal Dryness", href: link("/vaginal-dryness"), isSubItem: true },
-    { name: "Sexual Rejuvenation", href: link("/sexual-rejuvenation"), isSubItem: true },
   ];
 
   // Column 2: Aesthetics, Info & Contact
